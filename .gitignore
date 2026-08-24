@@ -1,0 +1,32 @@
+# Dependencies / builds
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Design reference corpus (external clone, not project code)
+awesome-design-md/
+
+# Agent tooling state
+.agents/
+.claude/
+skills-lock.json
+
+# Databases / runtime artifacts
+*.db
+*.sqlite3
+postgres-data/
+redis-data/
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# IDE (keep shared configs, ignore private)
+.idea/
