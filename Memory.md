@@ -1,0 +1,61 @@
+# Memory.md — ANVĪKṢA Running Log
+
+> Updated at the end of every phase (Phases.md rule). Purpose: any agent or human
+> can resume work with full context. Read alongside PROJECT.md, PRD.md,
+> Architecture.md, Design.md, Rules.md.
+
+---
+
+## Project snapshot (2026-08-25)
+
+- **Product:** ANVĪKṢA — Supervisory Analytics Tool for SOC Assessment (SAT-SA), SIH26157, NTRO
+- **Repo:** https://github.com/sanchit-K-panda/ANV-K-A.git (branch `main`)
+- **Author identity:** sanchit-K-panda <juug25btech30071@jainuniversity.ac.in> (set repo-locally; beware Antigravity IDE was signed in as a different GitHub account — necatiozmen — do not let it commit here)
+- **Host OS:** Windows 11, git-bash shell; Python 3.14 via `py -3.14` (pytest + pydantic installed there); `PYTHONPATH=src` needed to run the simulator without installing
+- **Skills installed in project:** `.agents/skills/` (Leonxlnx taste-skill set); `awesome-design-md/` = cloned corpus of 74 DESIGN.md design systems from VoltAgent — useful references for Phase 10 UI (linear.app/vercel/cursor fit the dark dense SOC aesthetic)
+
+## Phase status
+
+| Phase | Status | Notes |
+|---|---|---|
+| 1. Scaffold + Schema Freeze | 🟡 partial | Git repo ✅, .gitignore ✅, simulator data contracts ✅. Missing: full repo tree (frontend/, backend/, ml/, biometric/, database/, infrastructure/), docker-compose stack, SQLAlchemy models/Alembic migrations for the 11 core DB tables |
+| 2. SOC Simulator + Ground Truth | ✅ DONE | See details below |
+| 3–16 | ⬜ not started | Next: Phase 3 ingestion pipeline |
+
+## Phase 2 record — SOC Simulator (commit acea305)
+
+Location: `soc-simulator/`. Run with `export PYTHONPATH=src && py -3.14 -m simulator …`
+
+**What exists:**
+- Frozen Pydantic v2 contracts: `src/simulator/schemas/entities.py` (12 entities, extra="forbid") + `schemas/enums.py`
+- Generators: `world.py` (SOCs/analysts/devices/assets/threats), `telemetry.py` (events → alerts → incidents → investigations → escalations → actions with log-normal timelines scaled by analyst skill)
+- All 7 scenarios in `src/simulator/scenarios/`: healthy (empty ground truth BY DESIGN), investigation_gap, negative_space, kpi_manipulation (labelled POTENTIAL_KPI_MANIPULATION, never "malicious"), analyst_overload, recurring_threat, identity_anomaly
+- Ground truth: expected-vs-actual workflow per injection (`ground_truth/builder.py`) — deletions never lose what should have happened
+- Exporters JSON/CSV/SQLite (`exporters/io.py`); validation with 5 checks (`validation/integrity.py`): schema, referential, temporal, scenario, ground-truth integrity
+- CLI: `generate` / `validate` / `summary` (`cli.py`); all knobs config-driven (`config.py`, TOML overridable)
+
+**Verified:** 32/32 tests pass; all 7 scenarios DATASET VALID at 10k events seed 42; 50k-event stress run valid. Example datasets committed under `datasets/`.
+
+**Known tuning note:** default funnel is thin (~20 incidents per 10k events because only HIGH/CRITICAL events alert). For denser ML datasets later raise `alert_rate`/`incident_rate` in a config TOML — no code change.
+
+**Usage quick reference:**
+```bash
+python -m simulator generate --scenario investigation_gap --events 10000 --seed 42
+python -m simulator validate datasets/investigation_gap
+python -m simulator summary datasets/investigation_gap
+```
+
+## Frozen decisions (do not relitigate)
+
+1. Build order = the merged 16-phase list in Phases.md (simulator before pipeline, rules before ML, identity/audit after core product)
+2. Simulator generates data + truth only — it NEVER performs detection; ANVĪKṢA must discover injections independently (measured by precision/recall/F1 vs ground truth)
+3. No blockchain — hash-chained append-only audit log (Rules.md §7)
+4. Hybrid AI hierarchy: deterministic rules > ML baselines > optional local LLM for prose only (Rules.md §3)
+5. Fully air-gapped runtime; no cloud anything; offline status must be UI-visible
+6. Every finding answers WHAT/WHY/WHEN/WHERE/EVIDENCE/CONFIDENCE/RECOMMENDATION; risk scores always itemized factor sums
+7. LiDAR/biometrics are late-phase enhancements, never foundations
+8. graphifyy installed globally but NOT used for this project — Memory.md + existing docs are the context system (revisit if codebase navigation becomes costly ~Phase 6+)
+
+## Next up — Phase 3 (after finishing Phase 1 remainder)
+
+Decision pending: finish Phase 1 scaffold first (docker-compose, SQLAlchemy/Alembic models for users, biometric_profiles, devices, sessions, alerts, incidents, investigations, escalations, findings, risk_assessments, audit_logs) then Phase 3 ingestion (FastAPI POST endpoints feeding simulator datasets into Postgres).
