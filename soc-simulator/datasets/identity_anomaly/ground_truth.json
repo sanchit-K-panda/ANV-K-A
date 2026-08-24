@@ -1,0 +1,24 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "identity_anomaly",
+  "entity_type": "session",
+  "entity_id": "SESS-0039",
+  "expected_behaviour": {
+   "identity_stable_for_session": true
+  },
+  "actual_behaviour": {
+   "identity_change_event": true,
+   "event_at": "2026-08-06T05:38:14.182004+00:00",
+   "session_locked": true,
+   "locked_at": "2026-08-06T05:38:51.182004+00:00"
+  },
+  "expected_findings": [
+   "IDENTITY_ANOMALY"
+  ],
+  "severity": "CRITICAL",
+  "injected": true,
+  "start_time": "2026-08-06T05:35:56.182004Z",
+  "end_time": "2026-08-06T05:38:51.182004Z"
+ }
+]

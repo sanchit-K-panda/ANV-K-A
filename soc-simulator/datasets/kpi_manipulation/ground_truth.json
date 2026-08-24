@@ -1,0 +1,28 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "kpi_manipulation",
+  "entity_type": "analyst_group",
+  "entity_id": "AN-00001,AN-00011,AN-00012,AN-00016",
+  "expected_behaviour": {
+   "avg_closure_minutes": 40,
+   "investigation_rate": "> 0.80",
+   "escalation_rate_for_critical": "> 0.25"
+  },
+  "actual_behaviour": {
+   "avg_closure_minutes": 7.2,
+   "investigation_rate": 19.0,
+   "escalation_rate_injected": 0.05,
+   "analyst_count": 4,
+   "incident_count": 1
+  },
+  "expected_findings": [
+   "POTENTIAL_KPI_MANIPULATION",
+   "CLOSURE_ANOMALY"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": null,
+  "end_time": null
+ }
+]

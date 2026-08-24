@@ -1,0 +1,32 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "recurring_threat",
+  "entity_type": "threat",
+  "entity_id": "THR-00006",
+  "expected_behaviour": {
+   "recurrence_after_remediation": 0,
+   "status_after_first_closure": "MITIGATED"
+  },
+  "actual_behaviour": {
+   "incident_count": 5,
+   "incident_ids": [
+    "INC-00015",
+    "INC-00018",
+    "INC-00002",
+    "INC-00017",
+    "INC-00003"
+   ],
+   "all_closed": true,
+   "any_remediated": false
+  },
+  "expected_findings": [
+   "RECURRING_THREAT",
+   "REPEATED_UNRESOLVED_THREAT"
+  ],
+  "severity": "CRITICAL",
+  "injected": true,
+  "start_time": "2026-08-01T00:00:00Z",
+  "end_time": "2026-08-15T00:00:00Z"
+ }
+]

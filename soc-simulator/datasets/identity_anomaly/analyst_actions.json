@@ -1,0 +1,2955 @@
+[
+ {
+  "action_id": "ACT-00001",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T20:27:36.242896Z",
+  "duration_seconds": 731,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00002",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T21:47:33.987379Z",
+  "duration_seconds": 644,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00003",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T21:54:39.692014Z",
+  "duration_seconds": 625,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00004",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T22:19:16.325946Z",
+  "duration_seconds": 210,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00005",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-07T07:21:27.576085Z",
+  "duration_seconds": 150,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00006",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-07T08:40:37.185651Z",
+  "duration_seconds": 192,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00007",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-07T08:50:04.901789Z",
+  "duration_seconds": 37,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00008",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-07T08:57:50.455888Z",
+  "duration_seconds": 550,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00009",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-07T09:18:33.343473Z",
+  "duration_seconds": 847,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00010",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-06T12:05:33.073550Z",
+  "duration_seconds": 753,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00011",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-06T13:42:06.620995Z",
+  "duration_seconds": 264,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00012",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-06T13:48:31.402543Z",
+  "duration_seconds": 236,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00013",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-06T14:00:54.329603Z",
+  "duration_seconds": 306,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00014",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-06T14:25:53.373287Z",
+  "duration_seconds": 548,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00015",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T01:34:55.261120Z",
+  "duration_seconds": 736,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00016",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T01:54:34.595246Z",
+  "duration_seconds": 496,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00017",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T02:14:00.917802Z",
+  "duration_seconds": 237,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00018",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T02:18:16.216305Z",
+  "duration_seconds": 611,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00019",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T09:48:57.966814Z",
+  "duration_seconds": 438,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00020",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T11:01:58.071188Z",
+  "duration_seconds": 655,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00021",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-09T11:12:34.697896Z",
+  "duration_seconds": 582,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00022",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T11:16:19.740993Z",
+  "duration_seconds": 418,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00023",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T11:35:15.770560Z",
+  "duration_seconds": 754,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00024",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T12:24:01.364792Z",
+  "duration_seconds": 564,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00025",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T12:51:24.486912Z",
+  "duration_seconds": 56,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00026",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T13:11:39.758660Z",
+  "duration_seconds": 838,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00027",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T13:54:19.046083Z",
+  "duration_seconds": 233,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00028",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-01T08:05:25.798410Z",
+  "duration_seconds": 388,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00029",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-01T09:09:38.558101Z",
+  "duration_seconds": 334,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00030",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-01T09:31:12.620450Z",
+  "duration_seconds": 782,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00031",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-01T09:45:46.418734Z",
+  "duration_seconds": 333,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00032",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-04T01:06:41.562669Z",
+  "duration_seconds": 722,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00033",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-04T02:03:17.201183Z",
+  "duration_seconds": 784,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00034",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-04T02:31:45.469828Z",
+  "duration_seconds": 474,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00035",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-04T02:51:54.253790Z",
+  "duration_seconds": 39,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00036",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-13T21:36:48.951792Z",
+  "duration_seconds": 723,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00037",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-13T23:32:45.100712Z",
+  "duration_seconds": 598,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00038",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-13T23:43:45.174778Z",
+  "duration_seconds": 635,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00039",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-13T23:48:02.698162Z",
+  "duration_seconds": 366,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00040",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T00:11:36.861719Z",
+  "duration_seconds": 759,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00041",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-14T06:44:37.900566Z",
+  "duration_seconds": 463,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00042",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-14T07:32:08.616277Z",
+  "duration_seconds": 26,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00043",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-14T07:50:13.199468Z",
+  "duration_seconds": 493,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00044",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T08:58:26.199468Z",
+  "duration_seconds": 439,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00045",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-14T14:32:18.528196Z",
+  "duration_seconds": 707,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00046",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-14T15:24:22.054859Z",
+  "duration_seconds": 763,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00047",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-14T15:32:40.176005Z",
+  "duration_seconds": 424,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00048",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T16:05:55.176005Z",
+  "duration_seconds": 549,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00049",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-10T00:00:45.381176Z",
+  "duration_seconds": 836,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00050",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-10T01:10:59.362817Z",
+  "duration_seconds": 885,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00051",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-10T01:21:30.926142Z",
+  "duration_seconds": 569,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00052",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-10T01:22:08.863708Z",
+  "duration_seconds": 76,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00053",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-10T01:46:31.839695Z",
+  "duration_seconds": 388,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00054",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-10T19:52:40.543349Z",
+  "duration_seconds": 628,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00055",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-10T21:08:48.921824Z",
+  "duration_seconds": 191,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00056",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-10T21:23:35.519113Z",
+  "duration_seconds": 846,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00057",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-10T21:35:35.752982Z",
+  "duration_seconds": 854,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00058",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-12T07:05:50.573286Z",
+  "duration_seconds": 385,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00059",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-12T08:12:55.864034Z",
+  "duration_seconds": 151,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00060",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-12T08:38:32.316305Z",
+  "duration_seconds": 813,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00061",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-12T09:07:28.569632Z",
+  "duration_seconds": 713,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00062",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-05T21:45:11.539337Z",
+  "duration_seconds": 546,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00063",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-05T22:48:59.602578Z",
+  "duration_seconds": 98,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00064",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-05T23:06:25.145621Z",
+  "duration_seconds": 862,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00065",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-05T23:25:52.899883Z",
+  "duration_seconds": 677,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00066",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T18:20:41.592005Z",
+  "duration_seconds": 583,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00067",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T20:17:42.395958Z",
+  "duration_seconds": 281,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00068",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T20:29:11.691226Z",
+  "duration_seconds": 753,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00069",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T20:43:49.291118Z",
+  "duration_seconds": 548,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00070",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-05T21:16:51.225471Z",
+  "duration_seconds": 717,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00071",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-05T22:04:18.446310Z",
+  "duration_seconds": 657,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00072",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-05T22:11:48.364837Z",
+  "duration_seconds": 725,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00073",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-05T22:42:57.297061Z",
+  "duration_seconds": 472,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00074",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-07T17:31:24.305141Z",
+  "duration_seconds": 858,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00075",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-07T19:16:34.162215Z",
+  "duration_seconds": 372,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00076",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-07T19:40:11.198646Z",
+  "duration_seconds": 465,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00077",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-07T20:06:32.848883Z",
+  "duration_seconds": 479,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00078",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-04T05:58:01.613572Z",
+  "duration_seconds": 882,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00079",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-04T07:18:13.156163Z",
+  "duration_seconds": 749,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00080",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-04T07:28:46.156576Z",
+  "duration_seconds": 155,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00081",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-04T07:28:25.251968Z",
+  "duration_seconds": 74,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00082",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-04T07:36:10.251968Z",
+  "duration_seconds": 358,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00083",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-11T06:24:12.150290Z",
+  "duration_seconds": 461,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00084",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-11T07:08:51.874141Z",
+  "duration_seconds": 227,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00085",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-11T07:20:18.390959Z",
+  "duration_seconds": 710,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00086",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-11T07:44:58.702030Z",
+  "duration_seconds": 158,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00087",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-03T06:46:21.849094Z",
+  "duration_seconds": 566,
+  "metadata": {
+   "session": "SESS-0000",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00088",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-03T06:46:31.849094Z",
+  "duration_seconds": 63,
+  "metadata": {
+   "session": "SESS-0000",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00089",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-03T06:49:22.849094Z",
+  "duration_seconds": 578,
+  "metadata": {
+   "session": "SESS-0000",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00090",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-03T06:51:49.849094Z",
+  "duration_seconds": 209,
+  "metadata": {
+   "session": "SESS-0000",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00091",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-05T07:15:37.580448Z",
+  "duration_seconds": 323,
+  "metadata": {
+   "session": "SESS-0001",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00092",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-05T07:15:47.580448Z",
+  "duration_seconds": 538,
+  "metadata": {
+   "session": "SESS-0001",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00093",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-05T07:19:01.580448Z",
+  "duration_seconds": 480,
+  "metadata": {
+   "session": "SESS-0001",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00094",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-05T07:23:44.580448Z",
+  "duration_seconds": 518,
+  "metadata": {
+   "session": "SESS-0001",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00095",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-14T05:19:52.944748Z",
+  "duration_seconds": 236,
+  "metadata": {
+   "session": "SESS-0002",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00096",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-14T05:20:02.944748Z",
+  "duration_seconds": 302,
+  "metadata": {
+   "session": "SESS-0002",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00097",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-14T05:22:12.944748Z",
+  "duration_seconds": 232,
+  "metadata": {
+   "session": "SESS-0002",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00098",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-14T05:24:14.944748Z",
+  "duration_seconds": 329,
+  "metadata": {
+   "session": "SESS-0002",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00099",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-10T21:28:11.929877Z",
+  "duration_seconds": 518,
+  "metadata": {
+   "session": "SESS-0003",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00100",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-10T21:28:21.929877Z",
+  "duration_seconds": 202,
+  "metadata": {
+   "session": "SESS-0003",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00101",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-10T21:31:28.929877Z",
+  "duration_seconds": 361,
+  "metadata": {
+   "session": "SESS-0003",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00102",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-10T21:33:44.929877Z",
+  "duration_seconds": 425,
+  "metadata": {
+   "session": "SESS-0003",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00103",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-12T01:51:38.218870Z",
+  "duration_seconds": 395,
+  "metadata": {
+   "session": "SESS-0004",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00104",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-12T01:51:48.218870Z",
+  "duration_seconds": 381,
+  "metadata": {
+   "session": "SESS-0004",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00105",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-12T01:54:21.218870Z",
+  "duration_seconds": 12,
+  "metadata": {
+   "session": "SESS-0004",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00106",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-12T01:57:22.218870Z",
+  "duration_seconds": 484,
+  "metadata": {
+   "session": "SESS-0004",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00107",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-05T07:58:19.436274Z",
+  "duration_seconds": 49,
+  "metadata": {
+   "session": "SESS-0005",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00108",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-05T07:58:29.436274Z",
+  "duration_seconds": 35,
+  "metadata": {
+   "session": "SESS-0005",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00109",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-05T08:03:20.436274Z",
+  "duration_seconds": 449,
+  "metadata": {
+   "session": "SESS-0005",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00110",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-05T08:06:43.436274Z",
+  "duration_seconds": 146,
+  "metadata": {
+   "session": "SESS-0005",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00111",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-04T18:06:11.343724Z",
+  "duration_seconds": 285,
+  "metadata": {
+   "session": "SESS-0006",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00112",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-04T18:06:21.343724Z",
+  "duration_seconds": 568,
+  "metadata": {
+   "session": "SESS-0006",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00113",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-04T18:09:51.343724Z",
+  "duration_seconds": 107,
+  "metadata": {
+   "session": "SESS-0006",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00114",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-04T18:11:47.343724Z",
+  "duration_seconds": 198,
+  "metadata": {
+   "session": "SESS-0006",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00115",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-07T15:09:29.395590Z",
+  "duration_seconds": 483,
+  "metadata": {
+   "session": "SESS-0007",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00116",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-07T15:09:39.395590Z",
+  "duration_seconds": 283,
+  "metadata": {
+   "session": "SESS-0007",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00117",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-07T15:10:33.395590Z",
+  "duration_seconds": 337,
+  "metadata": {
+   "session": "SESS-0007",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00118",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-07T15:11:27.395590Z",
+  "duration_seconds": 376,
+  "metadata": {
+   "session": "SESS-0007",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00119",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T23:58:38.961196Z",
+  "duration_seconds": 412,
+  "metadata": {
+   "session": "SESS-0008",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00120",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T23:58:48.961196Z",
+  "duration_seconds": 344,
+  "metadata": {
+   "session": "SESS-0008",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00121",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-07T00:02:00.961196Z",
+  "duration_seconds": 424,
+  "metadata": {
+   "session": "SESS-0008",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00122",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-07T00:05:07.961196Z",
+  "duration_seconds": 89,
+  "metadata": {
+   "session": "SESS-0008",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00123",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T10:30:06.952678Z",
+  "duration_seconds": 271,
+  "metadata": {
+   "session": "SESS-0009",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00124",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T10:30:16.952678Z",
+  "duration_seconds": 449,
+  "metadata": {
+   "session": "SESS-0009",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00125",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-06T10:31:52.952678Z",
+  "duration_seconds": 66,
+  "metadata": {
+   "session": "SESS-0009",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00126",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-06T10:34:10.952678Z",
+  "duration_seconds": 466,
+  "metadata": {
+   "session": "SESS-0009",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00127",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-11T16:28:55.722590Z",
+  "duration_seconds": 351,
+  "metadata": {
+   "session": "SESS-0010",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00128",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-11T16:29:05.722590Z",
+  "duration_seconds": 98,
+  "metadata": {
+   "session": "SESS-0010",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00129",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-11T16:31:37.722590Z",
+  "duration_seconds": 299,
+  "metadata": {
+   "session": "SESS-0010",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00130",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-11T16:34:42.722590Z",
+  "duration_seconds": 513,
+  "metadata": {
+   "session": "SESS-0010",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00131",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T07:12:50.685248Z",
+  "duration_seconds": 399,
+  "metadata": {
+   "session": "SESS-0011",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00132",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T07:13:00.685248Z",
+  "duration_seconds": 363,
+  "metadata": {
+   "session": "SESS-0011",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00133",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-06T07:15:21.685248Z",
+  "duration_seconds": 190,
+  "metadata": {
+   "session": "SESS-0011",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00134",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-06T07:18:53.685248Z",
+  "duration_seconds": 264,
+  "metadata": {
+   "session": "SESS-0011",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00135",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-03T10:44:08.449204Z",
+  "duration_seconds": 344,
+  "metadata": {
+   "session": "SESS-0012",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00136",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-03T10:44:18.449204Z",
+  "duration_seconds": 77,
+  "metadata": {
+   "session": "SESS-0012",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00137",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-03T10:47:00.449204Z",
+  "duration_seconds": 138,
+  "metadata": {
+   "session": "SESS-0012",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00138",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-03T10:53:06.449204Z",
+  "duration_seconds": 250,
+  "metadata": {
+   "session": "SESS-0012",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00139",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-14T00:01:33.906320Z",
+  "duration_seconds": 6,
+  "metadata": {
+   "session": "SESS-0013",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00140",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-14T00:01:43.906320Z",
+  "duration_seconds": 332,
+  "metadata": {
+   "session": "SESS-0013",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00141",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-14T00:04:20.906320Z",
+  "duration_seconds": 423,
+  "metadata": {
+   "session": "SESS-0013",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00142",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-14T00:06:49.906320Z",
+  "duration_seconds": 190,
+  "metadata": {
+   "session": "SESS-0013",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00143",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-08T15:59:33.102363Z",
+  "duration_seconds": 235,
+  "metadata": {
+   "session": "SESS-0014",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00144",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-08T15:59:43.102363Z",
+  "duration_seconds": 212,
+  "metadata": {
+   "session": "SESS-0014",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00145",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-08T16:03:49.102363Z",
+  "duration_seconds": 370,
+  "metadata": {
+   "session": "SESS-0014",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00146",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-08T16:06:17.102363Z",
+  "duration_seconds": 221,
+  "metadata": {
+   "session": "SESS-0014",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00147",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-07T13:44:33.582588Z",
+  "duration_seconds": 94,
+  "metadata": {
+   "session": "SESS-0015",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00148",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-07T13:44:43.582588Z",
+  "duration_seconds": 587,
+  "metadata": {
+   "session": "SESS-0015",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00149",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-07T13:45:53.582588Z",
+  "duration_seconds": 162,
+  "metadata": {
+   "session": "SESS-0015",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00150",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-07T13:52:12.582588Z",
+  "duration_seconds": 308,
+  "metadata": {
+   "session": "SESS-0015",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00151",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-05T22:39:01.514944Z",
+  "duration_seconds": 35,
+  "metadata": {
+   "session": "SESS-0016",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00152",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-05T22:39:11.514944Z",
+  "duration_seconds": 448,
+  "metadata": {
+   "session": "SESS-0016",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00153",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-05T22:41:02.514944Z",
+  "duration_seconds": 68,
+  "metadata": {
+   "session": "SESS-0016",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00154",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-05T22:43:06.514944Z",
+  "duration_seconds": 91,
+  "metadata": {
+   "session": "SESS-0016",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00155",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-02T21:40:43.465487Z",
+  "duration_seconds": 456,
+  "metadata": {
+   "session": "SESS-0017",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00156",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-02T21:40:53.465487Z",
+  "duration_seconds": 571,
+  "metadata": {
+   "session": "SESS-0017",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00157",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-02T21:44:51.465487Z",
+  "duration_seconds": 289,
+  "metadata": {
+   "session": "SESS-0017",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00158",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-02T21:47:41.465487Z",
+  "duration_seconds": 593,
+  "metadata": {
+   "session": "SESS-0017",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00159",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-13T16:54:04.139573Z",
+  "duration_seconds": 493,
+  "metadata": {
+   "session": "SESS-0018",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00160",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-13T16:54:14.139573Z",
+  "duration_seconds": 107,
+  "metadata": {
+   "session": "SESS-0018",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00161",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-13T16:55:38.139573Z",
+  "duration_seconds": 244,
+  "metadata": {
+   "session": "SESS-0018",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00162",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-13T16:58:47.139573Z",
+  "duration_seconds": 18,
+  "metadata": {
+   "session": "SESS-0018",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00163",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-03T17:41:41.597195Z",
+  "duration_seconds": 361,
+  "metadata": {
+   "session": "SESS-0019",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00164",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-03T17:41:51.597195Z",
+  "duration_seconds": 176,
+  "metadata": {
+   "session": "SESS-0019",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00165",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-03T17:45:25.597195Z",
+  "duration_seconds": 59,
+  "metadata": {
+   "session": "SESS-0019",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00166",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-03T17:48:40.597195Z",
+  "duration_seconds": 90,
+  "metadata": {
+   "session": "SESS-0019",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00167",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-07T11:53:31.102390Z",
+  "duration_seconds": 159,
+  "metadata": {
+   "session": "SESS-0020",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00168",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-07T11:53:41.102390Z",
+  "duration_seconds": 502,
+  "metadata": {
+   "session": "SESS-0020",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00169",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-07T11:55:16.102390Z",
+  "duration_seconds": 214,
+  "metadata": {
+   "session": "SESS-0020",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00170",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-07T11:56:08.102390Z",
+  "duration_seconds": 433,
+  "metadata": {
+   "session": "SESS-0020",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00171",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-13T00:11:24.764555Z",
+  "duration_seconds": 101,
+  "metadata": {
+   "session": "SESS-0021",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00172",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-13T00:11:34.764555Z",
+  "duration_seconds": 118,
+  "metadata": {
+   "session": "SESS-0021",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00173",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-13T00:16:49.764555Z",
+  "duration_seconds": 541,
+  "metadata": {
+   "session": "SESS-0021",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00174",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-13T00:20:53.764555Z",
+  "duration_seconds": 395,
+  "metadata": {
+   "session": "SESS-0021",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00175",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-05T21:57:58.964972Z",
+  "duration_seconds": 572,
+  "metadata": {
+   "session": "SESS-0022",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00176",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-05T21:58:08.964972Z",
+  "duration_seconds": 288,
+  "metadata": {
+   "session": "SESS-0022",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00177",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-05T22:04:07.964972Z",
+  "duration_seconds": 245,
+  "metadata": {
+   "session": "SESS-0022",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00178",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-05T22:07:07.964972Z",
+  "duration_seconds": 314,
+  "metadata": {
+   "session": "SESS-0022",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00179",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-05T23:33:23.938765Z",
+  "duration_seconds": 485,
+  "metadata": {
+   "session": "SESS-0023",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00180",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-05T23:33:33.938765Z",
+  "duration_seconds": 413,
+  "metadata": {
+   "session": "SESS-0023",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00181",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-05T23:36:07.938765Z",
+  "duration_seconds": 576,
+  "metadata": {
+   "session": "SESS-0023",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00182",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-05T23:43:16.938765Z",
+  "duration_seconds": 194,
+  "metadata": {
+   "session": "SESS-0023",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00183",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T01:18:23.849031Z",
+  "duration_seconds": 553,
+  "metadata": {
+   "session": "SESS-0024",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00184",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T01:18:33.849031Z",
+  "duration_seconds": 516,
+  "metadata": {
+   "session": "SESS-0024",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00185",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-06T01:19:53.849031Z",
+  "duration_seconds": 513,
+  "metadata": {
+   "session": "SESS-0024",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00186",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-06T01:21:24.849031Z",
+  "duration_seconds": 311,
+  "metadata": {
+   "session": "SESS-0024",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00187",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-02T08:21:04.462445Z",
+  "duration_seconds": 330,
+  "metadata": {
+   "session": "SESS-0025",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00188",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-02T08:21:14.462445Z",
+  "duration_seconds": 467,
+  "metadata": {
+   "session": "SESS-0025",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00189",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-02T08:23:08.462445Z",
+  "duration_seconds": 309,
+  "metadata": {
+   "session": "SESS-0025",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00190",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-02T08:24:39.462445Z",
+  "duration_seconds": 457,
+  "metadata": {
+   "session": "SESS-0025",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00191",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-13T21:44:08.135637Z",
+  "duration_seconds": 190,
+  "metadata": {
+   "session": "SESS-0026",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00192",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-13T21:44:18.135637Z",
+  "duration_seconds": 279,
+  "metadata": {
+   "session": "SESS-0026",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00193",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-13T21:47:36.135637Z",
+  "duration_seconds": 316,
+  "metadata": {
+   "session": "SESS-0026",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00194",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-13T21:50:27.135637Z",
+  "duration_seconds": 275,
+  "metadata": {
+   "session": "SESS-0026",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00195",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-03T01:26:24.694394Z",
+  "duration_seconds": 583,
+  "metadata": {
+   "session": "SESS-0027",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00196",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-03T01:26:34.694394Z",
+  "duration_seconds": 568,
+  "metadata": {
+   "session": "SESS-0027",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00197",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-03T01:30:07.694394Z",
+  "duration_seconds": 22,
+  "metadata": {
+   "session": "SESS-0027",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00198",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-03T01:35:24.694394Z",
+  "duration_seconds": 268,
+  "metadata": {
+   "session": "SESS-0027",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00199",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-10T18:44:02.060094Z",
+  "duration_seconds": 525,
+  "metadata": {
+   "session": "SESS-0028",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00200",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-10T18:44:12.060094Z",
+  "duration_seconds": 202,
+  "metadata": {
+   "session": "SESS-0028",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00201",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-10T18:47:06.060094Z",
+  "duration_seconds": 194,
+  "metadata": {
+   "session": "SESS-0028",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00202",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-10T18:50:39.060094Z",
+  "duration_seconds": 532,
+  "metadata": {
+   "session": "SESS-0028",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00203",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-14T15:16:18.355875Z",
+  "duration_seconds": 94,
+  "metadata": {
+   "session": "SESS-0029",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00204",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-14T15:16:28.355875Z",
+  "duration_seconds": 143,
+  "metadata": {
+   "session": "SESS-0029",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00205",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-14T15:20:47.355875Z",
+  "duration_seconds": 167,
+  "metadata": {
+   "session": "SESS-0029",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00206",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-14T15:24:36.355875Z",
+  "duration_seconds": 563,
+  "metadata": {
+   "session": "SESS-0029",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00207",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-12T11:36:58.257969Z",
+  "duration_seconds": 160,
+  "metadata": {
+   "session": "SESS-0030",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00208",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-12T11:37:08.257969Z",
+  "duration_seconds": 523,
+  "metadata": {
+   "session": "SESS-0030",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00209",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-12T11:40:07.257969Z",
+  "duration_seconds": 558,
+  "metadata": {
+   "session": "SESS-0030",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00210",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-12T11:50:36.257969Z",
+  "duration_seconds": 211,
+  "metadata": {
+   "session": "SESS-0030",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00211",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-02T17:39:24.865664Z",
+  "duration_seconds": 235,
+  "metadata": {
+   "session": "SESS-0031",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00212",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-02T17:39:34.865664Z",
+  "duration_seconds": 327,
+  "metadata": {
+   "session": "SESS-0031",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00213",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-02T17:44:15.865664Z",
+  "duration_seconds": 493,
+  "metadata": {
+   "session": "SESS-0031",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00214",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-02T17:46:16.865664Z",
+  "duration_seconds": 597,
+  "metadata": {
+   "session": "SESS-0031",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00215",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-10T19:02:30.217949Z",
+  "duration_seconds": 32,
+  "metadata": {
+   "session": "SESS-0032",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00216",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-10T19:02:40.217949Z",
+  "duration_seconds": 199,
+  "metadata": {
+   "session": "SESS-0032",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00217",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-10T19:08:16.217949Z",
+  "duration_seconds": 527,
+  "metadata": {
+   "session": "SESS-0032",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00218",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-10T19:10:57.217949Z",
+  "duration_seconds": 520,
+  "metadata": {
+   "session": "SESS-0032",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00219",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-08T00:12:55.091717Z",
+  "duration_seconds": 541,
+  "metadata": {
+   "session": "SESS-0033",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00220",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-08T00:13:05.091717Z",
+  "duration_seconds": 410,
+  "metadata": {
+   "session": "SESS-0033",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00221",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-08T00:15:36.091717Z",
+  "duration_seconds": 545,
+  "metadata": {
+   "session": "SESS-0033",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00222",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-08T00:17:10.091717Z",
+  "duration_seconds": 425,
+  "metadata": {
+   "session": "SESS-0033",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00223",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-10T09:52:24.169193Z",
+  "duration_seconds": 253,
+  "metadata": {
+   "session": "SESS-0034",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00224",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-10T09:52:34.169193Z",
+  "duration_seconds": 58,
+  "metadata": {
+   "session": "SESS-0034",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00225",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-10T09:54:23.169193Z",
+  "duration_seconds": 47,
+  "metadata": {
+   "session": "SESS-0034",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00226",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-10T10:00:50.169193Z",
+  "duration_seconds": 574,
+  "metadata": {
+   "session": "SESS-0034",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00227",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-01T03:14:50.570394Z",
+  "duration_seconds": 430,
+  "metadata": {
+   "session": "SESS-0035",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00228",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-01T03:15:00.570394Z",
+  "duration_seconds": 485,
+  "metadata": {
+   "session": "SESS-0035",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00229",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-01T03:16:53.570394Z",
+  "duration_seconds": 198,
+  "metadata": {
+   "session": "SESS-0035",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00230",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-01T03:21:12.570394Z",
+  "duration_seconds": 368,
+  "metadata": {
+   "session": "SESS-0035",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00231",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T06:59:21.064886Z",
+  "duration_seconds": 83,
+  "metadata": {
+   "session": "SESS-0036",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00232",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T06:59:31.064886Z",
+  "duration_seconds": 400,
+  "metadata": {
+   "session": "SESS-0036",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00233",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-06T07:02:09.064886Z",
+  "duration_seconds": 13,
+  "metadata": {
+   "session": "SESS-0036",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00234",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-06T07:04:45.064886Z",
+  "duration_seconds": 178,
+  "metadata": {
+   "session": "SESS-0036",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00235",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-14T04:40:22.688840Z",
+  "duration_seconds": 578,
+  "metadata": {
+   "session": "SESS-0037",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00236",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-14T04:40:32.688840Z",
+  "duration_seconds": 542,
+  "metadata": {
+   "session": "SESS-0037",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00237",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-14T04:43:09.688840Z",
+  "duration_seconds": 91,
+  "metadata": {
+   "session": "SESS-0037",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00238",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-14T04:44:12.688840Z",
+  "duration_seconds": 391,
+  "metadata": {
+   "session": "SESS-0037",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00239",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-09T21:29:20.094563Z",
+  "duration_seconds": 180,
+  "metadata": {
+   "session": "SESS-0038",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00240",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-09T21:29:30.094563Z",
+  "duration_seconds": 157,
+  "metadata": {
+   "session": "SESS-0038",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00241",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-09T21:30:51.094563Z",
+  "duration_seconds": 173,
+  "metadata": {
+   "session": "SESS-0038",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00242",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-09T21:32:26.094563Z",
+  "duration_seconds": 366,
+  "metadata": {
+   "session": "SESS-0038",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00243",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGIN",
+  "timestamp": "2026-08-06T05:35:56.182004Z",
+  "duration_seconds": 232,
+  "metadata": {
+   "session": "SESS-0039",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00244",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "IDENTITY_VERIFICATION",
+  "timestamp": "2026-08-06T05:36:06.182004Z",
+  "duration_seconds": 559,
+  "metadata": {
+   "session": "SESS-0039",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00245",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "ADMIN_ACTION",
+  "timestamp": "2026-08-06T05:37:14.182004Z",
+  "duration_seconds": 334,
+  "metadata": {
+   "session": "SESS-0039",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00246",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "LOGOUT",
+  "timestamp": "2026-08-06T05:39:47.182004Z",
+  "duration_seconds": 524,
+  "metadata": {
+   "session": "SESS-0039",
+   "device_id": "DEV-00001"
+  }
+ },
+ {
+  "action_id": "ACT-00247",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": null,
+  "action_type": "SESSION_LOCK",
+  "timestamp": "2026-08-06T05:38:51.182004Z",
+  "duration_seconds": 0,
+  "metadata": {
+   "session": "SESS-0039",
+   "reason": "IDENTITY_MISMATCH"
+  }
+ }
+]

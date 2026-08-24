@@ -1,0 +1,62 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "negative_space",
+  "entity_type": "incident",
+  "entity_id": "INC-00006",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "CLOSURE"
+   ]
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "TRIAGE",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-09T12:23:40.364792Z",
+  "end_time": "2026-08-09T13:54:19.046083Z"
+ },
+ {
+  "truth_id": "GT-0002",
+  "scenario_id": "negative_space",
+  "entity_type": "incident",
+  "entity_id": "INC-00013",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "CLOSURE"
+   ]
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "TRIAGE",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-10T19:52:32.543349Z",
+  "end_time": "2026-08-10T21:35:35.752982Z"
+ }
+]

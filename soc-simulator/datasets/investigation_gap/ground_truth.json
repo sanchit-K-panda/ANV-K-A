@@ -1,0 +1,70 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "investigation_gap",
+  "entity_type": "incident",
+  "entity_id": "INC-00003",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "investigation_required": true,
+   "escalation_required": true
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "TRIAGE",
+    "CLOSURE"
+   ],
+   "investigation_exists": false,
+   "escalation_exists": false
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "NEGATIVE_SPACE",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "CRITICAL",
+  "injected": true,
+  "start_time": "2026-08-06T12:04:52.073550Z",
+  "end_time": "2026-08-06T14:25:53.373287Z"
+ },
+ {
+  "truth_id": "GT-0002",
+  "scenario_id": "investigation_gap",
+  "entity_type": "incident",
+  "entity_id": "INC-00009",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "investigation_required": true,
+   "escalation_required": true
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "TRIAGE",
+    "CLOSURE"
+   ],
+   "investigation_exists": false,
+   "escalation_exists": false
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "NEGATIVE_SPACE",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "CRITICAL",
+  "injected": true,
+  "start_time": "2026-08-13T21:36:28.951792Z",
+  "end_time": "2026-08-14T00:11:36.861719Z"
+ }
+]

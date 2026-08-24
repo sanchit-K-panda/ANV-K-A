@@ -1,0 +1,842 @@
+[
+ {
+  "action_id": "ACT-00001",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T20:27:36.242896Z",
+  "duration_seconds": 731,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00002",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T21:47:33.987379Z",
+  "duration_seconds": 644,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00003",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T21:54:39.692014Z",
+  "duration_seconds": 625,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00004",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00001",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T22:19:16.325946Z",
+  "duration_seconds": 210,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00005",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-07T07:21:27.576085Z",
+  "duration_seconds": 150,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00006",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-07T08:40:37.185651Z",
+  "duration_seconds": 192,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00007",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-07T08:50:04.901789Z",
+  "duration_seconds": 37,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00008",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-07T08:57:50.455888Z",
+  "duration_seconds": 550,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00009",
+  "analyst_id": "AN-00037",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00002",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-07T09:18:33.343473Z",
+  "duration_seconds": 847,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00010",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-06T12:05:33.073550Z",
+  "duration_seconds": 753,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00011",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-06T13:42:06.620995Z",
+  "duration_seconds": 264,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00012",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-06T13:48:31.402543Z",
+  "duration_seconds": 236,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00013",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-06T14:00:54.329603Z",
+  "duration_seconds": 306,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00014",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00003",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-06T14:25:53.373287Z",
+  "duration_seconds": 548,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00015",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T01:34:55.261120Z",
+  "duration_seconds": 736,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00016",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T01:54:34.595246Z",
+  "duration_seconds": 496,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00017",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T02:14:00.917802Z",
+  "duration_seconds": 237,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00018",
+  "analyst_id": "AN-00007",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00004",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T02:18:16.216305Z",
+  "duration_seconds": 611,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00019",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T09:48:57.966814Z",
+  "duration_seconds": 438,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00020",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T11:01:58.071188Z",
+  "duration_seconds": 655,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00021",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-09T11:12:34.697896Z",
+  "duration_seconds": 582,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00022",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T11:16:19.740993Z",
+  "duration_seconds": 418,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00023",
+  "analyst_id": "AN-00028",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00005",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T11:35:15.770560Z",
+  "duration_seconds": 754,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00024",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T12:24:01.364792Z",
+  "duration_seconds": 564,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00026",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T13:11:39.758660Z",
+  "duration_seconds": 838,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00027",
+  "analyst_id": "AN-00013",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00006",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T13:54:19.046083Z",
+  "duration_seconds": 233,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00028",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-01T08:05:25.798410Z",
+  "duration_seconds": 388,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00029",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-01T09:09:38.558101Z",
+  "duration_seconds": 334,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00030",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-01T09:31:12.620450Z",
+  "duration_seconds": 782,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00031",
+  "analyst_id": "AN-00024",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00007",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-01T09:45:46.418734Z",
+  "duration_seconds": 333,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00032",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-04T01:06:41.562669Z",
+  "duration_seconds": 722,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00033",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-04T02:03:17.201183Z",
+  "duration_seconds": 784,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00034",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-04T02:31:45.469828Z",
+  "duration_seconds": 474,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00035",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00008",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-04T02:51:54.253790Z",
+  "duration_seconds": 39,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00036",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-13T21:36:48.951792Z",
+  "duration_seconds": 723,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00037",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-13T23:32:45.100712Z",
+  "duration_seconds": 598,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00038",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-13T23:43:45.174778Z",
+  "duration_seconds": 635,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00039",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-13T23:48:02.698162Z",
+  "duration_seconds": 366,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00040",
+  "analyst_id": "AN-00033",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00009",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T00:11:36.861719Z",
+  "duration_seconds": 759,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00041",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-14T06:44:37.900566Z",
+  "duration_seconds": 463,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00042",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-14T07:32:08.616277Z",
+  "duration_seconds": 26,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00043",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-14T07:50:13.199468Z",
+  "duration_seconds": 493,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00044",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00010",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T08:58:26.199468Z",
+  "duration_seconds": 439,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00045",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-14T14:32:18.528196Z",
+  "duration_seconds": 707,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00046",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-14T15:24:22.054859Z",
+  "duration_seconds": 763,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00047",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-14T15:32:40.176005Z",
+  "duration_seconds": 424,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00048",
+  "analyst_id": "AN-00021",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00011",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-14T16:05:55.176005Z",
+  "duration_seconds": 549,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00049",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-10T00:00:45.381176Z",
+  "duration_seconds": 836,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00050",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-10T01:10:59.362817Z",
+  "duration_seconds": 885,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00051",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-10T01:21:30.926142Z",
+  "duration_seconds": 569,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00052",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-10T01:22:08.863708Z",
+  "duration_seconds": 76,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00053",
+  "analyst_id": "AN-00006",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00012",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-10T01:46:31.839695Z",
+  "duration_seconds": 388,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00054",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-10T19:52:40.543349Z",
+  "duration_seconds": 628,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00056",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-10T21:23:35.519113Z",
+  "duration_seconds": 846,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00057",
+  "analyst_id": "AN-00008",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00013",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-10T21:35:35.752982Z",
+  "duration_seconds": 854,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00058",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-12T07:05:50.573286Z",
+  "duration_seconds": 385,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00059",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-12T08:12:55.864034Z",
+  "duration_seconds": 151,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00060",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-12T08:38:32.316305Z",
+  "duration_seconds": 813,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00061",
+  "analyst_id": "AN-00005",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00014",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-12T09:07:28.569632Z",
+  "duration_seconds": 713,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00062",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-05T21:45:11.539337Z",
+  "duration_seconds": 546,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00063",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-05T22:48:59.602578Z",
+  "duration_seconds": 98,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00064",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-05T23:06:25.145621Z",
+  "duration_seconds": 862,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00065",
+  "analyst_id": "AN-00023",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00015",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-05T23:25:52.899883Z",
+  "duration_seconds": 677,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00066",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-09T18:20:41.592005Z",
+  "duration_seconds": 583,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00067",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-09T20:17:42.395958Z",
+  "duration_seconds": 281,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00068",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-09T20:29:11.691226Z",
+  "duration_seconds": 753,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00069",
+  "analyst_id": "AN-00002",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00016",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-09T20:43:49.291118Z",
+  "duration_seconds": 548,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00070",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-05T21:16:51.225471Z",
+  "duration_seconds": 717,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00071",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-05T22:04:18.446310Z",
+  "duration_seconds": 657,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00072",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-05T22:11:48.364837Z",
+  "duration_seconds": 725,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00073",
+  "analyst_id": "AN-00004",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00017",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-05T22:42:57.297061Z",
+  "duration_seconds": 472,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00074",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-07T17:31:24.305141Z",
+  "duration_seconds": 858,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00075",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-07T19:16:34.162215Z",
+  "duration_seconds": 372,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00076",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-07T19:40:11.198646Z",
+  "duration_seconds": 465,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00077",
+  "analyst_id": "AN-00012",
+  "soc_id": "SOC-001",
+  "incident_id": "INC-00018",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-07T20:06:32.848883Z",
+  "duration_seconds": 479,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00078",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-04T05:58:01.613572Z",
+  "duration_seconds": 882,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00079",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-04T07:18:13.156163Z",
+  "duration_seconds": 749,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00080",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "ESCALATION",
+  "timestamp": "2026-08-04T07:28:46.156576Z",
+  "duration_seconds": 155,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00081",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-04T07:28:25.251968Z",
+  "duration_seconds": 74,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00082",
+  "analyst_id": "AN-00032",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-04T07:36:10.251968Z",
+  "duration_seconds": 358,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00083",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "TRIAGE",
+  "timestamp": "2026-08-11T06:24:12.150290Z",
+  "duration_seconds": 461,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00084",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "INVESTIGATION_START",
+  "timestamp": "2026-08-11T07:08:51.874141Z",
+  "duration_seconds": 227,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00085",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "RESPONSE",
+  "timestamp": "2026-08-11T07:20:18.390959Z",
+  "duration_seconds": 710,
+  "metadata": {}
+ },
+ {
+  "action_id": "ACT-00086",
+  "analyst_id": "AN-00026",
+  "soc_id": "SOC-002",
+  "incident_id": "INC-00020",
+  "action_type": "CLOSURE",
+  "timestamp": "2026-08-11T07:44:58.702030Z",
+  "duration_seconds": 158,
+  "metadata": {}
+ }
+]

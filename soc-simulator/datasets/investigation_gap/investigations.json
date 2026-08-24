@@ -1,0 +1,182 @@
+[
+ {
+  "investigation_id": "INV-00001",
+  "incident_id": "INC-00001",
+  "analyst_id": "AN-00007",
+  "started_at": "2026-08-09T21:47:33.987379Z",
+  "completed_at": "2026-08-09T22:45:31.676194Z",
+  "status": "COMPLETED",
+  "evidence_count": 5,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00002",
+  "incident_id": "INC-00002",
+  "analyst_id": "AN-00037",
+  "started_at": "2026-08-07T08:40:37.185651Z",
+  "completed_at": "2026-08-07T09:43:21.048469Z",
+  "status": "COMPLETED",
+  "evidence_count": 10,
+  "notes": "Investigated CRITICAL incident"
+ },
+ {
+  "investigation_id": "INV-00004",
+  "incident_id": "INC-00004",
+  "analyst_id": "AN-00007",
+  "started_at": "2026-08-09T01:54:34.595246Z",
+  "completed_at": "2026-08-09T02:13:27.978543Z",
+  "status": "COMPLETED",
+  "evidence_count": 13,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00005",
+  "incident_id": "INC-00005",
+  "analyst_id": "AN-00028",
+  "started_at": "2026-08-09T11:01:58.071188Z",
+  "completed_at": "2026-08-09T11:59:23.778826Z",
+  "status": "COMPLETED",
+  "evidence_count": 9,
+  "notes": "Investigated CRITICAL incident"
+ },
+ {
+  "investigation_id": "INV-00006",
+  "incident_id": "INC-00006",
+  "analyst_id": "AN-00013",
+  "started_at": "2026-08-09T12:51:24.486912Z",
+  "completed_at": "2026-08-09T13:12:03.120049Z",
+  "status": "COMPLETED",
+  "evidence_count": 13,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00007",
+  "incident_id": "INC-00007",
+  "analyst_id": "AN-00024",
+  "started_at": "2026-08-01T09:09:38.558101Z",
+  "completed_at": "2026-08-01T09:46:29.322329Z",
+  "status": "COMPLETED",
+  "evidence_count": 6,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00008",
+  "incident_id": "INC-00008",
+  "analyst_id": "AN-00002",
+  "started_at": "2026-08-04T02:03:17.201183Z",
+  "completed_at": "2026-08-04T02:43:43.160162Z",
+  "status": "COMPLETED",
+  "evidence_count": 8,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00010",
+  "incident_id": "INC-00010",
+  "analyst_id": "AN-00021",
+  "started_at": "2026-08-14T07:32:08.616277Z",
+  "completed_at": "2026-08-14T08:00:47.251287Z",
+  "status": "COMPLETED",
+  "evidence_count": 9,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00011",
+  "incident_id": "INC-00011",
+  "analyst_id": "AN-00021",
+  "started_at": "2026-08-14T15:24:22.054859Z",
+  "completed_at": "2026-08-14T15:57:21.511619Z",
+  "status": "COMPLETED",
+  "evidence_count": 11,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00012",
+  "incident_id": "INC-00012",
+  "analyst_id": "AN-00006",
+  "started_at": "2026-08-10T01:10:59.362817Z",
+  "completed_at": "2026-08-10T02:05:32.426554Z",
+  "status": "COMPLETED",
+  "evidence_count": 10,
+  "notes": "Investigated CRITICAL incident"
+ },
+ {
+  "investigation_id": "INV-00013",
+  "incident_id": "INC-00013",
+  "analyst_id": "AN-00008",
+  "started_at": "2026-08-10T21:08:48.921824Z",
+  "completed_at": "2026-08-10T21:34:50.099035Z",
+  "status": "COMPLETED",
+  "evidence_count": 13,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00014",
+  "incident_id": "INC-00014",
+  "analyst_id": "AN-00005",
+  "started_at": "2026-08-12T08:12:55.864034Z",
+  "completed_at": "2026-08-12T09:06:20.032685Z",
+  "status": "COMPLETED",
+  "evidence_count": 12,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00015",
+  "incident_id": "INC-00015",
+  "analyst_id": "AN-00023",
+  "started_at": "2026-08-05T22:48:59.602578Z",
+  "completed_at": "2026-08-05T23:17:33.913805Z",
+  "status": "COMPLETED",
+  "evidence_count": 7,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00016",
+  "incident_id": "INC-00016",
+  "analyst_id": "AN-00002",
+  "started_at": "2026-08-09T20:17:42.395958Z",
+  "completed_at": "2026-08-09T20:54:37.854457Z",
+  "status": "COMPLETED",
+  "evidence_count": 9,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00017",
+  "incident_id": "INC-00017",
+  "analyst_id": "AN-00004",
+  "started_at": "2026-08-05T22:04:18.446310Z",
+  "completed_at": "2026-08-05T22:17:56.484030Z",
+  "status": "COMPLETED",
+  "evidence_count": 5,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00018",
+  "incident_id": "INC-00018",
+  "analyst_id": "AN-00012",
+  "started_at": "2026-08-07T19:16:34.162215Z",
+  "completed_at": "2026-08-07T19:52:02.501608Z",
+  "status": "COMPLETED",
+  "evidence_count": 2,
+  "notes": "Investigated HIGH incident"
+ },
+ {
+  "investigation_id": "INV-00019",
+  "incident_id": "INC-00019",
+  "analyst_id": "AN-00032",
+  "started_at": "2026-08-04T07:18:13.156163Z",
+  "completed_at": "2026-08-04T08:00:42.561732Z",
+  "status": "COMPLETED",
+  "evidence_count": 6,
+  "notes": "Investigated CRITICAL incident"
+ },
+ {
+  "investigation_id": "INV-00020",
+  "incident_id": "INC-00020",
+  "analyst_id": "AN-00026",
+  "started_at": "2026-08-11T07:08:51.874141Z",
+  "completed_at": "2026-08-11T07:47:00.187400Z",
+  "status": "COMPLETED",
+  "evidence_count": 4,
+  "notes": "Investigated HIGH incident"
+ }
+]

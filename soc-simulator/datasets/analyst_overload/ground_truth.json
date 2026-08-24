@@ -1,0 +1,29 @@
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "analyst_overload",
+  "entity_type": "analyst",
+  "entity_id": "AN-00016",
+  "expected_behaviour": {
+   "critical_case_share": {
+    "expected_uniform": true,
+    "per_analyst_share": 0.062
+   },
+   "distribution": "uniform"
+  },
+  "actual_behaviour": {
+   "critical_cases_total": 1,
+   "dominant_share": 0.0,
+   "mean_other_share": 0.0667,
+   "affected_incident_ids": []
+  },
+  "expected_findings": [
+   "WORKLOAD_IMBALANCE",
+   "ANALYST_BOTTLENECK"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-01T00:00:00Z",
+  "end_time": "2026-08-15T00:00:00Z"
+ }
+]

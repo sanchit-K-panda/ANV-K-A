@@ -1,0 +1,242 @@
+[
+ {
+  "device_id": "DEV-00001",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-case_management-00",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "192.57.135.16",
+  "os": "Ubuntu 22.04",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00002",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-ids-01",
+  "device_type": "IDS",
+  "ip_address": "28.142.174.233",
+  "os": "Windows Server 2022",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00003",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-firewall-02",
+  "device_type": "FIREWALL",
+  "ip_address": "40.125.6.202",
+  "os": "RHEL 9",
+  "criticality": "LOW",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00004",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-siem-03",
+  "device_type": "SIEM",
+  "ip_address": "244.45.71.204",
+  "os": "Windows 11",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00005",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-case_management-04",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "195.15.244.110",
+  "os": "Debian 12",
+  "criticality": "HIGH",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00006",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-case_management-05",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "233.161.250.111",
+  "os": "macOS 14",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00007",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-ids-06",
+  "device_type": "IDS",
+  "ip_address": "215.119.164.119",
+  "os": "Ubuntu 22.04",
+  "criticality": "HIGH",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00008",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-edr-07",
+  "device_type": "EDR",
+  "ip_address": "95.184.209.108",
+  "os": "Windows Server 2022",
+  "criticality": "HIGH",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00009",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-case_management-08",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "244.24.143.63",
+  "os": "RHEL 9",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00010",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-case_management-09",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "82.251.228.59",
+  "os": "Windows 11",
+  "criticality": "LOW",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00011",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-siem-10",
+  "device_type": "SIEM",
+  "ip_address": "28.163.92.251",
+  "os": "Debian 12",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00012",
+  "soc_id": "SOC-001",
+  "hostname": "SOC-001-ids-11",
+  "device_type": "IDS",
+  "ip_address": "61.76.191.55",
+  "os": "macOS 14",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00013",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-edr-00",
+  "device_type": "EDR",
+  "ip_address": "165.66.222.185",
+  "os": "Ubuntu 22.04",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00014",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-ids-01",
+  "device_type": "IDS",
+  "ip_address": "219.212.168.109",
+  "os": "Windows Server 2022",
+  "criticality": "HIGH",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00015",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-case_management-02",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "50.73.92.255",
+  "os": "RHEL 9",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00016",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-siem-03",
+  "device_type": "SIEM",
+  "ip_address": "186.56.140.143",
+  "os": "Windows 11",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00017",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-siem-04",
+  "device_type": "SIEM",
+  "ip_address": "217.126.141.60",
+  "os": "Debian 12",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00018",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-case_management-05",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "148.50.215.151",
+  "os": "macOS 14",
+  "criticality": "LOW",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00019",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-case_management-06",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "54.119.123.228",
+  "os": "Ubuntu 22.04",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00020",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-case_management-07",
+  "device_type": "CASE_MANAGEMENT",
+  "ip_address": "66.183.192.72",
+  "os": "Windows Server 2022",
+  "criticality": "LOW",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00021",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-edr-08",
+  "device_type": "EDR",
+  "ip_address": "93.166.74.58",
+  "os": "RHEL 9",
+  "criticality": "LOW",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00022",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-edr-09",
+  "device_type": "EDR",
+  "ip_address": "228.53.64.33",
+  "os": "Windows 11",
+  "criticality": "MEDIUM",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00023",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-edr-10",
+  "device_type": "EDR",
+  "ip_address": "118.246.167.120",
+  "os": "Debian 12",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ },
+ {
+  "device_id": "DEV-00024",
+  "soc_id": "SOC-002",
+  "hostname": "SOC-002-firewall-11",
+  "device_type": "FIREWALL",
+  "ip_address": "93.38.75.27",
+  "os": "macOS 14",
+  "criticality": "CRITICAL",
+  "status": "ONLINE"
+ }
+]

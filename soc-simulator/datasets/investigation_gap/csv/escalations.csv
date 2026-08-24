@@ -1,0 +1,5 @@
+escalation_id,incident_id,analyst_id,escalated_to,reason,timestamp,status
+ESC-00001,INC-00002,AN-00037,AN-00026,CRITICAL severity requires senior review,2026-08-07T08:50:04.901789Z,RESOLVED
+ESC-00003,INC-00005,AN-00028,AN-00026,CRITICAL severity requires senior review,2026-08-09T11:12:34.697896Z,RESOLVED
+ESC-00005,INC-00012,AN-00006,AN-00006,CRITICAL severity requires senior review,2026-08-10T01:21:30.926142Z,RESOLVED
+ESC-00006,INC-00019,AN-00032,AN-00023,CRITICAL severity requires senior review,2026-08-04T07:28:46.156576Z,RESOLVED

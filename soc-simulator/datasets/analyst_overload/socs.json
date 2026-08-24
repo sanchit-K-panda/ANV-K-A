@@ -1,0 +1,20 @@
+[
+ {
+  "soc_id": "SOC-001",
+  "name": "SOC A",
+  "environment": "PRODUCTION",
+  "location": "Mumbai, IN",
+  "timezone": "Asia/Kolkata",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "soc_id": "SOC-002",
+  "name": "SOC B",
+  "environment": "PRODUCTION",
+  "location": "Mumbai, IN",
+  "timezone": "Asia/Kolkata",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ }
+]

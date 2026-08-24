@@ -1,0 +1,3 @@
+soc_id,name,environment,location,timezone,status,created_at
+SOC-001,SOC A,PRODUCTION,"Mumbai, IN",Asia/Kolkata,ACTIVE,2025-08-01T00:00:00Z
+SOC-002,SOC B,PRODUCTION,"Mumbai, IN",Asia/Kolkata,ACTIVE,2025-08-01T00:00:00Z
