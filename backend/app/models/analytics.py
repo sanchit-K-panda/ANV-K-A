@@ -1,6 +1,8 @@
 """SQLAlchemy models for ANVĪKṢA — Findings, Risk & Recommendations tables."""
 from __future__ import annotations
 
+import enum
+
 import uuid
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
@@ -24,7 +26,7 @@ if TYPE_CHECKING:
     from app.models.identity import User
 
 
-class FindingType(str):
+class FindingType(str, enum.Enum):
     EXECUTION_GAP = "EXECUTION_GAP"
     NEGATIVE_SPACE = "NEGATIVE_SPACE"
     BEHAVIOURAL_ANOMALY = "BEHAVIOURAL_ANOMALY"
@@ -34,14 +36,14 @@ class FindingType(str):
     IDENTITY_ANOMALY = "IDENTITY_ANOMALY"
 
 
-class FindingSeverity(str):
+class FindingSeverity(str, enum.Enum):
     CRITICAL = "CRITICAL"
     HIGH = "HIGH"
     MEDIUM = "MEDIUM"
     LOW = "LOW"
 
 
-class FindingStatus(str):
+class FindingStatus(str, enum.Enum):
     OPEN = "OPEN"
     INVESTIGATING = "INVESTIGATING"
     RESOLVED = "RESOLVED"

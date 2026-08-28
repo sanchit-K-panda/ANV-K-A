@@ -1,6 +1,8 @@
 """SQLAlchemy models for ANVĪKṢA — SOC Telemetry & Analytics tables."""
 from __future__ import annotations
 
+import enum
+
 import uuid
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
@@ -24,7 +26,7 @@ if TYPE_CHECKING:
     from app.models.identity import User
 
 
-class Severity(str):
+class Severity(str, enum.Enum):
     CRITICAL = "CRITICAL"
     HIGH = "HIGH"
     MEDIUM = "MEDIUM"
@@ -32,13 +34,13 @@ class Severity(str):
     INFO = "INFO"
 
 
-class AlertStatus(str):
+class AlertStatus(str, enum.Enum):
     NEW = "NEW"
     TRIAGED = "TRIAGED"
     CLOSED = "CLOSED"
 
 
-class IncidentStatus(str):
+class IncidentStatus(str, enum.Enum):
     OPEN = "OPEN"
     INVESTIGATING = "INVESTIGATING"
     ESCALATED = "ESCALATED"
@@ -46,32 +48,32 @@ class IncidentStatus(str):
     CLOSED = "CLOSED"
 
 
-class InvestigationStatus(str):
+class InvestigationStatus(str, enum.Enum):
     IN_PROGRESS = "IN_PROGRESS"
     COMPLETED = "COMPLETED"
     ABANDONED = "ABANDONED"
 
 
-class EscalationStatus(str):
+class EscalationStatus(str, enum.Enum):
     OPEN = "OPEN"
     ACKNOWLEDGED = "ACKNOWLEDGED"
     RESOLVED = "RESOLVED"
 
 
-class AnalystRole(str):
+class AnalystRole(str, enum.Enum):
     TIER1 = "TIER1"
     TIER2 = "TIER2"
     TIER3 = "TIER3"
     SUPERVISOR = "SUPERVISOR"
 
 
-class Shift(str):
+class Shift(str, enum.Enum):
     MORNING = "MORNING"
     EVENING = "EVENING"
     NIGHT = "NIGHT"
 
 
-class DeviceType(str):
+class DeviceType(str, enum.Enum):
     SIEM = "SIEM"
     EDR = "EDR"
     IDS = "IDS"
@@ -79,7 +81,7 @@ class DeviceType(str):
     CASE_MANAGEMENT = "CASE_MANAGEMENT"
 
 
-class AssetType(str):
+class AssetType(str, enum.Enum):
     SERVER = "SERVER"
     WORKSTATION = "WORKSTATION"
     DATABASE = "DATABASE"
@@ -88,14 +90,14 @@ class AssetType(str):
     IOT = "IOT"
 
 
-class Criticality(str):
+class Criticality(str, enum.Enum):
     CRITICAL = "CRITICAL"
     HIGH = "HIGH"
     MEDIUM = "MEDIUM"
     LOW = "LOW"
 
 
-class FindingType(str):
+class FindingType(str, enum.Enum):
     EXECUTION_GAP = "EXECUTION_GAP"
     NEGATIVE_SPACE = "NEGATIVE_SPACE"
     BEHAVIOURAL_ANOMALY = "BEHAVIOURAL_ANOMALY"
@@ -105,14 +107,14 @@ class FindingType(str):
     IDENTITY_ANOMALY = "IDENTITY_ANOMALY"
 
 
-class FindingSeverity(str):
+class FindingSeverity(str, enum.Enum):
     CRITICAL = "CRITICAL"
     HIGH = "HIGH"
     MEDIUM = "MEDIUM"
     LOW = "LOW"
 
 
-class FindingStatus(str):
+class FindingStatus(str, enum.Enum):
     OPEN = "OPEN"
     INVESTIGATING = "INVESTIGATING"
     RESOLVED = "RESOLVED"
@@ -346,7 +348,7 @@ class Event(Base):
         SQLEnum(Severity, name="severity"), nullable=False
     )
     description: Mapped[str] = mapped_column(Text, nullable=False)
-    metadata: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    extra_data: Mapped[str] = mapped_column("metadata", Text, nullable=False, default="{}")
 
     soc: Mapped["Soc"] = relationship(back_populates="events")
     asset: Mapped["Asset | None"] = relationship(
@@ -647,7 +649,7 @@ class AnalystAction(Base):
         DateTime(timezone=True), nullable=False
     )
     duration_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    metadata: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
+    extra_data: Mapped[str] = mapped_column("metadata", Text, nullable=False, default="{}")
 
     analyst: Mapped["Analyst"] = relationship(
         back_populates="actions", foreign_keys=[analyst_id]

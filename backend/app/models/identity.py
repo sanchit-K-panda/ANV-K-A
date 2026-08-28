@@ -1,6 +1,8 @@
 """SQLAlchemy models for ANVĪKṢA — Core Identity & Access tables."""
 from __future__ import annotations
 
+import enum
+
 import uuid
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
@@ -20,10 +22,10 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import Base
 
 if TYPE_CHECKING:
-    from app.models.soc import Analyst, Device
+    from app.models.soc import Analyst
 
 
-class UserRole(str):
+class UserRole(str, enum.Enum):
     SUPERVISOR = "SUPERVISOR"
     ADMIN = "ADMIN"
     ANALYST = "ANALYST"
@@ -56,7 +58,7 @@ class User(Base):
     biometric_profile: Mapped["BiometricProfile"] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
-    devices: Mapped[list["Device"]] = relationship(
+    user_devices: Mapped[list["UserDevice"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
     sessions: Mapped[list["Session"]] = relationship(
@@ -102,8 +104,8 @@ class BiometricProfile(Base):
     )
 
 
-class Device(Base):
-    __tablename__ = "devices"
+class UserDevice(Base):
+    __tablename__ = "user_devices"
 
     id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
@@ -122,15 +124,19 @@ class Device(Base):
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
     )
 
-    user: Mapped["User"] = relationship(back_populates="devices")
+    user: Mapped["User"] = relationship(back_populates="user_devices")
     sessions: Mapped[list["Session"]] = relationship(
         back_populates="device", cascade="all, delete-orphan"
     )
 
     __table_args__ = (
-        Index("ix_devices_user_id", "user_id"),
-        Index("ix_devices_trust_status", "trust_status"),
+        Index("ix_user_devices_user_id", "user_id"),
+        Index("ix_user_devices_trust_status", "trust_status"),
     )
+
+
+# Backwards compat alias
+Device = UserDevice
 
 
 class Session(Base):
@@ -146,7 +152,7 @@ class Session(Base):
     )
     device_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("devices.id", ondelete="CASCADE"),
+        ForeignKey("user_devices.id", ondelete="CASCADE"),
         nullable=False,
     )
     session_status: Mapped[str] = mapped_column(
@@ -163,7 +169,7 @@ class Session(Base):
     permissions: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
 
     user: Mapped["User"] = relationship(back_populates="sessions")
-    device: Mapped["Device"] = relationship(back_populates="sessions")
+    device: Mapped["UserDevice"] = relationship(back_populates="sessions")
     audit_logs: Mapped[list["AuditLog"]] = relationship(
         back_populates="session", cascade="all, delete-orphan"
     )
@@ -200,7 +206,7 @@ class AuditLog(Base):
     )
     device_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True),
-        ForeignKey("devices.id", ondelete="SET NULL"),
+        ForeignKey("user_devices.id", ondelete="SET NULL"),
         nullable=True,
     )
     identity_status: Mapped[str] = mapped_column(String(50), nullable=False, default="UNKNOWN")
@@ -209,7 +215,7 @@ class AuditLog(Base):
 
     user: Mapped["User | None"] = relationship(back_populates="audit_logs")
     session: Mapped["Session | None"] = relationship(back_populates="audit_logs")
-    device: Mapped["Device | None"] = relationship()
+    device: Mapped["UserDevice | None"] = relationship()
 
     __table_args__ = (
         Index("ix_audit_logs_user_id", "user_id"),

@@ -5,7 +5,8 @@ from app.models.base import Base, AsyncSessionLocal, engine, get_db, init_db
 from app.models.identity import (
     User,
     BiometricProfile,
-    Device as IdentityDevice,
+    UserDevice as IdentityDevice,
+    UserDevice,
     Session,
     AuditLog,
     UserRole,

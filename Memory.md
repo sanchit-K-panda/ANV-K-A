@@ -18,7 +18,7 @@
 
 | Phase | Status | Notes |
 |---|---|---|
-| 1. Scaffold + Schema Freeze | 🟡 partial | Git repo ✅, .gitignore ✅, simulator data contracts ✅. Missing: full repo tree (frontend/, backend/, ml/, biometric/, database/, infrastructure/), docker-compose stack, SQLAlchemy models/Alembic migrations for the 11 core DB tables |
+| 1. Scaffold + Schema Freeze | ✅ DONE (2026-08-28) | Repo tree ✅ (frontend/backend/ml/simulator/biometric/database/infrastructure/docs), docker-compose valid ✅ (postgres+redis+fastapi+next), SQLAlchemy Base 22 tables ✅, Alembic 001_phase1 head ✅, .env.example ✅, contracts-only frontend ✅. Fixes: duplicate devices→user_devices, enum+metadata reserved fixes, base.py. Verified: 22 tables create in sqlite, /api/health 2/2 tests pass, alembic upgrade --sql generates. |
 | 2. SOC Simulator + Ground Truth | ✅ DONE | See details below |
 | 3–16 | ⬜ not started | Next: Phase 3 ingestion pipeline |
 
@@ -56,6 +56,25 @@ python -m simulator summary datasets/investigation_gap
 7. LiDAR/biometrics are late-phase enhancements, never foundations
 8. graphifyy installed globally but NOT used for this project — Memory.md + existing docs are the context system (revisit if codebase navigation becomes costly ~Phase 6+)
 
-## Next up — Phase 3 (after finishing Phase 1 remainder)
+## Phase 1 record — Scaffold + Schema Freeze (2026-08-28)
 
-Decision pending: finish Phase 1 scaffold first (docker-compose, SQLAlchemy/Alembic models for users, biometric_profiles, devices, sessions, alerts, incidents, investigations, escalations, findings, risk_assessments, audit_logs) then Phase 3 ingestion (FastAPI POST endpoints feeding simulator datasets into Postgres).
+**What was frozen:**
+- `backend/app/models/base.py` — DeclarativeBase + async engine/session (was missing, caused import failure)
+- `backend/app/models/identity.py` — renamed `devices` → `user_devices` to resolve clash with `soc.devices` (both used `devices` table name), fixed FKs; converted `UserRole` str class → `str,enum.Enum`; added `UserDevice` alias
+- `backend/app/models/soc.py` — converted all `class Foo(str):` → `str,enum.Enum`, renamed `metadata` → `extra_data` (mapped to column `metadata`) for `Event`+`AnalystAction` (SQLAlchemy reserved name), 22 tables verified in sqlite memory
+- `backend/app/models/analytics.py` — enum fix
+- `backend/app/main.py` + `app/api/health.py` — minimal FastAPI runnable (GET / + /api/health + /api/ready DB check), CORS, health tests 2/2
+- `backend/alembic.ini` + `alembic/env.py` config fix + `alembic/versions/001_phase1_schema_freeze.py` — full 22-table migration (users→recommendations + junction tables) with correct FK order; `alembic history` head = 001, `upgrade --sql` generates correctly
+- `docker-compose.yml` — removed obsolete `version: '3.8'` and stale `./database/migrations:/docker-entrypoint-initdb.d` mount; `docker compose config` VALID; services postgres+redis+backend+frontend all local, no cloud
+- `.env.example` — Postgres/Redis/backend/frontend vars, no cloud deps
+- `frontend/` — Next.js 14 scaffold (package.json, Dockerfile, next.config.js, tsconfig.json, app/layout.tsx+page.tsx with ● LOCAL/OFFLINE indicator per Design.md), contracts-only per Phases.md
+- Placeholder `.gitkeep` for ml/*/anomaly/behaviour/preprocessing etc, biometric/*, infrastructure/*, docs/*
+- Verification: `Base.metadata.create_all(sqlite)` 22 tables, missing=0; `docker compose config` VALID; `alembic upgrade head --sql` OK
+
+**Known Phase 1 debt for Phase 3:**
+- `docker compose up` not yet exercised against real Postgres (requires Docker daemon running); `alembic current/upgrade` needs live DB — will verify on `docker compose up postgres` in Phase 3 start
+- Frontend is scaffold only — no dashboard logic (intentional per Phase 1 contracts-only rule)
+
+## Next up — Phase 3 Ingestion Pipeline
+
+Phase 1 ✅ closed. Next: Phase 3 `POST /api/events | /alerts | /incidents | /investigations | /escalations` with validation→normalization→correlation IDs→Postgres persistence, handling thousands of synthetic records. No analytics logic yet.
