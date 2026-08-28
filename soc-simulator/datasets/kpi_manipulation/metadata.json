@@ -2,7 +2,7 @@
   "dataset_id": "DS-KPI_MANIPULATION-42",
   "scenario": "kpi_manipulation",
   "seed": 42,
-  "generated_at": "2026-08-24T19:28:53.662403Z",
+  "generated_at": "2026-08-28T08:14:42.281137Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,

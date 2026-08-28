@@ -2,7 +2,7 @@
   "dataset_id": "DS-RECURRING_THREAT-42",
   "scenario": "recurring_threat",
   "seed": 42,
-  "generated_at": "2026-08-24T19:29:07.271735Z",
+  "generated_at": "2026-08-28T08:14:45.013352Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,

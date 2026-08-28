@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: soc-simulator
+Version: 0.1.0
+Summary: ANVĪKṢA SOC Simulator — deterministic synthetic SOC telemetry with ground truth (SIH26157)
+Requires-Python: >=3.11
+Requires-Dist: pydantic>=2.6
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"

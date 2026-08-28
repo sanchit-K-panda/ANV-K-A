@@ -2,7 +2,7 @@
   "dataset_id": "DS-IDENTITY_ANOMALY-42",
   "scenario": "identity_anomaly",
   "seed": 42,
-  "generated_at": "2026-08-24T19:29:14.105695Z",
+  "generated_at": "2026-08-28T08:14:46.400388Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,

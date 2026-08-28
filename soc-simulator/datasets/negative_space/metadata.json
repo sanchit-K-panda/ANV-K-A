@@ -2,7 +2,7 @@
   "dataset_id": "DS-NEGATIVE_SPACE-42",
   "scenario": "negative_space",
   "seed": 42,
-  "generated_at": "2026-08-24T19:28:47.392722Z",
+  "generated_at": "2026-08-28T08:14:40.925867Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,
