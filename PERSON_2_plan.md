@@ -17,7 +17,7 @@ Phase 1 Scaffold + Schema Freeze  🟡 partial — repo + .gitignore + simulator
 Phase 2 SOC Simulator + Ground Truth ✅ DONE — commit acea305, 7 scenarios validated at 10k/50k events
 Phase 3 Ingestion Pipeline          ⬜ not started — BLOCKED on Phase 1 remainder
 Phase 4-9  (Engines)                ⬜ not started — Person 1 track, blocked on Phase 3
-Phase 10 Frontend                   ⬜ not started — Person 2
+Phase 10 Frontend                   ⬜ not started — Person 1
 Phase 11 Secure Identity            ⬜ not started — Person 2
 Phase 12 Audit Chain                ⬜ not started — Person 2
 Phase 13 Air-Gap Proof              ⬜ not started — Person 2
@@ -71,7 +71,7 @@ gantt
 
 | Responsibility | Phase | Status | Details |
 |---|---|---|---|
-| Next.js Frontend | 10 | ⬜ | 5 core screens |
+| Next.js Frontend | 10 | ⬜ | Reassigned to Person 1 |
 | FastAPI Backend | 1+3 | ⬜ | scaffold + ingestion |
 | PostgreSQL Schema | 1 | ⬜ | 11 core tables frozen |
 | Redis | 1 | ⬜ | cache/session/queue |
@@ -87,7 +87,7 @@ gantt
 
 ---
 
-## 2. Person 2 — Full Execution Plan (Phases 1, 3, 10, 11, 12, 13)
+## 2. Person 2 — Full Execution Plan (Phases 1, 3, 11, 12, 13)
 
 ### P0 — Phase 1 Remainder: Scaffold + Schema Freeze (Do FIRST — 2-3 days)
 
@@ -229,47 +229,6 @@ Explicitly out: no Execution Gap / Negative Space logic here. Just persist corre
 
 ---
 
-### P1 — Phase 10: Frontend — 5 Core Screens (5-7 days, can start after 1C, parallel with Person 1 Phase 4-9)
-
-> **Goal:** `Login → Command Centre → Critical Finding → Finding Detail → Evidence → Recommendation` flow works with stubbed/mock data, then wires to real ingestion/Risk APIs.
-
-#### 10A. Stack Lock (Architecture.md §9, Design.md §19-27)
-
-- **Next.js 14** App Router + TypeScript `strict`, **Tailwind CSS** + **shadcn/ui**, **Recharts** (or ECharts), **Lucide React**, **WebSockets** (later).
-- Theme: dark SOC default `Design.md:19` — `#0B0D10` bg, `#12151A` panels, `#1B1F26` raised, `#E8EAED` primary text, `#8A919C` secondary, `#242A32` borders, single restrained blue/teal accent. Severity palette reserved: CRITICAL red, HIGH orange, MEDIUM amber, LOW grey, VERIFIED green.
-
-#### 10B. 5 Screens (Phases.md:63-66, PRD.md:8.1 priority 1-10)
-
-1. **Secure Login** (`/login`) — username/role → device check → session credential (Phase 11 stub: just form now). Must show `Rules.md:8` deny path.
-2. **Command Centre** (`/`) — SOC Health Score, Live SOC Status, counters: Critical Findings / Active Anomalies / Execution Gap / Negative-Space / Behaviour Anomaly / Threat Recurrence (`PRD.md:7.1`), 4-quadrant performance (Detection/Investigation/Escalation/Response), Historical Trends (Recharts line). Drill-down: `Risk → Finding → Evidence → Original SOC events` (`Design.md:43`).
-3. **Findings** (`/findings`) — filterable table: severity (Critical/High/Medium/Low), confidence, type, status. Row = `FindingRow` component.
-4. **Finding Detail** (`/findings/:id`) — 7-part explainability card `Design.md:51`: `WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION` + Risk Factor breakdown (itemized `+31`, `+24` etc. `Architecture.md:5`).
-5. **Analytics** (`/analytics`) — Negative Space Expected vs Actual, Behaviour baselines, Workload distribution, Recurrence timeline.
-
-Plus: `Investigation` / `Cases`, `Evidence Explorer`, `Risk Breakdown` as secondary tabs (can stub).
-
-#### 10C. Shared Components (Design.md:46)
-
-`Sidebar`, `Topbar` (with `● LOCAL/OFFLINE` status indicator + drawer `Design.md:58-65`), `SeverityBadge`, `ConfidenceIndicator`, `RiskScore`, `MetricBlock`, `TimelineEvent`, `FilterBar`, `SessionStatus`.
-
-#### 10D. Offline Visibility (PRD.md:11, Rules.md:4)
-
-Topbar always shows:
-```
-● LOCAL / OFFLINE
-Runtime Mode: AIR-GAPPED
-Internet Connectivity: DISABLED
-AI Inference: LOCAL
-Database: LOCAL
-Authentication: LOCAL
-Audit: LOCAL
-External APIs: NONE
-```
-Drawer off indicator, demonstrable live in judging.
-
-**Exit criteria Phase 10:** 5 screens navigate end-to-end (even with mocked findings), dark theme + severity colors correct, offline drawer visible, `npm run build` passes.
-
----
 
 ### P2 — Phase 11: Secure Identity (4-5 days, depends on Phase 10 Login shell)
 
@@ -353,14 +312,14 @@ record_0.hash_{n-1} = "0"*64
 ## 3. Dependencies & Parallelization
 
 ```
-Phase 1 (YOU) ──→ Phase 3 (YOU) ──→ Phase 10 (YOU) ──┐
-                                    Phase 4-9 (P1) ──┼──→ Phase 14 Joint Validation (BOTH)
+Phase 1 (YOU) ──→ Phase 3 (YOU) ──┐
+                                    Phase 4-10 (P1) ──┼──→ Phase 14 Joint Validation (BOTH)
                                     Phase 11-13 (YOU)┘          ↓
                                                         Phase 15 Metrics + Phase 16 Demo (BOTH)
 ```
 
 - **You unblock Person 1.** Once Phase 3 is up, Person 1 can immediately start Phase 4 (Execution Gap) against real Postgres, instead of simulator JSON only.
-- **You can parallelize with Person 1 after Phase 3:** you → Phase 10 frontend, Person 1 → Phase 4-9 engines. No contention if DB schema is frozen.
+- **You can parallelize with Person 1 after Phase 3:** you → Phase 11-13 (security/offline), Person 1 → Phase 4-10 (engines and frontend). No contention if DB schema is frozen.
 - **Joint converge:** Phase 14 — run full system against 7 simulator scenarios `PRD.md:9`, measure `precision/recall/F1` vs `ground_truth.json`.
 - **Weekly sync artifact:** `Memory.md` — update at end of every phase (`Phases.md:3`).
 
@@ -387,7 +346,7 @@ Phase 1 (YOU) ──→ Phase 3 (YOU) ──→ Phase 10 (YOU) ──┐
 |---|---|---|
 | 1 | `docker compose up` healthy, 11 tables migrated, no cloud env vars | `docker compose ps`, `alembic current`, `psql \dt` |
 | 3 | 10k healthy dataset ingested, counts match `metadata.json` | `curl POST /api/ingest/batch`, `SELECT count(*) FROM alerts` |
-| 10 | 5 screens navigate, build passes, offline drawer visible | `npm run build`, manual click-through |
+
 | 11 | login+verify+session lock works without LiDAR, no raw template stored | `pytest backend/tests/test_auth.py` |
 | 12 | audit verify catches tamper injection | `pytest backend/tests/test_audit.py`, manual SQL tamper |
 | 13 | internet OFF still works, grep finds 0 cloud URLs | `airgap_check.sh`, `grep -r https://` |
