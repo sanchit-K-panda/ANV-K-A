@@ -3,19 +3,23 @@
   "truth_id": "GT-0001",
   "scenario_id": "analyst_overload",
   "entity_type": "analyst",
-  "entity_id": "AN-00016",
+  "entity_id": "AN-00024",
   "expected_behaviour": {
    "critical_case_share": {
     "expected_uniform": true,
-    "per_analyst_share": 0.062
+    "per_analyst_share": 0.056
    },
    "distribution": "uniform"
   },
   "actual_behaviour": {
-   "critical_cases_total": 1,
-   "dominant_share": 0.0,
-   "mean_other_share": 0.0667,
-   "affected_incident_ids": []
+   "critical_cases_total": 5,
+   "dominant_share": 0.6,
+   "mean_other_share": 0.0235,
+   "affected_incident_ids": [
+    "INC-00002",
+    "INC-00005",
+    "INC-00009"
+   ]
   },
   "expected_findings": [
    "WORKLOAD_IMBALANCE",

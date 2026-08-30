@@ -2,7 +2,7 @@
   "dataset_id": "DS-INVESTIGATION_GAP-42",
   "scenario": "investigation_gap",
   "seed": 42,
-  "generated_at": "2026-08-28T08:14:39.569705Z",
+  "generated_at": "2026-08-30T10:59:01.473768Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,

@@ -15,7 +15,9 @@ class AnalystOverloadScenario(Scenario):
     name = "analyst_overload"
 
     def inject(self, tel) -> None:
-        soc = self.rng.choice(self.world.socs).soc_id
+        # Pick the SOC with the critical incidents to ensure realistic overload
+        soc_crit_counts = {s.soc_id: len([i for i in tel.incidents if i.severity == Severity.CRITICAL and i.soc_id == s.soc_id]) for s in self.world.socs}
+        soc = max(soc_crit_counts, key=soc_crit_counts.get) if any(soc_crit_counts.values()) else self.world.socs[0].soc_id
         analysts = [a for a in self.world.analysts_of(soc) if a.role != "SUPERVISOR"]
         dominant = self.rng.choice(analysts)
         others = [a for a in analysts if a.analyst_id != dominant.analyst_id]
@@ -23,7 +25,7 @@ class AnalystOverloadScenario(Scenario):
                      and i.soc_id == soc]
 
         # Reassign critical incidents: dominant share to `dominant`, rest spread.
-        n_dom = int(len(criticals) * self.cfg.overload_dominant_share)
+        n_dom = max(1, int(len(criticals) * self.cfg.overload_dominant_share)) if criticals else 0
         picked = set(i.incident_id for i in self.rng.sample(
             criticals, min(n_dom, len(criticals)))) if criticals else set()
         other_ids = [a.analyst_id for a in others] or [dominant.analyst_id]
