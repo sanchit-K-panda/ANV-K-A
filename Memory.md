@@ -27,7 +27,7 @@
 | 7. Correlation + Recurrence Engine | ✅ DONE | CorrelationEngine (`ml/models/`) + ThreatRecurrenceEngine (`ml/recurrence/`) |
 | 8. Risk Engine | ✅ DONE | RiskEngine (`ml/models/risk_engine.py`) factor-sum scoring |
 | 9. Explainability Engine | ✅ DONE | ExplainabilityEngine (`ml/models/explainability_engine.py`) 7-part cards |
-| 10. Frontend | ⬜ not started | Person 2 track |
+| 10. Frontend | ✅ DONE (2026-08-30) | 5 Core Screens (`/`, `/login`, `/findings`, `/findings/[id]`, `/analytics`) + Offline Drawer + Explainability Cards. `npm run build` passes 11/11 routes. |
 | 11. Secure Identity (AI part) | ✅ DONE | FaceEmbeddingEngine + LivenessEngine + ContinuousIdentityMonitor in `ml/biometric/` |
 | 12. Audit Chain | ⬜ not started | Person 2 track |
 | 13. Air-Gap Proof | ⬜ not started | Person 2 track |
