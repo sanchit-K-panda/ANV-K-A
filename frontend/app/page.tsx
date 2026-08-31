@@ -32,6 +32,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
+import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
 import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { LiveActivityStream } from '@/components/dashboard/LiveActivityStream';
@@ -174,8 +175,8 @@ export default function CommandCentrePage() {
         />
       </div>
 
-      {/* 4. SOC Health Assessment & Root Cause Decomposition */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+      {/* 4. SOC Health Assessment, Total Risk Meter & Root Cause Decomposition */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-stretch">
         <div className="lg:col-span-4 flex flex-col">
           <SocHealthScore
             score={overview?.health_score ?? 78}
@@ -185,7 +186,17 @@ export default function CommandCentrePage() {
           />
         </div>
 
-        <div className="lg:col-span-8 flex flex-col">
+        <div className="lg:col-span-4 flex flex-col">
+          <TotalRiskMeter
+            score={91}
+            maxScore={100}
+            confidence={94}
+            scope="SOC-04"
+            trendDelta="+18 pts (Shift Delta)"
+          />
+        </div>
+
+        <div className="lg:col-span-4 flex flex-col">
           <WhySocDegraded />
         </div>
       </div>
