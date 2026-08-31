@@ -29,13 +29,13 @@ import {
 } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
+import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
+import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
 import { PerformanceBars } from '@/components/dashboard/PerformanceBars';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
 import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { LiveActivityStream } from '@/components/dashboard/LiveActivityStream';
-import { ExecutionGapMatrix } from '@/components/dashboard/ExecutionGapMatrix';
-import { IntelligenceFlow } from '@/components/infographics/IntelligenceFlow';
 import { HashChainLedger } from '@/components/infographics/HashChainLedger';
 
 export default function CommandCentrePage() {
@@ -48,6 +48,7 @@ export default function CommandCentrePage() {
   const [loading, setLoading] = useState(true);
   const [evaluating, setEvaluating] = useState(false);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
+  const [activeInfographicViewId, setActiveInfographicViewId] = useState<string>('execution-gap');
 
   const loadData = async (scen = currentScenario) => {
     setLoading(true);
@@ -82,8 +83,17 @@ export default function CommandCentrePage() {
   };
 
   const handleActionDispatch = (action: string) => {
-    setActionNotice(`Action executed: ${action}. Recorded on SAKṢĪ hash-chain audit ledger.`);
+    setActionNotice(`Action executed: ${action}. Cryptographic entry recorded on SAKṢĪ audit ledger.`);
     setTimeout(() => setActionNotice(null), 4000);
+  };
+
+  const handleSelectEngine = (engine: EngineItem) => {
+    setActiveInfographicViewId(engine.targetInfographicId);
+    // Smooth scroll down to Infographic Window if needed
+    const elem = document.getElementById('infographic-window-section');
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const topFinding = findings[0] || null;
@@ -152,7 +162,20 @@ export default function CommandCentrePage() {
         </div>
       )}
 
-      {/* 2. Core Question 1 & 2: Is my SOC Healthy & How are Lifecycle Phases Performing? */}
+      {/* 2. ALL ENGINES AT FIRST (TOP SECTION) */}
+      <SupervisoryEnginesGrid
+        onSelectEngine={handleSelectEngine}
+      />
+
+      {/* 3. DEDICATED INFOGRAPHIC INTELLIGENCE WINDOW (ALL DATA VISUALIZER) */}
+      <div id="infographic-window-section">
+        <InfographicIntelligenceWindow
+          activeViewId={activeInfographicViewId}
+          onViewChange={setActiveInfographicViewId}
+        />
+      </div>
+
+      {/* 4. SOC Health Assessment & Lifecycle Effectiveness */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         <div className="lg:col-span-5 flex flex-col">
           <SocHealthScore
@@ -173,13 +196,13 @@ export default function CommandCentrePage() {
         </div>
       </div>
 
-      {/* 3. Core Question 3: What is the Most Urgent Issue? (Dominant Spotlight) */}
+      {/* 5. Top Priority Critical Finding Spotlight */}
       <TopFindingSpotlight
         finding={topFinding}
         onActionDispatch={handleActionDispatch}
       />
 
-      {/* 4. Core Question 4: Why is This SOC Degraded & What is Happening Live? */}
+      {/* 6. Why SOC-04 is Degraded & Live Activity Stream */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         <div className="lg:col-span-8 flex flex-col">
           <WhySocDegraded />
@@ -188,12 +211,6 @@ export default function CommandCentrePage() {
           <LiveActivityStream />
         </div>
       </div>
-
-      {/* 5. Core Question 5: What are the Missing Actions? (Execution Gap & Negative Space) */}
-      <ExecutionGapMatrix />
-
-      {/* 6. Supervisory Architecture Infographic */}
-      <IntelligenceFlow />
 
       {/* 7. Prioritized Supervisory Findings Queue Table */}
       <div className="soc-panel overflow-hidden">
