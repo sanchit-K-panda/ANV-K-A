@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SCENARIOS } from '@/lib/mockData';
 import { evaluateScenario } from '@/lib/api';
-import { Play, RefreshCw } from 'lucide-react';
+import { Play, RefreshCw, Layers } from 'lucide-react';
 
 export default function ScenariosPage() {
   const router = useRouter();
@@ -21,19 +21,19 @@ export default function ScenariosPage() {
   };
 
   return (
-    <div className="space-y-4 font-sans text-xs">
-      <div className="flex items-center justify-between border-b border-[#232732] pb-3">
+    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
+      <div className="soc-panel p-4 flex items-center justify-between font-mono">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-1.5 py-0.5 bg-[#14171E] border border-[#3A4050] text-[10px] font-mono text-white font-bold">
+            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
+              Simulation &amp; Benchmark Hub
+            </h1>
+            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
               MĀYĀ + PARĪKṢA
             </span>
-            <h1 className="text-base font-bold text-white tracking-tight">
-              7-Scenario Simulation Hub
-            </h1>
           </div>
-          <p className="text-[11px] text-[#848B98] mt-0.5">
-            Test and demonstrate ANVĪKṢA offline supervisory detection across 7 synthetic benchmark attack scenarios.
+          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+            Evaluate ANVĪKṢA offline supervisory detection across 7 synthetic benchmark attack scenarios.
           </p>
         </div>
       </div>
@@ -42,20 +42,22 @@ export default function ScenariosPage() {
         {SCENARIOS.map((sc) => (
           <div
             key={sc.id}
-            className="p-4 bg-[#0C0E12] border border-[#232732] flex flex-col justify-between space-y-3 hover:border-white transition-colors"
+            className="soc-panel p-5 flex flex-col justify-between space-y-3 hover:border-slate-300 transition-colors"
           >
             <div>
               <div className="flex justify-between items-center">
-                <span className="text-xs font-bold text-white font-sans">{sc.name}</span>
-                <span className="text-[10px] text-white font-bold">10,000 EVT</span>
+                <span className="text-xs font-bold text-slate-900 font-sans">{sc.name}</span>
+                <span className="text-[10.5px] text-slate-700 font-bold bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                  10,000 EVT
+                </span>
               </div>
-              <p className="text-[11px] text-[#848B98] mt-1.5 font-sans">{sc.desc}</p>
+              <p className="text-xs text-slate-600 mt-1.5 font-sans leading-relaxed">{sc.desc}</p>
             </div>
 
             <button
               onClick={() => handleLaunchScenario(sc.id)}
               disabled={runningId === sc.id}
-              className="w-full py-2 bg-white text-black hover:bg-[#E5E7EB] font-bold text-xs border border-white flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
+              className="w-full py-2.5 bg-slate-900 text-white hover:bg-slate-800 font-bold text-xs rounded flex items-center justify-center gap-2 transition-colors disabled:opacity-50 shadow-xs"
             >
               {runningId === sc.id ? (
                 <>

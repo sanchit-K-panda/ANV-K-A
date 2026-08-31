@@ -6,39 +6,43 @@
   :root {
     --bg-base: #F8FAFC;
     --bg-panel: #FFFFFF;
-    --bg-raised: #F1F5F9;
-    --bg-elevated: #E2E8F0;
+    --bg-subpanel: #F1F5F9;
     --border-color: #E2E8F0;
-    --border-subtle: #F1F5F9;
-    --border-contrast: #CBD5E1;
+    --border-strong: #CBD5E1;
     --text-primary: #0F172A;
     --text-secondary: #475569;
-    --text-muted: #94A3B8;
+    --text-muted: #64748B;
   }
 
   * {
     box-sizing: border-box;
-    border-color: var(--border-color);
+    border-color: #E2E8F0;
   }
 
   body {
     background-color: #F8FAFC;
     color: #0F172A;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 0.8125rem; /* 13px baseline for professional density */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #0F172A;
+    letter-spacing: -0.01em;
   }
 }
 
-/* Precision Clean Scrollbar */
+/* Subtle clean scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
@@ -48,43 +52,43 @@
   background: #94A3B8;
 }
 
-/* High-Density Clean Enterprise Table */
+/* Unified Enterprise SOC Table */
 .soc-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 0.8125rem;
+  border-collapse: collapse;
+  font-size: 0.75rem; /* 12px */
 }
 
 .soc-table th {
   background-color: #F8FAFC;
   color: #64748B;
   font-weight: 600;
-  font-size: 0.6875rem;
+  font-size: 0.6875rem; /* 11px */
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 10px 14px;
+  padding: 8px 12px;
   text-align: left;
   border-bottom: 1px solid #E2E8F0;
   white-space: nowrap;
+  user-select: none;
 }
 
 .soc-table td {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid #F1F5F9;
   color: #1E293B;
   vertical-align: middle;
 }
 
-.soc-table tr:last-child td {
+.soc-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-.soc-table tr:hover td {
+.soc-table tbody tr:hover td {
   background-color: #F8FAFC;
 }
 
-/* Clean Colored Badges with Soft Corners */
+/* Restrained Semantic Badges */
 .badge-critical {
   display: inline-flex;
   align-items: center;
@@ -93,7 +97,7 @@
   color: #BE123C;
   font-weight: 700;
   font-size: 0.6875rem;
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
   border: 1px solid #FECDD3;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -107,7 +111,7 @@
   color: #B45309;
   font-weight: 600;
   font-size: 0.6875rem;
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
   border: 1px solid #FDE68A;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -119,9 +123,9 @@
   gap: 4px;
   background-color: #FEFCE8;
   color: #854D0E;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.6875rem;
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
   border: 1px solid #FEF08A;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -134,7 +138,7 @@
   background-color: #F1F5F9;
   color: #475569;
   font-size: 0.6875rem;
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
   border: 1px solid #E2E8F0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -148,39 +152,49 @@
   color: #047857;
   font-weight: 600;
   font-size: 0.6875rem;
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 9999px;
   border: 1px solid #A7F3D0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Subtle Status Indicator */
-.indicator-dot {
-  width: 7px;
-  height: 7px;
+/* Status Indicator Dots */
+.dot-green {
+  width: 6px;
+  height: 6px;
   border-radius: 9999px;
+  background-color: #10B981;
   display: inline-block;
 }
 
-.indicator-dot-green {
-  background-color: #10B981;
-}
-
-.indicator-dot-amber {
+.dot-amber {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
   background-color: #F59E0B;
+  display: inline-block;
 }
 
-.indicator-dot-red {
+.dot-red {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
   background-color: #EF4444;
+  display: inline-block;
 }
 
-.indicator-dot-gray {
-  background-color: #94A3B8;
+/* Operational panel container */
+.soc-panel {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
 
-/* Dashed Box for Gaps */
-.dashed-gap-box {
-  border: 1px dashed #CBD5E1;
-  background-color: #FFF1F2;
-  border-radius: 6px;
+.soc-panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { fetchFindingById } from '@/lib/api';
 import { Finding } from '@/types';
-import { ArrowLeft, Check, Clock } from 'lucide-react';
+import { ArrowLeft, Check, Clock, ShieldAlert, Activity, Search, Zap, FileText, CheckCircle2 } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
 
@@ -28,8 +28,8 @@ export default function FindingDetailPage() {
 
   if (!finding) {
     return (
-      <div className="p-8 font-mono text-xs text-[#848B98]">
-        Loading supervisory finding {id}...
+      <div className="p-8 font-mono text-xs text-slate-500">
+        Loading forensic finding {id}...
       </div>
     );
   }
@@ -40,139 +40,141 @@ export default function FindingDetailPage() {
   };
 
   return (
-    <div className="space-y-4 font-sans text-xs">
+    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
       {/* Back Link */}
       <Link
         href="/findings"
-        className="inline-flex items-center gap-1.5 text-xs text-[#848B98] hover:text-white font-mono transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-900 font-mono transition-colors"
       >
-        <ArrowLeft className="w-3 h-3" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>BACK TO FINDINGS CENTRE</span>
       </Link>
 
       {/* Action Notice */}
       {actionNotice && (
-        <div className="p-2.5 bg-[#0C0E12] border border-white text-xs font-mono text-white flex items-center gap-2">
-          <Check className="w-3.5 h-3.5" />
+        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded text-xs font-mono text-emerald-900 flex items-center gap-2 shadow-xs">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
           <span>{actionNotice}</span>
         </div>
       )}
 
-      {/* Screen 4 Header Enclave */}
-      <div className="p-4 bg-[#0C0E12] border border-[#232732] font-mono space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#232732] pb-3">
-          <div className="flex items-center gap-2">
+      {/* Top Forensic Header Enclave */}
+      <div className="soc-panel p-5 space-y-3 font-mono">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2.5">
             <SeverityBadge severity={finding.severity} size="lg" />
-            <span className="px-2 py-0.5 bg-[#14171E] border border-[#3A4050] text-white font-bold text-xs">
+            <span className="px-2 py-0.5 bg-slate-100 border border-slate-200 text-slate-800 font-bold text-xs rounded">
               {finding.type.toUpperCase()}
             </span>
-            <span className="px-2 py-0.5 bg-[#14171E] border border-[#3A4050] text-white text-xs">
+            <span className="px-2 py-0.5 bg-slate-100 border border-slate-200 text-slate-800 text-xs rounded">
               {finding.soc_scope}
             </span>
             <StatusBadge status={finding.status} />
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-4 text-xs font-mono">
             <div>
-              <span className="text-[#656C7A]">RISK: </span>
-              <strong className="text-white font-bold text-sm">
+              <span className="text-slate-500">RISK: </span>
+              <strong className="text-rose-700 font-bold text-base">
                 {finding.risk_score} / 100
               </strong>
             </div>
             <div>
-              <span className="text-[#656C7A]">CONFIDENCE: </span>
-              <strong className="text-white font-bold text-sm">
+              <span className="text-slate-500">CONFIDENCE: </span>
+              <strong className="text-slate-900 font-bold text-base">
                 {Math.round(finding.confidence * 100)}%
               </strong>
             </div>
           </div>
         </div>
 
-        {/* Main Statement */}
-        <div className="text-sm font-bold text-white font-sans">
+        {/* Main Forensic Statement */}
+        <div className="text-sm font-bold text-slate-900 font-sans leading-snug">
           &ldquo;{finding.summary}&rdquo;
         </div>
       </div>
 
       {/* Core Explainability Grid: WHY DETECTED + RISK FACTORS + TIMELINE */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 font-mono text-xs">
-        {/* Left: WHY DETECTED (Baseline vs Observed) */}
-        <div className="lg:col-span-4 bg-[#0C0E12] border border-[#232732] p-3.5 space-y-3">
-          <div className="flex items-center justify-between border-b border-[#232732] pb-2">
-            <h2 className="text-[11px] font-bold text-white uppercase tracking-wider">
+        {/* Left: WHY DETECTED (PRATYAYA) */}
+        <div className="lg:col-span-4 soc-panel p-4 space-y-3">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">
               WHY DETECTED (PRATYAYA)
             </h2>
-            <span className="text-[9px] text-white font-bold border border-white px-1">ANOMALY</span>
+            <span className="text-[10px] text-rose-700 bg-rose-50 border border-rose-200 px-1.5 py-0.2 rounded font-bold">
+              ANOMALY
+            </span>
           </div>
 
-          <div className="space-y-2 bg-[#060709] p-3 border border-[#232732]">
+          <div className="space-y-1.5 bg-slate-50 p-3 rounded border border-slate-200">
             <div className="flex justify-between">
-              <span className="text-[#848B98]">{finding.baseline_metric_name}:</span>
-              <span className="text-white font-bold">{finding.baseline_value}</span>
+              <span className="text-slate-500">{finding.baseline_metric_name}:</span>
+              <span className="text-slate-900 font-bold">{finding.baseline_value}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#848B98]">Observed In Telemetry:</span>
-              <span className="text-white font-bold">{finding.observed_value}</span>
+              <span className="text-slate-500">Observed Execution:</span>
+              <span className="text-rose-700 font-bold">{finding.observed_value}</span>
             </div>
-            <div className="flex justify-between border-t border-[#1C2029] pt-2">
-              <span className="text-[#656C7A]">Mathematical Deviation:</span>
-              <span className="text-white font-bold text-sm">{finding.deviation}</span>
+            <div className="flex justify-between border-t border-slate-200 pt-1.5">
+              <span className="text-slate-500">Net Deviation:</span>
+              <span className="text-rose-700 font-bold text-sm">{finding.deviation}</span>
             </div>
           </div>
 
-          <div className="text-[11px] text-[#9CA3AF] font-sans leading-relaxed">
+          <div className="text-xs text-slate-600 font-sans leading-relaxed">
             {finding.why}
           </div>
         </div>
 
-        {/* Middle: RISK FACTORS BREAKDOWN */}
-        <div className="lg:col-span-4 bg-[#0C0E12] border border-[#232732] p-3.5 space-y-3">
-          <div className="flex items-center justify-between border-b border-[#232732] pb-2">
-            <h2 className="text-[11px] font-bold text-white uppercase tracking-wider">
+        {/* Middle: RISK FACTORS BREAKDOWN (MĀN) */}
+        <div className="lg:col-span-4 soc-panel p-4 space-y-3">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">
               RISK FACTORS (MĀN)
             </h2>
-            <span className="text-xs text-white font-bold">TOTAL: +{finding.risk_score}</span>
+            <span className="text-xs text-slate-900 font-bold">TOTAL: +{finding.risk_score}</span>
           </div>
 
           <div className="space-y-1.5">
             {finding.risk_factors.map((rf) => (
               <div
                 key={rf.name}
-                className="p-2 bg-[#060709] border border-[#232732] flex items-center justify-between"
+                className="p-2.5 bg-slate-50 border border-slate-200 rounded flex items-center justify-between"
               >
                 <div>
-                  <div className="font-semibold text-white">{rf.name}</div>
+                  <div className="font-semibold text-slate-900 font-sans text-xs">{rf.name}</div>
                   {rf.description && (
-                    <div className="text-[9px] text-[#656C7A]">{rf.description}</div>
+                    <div className="text-[10px] text-slate-500">{rf.description}</div>
                   )}
                 </div>
-                <span className="font-bold text-white text-sm">+{rf.score}</span>
+                <span className="font-bold text-rose-700 text-xs">+{rf.score}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right: EVIDENCE TIMELINE */}
-        <div className="lg:col-span-4 bg-[#0C0E12] border border-[#232732] p-3.5 space-y-3">
-          <div className="flex items-center justify-between border-b border-[#232732] pb-2">
-            <h2 className="text-[11px] font-bold text-white uppercase tracking-wider">
+        <div className="lg:col-span-4 soc-panel p-4 space-y-3">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h2 className="text-[11px] font-bold text-slate-900 uppercase tracking-wider">
               EVIDENCE TIMELINE
             </h2>
-            <span className="text-[9px] text-[#848B98]">RECONSTRUCTION</span>
+            <span className="text-[10px] text-slate-400">RECONSTRUCTION</span>
           </div>
 
           <div className="space-y-1.5">
             {finding.evidence_timeline.map((step, idx) => (
               <div
                 key={idx}
-                className={`p-2 border ${
+                className={`p-2.5 rounded border ${
                   step.isAnomaly
-                    ? 'bg-[#1C2029] border-white text-white font-bold'
-                    : 'bg-[#060709] border-[#232732] text-[#9CA3AF]'
+                    ? 'bg-rose-50/70 border-rose-200 text-rose-900 font-bold'
+                    : 'bg-slate-50 border-slate-200 text-slate-700'
                 }`}
               >
-                <div className="text-[9px] text-[#656C7A]">{step.time}</div>
-                <div className="text-[11px]">{step.event}</div>
+                <div className="text-[10px] text-slate-400">{step.time}</div>
+                <div className="text-xs font-sans mt-0.5">{step.event}</div>
               </div>
             ))}
           </div>
@@ -180,16 +182,16 @@ export default function FindingDetailPage() {
       </div>
 
       {/* RELATED DATA TABS */}
-      <div className="bg-[#0C0E12] border border-[#232732] p-3.5 space-y-3 font-mono text-xs">
-        <div className="flex flex-wrap gap-1 border-b border-[#232732] pb-2">
+      <div className="soc-panel p-4 space-y-3 font-mono text-xs">
+        <div className="flex flex-wrap gap-1 border-b border-slate-100 pb-2">
           {(['ALERTS', 'INCIDENTS', 'INVESTIGATIONS', 'ASSETS', 'ANALYSTS', 'EVIDENCE', 'AUDIT'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-3 py-1 text-xs font-semibold transition-colors ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded transition-colors ${
                 activeTab === tab
-                  ? 'bg-white text-black'
-                  : 'bg-[#060709] text-[#848B98] hover:text-white border border-[#232732]'
+                  ? 'bg-slate-900 text-white'
+                  : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
               }`}
             >
               {tab}
@@ -198,15 +200,15 @@ export default function FindingDetailPage() {
         </div>
 
         {/* Tab Content Display */}
-        <div className="p-3 bg-[#060709] border border-[#232732] space-y-2">
+        <div className="p-3 bg-slate-50 rounded border border-slate-200 space-y-2">
           {activeTab === 'ALERTS' && (
             <div>
-              <div className="font-bold text-white mb-2">Affected Alerts ({finding.related_alerts.length})</div>
+              <div className="font-bold text-slate-900 mb-2">Affected Alerts ({finding.related_alerts.length})</div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {finding.related_alerts.map((alt) => (
-                  <div key={alt} className="p-2 bg-[#0C0E12] border border-[#232732]">
-                    <span className="text-white font-bold">{alt}</span>
-                    <div className="text-[10px] text-[#656C7A]">vssadmin shadowcopy delete · CRITICAL</div>
+                  <div key={alt} className="p-2.5 bg-white border border-slate-200 rounded">
+                    <span className="text-slate-900 font-bold">{alt}</span>
+                    <div className="text-[10.5px] text-slate-500 font-sans">vssadmin shadowcopy delete · CRITICAL</div>
                   </div>
                 ))}
               </div>
@@ -215,12 +217,12 @@ export default function FindingDetailPage() {
 
           {activeTab === 'INCIDENTS' && (
             <div>
-              <div className="font-bold text-white mb-2">Linked Incident Records ({finding.related_incidents.length})</div>
+              <div className="font-bold text-slate-900 mb-2">Linked Incident Records ({finding.related_incidents.length})</div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {finding.related_incidents.map((inc) => (
-                  <div key={inc} className="p-2 bg-[#0C0E12] border border-[#232732]">
-                    <span className="text-white font-bold">{inc}</span>
-                    <div className="text-[10px] text-[#656C7A]">Status: CLOSED_WITHOUT_EVIDENCE</div>
+                  <div key={inc} className="p-2.5 bg-white border border-slate-200 rounded">
+                    <span className="text-slate-900 font-bold">{inc}</span>
+                    <div className="text-[10.5px] text-slate-500 font-sans">Status: CLOSED_WITHOUT_EVIDENCE</div>
                   </div>
                 ))}
               </div>
@@ -229,28 +231,28 @@ export default function FindingDetailPage() {
 
           {activeTab === 'ASSETS' && (
             <div>
-              <div className="font-bold text-white mb-2">Scope Assets & Target Machines</div>
-              <div className="p-2 bg-[#0C0E12] border border-[#232732]">
-                <div className="text-white font-bold">DC-PROD-01 (10.14.2.1)</div>
-                <div className="text-[10px] text-[#656C7A]">Role: Primary Windows Active Directory Domain Controller</div>
+              <div className="font-bold text-slate-900 mb-2">Scope Assets & Target Machines</div>
+              <div className="p-2.5 bg-white border border-slate-200 rounded">
+                <div className="text-slate-900 font-bold">DC-PROD-01 (10.14.2.1)</div>
+                <div className="text-[10.5px] text-slate-500 font-sans">Role: Primary Windows Active Directory Domain Controller</div>
               </div>
             </div>
           )}
 
           {activeTab === 'ANALYSTS' && (
             <div>
-              <div className="font-bold text-white mb-2">Involved Personnel & Shift Queue</div>
-              <div className="p-2 bg-[#0C0E12] border border-[#232732]">
-                <div className="text-white font-bold">Analyst A-01 (Tier 1 Triage)</div>
-                <div className="text-[10px] text-white">Mean Dwell Time: 42 seconds · Investigation Bypassed</div>
+              <div className="font-bold text-slate-900 mb-2">Involved Personnel & Shift Queue</div>
+              <div className="p-2.5 bg-white border border-slate-200 rounded">
+                <div className="text-slate-900 font-bold">Analyst A-01 (Tier 1 Triage)</div>
+                <div className="text-[10.5px] text-rose-700 font-sans">Mean Dwell Time: 42 seconds · Investigation Bypassed</div>
               </div>
             </div>
           )}
 
           {activeTab === 'EVIDENCE' && (
             <div>
-              <div className="font-bold text-white mb-2">PRATYAYA Raw Evidence JSON</div>
-              <pre className="p-3 bg-black border border-[#232732] text-[10px] text-white overflow-x-auto">
+              <div className="font-bold text-slate-900 mb-2">PRATYAYA Raw Evidence JSON</div>
+              <pre className="p-3 bg-white border border-slate-200 rounded text-[10.5px] text-slate-800 overflow-x-auto font-mono">
                 {JSON.stringify(finding.evidence, null, 2)}
               </pre>
             </div>
@@ -258,18 +260,18 @@ export default function FindingDetailPage() {
 
           {activeTab === 'AUDIT' && (
             <div>
-              <div className="font-bold text-white mb-2">SAKṢĪ Cryptographic State</div>
-              <div className="text-[11px] text-[#848B98] space-y-1 font-mono">
-                <div>Audit Hash: <span className="text-white">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span></div>
-                <div>Integrity Proof: <span className="text-white font-bold">VERIFIED (AKṢARA Chain Height: 9904)</span></div>
+              <div className="font-bold text-slate-900 mb-2">SAKṢĪ Cryptographic State</div>
+              <div className="text-[11px] text-slate-600 space-y-1 font-mono">
+                <div>Audit Hash: <span className="text-slate-900 font-semibold">5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8</span></div>
+                <div>Integrity Proof: <span className="text-emerald-700 font-bold">VERIFIED (AKṢARA Chain Height: 9904)</span></div>
               </div>
             </div>
           )}
 
           {activeTab === 'INVESTIGATIONS' && (
             <div>
-              <div className="font-bold text-white mb-2">Missing Investigation Logs</div>
-              <div className="text-[11px] text-[#9CA3AF]">
+              <div className="font-bold text-slate-900 mb-2">Missing Investigation Logs</div>
+              <div className="text-xs text-slate-600 font-sans">
                 0 investigation notes created during the alert dwell window.
               </div>
             </div>
@@ -277,13 +279,13 @@ export default function FindingDetailPage() {
         </div>
       </div>
 
-      {/* RECOMMENDED ACTION & BUTTONS (Screen 4 Footer) */}
-      <div className="p-4 bg-[#0C0E12] border border-[#232732] space-y-3 font-mono">
+      {/* RECOMMENDED ACTION & BUTTONS */}
+      <div className="soc-panel p-5 space-y-3 font-mono">
         <div>
-          <div className="text-[9px] text-[#848B98] font-bold uppercase tracking-wider">
+          <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
             UPĀYA — RECOMMENDED ACTION
           </div>
-          <p className="text-xs font-semibold text-white font-sans mt-0.5">
+          <p className="text-xs font-semibold text-slate-900 font-sans mt-1">
             &ldquo;{finding.recommendation}&rdquo;
           </p>
         </div>
@@ -291,27 +293,27 @@ export default function FindingDetailPage() {
         <div className="flex flex-wrap gap-2 pt-1">
           <button
             onClick={() => handleAction('OPEN_INVESTIGATION')}
-            className="px-3.5 py-1.5 bg-white text-black font-bold text-xs border border-white hover:bg-[#E5E7EB] transition-colors"
+            className="px-3.5 py-1.5 bg-slate-900 text-white font-bold text-xs rounded hover:bg-slate-800 transition-colors shadow-xs"
           >
-            [ OPEN INVESTIGATION ]
+            OPEN INVESTIGATION
+          </button>
+          <button
+            onClick={() => handleAction('REOPEN_ALERTS')}
+            className="px-3.5 py-1.5 bg-white border border-slate-300 text-slate-800 font-semibold text-xs rounded hover:bg-slate-100 transition-colors"
+          >
+            REOPEN 83 ALERTS
           </button>
           <button
             onClick={() => handleAction('ASSIGN')}
-            className="px-3.5 py-1.5 bg-[#14171E] border border-[#3A4050] text-white font-bold text-xs hover:bg-[#1C2029] transition-colors"
+            className="px-3.5 py-1.5 bg-white border border-slate-300 text-slate-800 font-semibold text-xs rounded hover:bg-slate-100 transition-colors"
           >
-            [ ASSIGN ]
-          </button>
-          <button
-            onClick={() => handleAction('VIEW_EVIDENCE')}
-            className="px-3.5 py-1.5 bg-[#14171E] border border-[#3A4050] text-white font-bold text-xs hover:bg-[#1C2029] transition-colors"
-          >
-            [ VIEW EVIDENCE ]
+            ASSIGN TO TIER 2
           </button>
           <button
             onClick={() => handleAction('MARK_REVIEWED')}
-            className="px-3.5 py-1.5 bg-[#14171E] border border-[#3A4050] text-[#848B98] hover:text-white text-xs hover:bg-[#1C2029] transition-colors"
+            className="px-3.5 py-1.5 bg-slate-100 text-slate-600 hover:text-slate-900 text-xs rounded transition-colors"
           >
-            [ MARK REVIEWED ]
+            MARK REVIEWED
           </button>
         </div>
       </div>

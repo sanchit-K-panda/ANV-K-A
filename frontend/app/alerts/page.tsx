@@ -23,36 +23,36 @@ export default function AlertsPage() {
   );
 
   return (
-    <div className="space-y-4 font-sans text-xs">
-      <div className="flex items-center justify-between border-b border-[#232732] pb-3">
+    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
+      <div className="soc-panel p-4 flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-1.5 py-0.5 bg-[#14171E] border border-[#3A4050] text-[10px] font-mono text-white font-bold">
-              OPERATIONS
-            </span>
-            <h1 className="text-base font-bold text-white tracking-tight">
+            <h1 className="text-sm font-bold text-slate-900 tracking-tight">
               Alert Explorer
             </h1>
+            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200 font-mono">
+              OPERATIONS
+            </span>
           </div>
-          <p className="text-[11px] text-[#848B98] mt-0.5">
+          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
             Raw SOC ingestion telemetry cross-referenced against supervisory investigation records.
           </p>
         </div>
       </div>
 
-      <div className="border border-[#232732] bg-[#0C0E12] font-mono text-xs">
-        <div className="p-2.5 border-b border-[#232732] flex items-center justify-between">
+      <div className="soc-panel overflow-hidden">
+        <div className="p-3 border-b border-slate-100 flex items-center justify-between font-mono">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-3.5 h-3.5 absolute left-2.5 top-2 text-[#656C7A]" />
+            <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-slate-400" />
             <input
               type="text"
               placeholder="Search alerts, assets, or sources..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-[#060709] border border-[#232732] pl-8 pr-2 py-1 text-white placeholder-[#656C7A] focus:outline-none focus:border-white text-xs"
+              className="w-full bg-slate-50 border border-slate-200 pl-8 pr-2.5 py-1.5 text-slate-900 placeholder-slate-400 rounded text-xs focus:outline-none focus:border-slate-400"
             />
           </div>
-          <span className="text-[#656C7A] text-[10px]">{filtered.length} ALERT RECORDS</span>
+          <span className="text-slate-500 text-[10.5px]">{filtered.length} ALERT RECORDS</span>
         </div>
 
         <div className="overflow-x-auto">
@@ -71,19 +71,19 @@ export default function AlertsPage() {
             </thead>
             <tbody>
               {filtered.map((a) => (
-                <tr key={a.id}>
-                  <td className="font-bold text-white">{a.id}</td>
-                  <td className="text-[#848B98]">{a.time}</td>
-                  <td className="font-bold">
+                <tr key={a.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="font-bold text-slate-900 font-mono">{a.id}</td>
+                  <td className="text-slate-500 font-mono">{a.time}</td>
+                  <td className="whitespace-nowrap">
                     <SeverityBadge severity={a.severity as any} />
                   </td>
-                  <td className="text-[#9CA3AF]">{a.source}</td>
-                  <td className="text-white font-bold">{a.asset}</td>
-                  <td className="text-[#9CA3AF]">{a.analyst}</td>
-                  <td className="text-white font-mono">{a.incident}</td>
-                  <td className="text-right">
+                  <td className="text-slate-700 font-sans">{a.source}</td>
+                  <td className="text-slate-900 font-bold font-mono">{a.asset}</td>
+                  <td className="text-slate-700 font-sans">{a.analyst}</td>
+                  <td className="text-slate-700 font-mono">{a.incident}</td>
+                  <td className="text-right whitespace-nowrap">
                     <span className={a.status.includes('UNINVESTIGATED') ? 'badge-critical' : 'badge-verified'}>
-                      [{a.status}]
+                      {a.status}
                     </span>
                   </td>
                 </tr>
