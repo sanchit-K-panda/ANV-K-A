@@ -5,9 +5,8 @@ before persistence via deterministic UUID mapping.
 """
 from __future__ import annotations
 
-import json
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -25,8 +24,8 @@ def normalize_timestamp(v: Any) -> datetime:
     """Normalize timestamp to UTC aware datetime."""
     if isinstance(v, datetime):
         if v.tzinfo is None:
-            return v.replace(tzinfo=timezone.utc)
-        return v.astimezone(timezone.utc)
+            return v.replace(tzinfo=UTC)
+        return v.astimezone(UTC)
     if isinstance(v, str):
         # Handle "Z" suffix
         if v.endswith("Z"):
@@ -36,8 +35,8 @@ def normalize_timestamp(v: Any) -> datetime:
         except ValueError as e:
             raise ValueError(f"Invalid timestamp: {v}") from e
         if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        return dt.astimezone(timezone.utc)
+            dt = dt.replace(tzinfo=UTC)
+        return dt.astimezone(UTC)
     raise ValueError(f"Invalid timestamp type: {type(v)}")
 
 

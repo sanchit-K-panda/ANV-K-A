@@ -2,27 +2,27 @@
 from __future__ import annotations
 
 import enum
-
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from sqlalchemy import (
     DateTime,
-    Enum as SQLEnum,
     ForeignKey,
     Index,
     Integer,
     String,
     Text,
 )
+from sqlalchemy import (
+    Enum as SQLEnum,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base, GUID
+from app.models.base import GUID, Base
 
 if TYPE_CHECKING:
-    from app.models.soc import Incident, Analyst
-    from app.models.identity import User
+    from app.models.soc import Analyst, Incident
 
 
 class FindingType(str, enum.Enum):
@@ -70,12 +70,12 @@ class Finding(Base):
         nullable=True,
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
     )
     status: Mapped[str] = mapped_column(
         SQLEnum(FindingStatus, name="finding_status"),
@@ -95,16 +95,16 @@ class Finding(Base):
     where: Mapped[str] = mapped_column(String(500), nullable=False)
     recommendation: Mapped[str] = mapped_column(Text, nullable=False)
 
-    incident: Mapped["Incident | None"] = relationship(
+    incident: Mapped[Incident | None] = relationship(
         back_populates="findings", foreign_keys=[incident_id]
     )
-    assigned_analyst: Mapped["Analyst | None"] = relationship(
+    assigned_analyst: Mapped[Analyst | None] = relationship(
         foreign_keys=[assigned_analyst_id]
     )
-    risk_assessment: Mapped["RiskAssessment | None"] = relationship(
+    risk_assessment: Mapped[RiskAssessment | None] = relationship(
         back_populates="finding", uselist=False, cascade="all, delete-orphan"
     )
-    recommendations: Mapped[list["Recommendation"]] = relationship(
+    recommendations: Mapped[list[Recommendation]] = relationship(
         back_populates="finding", cascade="all, delete-orphan"
     )
 
@@ -135,10 +135,10 @@ class RiskAssessment(Base):
     )
     factors: Mapped[str] = mapped_column(Text, nullable=False)
     calculated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
 
-    finding: Mapped["Finding"] = relationship(back_populates="risk_assessment")
+    finding: Mapped[Finding] = relationship(back_populates="risk_assessment")
 
     __table_args__ = (
         Index("ix_risk_assessments_finding_id", "finding_id"),
@@ -162,15 +162,15 @@ class Recommendation(Base):
     priority: Mapped[int] = mapped_column(Integer, nullable=False, default=3)
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="PENDING")
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
     )
 
-    finding: Mapped["Finding"] = relationship(back_populates="recommendations")
+    finding: Mapped[Finding] = relationship(back_populates="recommendations")
 
     __table_args__ = (
         Index("ix_recommendations_finding_id", "finding_id"),

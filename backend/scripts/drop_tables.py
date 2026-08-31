@@ -8,8 +8,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.models.base import Base, engine
 import app.models  # noqa: F401
+from app.models.base import Base, engine
 
 
 async def main():

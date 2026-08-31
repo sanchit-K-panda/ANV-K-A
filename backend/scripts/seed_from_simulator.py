@@ -103,7 +103,7 @@ def verify_counts(ingested: dict[str, int], metadata: dict) -> bool:
         match = "✓" if expected == actual else "✗"
         if expected != actual:
             ok = False
-        print(f"  │ {entity_key:<19} │ {str(expected):>8} │ {str(actual):>8} │   {match}    │")
+        print(f"  │ {entity_key:<19} │ {expected!s:>8} │ {actual!s:>8} │   {match}    │")
     print("  └─────────────────────┴──────────┴──────────┴────────┘")
     return ok
 
@@ -116,12 +116,11 @@ async def seed_direct(scenario_dir: Path) -> dict[str, int]:
     import os
     os.environ.setdefault("DATABASE_URL", "sqlite+aiosqlite:///anviksa_test.db")
 
-    from app.models.base import Base, engine, AsyncSessionLocal
-    from app.schemas.ingestion import BatchIngestRequest
-    from app.ingestion.service import ingest_batch
-
     # Import all models to register them
     import app.models  # noqa: F401
+    from app.ingestion.service import ingest_batch
+    from app.models.base import AsyncSessionLocal, Base, engine
+    from app.schemas.ingestion import BatchIngestRequest
 
     # Create tables
     async with engine.begin() as conn:

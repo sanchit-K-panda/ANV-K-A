@@ -10,11 +10,9 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
-import json
 import logging
 import uuid
-from datetime import datetime, timezone
-from typing import Any
+from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -74,9 +72,9 @@ async def record_audit_action(
 ) -> AuditLog:
     """Append a new action to the cryptographic audit hash chain."""
     async with _AUDIT_LOCK:
-        now = timestamp or datetime.now(timezone.utc)
+        now = timestamp or datetime.now(UTC)
         if now.tzinfo is None:
-            now = now.replace(tzinfo=timezone.utc)
+            now = now.replace(tzinfo=UTC)
 
         record_id = uuid.uuid4()
 
@@ -124,7 +122,7 @@ async def verify_audit_chain(db: AsyncSession) -> AuditChainVerificationResponse
     res = await db.execute(stmt)
     records = list(res.scalars().all())
 
-    verified_at = datetime.now(timezone.utc)
+    verified_at = datetime.now(UTC)
 
     if not records:
         return AuditChainVerificationResponse(
@@ -151,7 +149,7 @@ async def verify_audit_chain(db: AsyncSession) -> AuditChainVerificationResponse
         # 2. Recompute current_hash from record contents
         ts = rec.timestamp
         if ts.tzinfo is None:
-            ts = ts.replace(tzinfo=timezone.utc)
+            ts = ts.replace(tzinfo=UTC)
 
         recomputed = compute_audit_hash(
             record_id=rec.id,

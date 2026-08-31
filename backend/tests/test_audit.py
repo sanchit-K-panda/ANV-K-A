@@ -3,10 +3,8 @@ from __future__ import annotations
 
 import pytest
 from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.audit.service import record_audit_action, verify_audit_chain
-from app.models.base import get_db
 from app.models.identity import AuditLog
 from tests.conftest import TestSessionLocal
 

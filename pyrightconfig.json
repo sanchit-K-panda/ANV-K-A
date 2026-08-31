@@ -1,0 +1,14 @@
+{
+  "include": [
+    "backend",
+    "ml",
+    "soc-simulator"
+  ],
+  "extraPaths": [
+    ".",
+    "backend",
+    "ml",
+    "soc-simulator"
+  ],
+  "typeCheckingMode": "basic"
+}
