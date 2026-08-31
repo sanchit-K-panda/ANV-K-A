@@ -12,8 +12,13 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Database
-    DATABASE_URL: str = "postgresql+asyncpg://anviksa:anviksa_dev@localhost:5432/anviksa"
+    # Database — TiDB Cloud (MySQL-compatible) via asyncmy driver
+    DATABASE_URL: str = (
+        "mysql+asyncmy://U8XmddPrYax4YJR.root:y0qTNQmOgaz5D3SH"
+        "@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/test"
+    )
+    # Set to True for TiDB Cloud (requires SSL)
+    DATABASE_SSL: bool = True
 
     # Redis
     REDIS_URL: str = "redis://:anviksa_dev@localhost:6379/0"

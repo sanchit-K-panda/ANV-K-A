@@ -16,10 +16,9 @@ from sqlalchemy import (
     String,
     Text,
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base
+from app.models.base import Base, GUID
 
 if TYPE_CHECKING:
     from app.models.soc import Incident, Analyst
@@ -54,7 +53,7 @@ class Finding(Base):
     __tablename__ = "findings"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     type: Mapped[str] = mapped_column(
         SQLEnum(FindingType, name="finding_type"), nullable=False
@@ -66,7 +65,7 @@ class Finding(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     evidence: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
     incident_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="SET NULL"),
         nullable=True,
     )
@@ -84,7 +83,7 @@ class Finding(Base):
         default=FindingStatus.OPEN,
     )
     assigned_analyst_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="SET NULL"),
         nullable=True,
     )
@@ -122,10 +121,10 @@ class RiskAssessment(Base):
     __tablename__ = "risk_assessments"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     finding_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("findings.id", ondelete="CASCADE"),
         unique=True,
         nullable=False,
@@ -151,10 +150,10 @@ class Recommendation(Base):
     __tablename__ = "recommendations"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     finding_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("findings.id", ondelete="CASCADE"),
         nullable=False,
     )

@@ -1,7 +1,7 @@
 """Models package — exports all SQLAlchemy models."""
 from __future__ import annotations
 
-from app.models.base import Base, AsyncSessionLocal, engine, get_db, init_db
+from app.models.base import Base, AsyncSessionLocal, engine, get_db, init_db, GUID
 from app.models.identity import (
     User,
     BiometricProfile,
