@@ -31,7 +31,6 @@ import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
 import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
-import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
@@ -162,10 +161,10 @@ export default function CommandCentrePage() {
         </div>
       )}
 
-      {/* 2. TOTAL RISK STAT METER & EXECUTIVE STATUS (AT THE TOP) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-stretch">
+      {/* 2. TOTAL RISK STAT METER & SOC HEALTH STATUS (BALANCED 50/50 ROW AT THE TOP) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         {/* Total Risk Stat Meter */}
-        <div className="lg:col-span-4 flex flex-col">
+        <div className="lg:col-span-6 flex flex-col">
           <TotalRiskMeter
             score={91}
             maxScore={100}
@@ -176,18 +175,13 @@ export default function CommandCentrePage() {
         </div>
 
         {/* SOC Health Assessment */}
-        <div className="lg:col-span-4 flex flex-col">
+        <div className="lg:col-span-6 flex flex-col">
           <SocHealthScore
             score={overview?.health_score ?? 78}
             grade={quadrants?.composite_grade ?? 'C-'}
             status={overview?.status ?? 'DEGRADED'}
             primaryDriver="Investigation effectiveness (-31 pts)"
           />
-        </div>
-
-        {/* Why SOC-04 is Degraded */}
-        <div className="lg:col-span-4 flex flex-col">
-          <WhySocDegraded />
         </div>
       </div>
 
@@ -210,12 +204,12 @@ export default function CommandCentrePage() {
         onActionDispatch={handleActionDispatch}
       />
 
-      {/* 6. Live Activity Stream & Tamper-Evident Ledger */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-        <div className="lg:col-span-7 flex flex-col">
+      {/* 6. Live Activity Stream & Tamper-Evident Ledger (BALANCED 50/50 SPLIT) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        <div className="lg:col-span-6 flex flex-col">
           <HashChainLedger />
         </div>
-        <div className="lg:col-span-5 flex flex-col">
+        <div className="lg:col-span-6 flex flex-col">
           <LiveActivityStream />
         </div>
       </div>
