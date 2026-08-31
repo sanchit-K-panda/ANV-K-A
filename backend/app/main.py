@@ -3,10 +3,15 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import asyncio
+from contextlib import asynccontextmanager
+
+from app.workers.blockchain_poller import poll_loop
 
 from app.core.config import settings
 from app.api.health import router as health_router
 from app.api.ingestion import router as ingestion_router
+from app.api.stream import router as stream_router
 from app.api.ingestion import alias_router as ingestion_alias_router
 from app.api.auth import router as auth_router
 from app.api.audit import router as audit_router
@@ -14,10 +19,24 @@ from app.api.audit import router as audit_router
 from app.api.findings import router as findings_router
 from app.api.analytics import router as analytics_router
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Start the native blockchain polling task in the background
+    polling_task = asyncio.create_task(poll_loop())
+    yield
+    # Cancel the task on shutdown gracefully
+    polling_task.cancel()
+    try:
+        await polling_task
+    except asyncio.CancelledError:
+        pass
+
+
 app = FastAPI(
     title="ANVĪKṢA API",
     description="Supervisory Analytics Tool for SOC Assessment — Security & Telemetry",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -35,6 +54,7 @@ app.include_router(ingestion_router, prefix="/api")
 app.include_router(ingestion_alias_router, prefix="/api")  # spec: POST /api/events etc.
 app.include_router(findings_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
+app.include_router(stream_router, prefix="/api")
 
 @app.get("/")
 async def root():

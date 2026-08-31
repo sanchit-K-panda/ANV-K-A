@@ -101,7 +101,7 @@ def require_role(*roles: UserRole | str) -> Callable:
     allowed_roles = {r.value if isinstance(r, UserRole) else r.upper() for r in roles}
 
     async def _role_checker(user: User = Depends(get_current_user)) -> User:
-        user_role_str = user.role.value if hasattr(user.role, "value") else str(user.role).split(".")[-1].upper()
+        user_role_str = user.role.value if hasattr(user.role, "value") else user.role.split(".")[-1].upper()
         if user_role_str not in allowed_roles:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
