@@ -5,24 +5,18 @@ idempotent upserts, and bulk inserts for thousands of records.
 """
 from __future__ import annotations
 
-import json
 import logging
 import uuid
-from typing import Any
 
 from sqlalchemy import delete, select
-from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ingestion.normalize import dumps_json
-from app.models.analytics import Finding, Recommendation, RiskAssessment
-from app.models.identity import AuditLog, BiometricProfile, Session, User, UserDevice
 from app.models.soc import (
     Alert,
     Analyst,
     AnalystAction,
     Asset,
-    Criticality,
     Device,
     Escalation,
     Event,

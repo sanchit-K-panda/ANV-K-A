@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -14,8 +13,6 @@ from app.auth.dependencies import (
     require_role,
 )
 from app.auth.schemas import (
-    DeviceRegisterRequest,
-    DeviceResponse,
     LockSessionRequest,
     LoginRequest,
     LoginResponse,
@@ -28,7 +25,6 @@ from app.auth.schemas import (
 from app.auth.service import (
     authenticate_user,
     create_session,
-    get_or_create_device,
     invalidate_session,
     lock_session,
     seed_default_users,

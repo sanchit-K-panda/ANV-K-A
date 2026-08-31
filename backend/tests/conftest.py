@@ -1,10 +1,19 @@
 """Pytest fixtures and configuration for ANVĪKṢA backend test suite."""
 from __future__ import annotations
 
-import asyncio
-from typing import AsyncGenerator
+import sys
+from pathlib import Path
 
-import pytest
+# Add backend and workspace root to sys.path at the very beginning
+backend_root = Path(__file__).resolve().parent.parent
+workspace_root = backend_root.parent
+
+for p in [str(workspace_root), str(backend_root)]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+from collections.abc import AsyncGenerator
+
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -56,13 +65,3 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
     transport = ASGITransport(app=fastapi_app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:
         yield c
-import sys
-from pathlib import Path
-
-# Add backend and workspace root to sys.path
-backend_root = Path(__file__).resolve().parent.parent
-workspace_root = backend_root.parent
-
-for p in [str(workspace_root), str(backend_root)]:
-    if p not in sys.path:
-        sys.path.insert(0, p)

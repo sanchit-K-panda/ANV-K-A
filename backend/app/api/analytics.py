@@ -2,14 +2,14 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel, Field
 
-from app.analytics.service import AnalyticsService
+from fastapi import APIRouter, HTTPException
 from ml.preprocessing.dataset_loader import load_dataset_from_dir
 from ml.preprocessing.feature_extraction import FeatureExtractor
 from ml.schemas import FindingSeverity, FindingType
+from pydantic import BaseModel, Field
+
+from app.analytics.service import AnalyticsService
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 analytics_service = AnalyticsService()
@@ -56,7 +56,7 @@ class ThreatRecurrenceItem(BaseModel):
     name: str
     category: str
     incident_count: int
-    affected_assets: List[str]
+    affected_assets: list[str]
     all_closed: bool
     remediation_applied: bool
 
@@ -138,7 +138,7 @@ async def get_quadrant_scores(scenario: str = "investigation_gap"):
     )
 
 
-@router.get("/workload", response_model=List[AnalystWorkloadItem])
+@router.get("/workload", response_model=list[AnalystWorkloadItem])
 async def get_workload_matrix(scenario: str = "analyst_overload"):
     """Returns per-analyst operational queue distribution and bottleneck flags."""
     dataset = _get_active_dataset(scenario)
@@ -167,7 +167,7 @@ async def get_workload_matrix(scenario: str = "analyst_overload"):
     return items
 
 
-@router.get("/threats", response_model=List[ThreatRecurrenceItem])
+@router.get("/threats", response_model=list[ThreatRecurrenceItem])
 async def get_threat_recurrence_matrix(scenario: str = "recurring_threat"):
     """Returns threat persistence and remediation adherence tracking."""
     dataset = _get_active_dataset(scenario)

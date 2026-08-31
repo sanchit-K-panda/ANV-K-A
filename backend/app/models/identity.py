@@ -2,27 +2,22 @@
 from __future__ import annotations
 
 import enum
-
 import uuid
-from datetime import datetime, timezone
-from typing import TYPE_CHECKING
+from datetime import UTC, datetime
 
 from sqlalchemy import (
     DateTime,
-    Enum as SQLEnum,
     ForeignKey,
     Index,
     String,
     Text,
-    UniqueConstraint,
+)
+from sqlalchemy import (
+    Enum as SQLEnum,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base, GUID
-
-
-if TYPE_CHECKING:
-    from app.models.soc import Analyst
+from app.models.base import GUID, Base
 
 
 class UserRole(str, enum.Enum):
@@ -47,24 +42,24 @@ class User(Base):
     )
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
     )
 
-    biometric_profile: Mapped["BiometricProfile"] = relationship(
+    biometric_profile: Mapped[BiometricProfile] = relationship(
         back_populates="user", uselist=False, cascade="all, delete-orphan"
     )
-    user_devices: Mapped[list["UserDevice"]] = relationship(
+    user_devices: Mapped[list[UserDevice]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
-    sessions: Mapped[list["Session"]] = relationship(
+    sessions: Mapped[list[Session]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
-    audit_logs: Mapped[list["AuditLog"]] = relationship(
+    audit_logs: Mapped[list[AuditLog]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
 
@@ -89,15 +84,15 @@ class BiometricProfile(Base):
     protected_template: Mapped[bytes] = mapped_column(nullable=False)
     encryption_key_reference: Mapped[str] = mapped_column(String(255), nullable=False)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=lambda: datetime.now(timezone.utc),
-        onupdate=lambda: datetime.now(timezone.utc),
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
     )
 
-    user: Mapped["User"] = relationship(back_populates="biometric_profile")
+    user: Mapped[User] = relationship(back_populates="biometric_profile")
 
     __table_args__ = (
         Index("ix_biometric_profiles_user_id", "user_id"),
@@ -121,11 +116,11 @@ class UserDevice(Base):
     )
     last_seen: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
 
-    user: Mapped["User"] = relationship(back_populates="user_devices")
-    sessions: Mapped[list["Session"]] = relationship(
+    user: Mapped[User] = relationship(back_populates="user_devices")
+    sessions: Mapped[list[Session]] = relationship(
         back_populates="device", cascade="all, delete-orphan"
     )
 
@@ -159,18 +154,18 @@ class Session(Base):
         String(50), nullable=False, default="ACTIVE"
     )
     issued_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     last_verified_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     session_credential: Mapped[str] = mapped_column(String(512), nullable=False)
     permissions: Mapped[str] = mapped_column(Text, nullable=False, default="{}")
 
-    user: Mapped["User"] = relationship(back_populates="sessions")
-    device: Mapped["UserDevice"] = relationship(back_populates="sessions")
-    audit_logs: Mapped[list["AuditLog"]] = relationship(
+    user: Mapped[User] = relationship(back_populates="sessions")
+    device: Mapped[UserDevice] = relationship(back_populates="sessions")
+    audit_logs: Mapped[list[AuditLog]] = relationship(
         back_populates="session", cascade="all, delete-orphan"
     )
 
@@ -202,7 +197,7 @@ class AuditLog(Base):
     resource: Mapped[str] = mapped_column(String(255), nullable=False)
     resource_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     device_id: Mapped[uuid.UUID | None] = mapped_column(
         GUID(),
@@ -213,9 +208,9 @@ class AuditLog(Base):
     previous_hash: Mapped[str | None] = mapped_column(String(64), nullable=True)
     current_hash: Mapped[str] = mapped_column(String(64), nullable=False)
 
-    user: Mapped["User | None"] = relationship(back_populates="audit_logs")
-    session: Mapped["Session | None"] = relationship(back_populates="audit_logs")
-    device: Mapped["UserDevice | None"] = relationship()
+    user: Mapped[User | None] = relationship(back_populates="audit_logs")
+    session: Mapped[Session | None] = relationship(back_populates="audit_logs")
+    device: Mapped[UserDevice | None] = relationship()
 
     __table_args__ = (
         Index("ix_audit_logs_user_id", "user_id"),

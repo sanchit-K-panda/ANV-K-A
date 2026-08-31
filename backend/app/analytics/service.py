@@ -1,12 +1,11 @@
 """Supervisory Analytics Service bridging ML pipelines with FastAPI and Database."""
 from __future__ import annotations
 
-import json
-from typing import Any, Dict, List, Optional
 from pathlib import Path
+from typing import Any
 
-from ml.preprocessing.dataset_loader import LoadedDataset, load_dataset_from_dir
 from ml.models.explainability_engine import SupervisoryAnalyticsPipeline
+from ml.preprocessing.dataset_loader import LoadedDataset, load_dataset_from_dir
 from ml.schemas import FindingOutput
 
 
@@ -16,12 +15,12 @@ class AnalyticsService:
     def __init__(self):
         self.pipeline = SupervisoryAnalyticsPipeline()
 
-    def evaluate_dataset_dir(self, dataset_dir: str | Path) -> List[FindingOutput]:
+    def evaluate_dataset_dir(self, dataset_dir: str | Path) -> list[FindingOutput]:
         """Evaluates an offline simulator dataset directory and returns structured findings."""
         ds = load_dataset_from_dir(dataset_dir)
         return self.pipeline.run(ds)
 
-    def evaluate_in_memory_dataset(self, data: Dict[str, Any]) -> List[FindingOutput]:
+    def evaluate_in_memory_dataset(self, data: dict[str, Any]) -> list[FindingOutput]:
         """Evaluates raw in-memory SOC telemetry dictionaries."""
         ds = LoadedDataset(
             scenario=data.get("scenario", "telemetry"),

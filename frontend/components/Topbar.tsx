@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   Lock,
-  RefreshCw,
   Clock,
   Shield,
-  KeyRound,
+  Activity,
 } from 'lucide-react';
 import { AirGapDrawer } from './AirGapDrawer';
 
@@ -48,67 +47,66 @@ export const Topbar: React.FC = () => {
 
   return (
     <>
-      <header className="h-10 bg-[#060709] border-b border-[#1D212B] px-4 flex items-center justify-between sticky top-0 z-20 font-mono text-xs select-none">
-        {/* Left: Product, Scope & Air-Gap Assurance */}
+      <header className="h-14 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-20 font-mono text-xs select-none shadow-xs">
+        {/* Left: Product & Air-gap Status */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-white tracking-widest text-xs">ANVĪKṢA</span>
-            <span className="text-[#4B5563]">/</span>
-            <span className="text-[11px] text-white font-semibold">SOC-04</span>
+            <span className="font-extrabold text-slate-900 tracking-wider text-xs">ANVĪKṢA</span>
+            <span className="text-slate-300">/</span>
+            <span className="text-[11px] text-slate-700 font-semibold bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+              SOC-04
+            </span>
           </div>
 
           {/* Air-Gap Status Pill */}
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="flex items-center gap-1.5 px-2 py-0.5 bg-[#0C0E12] border border-[#2A303E] hover:border-[#4B5563] text-white text-[10px] tracking-wide transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 text-emerald-800 text-[10.5px] rounded-full transition-colors font-medium"
             title="Inspect Sovereign Air-Gap Hardware & Enclave Security"
           >
-            <span className="w-1.5 h-1.5 bg-white inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             <span>LOCAL / AIR-GAPPED</span>
           </button>
 
-          {/* Passive MEDHĀ Live Engine State */}
-          <div className="hidden md:flex items-center gap-1.5 text-[10px] text-[#848B98] pl-2 border-l border-[#1D212B]">
-            <span className="w-1.5 h-1.5 bg-white inline-block opacity-80" />
+          {/* Engine State */}
+          <div className="hidden md:flex items-center gap-1.5 text-[10.5px] text-slate-500 pl-3 border-l border-slate-200">
+            <Activity className="w-3.5 h-3.5 text-blue-600" />
             <span>MEDHĀ LIVE:</span>
-            <span className="text-white">evaluated {lastEvaluatedSec}s ago</span>
+            <span className="text-slate-800 font-medium">evaluated {lastEvaluatedSec}s ago</span>
           </div>
         </div>
 
-        {/* Right: Grouped Supervisor Enclave & Token Info */}
+        {/* Right: Supervisor & Ephemeral Credential */}
         <div className="flex items-center gap-3 text-[11px]">
-          {/* Supervisor Identity + Device Trust Group */}
-          <div className="hidden sm:flex items-center gap-2 text-[#9CA3AF]">
-            <span>Supervisor: <strong className="text-white font-normal">A. Sharma</strong></span>
-            <span className="text-[#374151]">|</span>
-            <span>DEV-21 <strong className="text-white font-normal">(TRUSTED)</strong></span>
-            <span className="text-[#374151]">|</span>
-            <span className="text-white">Session Active</span>
+          <div className="hidden sm:flex items-center gap-2 text-slate-600 bg-slate-50 px-3 py-1 rounded-xl border border-slate-200">
+            <span>Supervisor: <strong className="text-slate-900 font-semibold">Dr. A. Sharma</strong></span>
+            <span className="text-slate-300">|</span>
+            <span className="text-emerald-700 font-medium font-mono">DEV-21 (TRUSTED)</span>
           </div>
 
-          {/* Rotating KṢAṆA Credential Timer */}
-          <div className="flex items-center gap-1 px-1.5 py-0.5 bg-[#0C0E12] border border-[#232732] text-white text-[10px]">
-            <span className="text-[#656C7A]">KṢAṆA:</span>
-            <span className="font-bold">{formatTimer(secondsToRenewal)}</span>
+          {/* Ephemeral Credential Timer */}
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 border border-slate-200 text-slate-800 text-[10.5px] rounded-xl">
+            <Clock className="w-3 h-3 text-slate-500" />
+            <span className="text-slate-500 font-mono">KṢAṆA:</span>
+            <span className="font-bold font-mono">{formatTimer(secondsToRenewal)}</span>
           </div>
 
           {/* UTC Clock */}
-          <div className="hidden xl:block text-[10px] text-[#656C7A]">
+          <div className="hidden xl:block text-[10.5px] text-slate-400 font-mono">
             {utcTime}
           </div>
 
-          {/* Emergency Lock Session */}
+          {/* Lock Session */}
           <button
             onClick={handleLockSession}
-            className="p-1 bg-[#0C0E12] border border-[#232732] hover:bg-[#14171E] text-[#9CA3AF] hover:text-white transition-colors"
-            title="Lock Session (DARŚANA Re-Authentication Required)"
+            className="p-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-xl transition-colors"
+            title="Lock Session"
           >
             <Lock className="w-3.5 h-3.5" />
           </button>
         </div>
       </header>
 
-      {/* Air Gap Drawer */}
       <AirGapDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
     </>
   );

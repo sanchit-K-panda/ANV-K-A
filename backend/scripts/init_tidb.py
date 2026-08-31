@@ -13,10 +13,10 @@ from pathlib import Path
 # Ensure backend is in path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from app.models.base import Base, engine, AsyncSessionLocal, init_db
 # Import all models to register with metadata
 import app.models  # noqa: F401
 from app.auth.service import seed_default_users
+from app.models.base import AsyncSessionLocal, Base, engine, init_db
 
 
 async def main():

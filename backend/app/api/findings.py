@@ -2,20 +2,20 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, Query
+
+from fastapi import APIRouter, HTTPException
+from ml.schemas import FindingOutput, FindingSeverity, FindingStatus, FindingType
 
 from app.analytics.service import AnalyticsService
-from ml.schemas import FindingOutput, FindingSeverity, FindingStatus, FindingType
 
 router = APIRouter(tags=["findings"])
 analytics_service = AnalyticsService()
 
 # In-memory cached findings store for active session
-_CACHED_FINDINGS: Dict[str, FindingOutput] = {}
+_CACHED_FINDINGS: dict[str, FindingOutput] = {}
 
 
-@router.post("/analytics/evaluate-scenario/{scenario_name}", response_model=List[FindingOutput])
+@router.post("/analytics/evaluate-scenario/{scenario_name}", response_model=list[FindingOutput])
 async def evaluate_scenario_endpoint(scenario_name: str):
     """Executes the complete Supervisory Analytics Pipeline against a simulator scenario dataset."""
     candidates = [
@@ -42,11 +42,11 @@ async def evaluate_scenario_endpoint(scenario_name: str):
     return findings
 
 
-@router.get("/findings", response_model=List[FindingOutput])
+@router.get("/findings", response_model=list[FindingOutput])
 async def list_findings(
-    severity: Optional[FindingSeverity] = None,
-    type: Optional[FindingType] = None,
-    status: Optional[FindingStatus] = None,
+    severity: FindingSeverity | None = None,
+    type: FindingType | None = None,
+    status: FindingStatus | None = None,
 ):
     """Returns all current supervisory findings matching optional filters."""
     findings = list(_CACHED_FINDINGS.values())

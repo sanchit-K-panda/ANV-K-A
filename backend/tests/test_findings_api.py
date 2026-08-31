@@ -11,7 +11,6 @@ for p in [str(workspace_root), str(backend_root)]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
-import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app

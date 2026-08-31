@@ -1,8 +1,10 @@
-"""Normalization helpers — timestamp, severity, entity mapping, correlation IDs."""
+"""Ingestion normalization, validation, and schema sanitization layer."""
 from __future__ import annotations
 
 import json
 import logging
+import uuid
+from datetime import UTC, datetime
 from typing import Any
 
 logger = logging.getLogger(__name__)
@@ -13,7 +15,6 @@ def dumps_json(v: Any) -> str:
     if v is None:
         return "{}"
     if isinstance(v, str):
-        # already serialized?
         try:
             json.loads(v)
             return v
@@ -36,42 +37,37 @@ def ensure_list(v: Any) -> list:
     if isinstance(v, list):
         return v
     return [v]
-import uuid
-from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
 
 
 def parse_iso_timestamp(ts: Any) -> str:
     """Parses various timestamp inputs into standardized ISO8601 UTC string."""
     if not ts:
-        return datetime.now(timezone.utc).isoformat()
+        return datetime.now(UTC).isoformat()
     if isinstance(ts, datetime):
         if ts.tzinfo is None:
-            ts = ts.replace(tzinfo=timezone.utc)
+            ts = ts.replace(tzinfo=UTC)
         return ts.isoformat()
     if isinstance(ts, (int, float)):
-        # Epoch seconds or milliseconds
         if ts > 1e11:
             ts = ts / 1000.0
-        return datetime.fromtimestamp(ts, tz=timezone.utc).isoformat()
+        return datetime.fromtimestamp(ts, tz=UTC).isoformat()
     if isinstance(ts, str):
         try:
-            # Strip trailing Z for python fromisoformat
             clean_ts = ts.replace("Z", "+00:00")
             dt = datetime.fromisoformat(clean_ts)
             if dt.tzinfo is None:
-                dt = dt.replace(tzinfo=timezone.utc)
+                dt = dt.replace(tzinfo=UTC)
             return dt.isoformat()
         except Exception:
-            return datetime.now(timezone.utc).isoformat()
-    return datetime.now(timezone.utc).isoformat()
+            return datetime.now(UTC).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 class IngestionNormalizer:
     """Normalizes raw incoming SOC telemetry records."""
 
     @staticmethod
-    def normalize_event(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize_event(raw: dict[str, Any]) -> dict[str, Any]:
         return {
             "event_id": str(raw.get("event_id") or f"EVT-{uuid.uuid4().hex[:8].upper()}"),
             "timestamp": parse_iso_timestamp(raw.get("timestamp")),
@@ -86,7 +82,7 @@ class IngestionNormalizer:
         }
 
     @staticmethod
-    def normalize_alert(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize_alert(raw: dict[str, Any]) -> dict[str, Any]:
         return {
             "alert_id": str(raw.get("alert_id") or f"ALT-{uuid.uuid4().hex[:8].upper()}"),
             "timestamp": parse_iso_timestamp(raw.get("timestamp")),
@@ -99,7 +95,7 @@ class IngestionNormalizer:
         }
 
     @staticmethod
-    def normalize_incident(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize_incident(raw: dict[str, Any]) -> dict[str, Any]:
         return {
             "incident_id": str(raw.get("incident_id") or f"INC-{uuid.uuid4().hex[:8].upper()}"),
             "created_at": parse_iso_timestamp(raw.get("created_at") or raw.get("timestamp")),
@@ -116,7 +112,7 @@ class IngestionNormalizer:
         }
 
     @staticmethod
-    def normalize_investigation(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize_investigation(raw: dict[str, Any]) -> dict[str, Any]:
         return {
             "investigation_id": str(raw.get("investigation_id") or f"INV-{uuid.uuid4().hex[:8].upper()}"),
             "incident_id": str(raw.get("incident_id", "")),
@@ -129,7 +125,7 @@ class IngestionNormalizer:
         }
 
     @staticmethod
-    def normalize_escalation(raw: Dict[str, Any]) -> Dict[str, Any]:
+    def normalize_escalation(raw: dict[str, Any]) -> dict[str, Any]:
         return {
             "escalation_id": str(raw.get("escalation_id") or f"ESC-{uuid.uuid4().hex[:8].upper()}"),
             "incident_id": str(raw.get("incident_id", "")),

@@ -2,28 +2,27 @@
 from __future__ import annotations
 
 import enum
-
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from sqlalchemy import (
     DateTime,
-    Enum as SQLEnum,
     ForeignKey,
     Index,
     Integer,
     String,
     Text,
-    UniqueConstraint,
+)
+from sqlalchemy import (
+    Enum as SQLEnum,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base, GUID
+from app.models.base import GUID, Base
 
 if TYPE_CHECKING:
     from app.models.analytics import Finding
-    from app.models.identity import User
 
 
 class Severity(str, enum.Enum):
@@ -133,25 +132,25 @@ class Soc(Base):
     timezone: Mapped[str] = mapped_column(String(100), nullable=False)
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="ACTIVE")
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
 
-    analysts: Mapped[list["Analyst"]] = relationship(
+    analysts: Mapped[list[Analyst]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
-    devices: Mapped[list["Device"]] = relationship(
+    devices: Mapped[list[Device]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
-    assets: Mapped[list["Asset"]] = relationship(
+    assets: Mapped[list[Asset]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
-    events: Mapped[list["Event"]] = relationship(
+    events: Mapped[list[Event]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
-    alerts: Mapped[list["Alert"]] = relationship(
+    alerts: Mapped[list[Alert]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
-    incidents: Mapped[list["Incident"]] = relationship(
+    incidents: Mapped[list[Incident]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
 
@@ -181,23 +180,23 @@ class Analyst(Base):
     )
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="ACTIVE")
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
 
-    soc: Mapped["Soc"] = relationship(back_populates="analysts")
-    alerts: Mapped[list["Alert"]] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="analysts")
+    alerts: Mapped[list[Alert]] = relationship(
         back_populates="analyst", foreign_keys="Alert.analyst_id"
     )
-    incidents: Mapped[list["Incident"]] = relationship(
+    incidents: Mapped[list[Incident]] = relationship(
         back_populates="assigned_analyst", foreign_keys="Incident.assigned_analyst_id"
     )
-    investigations: Mapped[list["Investigation"]] = relationship(
+    investigations: Mapped[list[Investigation]] = relationship(
         back_populates="analyst", foreign_keys="Investigation.analyst_id"
     )
-    escalations: Mapped[list["Escalation"]] = relationship(
+    escalations: Mapped[list[Escalation]] = relationship(
         back_populates="analyst", foreign_keys="Escalation.analyst_id"
     )
-    actions: Mapped[list["AnalystAction"]] = relationship(
+    actions: Mapped[list[AnalystAction]] = relationship(
         back_populates="analyst", foreign_keys="AnalystAction.analyst_id"
     )
 
@@ -229,11 +228,11 @@ class Device(Base):
     )
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="ONLINE")
 
-    soc: Mapped["Soc"] = relationship(back_populates="devices")
-    events: Mapped[list["Event"]] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="devices")
+    events: Mapped[list[Event]] = relationship(
         back_populates="device", foreign_keys="Event.device_id"
     )
-    alerts: Mapped[list["Alert"]] = relationship(
+    alerts: Mapped[list[Alert]] = relationship(
         back_populates="source_device", foreign_keys="Alert.source_device_id"
     )
 
@@ -266,14 +265,14 @@ class Asset(Base):
     owner: Mapped[str] = mapped_column(String(255), nullable=False)
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="ACTIVE")
 
-    soc: Mapped["Soc"] = relationship(back_populates="assets")
-    events: Mapped[list["Event"]] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="assets")
+    events: Mapped[list[Event]] = relationship(
         back_populates="asset", foreign_keys="Event.asset_id"
     )
-    alerts: Mapped[list["Alert"]] = relationship(
+    alerts: Mapped[list[Alert]] = relationship(
         back_populates="asset", foreign_keys="Alert.asset_id"
     )
-    incidents: Mapped[list["Incident"]] = relationship(
+    incidents: Mapped[list[Incident]] = relationship(
         back_populates="assets", secondary="incident_assets"
     )
 
@@ -306,7 +305,7 @@ class Threat(Base):
     )
     status: Mapped[str] = mapped_column(String(50), nullable=False, default="ACTIVE")
 
-    incidents: Mapped[list["Incident"]] = relationship(
+    incidents: Mapped[list[Incident]] = relationship(
         back_populates="threats", secondary="incident_threats"
     )
 
@@ -353,14 +352,14 @@ class Event(Base):
     description: Mapped[str] = mapped_column(Text, nullable=False)
     extra_data: Mapped[str] = mapped_column("metadata", Text, nullable=False, default="{}")
 
-    soc: Mapped["Soc"] = relationship(back_populates="events")
-    asset: Mapped["Asset | None"] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="events")
+    asset: Mapped[Asset | None] = relationship(
         back_populates="events", foreign_keys=[asset_id]
     )
-    device: Mapped["Device | None"] = relationship(
+    device: Mapped[Device | None] = relationship(
         back_populates="events", foreign_keys=[device_id]
     )
-    analyst: Mapped["Analyst | None"] = relationship(
+    analyst: Mapped[Analyst | None] = relationship(
         foreign_keys=[analyst_id]
     )
 
@@ -414,21 +413,21 @@ class Alert(Base):
     )
     priority: Mapped[int] = mapped_column(Integer, nullable=False, default=3)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
-    soc: Mapped["Soc"] = relationship(back_populates="alerts")
-    asset: Mapped["Asset"] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="alerts")
+    asset: Mapped[Asset] = relationship(
         back_populates="alerts", foreign_keys=[asset_id]
     )
-    source_device: Mapped["Device"] = relationship(
+    source_device: Mapped[Device] = relationship(
         back_populates="alerts", foreign_keys=[source_device_id]
     )
-    analyst: Mapped["Analyst"] = relationship(
+    analyst: Mapped[Analyst] = relationship(
         back_populates="alerts", foreign_keys=[analyst_id]
     )
-    incidents: Mapped[list["Incident"]] = relationship(
+    incidents: Mapped[list[Incident]] = relationship(
         back_populates="alerts", secondary="incident_alerts"
     )
 
@@ -461,7 +460,7 @@ class Incident(Base):
         default=IncidentStatus.OPEN,
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     assigned_analyst_id: Mapped[uuid.UUID] = mapped_column(
@@ -470,26 +469,26 @@ class Incident(Base):
         nullable=False,
     )
 
-    soc: Mapped["Soc"] = relationship(back_populates="incidents")
-    alerts: Mapped[list["Alert"]] = relationship(
+    soc: Mapped[Soc] = relationship(back_populates="incidents")
+    alerts: Mapped[list[Alert]] = relationship(
         back_populates="incidents", secondary="incident_alerts"
     )
-    threats: Mapped[list["Threat"]] = relationship(
+    threats: Mapped[list[Threat]] = relationship(
         back_populates="incidents", secondary="incident_threats"
     )
-    assets: Mapped[list["Asset"]] = relationship(
+    assets: Mapped[list[Asset]] = relationship(
         back_populates="incidents", secondary="incident_assets"
     )
-    assigned_analyst: Mapped["Analyst"] = relationship(
+    assigned_analyst: Mapped[Analyst] = relationship(
         back_populates="incidents", foreign_keys=[assigned_analyst_id]
     )
-    investigations: Mapped[list["Investigation"]] = relationship(
+    investigations: Mapped[list[Investigation]] = relationship(
         back_populates="incident", cascade="all, delete-orphan"
     )
-    escalations: Mapped[list["Escalation"]] = relationship(
+    escalations: Mapped[list[Escalation]] = relationship(
         back_populates="incident", cascade="all, delete-orphan"
     )
-    findings: Mapped[list["Finding"]] = relationship(
+    findings: Mapped[list[Finding]] = relationship(
         back_populates="incident", cascade="all, delete-orphan"
     )
 
@@ -575,8 +574,8 @@ class Investigation(Base):
     evidence_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     notes: Mapped[str] = mapped_column(Text, nullable=False, default="")
 
-    incident: Mapped["Incident"] = relationship(back_populates="investigations")
-    analyst: Mapped["Analyst"] = relationship(
+    incident: Mapped[Incident] = relationship(back_populates="investigations")
+    analyst: Mapped[Analyst] = relationship(
         back_populates="investigations", foreign_keys=[analyst_id]
     )
 
@@ -614,8 +613,8 @@ class Escalation(Base):
         default=EscalationStatus.OPEN,
     )
 
-    incident: Mapped["Incident"] = relationship(back_populates="escalations")
-    analyst: Mapped["Analyst"] = relationship(
+    incident: Mapped[Incident] = relationship(back_populates="escalations")
+    analyst: Mapped[Analyst] = relationship(
         back_populates="escalations", foreign_keys=[analyst_id]
     )
 
@@ -654,11 +653,11 @@ class AnalystAction(Base):
     duration_seconds: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     extra_data: Mapped[str] = mapped_column("metadata", Text, nullable=False, default="{}")
 
-    analyst: Mapped["Analyst"] = relationship(
+    analyst: Mapped[Analyst] = relationship(
         back_populates="actions", foreign_keys=[analyst_id]
     )
-    soc: Mapped["Soc"] = relationship()
-    incident: Mapped["Incident | None"] = relationship(foreign_keys=[incident_id])
+    soc: Mapped[Soc] = relationship()
+    incident: Mapped[Incident | None] = relationship(foreign_keys=[incident_id])
 
     __table_args__ = (
         Index("ix_analyst_actions_analyst_id", "analyst_id"),

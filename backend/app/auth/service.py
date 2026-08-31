@@ -4,18 +4,12 @@ from __future__ import annotations
 import json
 import logging
 import uuid
-from datetime import datetime, timedelta, timezone
-from typing import Any
+from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth.schemas import (
-    DeviceResponse,
-    LoginRequest,
-    LoginResponse,
-    SessionResponse,
-    UserResponse,
     VerifySessionResponse,
 )
 from app.auth.security import (
@@ -57,8 +51,8 @@ async def seed_default_users(db: AsyncSession) -> list[str]:
                 role=role.value,
                 status="ACTIVE",
                 password_hash=get_password_hash(raw_pwd),
-                created_at=datetime.now(timezone.utc),
-                updated_at=datetime.now(timezone.utc),
+                created_at=datetime.now(UTC),
+                updated_at=datetime.now(UTC),
             )
             db.add(u)
             created.append(email)
@@ -92,7 +86,7 @@ async def get_or_create_device(
         select(UserDevice).where(UserDevice.device_identifier == device_identifier)
     )
     device = res.scalar_one_or_none()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     if not device:
         device = UserDevice(
             id=uuid.uuid4(),
@@ -119,7 +113,7 @@ async def create_session(
     device = await get_or_create_device(db, user.id, device_identifier)
     
     session_id = uuid.uuid4()
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     expires_at = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     permissions = ROLE_PERMISSIONS.get(user.role, ["read:basic"])
     perm_json = json.dumps(permissions)
@@ -173,7 +167,7 @@ async def verify_and_rotate_session(
             message="Session not found",
         )
 
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
     if session.session_status != "ACTIVE":
         return VerifySessionResponse(
             valid=False,
@@ -184,7 +178,7 @@ async def verify_and_rotate_session(
     # Ensure tz-aware comparison
     expires_at = session.expires_at
     if expires_at.tzinfo is None:
-        expires_at = expires_at.replace(tzinfo=timezone.utc)
+        expires_at = expires_at.replace(tzinfo=UTC)
 
     if now > expires_at:
         session.session_status = "EXPIRED"
@@ -232,7 +226,7 @@ async def lock_session(
     if not session:
         return False
     session.session_status = "LOCKED"
-    session.last_verified_at = datetime.now(timezone.utc)
+    session.last_verified_at = datetime.now(UTC)
     await db.commit()
     logger.warning("Locked session %s: %s", session_id, reason)
     return True
