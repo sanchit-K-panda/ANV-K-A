@@ -29,12 +29,12 @@ import {
 } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
+import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
+import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
+import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
-import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
-import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
-import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { LiveActivityStream } from '@/components/dashboard/LiveActivityStream';
 import { HashChainLedger } from '@/components/infographics/HashChainLedger';
 
@@ -162,30 +162,9 @@ export default function CommandCentrePage() {
         </div>
       )}
 
-      {/* 2. ALL ENGINES AT FIRST (TOP SECTION) */}
-      <SupervisoryEnginesGrid
-        onSelectEngine={handleSelectEngine}
-      />
-
-      {/* 3. DEDICATED INFOGRAPHIC INTELLIGENCE WINDOW (ALL DATA VISUALIZER) */}
-      <div id="infographic-window-section">
-        <InfographicIntelligenceWindow
-          activeViewId={activeInfographicViewId}
-          onViewChange={setActiveInfographicViewId}
-        />
-      </div>
-
-      {/* 4. SOC Health Assessment, Total Risk Meter & Root Cause Decomposition */}
+      {/* 2. TOTAL RISK STAT METER & EXECUTIVE STATUS (AT THE TOP) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 items-stretch">
-        <div className="lg:col-span-4 flex flex-col">
-          <SocHealthScore
-            score={overview?.health_score ?? 78}
-            grade={quadrants?.composite_grade ?? 'C-'}
-            status={overview?.status ?? 'DEGRADED'}
-            primaryDriver="Investigation effectiveness (-31 pts)"
-          />
-        </div>
-
+        {/* Total Risk Stat Meter */}
         <div className="lg:col-span-4 flex flex-col">
           <TotalRiskMeter
             score={91}
@@ -196,9 +175,33 @@ export default function CommandCentrePage() {
           />
         </div>
 
+        {/* SOC Health Assessment */}
+        <div className="lg:col-span-4 flex flex-col">
+          <SocHealthScore
+            score={overview?.health_score ?? 78}
+            grade={quadrants?.composite_grade ?? 'C-'}
+            status={overview?.status ?? 'DEGRADED'}
+            primaryDriver="Investigation effectiveness (-31 pts)"
+          />
+        </div>
+
+        {/* Why SOC-04 is Degraded */}
         <div className="lg:col-span-4 flex flex-col">
           <WhySocDegraded />
         </div>
+      </div>
+
+      {/* 3. ALL SUPERVISORY INTELLIGENCE ENGINES */}
+      <SupervisoryEnginesGrid
+        onSelectEngine={handleSelectEngine}
+      />
+
+      {/* 4. DEDICATED INFOGRAPHIC INTELLIGENCE WINDOW (ALL DATA VISUALIZER) */}
+      <div id="infographic-window-section">
+        <InfographicIntelligenceWindow
+          activeViewId={activeInfographicViewId}
+          onViewChange={setActiveInfographicViewId}
+        />
       </div>
 
       {/* 5. Top Priority Critical Finding Spotlight */}
