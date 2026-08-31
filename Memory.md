@@ -6,12 +6,14 @@
 
 ---
 
-## Project snapshot (2026-08-25)
+## Project snapshot (2026-08-28 — post-pull d1ff287)
 
 - **Product:** ANVĪKṢA — Supervisory Analytics Tool for SOC Assessment (SAT-SA), SIH26157, NTRO
-- **Repo:** https://github.com/sanchit-K-panda/ANV-K-A.git (branch `main`)
+- **Repo:** https://github.com/sanchit-K-panda/ANV-K-A.git (branch `main`, HEAD `d1ff287` 2026-08-28 16:13)
 - **Author identity:** sanchit-K-panda <juug25btech30071@jainuniversity.ac.in> (set repo-locally; beware Antigravity IDE was signed in as a different GitHub account — necatiozmen — do not let it commit here)
 - **Host OS:** Windows 11, git-bash shell; Python 3.14 via `py -3.14` (pytest + pydantic installed there); `PYTHONPATH=src` needed to run the simulator without installing
+- **Last pull:** `e7bcc69` (backend scaffold) → `7f2d6d2` (22-table freeze + Next.js + docker-compose) → `d1ff287` (PERSON_2_plan.md + healthy dataset regen). Full scaffold now on disk: `backend/`, `frontend/`, `ml/`, `biometric/`, `database/`, `infrastructure/`, `docs/` + 22-table Alembic 001
+- **Person 2 refs:** `PERSON_2_plan.md` (platform/security execution plan, P0→P2), `PERSON_2_memory.md` (personal runbook + DB quick ref + pull snapshot) — created 2026-08-28 for Person 2 local continuity alongside this team log
 - **Skills installed in project:** `.agents/skills/` (Leonxlnx taste-skill set); `awesome-design-md/` = cloned corpus of 74 DESIGN.md design systems from VoltAgent — useful references for Phase 10 UI (linear.app/vercel/cursor fit the dark dense SOC aesthetic)
 
 ## Phase status
@@ -88,6 +90,28 @@ python -m simulator summary datasets/investigation_gap
 - `docker compose up` not yet exercised against real Postgres (requires Docker daemon running); `alembic current/upgrade` needs live DB — will verify on `docker compose up postgres` in Phase 3 start
 - Frontend is scaffold only — no dashboard logic (intentional per Phase 1 contracts-only rule)
 
+## Phase 3 record — Ingestion Pipeline (2026-08-28)
+- Endpoints: `POST /api/ingestion/events|alerts|incidents|investigations|escalations|socs|analysts|devices|assets|threats|analyst_actions` + `/batch` + `/batch/raw` + `/stats` + aliases `POST /api/events|alerts|incidents|investigations|escalations`.
+- Script: `backend/scripts/seed_from_simulator.py` supporting direct SQLAlchemy mode and HTTP mode.
+- Verification: Tested against all 7 simulator scenarios (`healthy`, `investigation_gap`, `negative_space`, `kpi_manipulation`, `analyst_overload`, `recurring_threat`, `identity_anomaly`) — 100% count match on every entity.
+- Tests: `backend/tests/test_ingestion.py` — 16/16 passed.
+
+## Phase 11 record — Secure Identity (2026-08-28)
+- Module: `backend/app/auth/` (security, schemas, service, dependencies).
+- Features: Local Argon2 password hashing (`passlib[argon2]`), JWT access tokens (`python-jose`), rotating cryptographic session credentials (`User+Device+Session+Role+Timestamp+Permissions`), continuous verification (`POST /api/auth/verify`), session locking on anomaly (`POST /api/auth/lock-session`), default user seeding (Supervisor, Admin, Analyst).
+- Tests: `backend/tests/test_auth.py` — 7/7 passed.
+
+## Phase 12 record — Audit Chain (2026-08-28)
+- Module: `backend/app/audit/` (service, schemas).
+- Features: Append-only cryptographic hash chain (`hash_n = SHA-256(record_n + hash_{n-1})`), `verify_audit_chain` integrity validation with pinpoint tamper detection, automated audit logging on privileged events (login, logout, session locking), privileged query endpoints.
+- Tests: `backend/tests/test_audit.py` — 4/4 passed (including intentional DB tampering detection test).
+
+## Phase 13 record — Air-Gap Proof (2026-08-28)
+- Script: `infrastructure/verify_airgap.py` — executes 6-step offline validation (schema, Argon2 user seed, cryptographic auth & session rotation, batch telemetry ingestion, SHA-256 hash chaining, and tamper detection).
+- Verification: 6/6 checks passed — platform is 100% offline & air-gap compliant.
+
+## Overall Backend Test Status
+- 29/29 tests passing across health, ingestion, auth, and audit modules.
 ## Next up — Phase 3 Ingestion Pipeline (Person 2 Track)
 Phase 1 & Person 1 AI/Data Track ✅ closed. Next: Phase 3 `POST /api/events | /alerts | /incidents | /investigations | /escalations` with validation→normalization→correlation IDs→Postgres persistence.
 

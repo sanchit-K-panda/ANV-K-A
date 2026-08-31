@@ -17,12 +17,12 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
 )
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.base import Base
+from app.models.base import Base, GUID
 
 if TYPE_CHECKING:
+    from app.models.analytics import Finding
     from app.models.identity import User
 
 
@@ -125,7 +125,7 @@ class Soc(Base):
     __tablename__ = "socs"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     environment: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -145,6 +145,9 @@ class Soc(Base):
     assets: Mapped[list["Asset"]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
+    events: Mapped[list["Event"]] = relationship(
+        back_populates="soc", cascade="all, delete-orphan"
+    )
     alerts: Mapped[list["Alert"]] = relationship(
         back_populates="soc", cascade="all, delete-orphan"
     )
@@ -161,10 +164,10 @@ class Analyst(Base):
     __tablename__ = "analysts"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -208,10 +211,10 @@ class Device(Base):
     __tablename__ = "devices"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -244,10 +247,10 @@ class Asset(Base):
     __tablename__ = "assets"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -285,7 +288,7 @@ class Threat(Base):
     __tablename__ = "threats"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     category: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -317,10 +320,10 @@ class Event(Base):
     __tablename__ = "events"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -330,17 +333,17 @@ class Event(Base):
     event_type: Mapped[str] = mapped_column(String(100), nullable=False)
     source: Mapped[str] = mapped_column(String(100), nullable=False)
     asset_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("assets.id", ondelete="SET NULL"),
         nullable=True,
     )
     device_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("devices.id", ondelete="SET NULL"),
         nullable=True,
     )
     analyst_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="SET NULL"),
         nullable=True,
     )
@@ -373,10 +376,10 @@ class Alert(Base):
     __tablename__ = "alerts"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -389,12 +392,12 @@ class Alert(Base):
     )
     alert_type: Mapped[str] = mapped_column(String(100), nullable=False)
     asset_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("assets.id", ondelete="CASCADE"),
         nullable=False,
     )
     source_device_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("devices.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -402,7 +405,7 @@ class Alert(Base):
         Text, nullable=False, default="[]"
     )
     analyst_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -442,10 +445,10 @@ class Incident(Base):
     __tablename__ = "incidents"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -462,7 +465,7 @@ class Incident(Base):
     )
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     assigned_analyst_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -503,12 +506,12 @@ class IncidentAlert(Base):
     __tablename__ = "incident_alerts"
 
     incident_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="CASCADE"),
         primary_key=True,
     )
     alert_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("alerts.id", ondelete="CASCADE"),
         primary_key=True,
     )
@@ -518,12 +521,12 @@ class IncidentThreat(Base):
     __tablename__ = "incident_threats"
 
     incident_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="CASCADE"),
         primary_key=True,
     )
     threat_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("threats.id", ondelete="CASCADE"),
         primary_key=True,
     )
@@ -533,12 +536,12 @@ class IncidentAsset(Base):
     __tablename__ = "incident_assets"
 
     incident_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="CASCADE"),
         primary_key=True,
     )
     asset_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("assets.id", ondelete="CASCADE"),
         primary_key=True,
     )
@@ -548,15 +551,15 @@ class Investigation(Base):
     __tablename__ = "investigations"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     incident_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="CASCADE"),
         nullable=False,
     )
     analyst_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -588,15 +591,15 @@ class Escalation(Base):
     __tablename__ = "escalations"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     incident_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="CASCADE"),
         nullable=False,
     )
     analyst_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="CASCADE"),
         nullable=False,
     )
@@ -627,20 +630,20 @@ class AnalystAction(Base):
     __tablename__ = "analyst_actions"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+        GUID(), primary_key=True, default=uuid.uuid4
     )
     analyst_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("analysts.id", ondelete="CASCADE"),
         nullable=False,
     )
     soc_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("socs.id", ondelete="CASCADE"),
         nullable=False,
     )
     incident_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        GUID(),
         ForeignKey("incidents.id", ondelete="SET NULL"),
         nullable=True,
     )
