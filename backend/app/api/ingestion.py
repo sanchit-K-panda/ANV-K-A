@@ -304,12 +304,14 @@ async def alias_investigations(payload: list[InvestigationIngest] | Investigatio
 async def alias_escalations(payload: list[EscalationIngest] | EscalationIngest, db: AsyncSession = Depends(get_db)):
     return await ingest_escalations(payload, db)
 from typing import Dict, List, Optional
-from fastapi import status
+from fastapi import APIRouter as FastAPIRouter, status
 from pydantic import BaseModel, Field
 from app.ingestion.normalize import IngestionNormalizer
 from app.analytics.service import AnalyticsService
 
 analytics_service = AnalyticsService()
+live_router = FastAPIRouter(prefix="/ingest", tags=["ingestion_live"])
+
 
 
 # In-memory working buffer for live ingested records
@@ -338,19 +340,19 @@ class BatchIngestionPayload(BaseModel):
     analyst_actions: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
 
 
-class IngestResponse(BaseModel):
+class LiveIngestResponse(BaseModel):
     status: str
     ingested_count: int
     record_type: str
     message: str
 
 
-@router.post("/events", response_model=IngestResponse, status_code=status.HTTP_201_CREATED)
+@live_router.post("/events", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
 async def ingest_event(event: Dict[str, Any]):
     """Ingests a single raw event, normalizes it, and buffers it."""
     norm = IngestionNormalizer.normalize_event(event)
     _LIVE_BUFFER["events"].append(norm)
-    return IngestResponse(
+    return LiveIngestResponse(
         status="ok",
         ingested_count=1,
         record_type="event",
@@ -358,12 +360,12 @@ async def ingest_event(event: Dict[str, Any]):
     )
 
 
-@router.post("/alerts", response_model=IngestResponse, status_code=status.HTTP_201_CREATED)
+@live_router.post("/alerts", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
 async def ingest_alert(alert: Dict[str, Any]):
     """Ingests a single alert."""
     norm = IngestionNormalizer.normalize_alert(alert)
     _LIVE_BUFFER["alerts"].append(norm)
-    return IngestResponse(
+    return LiveIngestResponse(
         status="ok",
         ingested_count=1,
         record_type="alert",
@@ -371,12 +373,12 @@ async def ingest_alert(alert: Dict[str, Any]):
     )
 
 
-@router.post("/incidents", response_model=IngestResponse, status_code=status.HTTP_201_CREATED)
+@live_router.post("/incidents", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
 async def ingest_incident(incident: Dict[str, Any]):
     """Ingests a single incident."""
     norm = IngestionNormalizer.normalize_incident(incident)
     _LIVE_BUFFER["incidents"].append(norm)
-    return IngestResponse(
+    return LiveIngestResponse(
         status="ok",
         ingested_count=1,
         record_type="incident",
@@ -384,12 +386,12 @@ async def ingest_incident(incident: Dict[str, Any]):
     )
 
 
-@router.post("/investigations", response_model=IngestResponse, status_code=status.HTTP_201_CREATED)
+@live_router.post("/investigations", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
 async def ingest_investigation(investigation: Dict[str, Any]):
     """Ingests a single investigation."""
     norm = IngestionNormalizer.normalize_investigation(investigation)
     _LIVE_BUFFER["investigations"].append(norm)
-    return IngestResponse(
+    return LiveIngestResponse(
         status="ok",
         ingested_count=1,
         record_type="investigation",
@@ -397,12 +399,12 @@ async def ingest_investigation(investigation: Dict[str, Any]):
     )
 
 
-@router.post("/escalations", response_model=IngestResponse, status_code=status.HTTP_201_CREATED)
+@live_router.post("/escalations", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
 async def ingest_escalation(escalation: Dict[str, Any]):
     """Ingests a single escalation."""
     norm = IngestionNormalizer.normalize_escalation(escalation)
     _LIVE_BUFFER["escalations"].append(norm)
-    return IngestResponse(
+    return LiveIngestResponse(
         status="ok",
         ingested_count=1,
         record_type="escalation",
@@ -410,8 +412,8 @@ async def ingest_escalation(escalation: Dict[str, Any]):
     )
 
 
-@router.post("/batch", status_code=status.HTTP_200_OK)
-async def ingest_batch(payload: BatchIngestionPayload):
+@live_router.post("/batch", status_code=status.HTTP_200_OK)
+async def ingest_batch_live(payload: BatchIngestionPayload):
     """Batch ingests normalized telemetry and immediately triggers supervisory analytics."""
     norm_events = [IngestionNormalizer.normalize_event(e) for e in (payload.events or [])]
     norm_alerts = [IngestionNormalizer.normalize_alert(a) for a in (payload.alerts or [])]
