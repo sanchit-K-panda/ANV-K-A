@@ -2,7 +2,7 @@
   "dataset_id": "DS-ANALYST_OVERLOAD-42",
   "scenario": "analyst_overload",
   "seed": 42,
-  "generated_at": "2026-08-28T08:14:43.645912Z",
+  "generated_at": "2026-08-30T10:59:05.964977Z",
   "config": {
     "soc_count": 2,
     "analysts_per_soc_min": 15,

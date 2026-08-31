@@ -36,8 +36,8 @@
   "severity": "CRITICAL",
   "status": "CLOSED",
   "created_at": "2026-08-07T07:20:51.576085Z",
-  "closed_at": "2026-08-07T09:18:33.343473Z",
-  "assigned_analyst_id": "AN-00037"
+  "closed_at": "2026-08-07T10:41:19.839597Z",
+  "assigned_analyst_id": "AN-00024"
  },
  {
   "incident_id": "INC-00003",
@@ -57,7 +57,7 @@
   "status": "CLOSED",
   "created_at": "2026-08-06T12:04:52.073550Z",
   "closed_at": "2026-08-06T14:25:53.373287Z",
-  "assigned_analyst_id": "AN-00033"
+  "assigned_analyst_id": "AN-00019"
  },
  {
   "incident_id": "INC-00004",
@@ -94,8 +94,8 @@
   "severity": "CRITICAL",
   "status": "CLOSED",
   "created_at": "2026-08-09T09:48:27.966814Z",
-  "closed_at": "2026-08-09T11:35:15.770560Z",
-  "assigned_analyst_id": "AN-00028"
+  "closed_at": "2026-08-09T12:05:53.143322Z",
+  "assigned_analyst_id": "AN-00024"
  },
  {
   "incident_id": "INC-00006",
@@ -166,8 +166,8 @@
   "severity": "CRITICAL",
   "status": "CLOSED",
   "created_at": "2026-08-13T21:36:28.951792Z",
-  "closed_at": "2026-08-14T00:11:36.861719Z",
-  "assigned_analyst_id": "AN-00033"
+  "closed_at": "2026-08-14T01:15:20.153058Z",
+  "assigned_analyst_id": "AN-00024"
  },
  {
   "incident_id": "INC-00010",
@@ -235,7 +235,7 @@
   "status": "CLOSED",
   "created_at": "2026-08-10T00:00:27.381176Z",
   "closed_at": "2026-08-10T01:46:31.839695Z",
-  "assigned_analyst_id": "AN-00001"
+  "assigned_analyst_id": "AN-00006"
  },
  {
   "incident_id": "INC-00013",
@@ -367,7 +367,7 @@
   "status": "CLOSED",
   "created_at": "2026-08-04T05:55:43.613572Z",
   "closed_at": "2026-08-04T07:36:10.251968Z",
-  "assigned_analyst_id": "AN-00032"
+  "assigned_analyst_id": "AN-00020"
  },
  {
   "incident_id": "INC-00020",

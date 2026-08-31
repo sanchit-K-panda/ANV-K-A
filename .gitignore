@@ -1,5 +1,9 @@
 # Dependencies / builds
 node_modules/
+.next/
+out/
+build/
+dist/
 __pycache__/
 *.pyc
 .venv/

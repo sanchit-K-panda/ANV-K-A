@@ -12,7 +12,7 @@
  {
   "investigation_id": "INV-00002",
   "incident_id": "INC-00002",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "started_at": "2026-08-07T08:40:37.185651Z",
   "completed_at": "2026-08-07T09:43:21.048469Z",
   "status": "COMPLETED",
@@ -42,7 +42,7 @@
  {
   "investigation_id": "INV-00005",
   "incident_id": "INC-00005",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "started_at": "2026-08-09T11:01:58.071188Z",
   "completed_at": "2026-08-09T11:59:23.778826Z",
   "status": "COMPLETED",
@@ -82,7 +82,7 @@
  {
   "investigation_id": "INV-00009",
   "incident_id": "INC-00009",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "started_at": "2026-08-13T23:32:45.100712Z",
   "completed_at": "2026-08-14T01:02:09.447093Z",
   "status": "COMPLETED",

@@ -39,7 +39,7 @@ def cmd_generate(args: argparse.Namespace) -> int:
             cfg.events = args.events
         if args.socs:
             cfg.soc_count = args.socs
-        print(f"▶ Generating scenario '{scen}' (events={cfg.events}, seed={cfg.seed}) …")
+        print(f"[+] Generating scenario '{scen}' (events={cfg.events}, seed={cfg.seed})...")
         ds = build_scenario(scen, cfg)
         out_dir = args.out / scen
         export_json(ds, out_dir)

@@ -14,6 +14,13 @@ from app.api.audit import router as audit_router
 app = FastAPI(
     title="ANVĪKṢA API",
     description="Supervisory Analytics Tool for SOC Assessment — Security & Telemetry",
+from app.api.findings import router as findings_router
+from app.api.analytics import router as analytics_router
+from app.api.ingestion import router as ingestion_router
+
+app = FastAPI(
+    title="ANVĪKṢA API",
+    description="Supervisory Analytics Tool for SOC Assessment",
     version="0.1.0",
 )
 
@@ -30,6 +37,9 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(audit_router, prefix="/api")
 app.include_router(ingestion_router, prefix="/api")
 app.include_router(ingestion_alias_router, prefix="/api")  # spec: POST /api/events etc.
+app.include_router(findings_router, prefix="/api")
+app.include_router(analytics_router, prefix="/api")
+app.include_router(ingestion_router, prefix="/api")
 
 
 @app.get("/")

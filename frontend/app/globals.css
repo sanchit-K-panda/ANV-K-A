@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-base: #060709;
+    --bg-panel: #0C0E12;
+    --bg-raised: #14171E;
+    --bg-elevated: #1C2029;
+    --border-color: #232732;
+    --border-subtle: #171A22;
+    --border-contrast: #4A5162;
+    --text-primary: #F4F5F7;
+    --text-secondary: #9CA3AF;
+    --text-muted: #656C7A;
+  }
+
+  * {
+    box-sizing: border-box;
+    border-color: var(--border-color);
+  }
+
+  body {
+    background-color: #060709;
+    color: #F4F5F7;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Precision Enterprise Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #060709;
+}
+::-webkit-scrollbar-thumb {
+  background: #232732;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4A5162;
+}
+
+/* High-Density Monochrome Enterprise Table */
+.soc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.soc-table th {
+  background-color: #090B0F;
+  color: #848B98;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #232732;
+  border-top: 1px solid #232732;
+  white-space: nowrap;
+}
+
+.soc-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #14171E;
+  color: #E2E4E9;
+  vertical-align: middle;
+}
+
+.soc-table tr:hover td {
+  background-color: #10131A;
+}
+
+/* Monochrome Badges */
+.badge-critical {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border: 1px solid #FFFFFF;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.badge-high {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #1C2029;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border: 1px solid #4A5162;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.badge-medium {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #0C0E12;
+  color: #C0C5D0;
+  font-weight: 500;
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border: 1px solid #282D3A;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.badge-low {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: transparent;
+  color: #7A8290;
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border: 1px solid #1E222C;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #0C0E12;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border: 1px solid #4A5162;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Subtle Monochrome Status Indicator */
+.indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.indicator-dot-white {
+  background-color: #FFFFFF;
+}
+
+.indicator-dot-gray {
+  background-color: #656C7A;
+}
+
+/* Dashed Missing Box for Negative Space & Execution Gaps */
+.dashed-gap-box {
+  border: 1px dashed #656C7A;
+  background-color: rgba(255, 255, 255, 0.02);
+}

@@ -41,7 +41,7 @@
  },
  {
   "action_id": "ACT-00005",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00002",
   "action_type": "TRIAGE",
@@ -51,7 +51,7 @@
  },
  {
   "action_id": "ACT-00006",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00002",
   "action_type": "INVESTIGATION_START",
@@ -61,7 +61,7 @@
  },
  {
   "action_id": "ACT-00007",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00002",
   "action_type": "ESCALATION",
@@ -71,7 +71,7 @@
  },
  {
   "action_id": "ACT-00008",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00002",
   "action_type": "RESPONSE",
@@ -81,7 +81,7 @@
  },
  {
   "action_id": "ACT-00009",
-  "analyst_id": "AN-00037",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00002",
   "action_type": "CLOSURE",
@@ -181,7 +181,7 @@
  },
  {
   "action_id": "ACT-00019",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00005",
   "action_type": "TRIAGE",
@@ -191,7 +191,7 @@
  },
  {
   "action_id": "ACT-00020",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00005",
   "action_type": "INVESTIGATION_START",
@@ -201,7 +201,7 @@
  },
  {
   "action_id": "ACT-00021",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00005",
   "action_type": "ESCALATION",
@@ -211,7 +211,7 @@
  },
  {
   "action_id": "ACT-00022",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00005",
   "action_type": "RESPONSE",
@@ -221,7 +221,7 @@
  },
  {
   "action_id": "ACT-00023",
-  "analyst_id": "AN-00028",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00005",
   "action_type": "CLOSURE",
@@ -351,7 +351,7 @@
  },
  {
   "action_id": "ACT-00036",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00009",
   "action_type": "TRIAGE",
@@ -361,7 +361,7 @@
  },
  {
   "action_id": "ACT-00037",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00009",
   "action_type": "INVESTIGATION_START",
@@ -371,7 +371,7 @@
  },
  {
   "action_id": "ACT-00038",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00009",
   "action_type": "ESCALATION",
@@ -381,7 +381,7 @@
  },
  {
   "action_id": "ACT-00039",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00009",
   "action_type": "RESPONSE",
@@ -391,7 +391,7 @@
  },
  {
   "action_id": "ACT-00040",
-  "analyst_id": "AN-00033",
+  "analyst_id": "AN-00024",
   "soc_id": "SOC-002",
   "incident_id": "INC-00009",
   "action_type": "CLOSURE",
