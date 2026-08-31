@@ -29,21 +29,21 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "backend"))
 sys.path.insert(0, str(REPO_ROOT / "soc-simulator" / "src"))
 
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine  # type: ignore
+from sqlalchemy.pool import StaticPool  # type: ignore
 
-from app.audit.service import record_audit_action, verify_audit_chain
-from app.auth.service import (
+from app.audit.service import record_audit_action, verify_audit_chain  # type: ignore
+from app.auth.service import (  # type: ignore
     authenticate_user,
     create_session,
     lock_session,
     seed_default_users,
     verify_and_rotate_session,
 )
-from app.ingestion.service import get_stats, ingest_batch
-from app.models.base import Base
-from app.models.identity import AuditLog
-from app.schemas.ingestion import BatchIngestRequest
+from app.ingestion.service import get_stats, ingest_batch  # type: ignore
+from app.models.base import Base  # type: ignore
+from app.models.identity import AuditLog  # type: ignore
+from app.schemas.ingestion import BatchIngestRequest  # type: ignore
 
 
 def log_step(step: int, name: str, status: str = "RUNNING"):

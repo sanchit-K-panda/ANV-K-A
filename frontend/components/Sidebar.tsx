@@ -42,6 +42,7 @@ export const Sidebar: React.FC = () => {
         { href: '/investigations', label: 'Investigations', sublabel: 'Queue Audit', icon: Briefcase },
         { href: '/cases', label: 'Cases', sublabel: 'Management', icon: FolderGit2 },
         { href: '/evidence', label: 'Evidence', sublabel: 'PRATYAYA', icon: Search },
+        { href: '/login-sessions', label: 'Login Sessions', sublabel: 'Auth Audit', icon: ShieldAlert },
       ],
     },
     {

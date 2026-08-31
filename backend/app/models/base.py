@@ -22,7 +22,6 @@ class GUID(TypeDecorator):
     Uses CHAR(36) (fixed-width) for MySQL FK constraint compatibility.
     """
     impl = String(36)
-    impl_instance = String(36, collation="ascii_bin")
     cache_ok = True
 
     def load_dialect_impl(self, dialect):
