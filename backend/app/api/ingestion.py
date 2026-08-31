@@ -7,9 +7,10 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Any
+from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.ingestion.service import get_stats, ingest_batch
@@ -31,6 +32,8 @@ from app.schemas.ingestion import (
     SocIngest,
     ThreatIngest,
 )
+from app.ingestion.normalize import IngestionNormalizer
+from app.analytics.service import AnalyticsService
 
 logger = logging.getLogger(__name__)
 
@@ -219,10 +222,8 @@ async def ingest_batch_raw(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid JSON: {e}")
 
-    # Try to parse as BatchIngestRequest; collect per-entity errors
     errors: list[dict[str, Any]] = []
 
-    # Map raw keys to ingest models
     key_to_model = {
         "socs": SocIngest,
         "analysts": AnalystIngest,
@@ -235,7 +236,7 @@ async def ingest_batch_raw(
         "investigations": InvestigationIngest,
         "escalations": EscalationIngest,
         "analyst_actions": AnalystActionIngest,
-        "actions": AnalystActionIngest,  # alias
+        "actions": AnalystActionIngest,
     }
 
     validated_payload = BatchIngestRequest()
@@ -255,7 +256,6 @@ async def ingest_batch_raw(
             except Exception as e:
                 _log_bad_record(rec, e)
                 errors.append({"entity": key, "index": idx, "error": str(e), "record": rec})
-        # assign to payload
         attr = "analyst_actions" if key == "actions" else key
         setattr(validated_payload, attr, valid_items)
 
@@ -264,15 +264,14 @@ async def ingest_batch_raw(
     return BatchIngestResponse(counts=counts, total_ingested=total, errors=errors)
 
 
-# ---------- Stats & health ----------
-
 @router.get("/stats", response_model=IngestStatsResponse)
 async def ingestion_stats(db: AsyncSession = Depends(get_db)):
     stats = await get_stats(db)
     return IngestStatsResponse(**stats)
 
 
-# Backwards compat aliases per Phases.md spec (POST /api/events etc. without /ingestion prefix)
+# ---------- Alias Router (spec: POST /api/events etc.) ----------
+
 alias_router = APIRouter(tags=["ingestion-alias"])
 
 
@@ -299,3 +298,141 @@ async def alias_investigations(payload: list[InvestigationIngest] | Investigatio
 @alias_router.post("/escalations", response_model=IngestResponse)
 async def alias_escalations(payload: list[EscalationIngest] | EscalationIngest, db: AsyncSession = Depends(get_db)):
     return await ingest_escalations(payload, db)
+
+
+# ---------- Live Router (POST /api/ingest/*) ----------
+
+live_router = APIRouter(prefix="/ingest", tags=["ingestion_live"])
+analytics_service = AnalyticsService()
+
+_LIVE_BUFFER: Dict[str, List[Dict[str, Any]]] = {
+    "events": [],
+    "alerts": [],
+    "incidents": [],
+    "investigations": [],
+    "escalations": [],
+    "analyst_actions": [],
+}
+
+
+class BatchIngestionPayload(BaseModel):
+    scenario: Optional[str] = "live_stream"
+    socs: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    analysts: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    devices: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    assets: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    threats: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    events: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    alerts: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    incidents: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    investigations: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    escalations: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+    analyst_actions: Optional[List[Dict[str, Any]]] = Field(default_factory=list)
+
+
+class LiveIngestResponse(BaseModel):
+    status: str
+    ingested_count: int
+    record_type: str
+    message: str
+
+
+@live_router.post("/events", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
+async def live_ingest_event(event: Dict[str, Any]):
+    norm = IngestionNormalizer.normalize_event(event)
+    _LIVE_BUFFER["events"].append(norm)
+    return LiveIngestResponse(
+        status="ok",
+        ingested_count=1,
+        record_type="event",
+        message=f"Event {norm['event_id']} normalized and ingested.",
+    )
+
+
+@live_router.post("/alerts", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
+async def live_ingest_alert(alert: Dict[str, Any]):
+    norm = IngestionNormalizer.normalize_alert(alert)
+    _LIVE_BUFFER["alerts"].append(norm)
+    return LiveIngestResponse(
+        status="ok",
+        ingested_count=1,
+        record_type="alert",
+        message=f"Alert {norm['alert_id']} normalized and ingested.",
+    )
+
+
+@live_router.post("/incidents", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
+async def live_ingest_incident(incident: Dict[str, Any]):
+    norm = IngestionNormalizer.normalize_incident(incident)
+    _LIVE_BUFFER["incidents"].append(norm)
+    return LiveIngestResponse(
+        status="ok",
+        ingested_count=1,
+        record_type="incident",
+        message=f"Incident {norm['incident_id']} normalized and ingested.",
+    )
+
+
+@live_router.post("/investigations", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
+async def live_ingest_investigation(investigation: Dict[str, Any]):
+    norm = IngestionNormalizer.normalize_investigation(investigation)
+    _LIVE_BUFFER["investigations"].append(norm)
+    return LiveIngestResponse(
+        status="ok",
+        ingested_count=1,
+        record_type="investigation",
+        message=f"Investigation {norm['investigation_id']} normalized and ingested.",
+    )
+
+
+@live_router.post("/escalations", response_model=LiveIngestResponse, status_code=status.HTTP_201_CREATED)
+async def live_ingest_escalation(escalation: Dict[str, Any]):
+    norm = IngestionNormalizer.normalize_escalation(escalation)
+    _LIVE_BUFFER["escalations"].append(norm)
+    return LiveIngestResponse(
+        status="ok",
+        ingested_count=1,
+        record_type="escalation",
+        message=f"Escalation {norm['escalation_id']} normalized and ingested.",
+    )
+
+
+@live_router.post("/batch", status_code=status.HTTP_200_OK)
+async def live_ingest_batch(payload: BatchIngestionPayload):
+    norm_events = [IngestionNormalizer.normalize_event(e) for e in (payload.events or [])]
+    norm_alerts = [IngestionNormalizer.normalize_alert(a) for a in (payload.alerts or [])]
+    norm_incidents = [IngestionNormalizer.normalize_incident(i) for i in (payload.incidents or [])]
+    norm_investigations = [IngestionNormalizer.normalize_investigation(iv) for iv in (payload.investigations or [])]
+    norm_escalations = [IngestionNormalizer.normalize_escalation(e) for e in (payload.escalations or [])]
+
+    dataset_dict = {
+        "scenario": payload.scenario or "batch_ingest",
+        "socs": payload.socs or [],
+        "analysts": payload.analysts or [],
+        "devices": payload.devices or [],
+        "assets": payload.assets or [],
+        "threats": payload.threats or [],
+        "events": norm_events,
+        "alerts": norm_alerts,
+        "incidents": norm_incidents,
+        "investigations": norm_investigations,
+        "escalations": norm_escalations,
+        "analyst_actions": payload.analyst_actions or [],
+        "ground_truth": [],
+        "metadata": {},
+    }
+
+    findings = analytics_service.evaluate_in_memory_dataset(dataset_dict)
+
+    return {
+        "status": "success",
+        "ingested_counts": {
+            "events": len(norm_events),
+            "alerts": len(norm_alerts),
+            "incidents": len(norm_incidents),
+            "investigations": len(norm_investigations),
+            "escalations": len(norm_escalations),
+        },
+        "findings_generated": len(findings),
+        "findings": findings,
+    }
