@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    --bg-base: #060709;
-    --bg-panel: #0C0E12;
-    --bg-raised: #14171E;
-    --bg-elevated: #1C2029;
-    --border-color: #232732;
-    --border-subtle: #171A22;
-    --border-contrast: #4A5162;
-    --text-primary: #F4F5F7;
-    --text-secondary: #9CA3AF;
-    --text-muted: #656C7A;
+    --bg-base: #F8FAFC;
+    --bg-panel: #FFFFFF;
+    --bg-raised: #F1F5F9;
+    --bg-elevated: #E2E8F0;
+    --border-color: #E2E8F0;
+    --border-subtle: #F1F5F9;
+    --border-contrast: #CBD5E1;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
   }
 
   * {
@@ -22,8 +22,8 @@
   }
 
   body {
-    background-color: #060709;
-    color: #F4F5F7;
+    background-color: #F8FAFC;
+    color: #0F172A;
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -32,65 +32,70 @@
   }
 }
 
-/* Precision Enterprise Scrollbar */
+/* Precision Clean Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #060709;
+  background: #F8FAFC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #232732;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4A5162;
+  background: #94A3B8;
 }
 
-/* High-Density Monochrome Enterprise Table */
+/* High-Density Clean Enterprise Table */
 .soc-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.75rem;
-  letter-spacing: -0.01em;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.8125rem;
 }
 
 .soc-table th {
-  background-color: #090B0F;
-  color: #848B98;
+  background-color: #F8FAFC;
+  color: #64748B;
   font-weight: 600;
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 8px 12px;
+  padding: 10px 14px;
   text-align: left;
-  border-bottom: 1px solid #232732;
-  border-top: 1px solid #232732;
+  border-bottom: 1px solid #E2E8F0;
   white-space: nowrap;
 }
 
 .soc-table td {
-  padding: 8px 12px;
-  border-bottom: 1px solid #14171E;
-  color: #E2E4E9;
+  padding: 12px 14px;
+  border-bottom: 1px solid #F1F5F9;
+  color: #1E293B;
   vertical-align: middle;
 }
 
-.soc-table tr:hover td {
-  background-color: #10131A;
+.soc-table tr:last-child td {
+  border-bottom: none;
 }
 
-/* Monochrome Badges */
+.soc-table tr:hover td {
+  background-color: #F8FAFC;
+}
+
+/* Clean Colored Badges with Soft Corners */
 .badge-critical {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: #FFFFFF;
-  color: #000000;
+  background-color: #FFF1F2;
+  color: #BE123C;
   font-weight: 700;
   font-size: 0.6875rem;
-  padding: 2px 6px;
-  border: 1px solid #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #FECDD3;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -98,12 +103,13 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: #1C2029;
-  color: #FFFFFF;
+  background-color: #FFFBEB;
+  color: #B45309;
   font-weight: 600;
   font-size: 0.6875rem;
-  padding: 2px 6px;
-  border: 1px solid #4A5162;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #FDE68A;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -111,12 +117,13 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: #0C0E12;
-  color: #C0C5D0;
+  background-color: #FEFCE8;
+  color: #854D0E;
   font-weight: 500;
   font-size: 0.6875rem;
-  padding: 2px 6px;
-  border: 1px solid #282D3A;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #FEF08A;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -124,11 +131,12 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: transparent;
-  color: #7A8290;
+  background-color: #F1F5F9;
+  color: #475569;
   font-size: 0.6875rem;
-  padding: 2px 6px;
-  border: 1px solid #1E222C;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #E2E8F0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
@@ -136,33 +144,43 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background-color: #0C0E12;
-  color: #FFFFFF;
+  background-color: #ECFDF5;
+  color: #047857;
   font-weight: 600;
   font-size: 0.6875rem;
-  padding: 2px 6px;
-  border: 1px solid #4A5162;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid #A7F3D0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Subtle Monochrome Status Indicator */
+/* Subtle Status Indicator */
 .indicator-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 1px;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
   display: inline-block;
 }
 
-.indicator-dot-white {
-  background-color: #FFFFFF;
+.indicator-dot-green {
+  background-color: #10B981;
+}
+
+.indicator-dot-amber {
+  background-color: #F59E0B;
+}
+
+.indicator-dot-red {
+  background-color: #EF4444;
 }
 
 .indicator-dot-gray {
-  background-color: #656C7A;
+  background-color: #94A3B8;
 }
 
-/* Dashed Missing Box for Negative Space & Execution Gaps */
+/* Dashed Box for Gaps */
 .dashed-gap-box {
-  border: 1px dashed #656C7A;
-  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px dashed #CBD5E1;
+  background-color: #FFF1F2;
+  border-radius: 6px;
 }
