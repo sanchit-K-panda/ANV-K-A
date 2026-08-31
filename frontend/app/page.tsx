@@ -32,7 +32,6 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
-import { PerformanceBars } from '@/components/dashboard/PerformanceBars';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
 import { WhySocDegraded } from '@/components/dashboard/WhySocDegraded';
 import { LiveActivityStream } from '@/components/dashboard/LiveActivityStream';
@@ -175,9 +174,9 @@ export default function CommandCentrePage() {
         />
       </div>
 
-      {/* 4. SOC Health Assessment & Lifecycle Effectiveness */}
+      {/* 4. SOC Health Assessment & Root Cause Decomposition */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-        <div className="lg:col-span-5 flex flex-col">
+        <div className="lg:col-span-4 flex flex-col">
           <SocHealthScore
             score={overview?.health_score ?? 78}
             grade={quadrants?.composite_grade ?? 'C-'}
@@ -186,13 +185,8 @@ export default function CommandCentrePage() {
           />
         </div>
 
-        <div className="lg:col-span-7 flex flex-col">
-          <PerformanceBars
-            detectionScore={quadrants?.detection_score ?? 92}
-            investigationScore={quadrants?.investigation_score ?? 31}
-            escalationScore={quadrants?.escalation_score ?? 48}
-            responseScore={quadrants?.response_score ?? 64}
-          />
+        <div className="lg:col-span-8 flex flex-col">
+          <WhySocDegraded />
         </div>
       </div>
 
@@ -202,12 +196,12 @@ export default function CommandCentrePage() {
         onActionDispatch={handleActionDispatch}
       />
 
-      {/* 6. Why SOC-04 is Degraded & Live Activity Stream */}
+      {/* 6. Live Activity Stream & Tamper-Evident Ledger */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-        <div className="lg:col-span-8 flex flex-col">
-          <WhySocDegraded />
+        <div className="lg:col-span-7 flex flex-col">
+          <HashChainLedger />
         </div>
-        <div className="lg:col-span-4 flex flex-col">
+        <div className="lg:col-span-5 flex flex-col">
           <LiveActivityStream />
         </div>
       </div>
@@ -273,9 +267,6 @@ export default function CommandCentrePage() {
           </table>
         </div>
       </div>
-
-      {/* 8. Tamper-Evident SAKṢĪ Hash Chain */}
-      <HashChainLedger />
     </div>
   );
 }

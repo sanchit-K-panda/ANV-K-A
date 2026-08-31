@@ -27,7 +27,6 @@ import { ThreatRecurrenceTimeline } from '@/components/infographics/ThreatRecurr
 import { FindingCorrelationGraph } from '@/components/infographics/FindingCorrelationGraph';
 import { SecureSessionEnclave } from '@/components/infographics/SecureSessionEnclave';
 import { AirGapArchitecture } from '@/components/infographics/AirGapArchitecture';
-import { PerformanceBars } from '@/components/dashboard/PerformanceBars';
 import { HashChainLedger } from '@/components/infographics/HashChainLedger';
 
 export interface InfographicViewOption {
@@ -66,8 +65,8 @@ export const INFOGRAPHIC_VIEWS: InfographicViewOption[] = [
   },
   {
     id: 'lifecycle',
-    title: 'SOC Operational Lifecycle Flow',
-    category: 'SLA Analysis',
+    title: 'SOC Operational Workflow Flow',
+    category: 'SOP Audit',
     engine: 'PARĪKṢA',
     icon: Activity,
     description: 'Step-by-step audit from raw alert ingestion to resolution and case closure.',
@@ -95,14 +94,6 @@ export const INFOGRAPHIC_VIEWS: InfographicViewOption[] = [
     engine: 'PRATYAYA',
     icon: Share2,
     description: 'Connects Raw Alert ➔ Incident ➔ Analyst ➔ Omission ➔ Threat ➔ Supervisory Finding.',
-  },
-  {
-    id: 'performance-bars',
-    title: 'Lifecycle Effectiveness vs SLA',
-    category: '4-Quadrants',
-    engine: 'MEDHĀ',
-    icon: Activity,
-    description: 'Detection, Investigation, Escalation, and Response dwell comparisons.',
   },
   {
     id: 'airgap-enclave',
@@ -142,13 +133,6 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
     onViewChange?.(id);
   };
 
-  const filteredViews = INFOGRAPHIC_VIEWS.filter(
-    (v) =>
-      v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.engine.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   const renderActiveInfographic = () => {
     switch (currentViewId) {
       case 'execution-gap':
@@ -164,17 +148,6 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
         return <ThreatRecurrenceTimeline />;
       case 'correlation-graph':
         return <FindingCorrelationGraph />;
-      case 'performance-bars':
-        return (
-          <div className="space-y-4">
-            <PerformanceBars
-              detectionScore={92}
-              investigationScore={31}
-              escalationScore={48}
-              responseScore={64}
-            />
-          </div>
-        );
       case 'airgap-enclave':
         return (
           <div className="space-y-4">
@@ -205,7 +178,7 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
                   Infographic Intelligence Window (All SOC Data Visualizer)
                 </h2>
                 <span className="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.2 rounded border border-blue-200">
-                  10 VISUAL MODELS
+                  09 VISUAL MODELS
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 font-sans mt-0.5">
