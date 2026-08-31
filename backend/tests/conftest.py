@@ -56,9 +56,6 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
     transport = ASGITransport(app=fastapi_app)
     async with AsyncClient(transport=transport, base_url="http://test") as c:
         yield c
-"""Pytest configuration ensuring workspace root and backend paths are in sys.path."""
-from __future__ import annotations
-
 import sys
 from pathlib import Path
 

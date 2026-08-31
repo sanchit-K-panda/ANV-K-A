@@ -303,18 +303,14 @@ async def alias_investigations(payload: list[InvestigationIngest] | Investigatio
 @alias_router.post("/escalations", response_model=IngestResponse)
 async def alias_escalations(payload: list[EscalationIngest] | EscalationIngest, db: AsyncSession = Depends(get_db)):
     return await ingest_escalations(payload, db)
-"""Ingestion API routes for live and batch SOC telemetry ingestion."""
-from __future__ import annotations
-
-from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, HTTPException, status
+from typing import Dict, List, Optional
+from fastapi import status
 from pydantic import BaseModel, Field
-
 from app.ingestion.normalize import IngestionNormalizer
 from app.analytics.service import AnalyticsService
 
-router = APIRouter(prefix="/ingest", tags=["ingestion"])
 analytics_service = AnalyticsService()
+
 
 # In-memory working buffer for live ingested records
 _LIVE_BUFFER: Dict[str, List[Dict[str, Any]]] = {

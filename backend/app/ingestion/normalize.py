@@ -36,12 +36,9 @@ def ensure_list(v: Any) -> list:
     if isinstance(v, list):
         return v
     return [v]
-"""Ingestion normalization, validation, and schema sanitization layer."""
-from __future__ import annotations
-
 import uuid
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 
 def parse_iso_timestamp(ts: Any) -> str:
