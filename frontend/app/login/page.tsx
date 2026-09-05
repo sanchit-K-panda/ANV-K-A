@@ -3,31 +3,26 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
-  Shield,
   ShieldAlert,
-  ShieldCheck,
-  Server,
   Lock,
   ArrowRight,
   UserCheck,
   EyeOff,
-  Cpu,
+  Server,
   CheckCircle2,
-  FileText,
-  Activity,
-  Layers,
-  Search,
   KeyRound,
   Fingerprint,
-  Radio,
-  Clock,
-  Zap,
   RefreshCw,
+  Terminal,
+  ShieldCheck,
+  CircleDot,
 } from 'lucide-react';
 import { BiometricHUD } from '@/components/BiometricHUD';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface SupervisorProfile {
   id: string;
+  email: string;
   name: string;
   role: string;
   clearance: string;
@@ -38,6 +33,7 @@ interface SupervisorProfile {
 const DEMO_PROFILES: SupervisorProfile[] = [
   {
     id: 'a_sharma_supervisor',
+    email: 'supervisor@anviksa.local',
     name: 'Dr. A. Sharma',
     role: 'Chief SOC Supervisor',
     clearance: 'LEVEL-4 (EXECUTIVE)',
@@ -46,6 +42,7 @@ const DEMO_PROFILES: SupervisorProfile[] = [
   },
   {
     id: 'v_raman_auditor',
+    email: 'admin@anviksa.local',
     name: 'V. Raman',
     role: 'Compliance & Integrity Auditor',
     clearance: 'LEVEL-3 (AUDIT)',
@@ -54,12 +51,31 @@ const DEMO_PROFILES: SupervisorProfile[] = [
   },
   {
     id: 'k_menon_lead',
+    email: 'analyst@anviksa.local',
     name: 'K. Menon',
     role: 'Incident Response Commander',
     clearance: 'LEVEL-3 (OPERATIONAL)',
     station: 'IR-CONSOLE-09',
     deviceId: 'DEV-09-IR-PRIMARY',
   },
+];
+
+type StageState = 'PENDING' | 'RUNNING' | 'PASS' | 'FAIL';
+
+const PIPELINE_STAGES = [
+  { id: 'identity', label: 'IDENTITY', detail: 'DARŚANA optical vector match' },
+  { id: 'liveness', label: 'LIVENESS', detail: 'Anti-spoofing texture entropy check' },
+  { id: 'device', label: 'DEVICE TRUST', detail: 'BANDHA TPM hardware binding' },
+  { id: 'session', label: 'SESSION MINT', detail: 'KṢAṆA 15-min rotating credential' },
+] as const;
+
+const AIRGAP_MANIFEST = [
+  { label: 'Runtime Mode', value: 'AIR-GAPPED' },
+  { label: 'Internet Connectivity', value: 'DISABLED' },
+  { label: 'AI Inference', value: 'LOCAL' },
+  { label: 'Authentication', value: 'LOCAL (ARGON2ID)' },
+  { label: 'Audit Ledger', value: 'SAKṢĪ SHA-256' },
+  { label: 'External APIs', value: 'NONE' },
 ];
 
 function LoginContent() {
@@ -71,326 +87,408 @@ function LoginContent() {
   const [selectedProfile, setSelectedProfile] = useState<SupervisorProfile>(DEMO_PROFILES[0]);
   const [authStage, setAuthStage] = useState<'IDLE' | 'SCANNING' | 'VERIFIED' | 'DENIED'>('IDLE');
   const [denyReason, setDenyReason] = useState<string | null>(null);
-  const [statusMessage, setStatusMessage] = useState<string>('');
-  const [pin, setPin] = useState<string>('729401');
+  const [stageStates, setStageStates] = useState<StageState[]>(['PENDING', 'PENDING', 'PENDING', 'PENDING']);
+  const [pin, setPin] = useState<string>('');
+  const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
+  const [credentialId, setCredentialId] = useState<string>('');
 
-  const handleStartAuth = (
+  // Probe the local backend once — the platform must work with or without it.
+  useEffect(() => {
+    let cancelled = false;
+    fetch('http://localhost:8000/api/health', { signal: AbortSignal.timeout(2500) })
+      .then((res) => { if (!cancelled) setBackendOnline(res.ok); })
+      .catch(() => { if (!cancelled) setBackendOnline(false); });
+    return () => { cancelled = true; };
+  }, []);
+
+  const setStage = (index: number, state: StageState) => {
+    setStageStates((prev) => prev.map((s, i) => (i === index ? state : s)));
+  };
+
+  const tryBackendLogin = async (): Promise<boolean> => {
+    if (backendOnline !== true) return false;
+    try {
+      const res = await fetch('http://localhost:8000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: selectedProfile.email, password: 'anviksa_supervisor' }),
+        signal: AbortSignal.timeout(3000),
+      });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  };
+
+  const handleStartAuth = async (
     testScenario: 'NORMAL' | 'SPOOF_MASK' | 'UNTRUSTED_DEVICE' = 'NORMAL'
   ) => {
     setAuthStage('SCANNING');
     setDenyReason(null);
-    setStatusMessage('1. Verifying DARŚANA optical liveness & 3D facial vectors...');
+    setCredentialId('');
+    setStageStates(['RUNNING', 'PENDING', 'PENDING', 'PENDING']);
+
+    await new Promise((r) => setTimeout(r, 800));
+    if (testScenario === 'SPOOF_MASK') {
+      setStage(0, 'FAIL');
+      setAuthStage('DENIED');
+      setDenyReason('ANTI-SPOOFING ALERT: 2D static reflection / photo-mask artifact detected. Liveness entropy below threshold.');
+      return;
+    }
+    setStage(0, 'PASS');
+    setStage(1, 'RUNNING');
+
+    await new Promise((r) => setTimeout(r, 550));
+    if (testScenario === 'UNTRUSTED_DEVICE') {
+      setStage(1, 'PASS');
+      setStage(2, 'FAIL');
+      setAuthStage('DENIED');
+      setDenyReason('HARDWARE BINDING FAILURE: BANDHA TPM fingerprint mismatch. Sensitive operations remain locked.');
+      return;
+    }
+    setStage(1, 'PASS');
+    setStage(2, 'RUNNING');
+
+    await new Promise((r) => setTimeout(r, 500));
+    await tryBackendLogin();
+    setStage(2, 'PASS');
+    setStage(3, 'RUNNING');
+
+    await new Promise((r) => setTimeout(r, 500));
+    setStage(3, 'PASS');
+    setCredentialId(`KSA-${Date.now().toString(16).toUpperCase().slice(-8)}`);
+    setAuthStage('VERIFIED');
 
     setTimeout(() => {
-      if (testScenario === 'SPOOF_MASK') {
-        setAuthStage('DENIED');
-        setDenyReason(
-          'ANTI-SPOOFING ALERT: 2D static reflection / photo-mask artifact detected.'
-        );
-        setStatusMessage('SECURITY DENIAL: Biometric Anti-Spoofing Engaged');
-        return;
-      }
+      router.push('/');
+    }, 1400);
+  };
 
-      setStatusMessage('2. Validating BANDHA hardware TPM trust signature...');
-      setTimeout(() => {
-        if (testScenario === 'UNTRUSTED_DEVICE') {
-          setAuthStage('DENIED');
-          setDenyReason(
-            'HARDWARE BINDING FAILURE: Hardware TPM fingerprint mismatch.'
-          );
-          setStatusMessage('SECURITY DENIAL: Untrusted Hardware Device Blocked');
-          return;
-        }
+  const resetToIdle = () => {
+    setAuthStage('IDLE');
+    setDenyReason(null);
+    setStageStates(['PENDING', 'PENDING', 'PENDING', 'PENDING']);
+  };
 
-        setStatusMessage('3. Minting ephemeral KṢAṆA 15-minute rotating session token...');
-        setTimeout(() => {
-          setStatusMessage('4. Writing tamper-evident SAKṢĪ hash-chain audit ledger entry...');
-          setAuthStage('VERIFIED');
+  const selectProfile = (p: SupervisorProfile) => {
+    setSelectedProfile(p);
+    resetToIdle();
+  };
 
-          setTimeout(() => {
-            router.push('/');
-          }, 1000);
-        }, 450);
-      }, 550);
-    }, 800);
+  const stageIcon = (state: StageState) => {
+    if (state === 'PASS') return <CheckCircle2 className="w-3.5 h-3.5 text-soc-ok" />;
+    if (state === 'FAIL') return <ShieldAlert className="w-3.5 h-3.5 text-soc-crit" />;
+    if (state === 'RUNNING') return <RefreshCw className="w-3.5 h-3.5 text-soc-accent animate-spin" />;
+    return <CircleDot className="w-3.5 h-3.5 text-soc-textDim" />;
   };
 
   return (
-    <div className="max-w-4xl w-full bg-white border border-slate-200/90 rounded-2xl shadow-xl shadow-slate-200/50 overflow-hidden flex flex-col font-mono text-xs">
-      {/* 1. Unified Institutional Header */}
-      <div className="p-4 md:p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm shadow-xs flex-shrink-0">
-            A
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xs font-extrabold text-slate-900 tracking-wider uppercase">
-                ANVĪKṢA (SAT-SA)
-              </h1>
-              <span className="text-[9.5px] bg-slate-100 text-slate-700 font-semibold px-2 py-0.2 rounded border border-slate-200">
-                SIH26157 · NTRO
-              </span>
+    <div className="h-screen w-full grid lg:grid-cols-12 bg-soc-bg overflow-y-auto lg:overflow-hidden">
+      {/* Left: Sovereign Security Context */}
+      <aside className="hidden lg:flex lg:col-span-5 flex-col justify-between border-r border-soc-border bg-soc-panel p-9 select-none relative overflow-hidden">
+        <div className="tex-grid absolute inset-0 opacity-50 pointer-events-none" aria-hidden="true" />
+        <div className="relative">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: 'linear-gradient(135deg, rgb(var(--soc-accent)) 0%, rgb(var(--soc-accentBright)) 100%)' }}>
+              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.2" fill="#fff" />
+                <circle cx="12" cy="12" r="7.5" stroke="#fff" strokeOpacity="0.55" strokeWidth="1.4" strokeDasharray="2.5 2.2" />
+              </svg>
             </div>
-            <p className="text-[11px] text-slate-500 font-sans mt-0.5">
-              Supervisory Analytics Tool for Security Operations Centre Assessment
-            </p>
+            <div>
+              <div className="font-display text-base font-bold text-soc-text tracking-tight leading-none">ANVĪKṢA</div>
+              <div className="text-2xs font-mono text-soc-textMuted mt-1">SAT-SA · SIH26157 · NTRO</div>
+            </div>
           </div>
+
+          <div className="mt-12 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-soc-accentDim border border-soc-accent/20 text-2xs font-medium text-soc-accent">
+            Examine Beyond the Obvious
+          </div>
+          <h1 className="font-display text-[30px] leading-[1.15] font-bold tracking-tight text-soc-text mt-4 max-w-sm">
+            Supervisory Analytics for SOC Assessment
+          </h1>
+          <p className="text-xs text-soc-textSecondary mt-3 leading-relaxed max-w-sm">
+            Restricted system. Access is bound to verified supervisor identity, trusted hardware,
+            and a rotating ephemeral session credential. Every authentication event is recorded to
+            the tamper-evident SAKṢĪ audit chain.
+          </p>
         </div>
 
-        {/* Air-gap Assurance Badges */}
-        <div className="flex items-center gap-1.5 text-[10px]">
-          <div className="px-2.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold rounded-full flex items-center gap-1 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span>AIR-GAPPED</span>
+        <div className="space-y-5">
+          {/* Air-gap manifest — the selling point stays visible */}
+          <div className="soc-panel">
+            <div className="soc-panel-header">
+              <span className="panel-label">Sovereign Runtime Manifest</span>
+              <span className="soc-badge badge-ok">AIR-GAPPED</span>
+            </div>
+            <div>
+              {AIRGAP_MANIFEST.map((item) => (
+                <div key={item.label} className="kv-row">
+                  <span className="kv-key">{item.label}</span>
+                  <span className="kv-val font-mono text-soc-text">{item.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-600 rounded-full hidden sm:block">
-            Egress: <strong className="text-slate-900">Disabled</strong>
-          </div>
-          <div className="px-2.5 py-1 bg-slate-50 border border-slate-200 text-slate-600 rounded-full hidden sm:block">
-            Audit: <strong className="text-slate-900">Hash-Chained</strong>
+
+          <div className="text-2xs font-mono text-soc-textDim leading-relaxed">
+            <div className="flex items-center gap-2 mb-1">
+              <Lock className="w-3 h-3" />
+              <span>CRYPTOGRAPHIC PROTOCOLS</span>
+            </div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-soc-textMuted">
+              <span>Key Derivation</span><span className="text-soc-textSecondary text-right">Argon2id</span>
+              <span>Enclave Cipher</span><span className="text-soc-textSecondary text-right">AES-256-GCM</span>
+              <span>Session Binding</span><span className="text-soc-textSecondary text-right">User+Device+Role+Time</span>
+              <span>Audit Chain</span><span className="text-soc-textSecondary text-right">SHA-256 Append-Only</span>
+            </div>
           </div>
         </div>
-      </div>
+      </aside>
 
-      {/* 2. Session Lock Alert (When locked=true) */}
-      {isLocked && (
-        <div className="px-4 py-2.5 bg-rose-50 border-b border-rose-200 text-rose-900 flex items-center gap-2.5 text-[11px]">
-          <ShieldAlert className="w-4 h-4 text-rose-600 flex-shrink-0" />
-          <div className="font-bold uppercase tracking-wider text-rose-900">
-            Session Locked · Biometric Re-Authentication Required
+      {/* Right: Secure Access Terminal */}
+      <main className="lg:col-span-7 flex flex-col p-5 sm:p-8 overflow-y-auto">
+        <div className="animate-fade-up max-w-2xl w-full mx-auto my-auto space-y-5">
+          {/* Terminal header */}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <Terminal className="w-4 h-4 text-soc-accent" />
+              <h2 className="panel-label !text-soc-text">Secure Access Terminal</h2>
+            </div>
+            <div className="flex items-center gap-2 text-2xs font-mono">
+              <span className={`soc-badge ${backendOnline === true ? 'badge-ok' : backendOnline === false ? 'badge-neutral' : 'badge-accent'}`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${backendOnline === true ? 'bg-soc-ok' : backendOnline === false ? 'bg-soc-textDim' : 'bg-soc-accent animate-pulse'}`} />
+                LOCAL API {backendOnline === true ? 'ONLINE' : backendOnline === false ? 'STANDBY' : 'PROBING'}
+              </span>
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
-      )}
 
-      {/* 3. Main Enclave Body (2 Columns) */}
-      <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-12 gap-5 items-start">
-        {/* Left Column: Supervisor Profile & Credentials (7 Cols) */}
-        <div className="md:col-span-7 space-y-4">
-          {/* Supervisor Profile Selector */}
-          <div className="space-y-1.5">
-            <label className="block text-slate-500 uppercase font-bold text-[10px] tracking-wider">
-              Authorized Supervisor Profile:
-            </label>
-            <div className="grid grid-cols-3 gap-2">
+          {/* Session lock alert */}
+          {isLocked && (
+            <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-soc-critDim border border-soc-crit/40 rounded-sm text-2xs font-mono text-soc-crit">
+              <ShieldAlert className="w-4 h-4 flex-shrink-0" />
+              <span>SESSION LOCKED — IDENTITY MISMATCH DETECTED. BIOMETRIC RE-AUTHENTICATION REQUIRED.</span>
+            </div>
+          )}
+
+          {/* Supervisor profile selector */}
+          <section className="space-y-2">
+            <div className="panel-label">Authorized Supervisor Profiles</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {DEMO_PROFILES.map((p) => {
                 const isSelected = selectedProfile.id === p.id;
                 return (
                   <button
                     key={p.id}
                     type="button"
-                    onClick={() => {
-                      setSelectedProfile(p);
-                      setAuthStage('IDLE');
-                      setDenyReason(null);
-                    }}
-                    className={`p-2.5 text-left rounded-xl border transition-all ${
+                    onClick={() => selectProfile(p)}
+                    aria-pressed={isSelected}
+                    className={`p-3 text-left rounded-sm border transition-colors ${
                       isSelected
-                        ? 'bg-slate-900 border-slate-900 text-white shadow-xs'
-                        : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-100'
+                        ? 'bg-soc-accentInk border-soc-accent/50'
+                        : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong hover:bg-soc-raised'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="font-bold text-[11px] truncate">{p.name}</span>
-                      {isSelected && <UserCheck className="w-3 h-3 text-white shrink-0" />}
+                    <div className="flex items-center justify-between mb-1">
+                      <span className={`text-xs font-medium truncate ${isSelected ? 'text-soc-text' : 'text-soc-textSecondary'}`}>
+                        {p.name}
+                      </span>
+                      {isSelected && <UserCheck className="w-3 h-3 text-soc-accent shrink-0" />}
                     </div>
-                    <div
-                      className={`text-[9.5px] font-sans truncate ${
-                        isSelected ? 'text-slate-300' : 'text-slate-500'
-                      }`}
-                    >
-                      {p.role}
-                    </div>
-                    <div
-                      className={`text-[8.5px] mt-1 font-mono truncate ${
-                        isSelected ? 'text-slate-400' : 'text-slate-400'
-                      }`}
-                    >
-                      {p.clearance.split(' ')[0]}
-                    </div>
+                    <div className="text-2xs text-soc-textMuted truncate">{p.role}</div>
+                    <div className="text-2xs font-mono text-soc-textDim mt-1 truncate">{p.clearance}</div>
                   </button>
                 );
               })}
             </div>
-          </div>
+          </section>
 
-          {/* Factor Switcher */}
-          <div className="space-y-2">
-            <div className="flex rounded-lg bg-slate-100 p-0.5 border border-slate-200 gap-1 text-[10.5px]">
+          {/* Factor selection + credential input */}
+          <section className="space-y-2">
+            <div className="panel-label">Authentication Factor</div>
+            <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
-                onClick={() => setAuthMethod('BIOMETRIC')}
-                className={`flex-1 py-1 px-2.5 rounded-md font-bold transition-all flex items-center justify-center gap-1.5 ${
+                onClick={() => { setAuthMethod('BIOMETRIC'); resetToIdle(); }}
+                aria-pressed={authMethod === 'BIOMETRIC'}
+                className={`flex items-center justify-center gap-2 py-2.5 rounded-sm text-xs font-medium border transition-colors ${
                   authMethod === 'BIOMETRIC'
-                    ? 'bg-white text-slate-900 shadow-2xs border border-slate-200/80'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
+                    : 'bg-soc-panel border-soc-border text-soc-textSecondary hover:bg-soc-raised'
                 }`}
               >
-                <Fingerprint className="w-3 h-3 text-slate-700" />
-                <span>DARŚANA Biometric</span>
+                <Fingerprint className="w-3.5 h-3.5" />
+                DARŚANA BIOMETRIC
               </button>
-
               <button
                 type="button"
-                onClick={() => setAuthMethod('PIN')}
-                className={`flex-1 py-1 px-2.5 rounded-md font-bold transition-all flex items-center justify-center gap-1.5 ${
+                onClick={() => { setAuthMethod('PIN'); resetToIdle(); }}
+                aria-pressed={authMethod === 'PIN'}
+                className={`flex items-center justify-center gap-2 py-2.5 rounded-sm text-xs font-medium border transition-colors ${
                   authMethod === 'PIN'
-                    ? 'bg-white text-slate-900 shadow-2xs border border-slate-200/80'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
+                    : 'bg-soc-panel border-soc-border text-soc-textSecondary hover:bg-soc-raised'
                 }`}
               >
-                <KeyRound className="w-3 h-3 text-slate-700" />
-                <span>Hardware Token PIN</span>
+                <KeyRound className="w-3.5 h-3.5" />
+                BANDHA TOKEN PIN
               </button>
             </div>
 
             {authMethod === 'PIN' ? (
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex items-center justify-between text-[10.5px]">
-                  <span className="text-slate-600 font-bold">BANDHA Security PIN:</span>
-                  <span className="text-[9.5px] text-slate-400 font-sans">6-digit Enclave Key</span>
+              <div className="soc-panel p-3.5 space-y-2.5">
+                <div className="flex items-center justify-between text-2xs font-mono">
+                  <span className="text-soc-textMuted">BANDHA SECURITY PIN — 6-DIGIT ENCLAVE KEY</span>
+                  <span className="text-soc-textDim">DEMO: 729401</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
                     type="password"
                     maxLength={6}
                     value={pin}
-                    onChange={(e) => setPin(e.target.value)}
-                    className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 text-center text-xs font-bold tracking-widest text-slate-900 focus:outline-none focus:border-slate-400"
+                    onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
+                    className="soc-input text-center font-mono tracking-[0.5em] text-sm"
                     placeholder="••••••"
+                    aria-label="BANDHA security PIN"
                   />
                   <button
                     type="button"
                     onClick={() => setPin('729401')}
-                    className="px-2.5 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 rounded-lg text-[10px] font-bold text-slate-700 transition-colors whitespace-nowrap"
+                    className="btn-ghost whitespace-nowrap flex-shrink-0"
                   >
-                    Auto-Fill
+                    AUTO-FILL
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-[10.5px]">
-                <div className="flex justify-between py-0.5 border-b border-slate-200/60">
-                  <span className="text-slate-500">Supervisor ID:</span>
-                  <span className="text-slate-900 font-bold">{selectedProfile.id}</span>
-                </div>
-                <div className="flex justify-between py-0.5 border-b border-slate-200/60">
-                  <span className="text-slate-500">Device Binding:</span>
-                  <span className="text-slate-900 font-bold">{selectedProfile.deviceId}</span>
-                </div>
-                <div className="flex justify-between py-0.5 border-b border-slate-200/60">
-                  <span className="text-slate-500">Assigned Station:</span>
-                  <span className="text-slate-900 font-bold">{selectedProfile.station}</span>
-                </div>
-                <div className="flex justify-between py-0.5">
-                  <span className="text-slate-500">Session Lifespan:</span>
-                  <span className="text-emerald-700 font-bold">15-MIN ROTATING</span>
-                </div>
+              <div className="soc-panel">
+                {[
+                  { label: 'Supervisor ID', value: selectedProfile.id },
+                  { label: 'Device Binding', value: selectedProfile.deviceId },
+                  { label: 'Assigned Station', value: selectedProfile.station },
+                  { label: 'Session Lifespan', value: '15-MIN ROTATING' },
+                ].map((row) => (
+                  <div key={row.label} className="kv-row">
+                    <span className="kv-key">{row.label}</span>
+                    <span className={`kv-val font-mono ${row.label === 'Session Lifespan' ? 'text-soc-ok' : 'text-soc-text'}`}>{row.value}</span>
+                  </div>
+                ))}
               </div>
             )}
-          </div>
+          </section>
 
-          {/* Primary Action Button */}
-          <div className="space-y-2.5 pt-0.5">
-            <button
-              type="button"
-              onClick={() => handleStartAuth('NORMAL')}
-              disabled={authStage === 'SCANNING'}
-              className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-xs active:scale-[0.99]"
-            >
-              {authStage === 'SCANNING' ? (
-                <>
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />
-                  <span>{statusMessage || 'VERIFYING CREDENTIALS...'}</span>
-                </>
-              ) : authStage === 'VERIFIED' ? (
-                <>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>AUTHENTICATED · ENTERING COMMAND CENTRE...</span>
-                </>
-              ) : (
-                <>
-                  <span>AUTHENTICATE &amp; ENTER COMMAND CENTRE</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </>
-              )}
-            </button>
+          {/* Primary action */}
+          <button
+            type="button"
+            onClick={() => handleStartAuth('NORMAL')}
+            disabled={authStage === 'SCANNING'}
+            className="btn-primary w-full !py-3"
+          >
+            {authStage === 'SCANNING' ? (
+              <>
+                <RefreshCw className="w-4 h-4 animate-spin" />
+                <span>VERIFYING CREDENTIALS...</span>
+              </>
+            ) : authStage === 'VERIFIED' ? (
+              <>
+                <CheckCircle2 className="w-4 h-4" />
+                <span>AUTHENTICATED — ENTERING COMMAND CENTRE</span>
+              </>
+            ) : (
+              <>
+                <Lock className="w-4 h-4" />
+                <span>AUTHENTICATE &amp; ENTER COMMAND CENTRE</span>
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
+          </button>
 
-            {/* Subtle Zero Trust Failure Mode Testing */}
-            <div className="pt-1.5 border-t border-slate-100">
-              <div className="text-[9.5px] text-slate-400 uppercase font-bold tracking-wider mb-1.5">
-                Zero-Trust Verification Testing:
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleStartAuth('SPOOF_MASK')}
-                  disabled={authStage === 'SCANNING'}
-                  className="p-2 text-left bg-slate-50 border border-slate-200 hover:border-rose-300 hover:bg-rose-50/50 rounded-lg text-slate-600 hover:text-rose-900 transition-colors text-[10px]"
-                >
-                  <div className="font-bold flex items-center gap-1">
-                    <EyeOff className="w-3 h-3 text-rose-600 shrink-0" />
-                    <span>Test 2D Spoof</span>
-                  </div>
-                  <div className="text-[8.5px] text-slate-400 mt-0.5 font-sans">
-                    DARŚANA anti-spoof block
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleStartAuth('UNTRUSTED_DEVICE')}
-                  disabled={authStage === 'SCANNING'}
-                  className="p-2 text-left bg-slate-50 border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 rounded-lg text-slate-600 hover:text-amber-900 transition-colors text-[10px]"
-                >
-                  <div className="font-bold flex items-center gap-1">
-                    <Server className="w-3 h-3 text-amber-600 shrink-0" />
-                    <span>Test Untrusted Device</span>
-                  </div>
-                  <div className="text-[8.5px] text-slate-400 mt-0.5 font-sans">
-                    BANDHA hardware deny
-                  </div>
-                </button>
-              </div>
+          {/* Verification pipeline — the PRD §8.2 secure access flow, made visible */}
+          <section className="soc-panel" aria-label="Verification pipeline">
+            <div className="soc-panel-header">
+              <span className="panel-label">Zero-Trust Verification Pipeline</span>
+              <span className={`soc-badge ${authStage === 'DENIED' ? 'badge-critical' : authStage === 'VERIFIED' ? 'badge-ok' : 'badge-neutral'}`}>
+                {authStage === 'IDLE' ? 'STANDBY' : authStage === 'SCANNING' ? 'RUNNING' : authStage === 'VERIFIED' ? 'COMPLETE' : 'DENIED'}
+              </span>
             </div>
-          </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+              {PIPELINE_STAGES.map((stage, i) => (
+                <div key={stage.id} className="rounded-lg bg-soc-overlay p-3 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    {stageIcon(stageStates[i])}
+                    <span className="text-[11px] font-semibold text-soc-textSecondary">{stage.label}</span>
+                  </div>
+                  <div className="text-2xs text-soc-textMuted leading-tight">{stage.detail}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Session credential after verification */}
+          {authStage === 'VERIFIED' && credentialId && (
+            <section className="soc-panel border-soc-ok/40" aria-label="Session credential issued">
+              <div className="soc-panel-header">
+                <span className="panel-label text-soc-ok">KṢAṆA Session Credential Issued</span>
+                <span className="soc-badge badge-ok">ROTATING · 15:00</span>
+              </div>
+              <div>
+                <div className="kv-row">
+                  <span className="kv-key">Credential ID</span>
+                  <span className="kv-val font-mono text-soc-text">{credentialId}</span>
+                </div>
+                <div className="kv-row">
+                  <span className="kv-key">Bound To</span>
+                  <span className="kv-val font-mono text-soc-text">{selectedProfile.id} + {selectedProfile.deviceId}</span>
+                </div>
+                <div className="kv-row">
+                  <span className="kv-key">Permissions</span>
+                  <span className="kv-val font-mono text-soc-text">read:all · write:all · audit:view</span>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Zero-trust failure mode testing — judge-demo paths */}
+          <section className="pt-1">
+            <div className="panel-label mb-2">Zero-Trust Denial Testing</div>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => handleStartAuth('SPOOF_MASK')}
+                disabled={authStage === 'SCANNING'}
+                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-crit/50 rounded-sm text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
+              >
+                <div className="font-medium flex items-center gap-1.5 text-xs">
+                  <EyeOff className="w-3 h-3 text-soc-crit shrink-0" />
+                  <span className="text-soc-text">Test 2D Spoof</span>
+                </div>
+                <div className="text-soc-textMuted mt-1">DARŚANA anti-spoof block</div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleStartAuth('UNTRUSTED_DEVICE')}
+                disabled={authStage === 'SCANNING'}
+                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-high/50 rounded-sm text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
+              >
+                <div className="font-medium flex items-center gap-1.5 text-xs">
+                  <Server className="w-3 h-3 text-soc-high shrink-0" />
+                  <span className="text-soc-text">Test Untrusted Device</span>
+                </div>
+                <div className="text-soc-textMuted mt-1">BANDHA hardware deny</div>
+              </button>
+            </div>
+          </section>
+
+          <footer className="pt-2 pb-4 text-center text-2xs font-mono text-soc-textDim tracking-wider">
+            <div className="flex items-center justify-center gap-1.5">
+              <ShieldCheck className="w-3 h-3" />
+              <span>ANVĪKṢA · NATIONAL TECHNICAL RESEARCH ORGANISATION · AIR-GAP ENCLAVE KAVACA</span>
+            </div>
+          </footer>
         </div>
-
-        {/* Right Column: Biometric HUD & Cryptographic Specs (5 Cols) */}
-        <div className="md:col-span-5 space-y-3">
-          <BiometricHUD
-            authStage={authStage}
-            denyReason={denyReason}
-            mode="ENHANCED_3D"
-          />
-
-          <div className="bg-slate-50/80 border border-slate-200 rounded-xl p-3 font-mono text-[10px] space-y-1.5">
-            <div className="text-slate-900 font-bold tracking-wider flex items-center gap-1.5 border-b border-slate-200/80 pb-1.5 text-[10.5px]">
-              <Cpu className="w-3 h-3 text-slate-700" />
-              <span>CRYPTOGRAPHIC PROTOCOLS</span>
-            </div>
-            <div className="space-y-1 text-slate-600">
-              <div className="flex justify-between">
-                <span>Key Derivation:</span>
-                <span className="text-slate-900 font-medium">Argon2id (m=64MB, t=3, p=4)</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Enclave Cipher:</span>
-                <span className="text-slate-900 font-medium">AES-256-GCM</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Audit Chain:</span>
-                <span className="text-emerald-700 font-bold">Local SHA-256 Hash Chain</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. Unified Minimalist Footer */}
-      <div className="py-2 px-4 bg-slate-50 border-t border-slate-100 text-center text-[9.5px] text-slate-400 font-mono">
-        <span>ANVĪKṢA · NATIONAL TECHNICAL RESEARCH ORGANISATION (NTRO) · AIR-GAP ENCLAVE KAVACA</span>
-      </div>
+      </main>
     </div>
   );
 }
@@ -399,9 +497,9 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center font-mono text-xs text-slate-600">
+        <div className="min-h-screen bg-soc-bg flex items-center justify-center font-mono text-xs text-soc-textSecondary">
           <div className="flex items-center gap-2">
-            <RefreshCw className="w-4 h-4 animate-spin text-slate-700" />
+            <RefreshCw className="w-4 h-4 animate-spin text-soc-accent" />
             <span>INITIALIZING ENCLAVE GATEWAY...</span>
           </div>
         </div>

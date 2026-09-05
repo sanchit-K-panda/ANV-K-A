@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, ShieldCheck, HardDrive, Cpu, Terminal, CheckCircle2, Lock } from 'lucide-react';
+import { X, ShieldCheck, Lock } from 'lucide-react';
 
 interface AirGapDrawerProps {
   isOpen: boolean;
@@ -17,57 +17,62 @@ export const AirGapDrawer: React.FC<AirGapDrawerProps> = ({ isOpen, onClose }) =
     { label: 'AI Inference Engine', value: 'LOCAL (ON-DEVICE CPU/GPU)' },
     { label: 'Database & State Store', value: 'LOCAL (POSTGRES / SQLALCHEMY)' },
     { label: 'Authentication Provider', value: 'LOCAL (DARŚANA / BANDHA)' },
-    { label: 'Cryptographic Audit', value: 'LOCAL (AKṢARA SHA-256)' },
+    { label: 'Cryptographic Audit', value: 'LOCAL (SAKṢĪ SHA-256)' },
     { label: 'External APIs / Telemetry', value: 'NONE (0 B/s EGRESS)' },
     { label: 'Physical Security Node', value: 'SEC-WS-092-AIRGAP' },
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-xs font-mono text-xs animate-in fade-in duration-200">
-      <div className="w-full max-w-md bg-white border-l border-slate-200 h-full flex flex-col justify-between p-6 space-y-6 shadow-2xl">
-        <div className="space-y-5">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+    <div
+      className="fixed inset-0 z-50 flex justify-end bg-black/60 font-mono text-xs"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Air-Gap Assurance Manifest"
+    >
+      <button className="absolute inset-0 cursor-default" onClick={onClose} tabIndex={-1} aria-hidden="true" />
+      <div className="relative w-full max-w-md bg-soc-panel border-l border-soc-border h-full flex flex-col justify-between p-5 space-y-5 shadow-drawer">
+        <div className="space-y-5 overflow-y-auto">
+          <div className="flex items-center justify-between border-b border-soc-border pb-4">
             <div className="flex items-center gap-2.5">
-              <ShieldCheck className="w-5 h-5 text-emerald-600" />
-              <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                Air-Gap Assurance Manifest
-              </h2>
+              <ShieldCheck className="w-4 h-4 text-soc-ok" />
+              <h2 className="panel-label">Air-Gap Assurance Manifest</h2>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-1.5 text-soc-textMuted hover:text-soc-text rounded-sm hover:bg-soc-raised transition-colors"
+              aria-label="Close manifest"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <p className="text-xs text-slate-600 font-sans leading-relaxed">
-            ANVĪKṢA operates in strict offline sovereign mode. All supervisory ML inferences, behavioural baselines, and audit hash-chains execute locally on this workstation without external network connectivity.
+          <p className="text-xs text-soc-textSecondary font-sans leading-relaxed">
+            ANVĪKṢA operates in strict offline sovereign mode. All supervisory ML inferences,
+            behavioural baselines, and audit hash-chains execute locally on this workstation
+            without external network connectivity.
           </p>
 
-          <div className="border border-slate-200 rounded-xl overflow-hidden divide-y divide-slate-100 text-[11px] shadow-xs">
+          <div className="soc-panel overflow-hidden">
             {manifestItems.map((item) => (
-              <div key={item.label} className="flex justify-between p-3 bg-slate-50/50">
-                <span className="text-slate-500">{item.label}:</span>
-                <span className="font-bold text-slate-900">{item.value}</span>
+              <div key={item.label} className="kv-row">
+                <span className="kv-key">{item.label}</span>
+                <span className="kv-val font-mono text-soc-text">{item.value}</span>
               </div>
             ))}
           </div>
 
-          <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-1.5 text-[11px]">
-            <div className="text-slate-400 uppercase font-bold text-[10px]">AKṢARA GENESIS PROOF:</div>
-            <div className="text-slate-700 break-all font-mono">
+          <div className="soc-panel p-3.5 space-y-1.5">
+            <div className="panel-label">SAKṢĪ Genesis Proof</div>
+            <div className="text-xs text-soc-textSecondary break-all font-mono leading-relaxed">
               e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
             </div>
           </div>
         </div>
 
-        <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-[10.5px] text-slate-400">
+        <div className="pt-4 border-t border-soc-border flex justify-between items-center text-2xs text-soc-textMuted">
           <span>NIST 800-53 / ISO 27001</span>
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-sm"
-          >
+          <button onClick={onClose} className="btn-ghost">
+            <Lock className="w-3 h-3" />
             DISMISS
           </button>
         </div>

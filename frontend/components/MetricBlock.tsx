@@ -23,56 +23,54 @@ export const MetricBlock: React.FC<MetricBlockProps> = ({
   onClick,
 }) => {
   const borderStyles = {
-    critical: 'border-l-4 border-l-severity-critical border-soc-border hover:border-soc-border/80',
-    high: 'border-l-4 border-l-severity-high border-soc-border hover:border-soc-border/80',
-    medium: 'border-l-4 border-l-severity-medium border-soc-border hover:border-soc-border/80',
-    low: 'border-l-4 border-l-severity-low border-soc-border hover:border-soc-border/80',
-    verified: 'border-l-4 border-l-severity-verified border-soc-border hover:border-soc-border/80',
-    normal: 'border-l-4 border-l-soc-accent border-soc-border hover:border-soc-border/80',
+    critical: 'border-l-2 border-l-soc-crit',
+    high: 'border-l-2 border-l-soc-high',
+    medium: 'border-l-2 border-l-soc-med',
+    low: 'border-l-2 border-l-soc-low',
+    verified: 'border-l-2 border-l-soc-ok',
+    normal: 'border-l-2 border-l-soc-accent',
   };
 
   const valueStyles = {
-    critical: 'text-severity-critical',
-    high: 'text-severity-high',
-    medium: 'text-severity-medium',
+    critical: 'text-soc-crit',
+    high: 'text-soc-high',
+    medium: 'text-soc-med',
     low: 'text-soc-textSecondary',
-    verified: 'text-severity-verified',
-    normal: 'text-soc-textPrimary',
+    verified: 'text-soc-ok',
+    normal: 'text-soc-text',
   };
 
   return (
     <div
       onClick={onClick}
-      className={`bg-soc-panel border rounded-md p-4 transition-all duration-150 ${borderStyles[severity]} ${
-        onClick ? 'cursor-pointer hover:bg-soc-raised' : ''
+      className={`soc-panel card-hover border-l-4 p-4 ${borderStyles[severity]} ${
+        onClick ? 'cursor-pointer' : ''
       }`}
     >
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-semibold uppercase tracking-wider text-soc-textSecondary">
-          {label}
-        </span>
+      <div className="flex items-center justify-between mb-2.5">
+        <span className="text-xs font-medium text-soc-textMuted">{label}</span>
         {Icon && <Icon className="w-4 h-4 text-soc-textMuted" />}
       </div>
-      <div className="flex items-baseline justify-between">
-        <span className={`text-2xl font-mono font-bold tracking-tight ${valueStyles[severity]}`}>
+      <div className="flex items-baseline justify-between gap-2">
+        <span className={`text-2xl font-semibold tracking-tight tabular-nums ${valueStyles[severity]}`}>
           {value}
         </span>
         {trendValue && (
           <span
-            className={`text-xs font-mono font-medium ${
+            className={`text-2xs font-medium tabular-nums ${
               trend === 'up'
-                ? severity === 'critical' ? 'text-rose-400' : 'text-emerald-400'
+                ? severity === 'critical' ? 'text-soc-crit' : 'text-soc-ok'
                 : trend === 'down'
-                ? 'text-emerald-400'
+                ? 'text-soc-ok'
                 : 'text-soc-textSecondary'
             }`}
           >
-            {trend === 'up' ? '▲' : trend === 'down' ? '▼' : '●'} {trendValue}
+            {trend === 'up' ? '▲' : trend === 'down' ? '▼' : '—'} {trendValue}
           </span>
         )}
       </div>
       {subtext && (
-        <p className="text-[11px] text-soc-textMuted mt-1.5 line-clamp-1">
+        <p className="text-2xs text-soc-textMuted mt-1.5 line-clamp-1">
           {subtext}
         </p>
       )}

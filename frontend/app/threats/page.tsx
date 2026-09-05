@@ -2,72 +2,87 @@
 
 import React from 'react';
 import { MOCK_THREAT_RECURRENCE } from '@/lib/mockData';
-import { ArrowRight, Activity } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function ThreatsPage() {
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Threat Recurrence Intelligence
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              PUNARĀVṚTTI
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>THREAT RECURRENCE</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Threat Recurrence Intelligence</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Detection of unresolved recurring threat signatures hitting SOC assets without root-cause remediation.
           </p>
         </div>
+        <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+          {MOCK_THREAT_RECURRENCE.length} recurring signatures
+        </span>
       </div>
 
-      <div className="space-y-3 font-mono text-xs">
+      {/* Threat recurrence records */}
+      <div className="space-y-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
         {MOCK_THREAT_RECURRENCE.map((t) => (
-          <div key={t.threat_id} className="soc-panel p-4 space-y-3">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
-              <div>
-                <span className="text-xs font-bold text-slate-900 font-sans">{t.name}</span>
-                <div className="text-[10.5px] text-slate-500">{t.threat_id} · {t.category}</div>
+          <div key={t.threat_id} className="soc-panel card-hover overflow-hidden">
+            <div className="soc-panel-header">
+              <div className="min-w-0">
+                <div className="text-xs font-medium text-soc-text truncate">{t.name}</div>
+                <div className="font-mono text-2xs text-soc-textMuted mt-0.5">
+                  {t.threat_id} · {t.category}
+                </div>
               </div>
-              <span className="text-rose-700 font-bold text-xs bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
+              <span
+                className={`soc-badge ${
+                  t.recurrence_score >= 80 ? 'badge-critical' : t.recurrence_score >= 50 ? 'badge-high' : 'badge-medium'
+                }`}
+              >
                 RECURRENCE SCORE: {t.recurrence_score} / 100
               </span>
             </div>
 
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded space-y-1.5">
-              <div className="text-[10px] text-slate-500 uppercase font-bold">Incident Chain Progression:</div>
-              <div className="flex flex-wrap items-center gap-1.5">
-                {t.incident_chain.map((inc, idx) => (
-                  <React.Fragment key={inc}>
-                    <span className="px-2 py-0.5 bg-white border border-slate-200 font-bold text-slate-900 text-[10.5px] rounded shadow-xs">
-                      {inc}
-                    </span>
-                    {idx < t.incident_chain.length - 1 && (
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
-                    )}
-                  </React.Fragment>
-                ))}
+            <div className="p-4 space-y-4">
+              {/* Incident chain progression */}
+              <div className="bg-soc-overlay rounded-lg p-3 space-y-2">
+                <div className="panel-label">Incident Chain Progression</div>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {t.incident_chain.map((inc, idx) => (
+                    <React.Fragment key={inc}>
+                      <span className="px-2 py-0.5 bg-soc-raised border border-soc-border rounded-lg font-mono text-2xs text-soc-text tabular-nums">
+                        {inc}
+                      </span>
+                      {idx < t.incident_chain.length - 1 && (
+                        <ArrowRight className="w-3 h-3 text-soc-textDim" />
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded">
-                <div className="text-slate-500 text-[10px]">First Seen</div>
-                <div className="font-semibold text-slate-900 mt-0.5">{t.first_seen}</div>
-              </div>
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded">
-                <div className="text-slate-500 text-[10px]">Last Seen</div>
-                <div className="font-semibold text-slate-900 mt-0.5">{t.last_seen}</div>
-              </div>
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded">
-                <div className="text-slate-500 text-[10px]">Target Assets</div>
-                <div className="font-semibold text-slate-900 mt-0.5">{t.affected_assets.join(', ')}</div>
-              </div>
-              <div className="p-2.5 bg-slate-50 border border-slate-200 rounded">
-                <div className="text-slate-500 text-[10px]">Resolution History</div>
-                <div className="font-semibold text-rose-700 mt-0.5">{t.resolution_history}</div>
+              {/* Observation grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-3 bg-soc-overlay rounded-lg">
+                  <div className="panel-label mb-1">First Seen</div>
+                  <div className="font-mono text-2xs text-soc-text tabular-nums">{t.first_seen}</div>
+                </div>
+                <div className="p-3 bg-soc-overlay rounded-lg">
+                  <div className="panel-label mb-1">Last Seen</div>
+                  <div className="font-mono text-2xs text-soc-text tabular-nums">{t.last_seen}</div>
+                </div>
+                <div className="p-3 bg-soc-overlay rounded-lg">
+                  <div className="panel-label mb-1">Target Assets</div>
+                  <div className="font-mono text-2xs text-soc-text">{t.affected_assets.join(', ')}</div>
+                </div>
+                <div className="p-3 bg-soc-overlay rounded-lg">
+                  <div className="panel-label mb-1">Resolution History</div>
+                  <div className="text-2xs text-soc-crit font-medium leading-relaxed">{t.resolution_history}</div>
+                </div>
               </div>
             </div>
           </div>

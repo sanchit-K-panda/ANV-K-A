@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, ShieldAlert, Activity, CheckCircle, AlertTriangle } from 'lucide-react';
+import { Activity, CheckCircle, AlertTriangle } from 'lucide-react';
 import { LiveRefresher } from '@/components/LiveRefresher';
 
 async function fetchLiveEvents() {
@@ -40,79 +40,92 @@ export default async function LoginSessionsPage() {
   const hasRaceCondition = forkedHashes.length > 0;
   
   return (
-    <div className="space-y-4 font-sans text-xs">
+    <div className="space-y-5 pb-16">
       {/* Invisible SSE Refresher */}
       <LiveRefresher />
       
-      {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#232732] pb-3">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="px-1.5 py-0.5 bg-[#14171E] border border-[#3A4050] text-[10px] font-mono text-white font-bold">
-              AUTH AUDIT
-            </span>
-            <h1 className="text-base font-bold text-white tracking-tight">
-              Login Sessions & Pattern Analysis
-            </h1>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>SESSIONS</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-[#848B98] mt-0.5">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Login Sessions &amp; Pattern Analysis</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Live telemetry of user authentication events. Analyzes cryptographic chain integrity for concurrency attacks.
           </p>
         </div>
       </div>
 
-      {/* Pattern Analyzer */}
-      <div className="p-4 bg-[#0C0E12] border border-[#232732] space-y-3">
-        <h2 className="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-2">
-          <Activity className="w-3.5 h-3.5" />
-          Malpractice Pattern Analyzer
-        </h2>
+      {/* Malpractice Pattern Analyzer */}
+      <div className="soc-panel card-hover overflow-hidden animate-fade-up" style={{ animationDelay: '60ms' }}>
+        <div className="soc-panel-header">
+          <div className="flex items-center gap-2.5">
+            <span className="w-7 h-7 rounded-lg bg-soc-accentDim flex items-center justify-center">
+              <Activity className="w-3.5 h-3.5 text-soc-accent" />
+            </span>
+            <div>
+              <span className="panel-label">Malpractice Pattern Analyzer</span>
+              <p className="text-2xs text-soc-textMuted mt-0.5">Cryptographic chain integrity checks</p>
+            </div>
+          </div>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-3 bg-[#060709] border border-[#232732]">
-            <h3 className="text-white font-mono mb-1">Pattern: Blockchain Fork (Race Condition)</h3>
-            <p className="text-[#848B98] text-[10px] mb-2">Detects simultaneous blocks attempting to chain off the same previous block.</p>
+        <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-soc-overlay rounded-lg space-y-2">
+            <h3 className="text-xs font-medium text-soc-text">Pattern: Blockchain Fork (Race Condition)</h3>
+            <p className="text-2xs text-soc-textMuted leading-relaxed">
+              Detects simultaneous blocks attempting to chain off the same previous block.
+            </p>
             {hasRaceCondition ? (
-               <div className="flex items-center gap-2 text-red-500 font-bold bg-red-500/10 p-2 border border-red-500/20">
-                 <AlertTriangle className="w-4 h-4" />
+               <div className="flex items-center gap-2 text-2xs font-semibold text-soc-crit bg-soc-critDim border border-soc-crit/40 rounded-lg p-2.5">
+                 <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0" />
                  DETECTED: Multiple logins share the same parent hash.
                </div>
             ) : (
-               <div className="flex items-center gap-2 text-green-500 font-bold bg-green-500/10 p-2 border border-green-500/20">
-                 <CheckCircle className="w-4 h-4" />
+               <div className="flex items-center gap-2 text-2xs font-semibold text-soc-ok bg-soc-okDim border border-soc-ok/40 rounded-lg p-2.5">
+                 <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" />
                  CLEAR: Chain is strictly sequential.
                </div>
             )}
           </div>
           
-          <div className="p-3 bg-[#060709] border border-[#232732]">
-            <h3 className="text-white font-mono mb-1">Pattern: Impossible Travel</h3>
-            <p className="text-[#848B98] text-[10px] mb-2">Detects logins from geographically distant IP addresses within an impossible timeframe.</p>
-            <div className="flex items-center gap-2 text-green-500 font-bold bg-green-500/10 p-2 border border-green-500/20">
-              <CheckCircle className="w-4 h-4" />
+          <div className="p-4 bg-soc-overlay rounded-lg space-y-2">
+            <h3 className="text-xs font-medium text-soc-text">Pattern: Impossible Travel</h3>
+            <p className="text-2xs text-soc-textMuted leading-relaxed">
+              Detects logins from geographically distant IP addresses within an impossible timeframe.
+            </p>
+            <div className="flex items-center gap-2 text-2xs font-semibold text-soc-ok bg-soc-okDim border border-soc-ok/40 rounded-lg p-2.5">
+              <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" />
               CLEAR: No anomalies detected.
             </div>
           </div>
         </div>
       </div>
 
-      {/* Dense Audit Table */}
-      <div className="border border-[#232732] bg-[#0C0E12] font-mono text-xs">
-        <div className="p-2.5 border-b border-[#232732] flex items-center justify-between">
-          <span className="text-white font-bold">LIVE TELEMETRY LOGS</span>
-          <span className="text-[#656C7A] text-[10px]">{logs.length} VERIFIED ENTRIES</span>
+      {/* Dense audit table */}
+      <div className="soc-panel card-hover overflow-hidden animate-fade-up" style={{ animationDelay: '120ms' }}>
+        <div className="soc-panel-header">
+          <span className="panel-label">Live Telemetry Logs</span>
+          <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+            {logs.length} verified entries
+          </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="soc-table">
             <thead>
-              <tr className="bg-[#14171E] border-b border-[#232732] text-[#848B98] text-[10px] uppercase tracking-wider">
-                <th className="p-2 font-normal">TIME</th>
-                <th className="p-2 font-normal">USER</th>
-                <th className="p-2 font-normal">ACTION</th>
-                <th className="p-2 font-normal">IP & DEVICE</th>
-                <th className="p-2 font-normal">SESSION ID</th>
-                <th className="p-2 font-normal">BLOCK HASH</th>
+              <tr>
+                <th>Time</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>IP &amp; device</th>
+                <th>Session ID</th>
+                <th>Block hash</th>
               </tr>
             </thead>
             <tbody>
@@ -128,22 +141,31 @@ export default async function LoginSessionsPage() {
                 const isForked = forkedHashes.includes(log.metadata?.previous_hash);
                 
                 return (
-                  <tr key={log.event_id} className="border-b border-[#232732]/50 hover:bg-[#14171E]/50 transition-colors">
-                    <td className="p-2 text-white">{new Date(log.timestamp).toLocaleTimeString()}</td>
-                    <td className="p-2 text-[#9CA3AF]">{(payload as any).email || (payload as any).userId}</td>
-                    <td className="p-2">
-                       <span className={`px-1.5 py-0.5 rounded-sm text-[10px] ${log.metadata?.action === 'LOGIN' ? 'bg-blue-500/20 text-blue-400' : 'bg-gray-500/20 text-gray-400'}`}>
-                         {log.metadata?.action}
-                       </span>
+                  <tr key={log.event_id}>
+                    <td className="col-mono">{new Date(log.timestamp).toLocaleTimeString()}</td>
+                    <td className="font-mono text-2xs text-soc-textSecondary">
+                      {(payload as any).email || (payload as any).userId}
                     </td>
-                    <td className="p-2 text-[#9CA3AF] text-[10px]">
-                      <div className="text-white">{(payload as any).ip}</div>
-                      <div className="truncate max-w-[150px]" title={(payload as any).device}>{(payload as any).device}</div>
+                    <td className="whitespace-nowrap">
+                      <span className={`soc-badge ${log.metadata?.action === 'LOGIN' ? 'badge-accent' : 'badge-neutral'}`}>
+                        {log.metadata?.action}
+                      </span>
                     </td>
-                    <td className="p-2 text-[#9CA3AF] text-[10px]">{(payload as any).sessionId}</td>
-                    <td className="p-2 text-[#656C7A] text-[10px]">
-                      <div className="truncate max-w-[120px]" title={log.event_id}>{log.event_id}</div>
-                      {isForked && <div className="text-red-500 font-bold mt-0.5">⚠️ FORKED CHAIN</div>}
+                    <td className="text-2xs">
+                      <div className="font-mono text-soc-text">{(payload as any).ip}</div>
+                      <div className="truncate max-w-[150px] text-soc-textMuted" title={(payload as any).device}>
+                        {(payload as any).device}
+                      </div>
+                    </td>
+                    <td className="col-mono">{(payload as any).sessionId}</td>
+                    <td className="text-2xs">
+                      <div className="col-mono truncate max-w-[120px]" title={log.event_id}>{log.event_id}</div>
+                      {isForked && (
+                        <div className="flex items-center gap-1 text-2xs font-semibold text-soc-crit mt-0.5">
+                          <AlertTriangle className="w-3 h-3 flex-shrink-0" />
+                          FORKED CHAIN
+                        </div>
+                      )}
                     </td>
                   </tr>
                 );
@@ -152,7 +174,10 @@ export default async function LoginSessionsPage() {
           </table>
           
           {logs.length === 0 && (
-            <div className="p-8 text-center text-[#656C7A]">No login sessions found.</div>
+            <div className="m-4 rounded-xl border border-soc-border/70 bg-soc-overlay p-8 text-center">
+              <div className="panel-label mb-1">No login sessions found</div>
+              <p className="text-xs text-soc-textMuted">No authentication events recorded in the current telemetry window.</p>
+            </div>
           )}
         </div>
       </div>

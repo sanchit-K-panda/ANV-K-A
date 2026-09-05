@@ -13,14 +13,11 @@ import {
   Database,
   Cpu,
   CheckCircle2,
-  AlertCircle,
   Copy,
   Check,
-  ShieldAlert,
-  ArrowRight,
-  ExternalLink,
   ChevronDown,
   ChevronUp,
+  ArrowRight,
 } from 'lucide-react';
 
 interface ExplainabilityCardProps {
@@ -44,102 +41,103 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
     if (onTakeAction) onTakeAction(action);
   };
 
+  const stageHeader = (num: string, title: string, icon: React.ReactNode, tone: 'accent' | 'warn' | 'muted' | 'ok' | 'crit' = 'muted') => {
+    const tones = {
+      accent: 'text-soc-accent',
+      warn: 'text-soc-med',
+      muted: 'text-soc-textSecondary',
+      ok: 'text-soc-ok',
+      crit: 'text-soc-crit',
+    };
+    return (
+      <div className={`flex items-center gap-2 mb-2.5 font-mono text-2xs font-medium uppercase tracking-[0.14em] ${tones[tone]}`}>
+        {icon}
+        <span>{num} · {title}</span>
+      </div>
+    );
+  };
+
+  const bodyBox = 'px-3.5 py-3 bg-soc-overlay rounded-lg text-xs text-soc-text leading-relaxed';
+
   return (
-    <div className="space-y-6">
-      {/* Top Finding Header Card */}
-      <div className="bg-soc-panel border border-soc-border rounded-lg p-6 shadow-soc">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-soc-border">
-          <div className="flex items-center gap-3">
-            <SeverityBadge severity={finding.severity} size="lg" />
-            <span className="font-mono text-sm font-bold text-soc-textPrimary">
-              {finding.id}
-            </span>
-            <button
-              onClick={handleCopyId}
-              className="p-1 rounded text-soc-textMuted hover:text-soc-textPrimary hover:bg-soc-raised transition-colors"
-              title="Copy Finding ID"
-            >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-            </button>
-            <StatusBadge status={finding.status} />
+    <div className="space-y-5">
+      {/* Finding Header */}
+      <div className="soc-panel">
+        <div className="p-5">
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-soc-border">
+            <div className="flex items-center gap-3">
+              <SeverityBadge severity={finding.severity} />
+              <span className="col-mono text-sm text-soc-text">
+                {finding.id}
+              </span>
+              <button
+                onClick={handleCopyId}
+                className="p-1 rounded-sm text-soc-textMuted hover:text-soc-text hover:bg-soc-raised transition-colors"
+                title="Copy Finding ID"
+                aria-label="Copy Finding ID"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-soc-ok" /> : <Copy className="w-3.5 h-3.5" />}
+              </button>
+              <StatusBadge status={finding.status} />
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <div className="panel-label mb-1">Risk Score</div>
+                <RiskScore score={finding.risk_score} factorsCount={finding.risk_factors.length} size="md" />
+              </div>
+              <div className="h-8 w-px bg-soc-border" />
+              <div className="text-right">
+                <div className="panel-label mb-1">ML Certainty</div>
+                <ConfidenceIndicator confidence={finding.confidence} />
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="text-right">
-              <div className="text-[10px] font-mono uppercase text-soc-textMuted">Risk Score</div>
-              <RiskScore score={finding.risk_score} factorsCount={finding.risk_factors.length} size="md" />
-            </div>
-            <div className="h-8 w-px bg-soc-border" />
-            <div className="text-right">
-              <div className="text-[10px] font-mono uppercase text-soc-textMuted">ML Certainty</div>
-              <ConfidenceIndicator confidence={finding.confidence} />
-            </div>
-          </div>
+          <h1 className="font-display text-lg font-bold text-soc-text mt-4 mb-1.5">
+            {finding.title}
+          </h1>
+          <p className="text-xs text-soc-textSecondary leading-relaxed max-w-prose">
+            {finding.summary}
+          </p>
         </div>
-
-        <h1 className="text-lg font-bold text-soc-textPrimary mt-4 mb-2">
-          {finding.title}
-        </h1>
-        <p className="text-xs text-soc-textSecondary leading-relaxed">
-          {finding.summary}
-        </p>
       </div>
 
-      {/* 7-PART EXPLAINABILITY MATRIX */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* 7-PART EXPLAINABILITY MATRIX — WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Left Column: WHAT, WHY, WHEN, WHERE */}
-        <div className="space-y-4">
-          {/* 1. WHAT */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-soc-accent font-mono text-xs font-bold uppercase tracking-wider">
-              <HelpCircle className="w-4 h-4" />
-              <span>1. WHAT (Forensic Observation)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border text-xs text-soc-textPrimary leading-relaxed">
-              {finding.what}
+        <div className="space-y-5">
+          <div className="soc-panel p-4">
+            {stageHeader('01', 'WHAT — Forensic Observation', <HelpCircle className="w-3.5 h-3.5" />, 'accent')}
+            <div className={bodyBox}>{finding.what}</div>
+          </div>
+
+          <div className="soc-panel p-4">
+            {stageHeader('02', 'WHY — Baseline vs. Observed Deviation', <FileText className="w-3.5 h-3.5" />, 'warn')}
+            <div className={bodyBox}>{finding.why}</div>
+          </div>
+
+          <div className="soc-panel p-4">
+            {stageHeader('03', 'WHEN — Detection Telemetry', <Clock className="w-3.5 h-3.5" />)}
+            <div className={`${bodyBox} font-mono space-y-1.5`}>
+              <div className="flex justify-between gap-4"><span className="text-soc-textMuted">TIMESTAMP</span><span className="text-soc-text tabular-nums">{finding.when_detected}</span></div>
+              <div className="flex justify-between gap-4"><span className="text-soc-textMuted">INGESTION DELAY</span><span className="text-soc-ok">1.4s (real-time)</span></div>
+              <div className="flex justify-between gap-4"><span className="text-soc-textMuted">EVALUATION RUN</span><span className="text-soc-accent">SUPERVISORY-PASS-7</span></div>
             </div>
           </div>
 
-          {/* 2. WHY */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-amber-400 font-mono text-xs font-bold uppercase tracking-wider">
-              <FileText className="w-4 h-4" />
-              <span>2. WHY (Baseline vs. Observed Deviation)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border text-xs text-soc-textPrimary leading-relaxed">
-              {finding.why}
-            </div>
-          </div>
-
-          {/* 3. WHEN */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-soc-textSecondary font-mono text-xs font-bold uppercase tracking-wider">
-              <Clock className="w-4 h-4" />
-              <span>3. WHEN (Detection Telemetry & Timing)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border font-mono text-xs text-soc-textPrimary space-y-1">
-              <div>TIMESTAMP: <span className="text-soc-textSecondary">{finding.when_detected}</span></div>
-              <div>INGESTION DELAY: <span className="text-emerald-400">1.4 seconds (Real-time)</span></div>
-              <div>EVALUATION RUN: <span className="text-soc-accent">SUPERVISORY-PASS-7</span></div>
-            </div>
-          </div>
-
-          {/* 4. WHERE */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-soc-textSecondary font-mono text-xs font-bold uppercase tracking-wider">
-              <MapPin className="w-4 h-4" />
-              <span>4. WHERE (Scope & Entities)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border font-mono text-xs text-soc-textPrimary space-y-2">
-              <div className="text-soc-textSecondary text-[11px]">{finding.where_scope}</div>
-              <div className="flex flex-wrap gap-2 pt-1">
+          <div className="soc-panel p-4">
+            {stageHeader('04', 'WHERE — Scope & Entities', <MapPin className="w-3.5 h-3.5" />)}
+            <div className={`${bodyBox} font-mono space-y-2.5`}>
+              <div className="text-soc-textSecondary text-2xs tracking-wide">{finding.where_scope}</div>
+              <div className="flex flex-wrap gap-1.5 pt-0.5">
                 {finding.affected_entities.map((entity, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center px-2 py-0.5 rounded bg-soc-raised border border-soc-border text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-soc-raised border border-soc-border text-2xs"
                   >
-                    <span className="text-soc-textMuted mr-1">{entity.type}:</span>
-                    <span className="text-soc-textPrimary font-semibold">{entity.id}</span>
+                    <span className="text-soc-textMuted uppercase tracking-wider">{entity.type}</span>
+                    <span className="text-soc-text font-medium">{entity.id}</span>
                   </span>
                 ))}
               </div>
@@ -148,34 +146,30 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
         </div>
 
         {/* Right Column: EVIDENCE, CONFIDENCE, RECOMMENDATION & RISK BREAKDOWN */}
-        <div className="space-y-4">
-          {/* 5. EVIDENCE */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2 text-soc-accent font-mono text-xs font-bold uppercase tracking-wider">
-                <Database className="w-4 h-4" />
-                <span>5. EVIDENCE (Forensic Artifacts)</span>
-              </div>
+        <div className="space-y-5">
+          <div className="soc-panel p-4">
+            <div className="flex items-center justify-between mb-2.5">
+              {stageHeader('05', 'EVIDENCE — Forensic Artifacts', <Database className="w-3.5 h-3.5" />, 'accent')}
               <button
                 onClick={() => setShowRawJson(!showRawJson)}
-                className="text-[10px] font-mono text-soc-textSecondary hover:text-soc-textPrimary flex items-center gap-1"
+                className="text-2xs font-mono text-soc-textMuted hover:text-soc-text flex items-center gap-1 transition-colors"
               >
                 {showRawJson ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                {showRawJson ? 'Hide JSON' : 'Inspect JSON'}
+                {showRawJson ? 'HIDE JSON' : 'INSPECT JSON'}
               </button>
             </div>
 
-            <div className="bg-soc-base rounded border border-soc-border p-3.5 font-mono text-xs text-soc-textSecondary overflow-x-auto">
+            <div className="bg-soc-overlay rounded-lg p-3.5 font-mono text-2xs overflow-x-auto">
               {showRawJson ? (
-                <pre className="text-[11px] text-emerald-400">
+                <pre className="text-soc-accentBright leading-relaxed whitespace-pre-wrap">
                   {JSON.stringify(finding.evidence, null, 2)}
                 </pre>
               ) : (
                 <div className="space-y-1.5">
                   {Object.entries(finding.evidence).map(([k, v]) => (
-                    <div key={k} className="flex justify-between border-b border-soc-border/40 pb-1 text-[11px]">
-                      <span className="text-soc-textMuted uppercase">{k.replace(/_/g, ' ')}:</span>
-                      <span className="text-soc-textPrimary font-semibold truncate max-w-[240px]">
+                    <div key={k} className="flex justify-between gap-4 border-b border-soc-border/50 pb-1.5 last:border-0 last:pb-0">
+                      <span className="text-soc-textMuted uppercase tracking-wider">{k.replace(/_/g, ' ')}</span>
+                      <span className="text-soc-text font-medium truncate max-w-[240px]">
                         {typeof v === 'object' ? JSON.stringify(v) : String(v)}
                       </span>
                     </div>
@@ -185,39 +179,31 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
             </div>
           </div>
 
-          {/* 6. CONFIDENCE */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
-              <Cpu className="w-4 h-4" />
-              <span>6. CONFIDENCE (ML Model Attribution)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border font-mono text-xs space-y-1.5">
-              <div className="flex justify-between">
-                <span className="text-soc-textSecondary">Primary Model:</span>
-                <span className="text-soc-textPrimary font-semibold">
+          <div className="soc-panel p-4">
+            {stageHeader('06', 'CONFIDENCE — ML Model Attribution', <Cpu className="w-3.5 h-3.5" />, 'ok')}
+            <div className={`${bodyBox} font-mono space-y-1.5`}>
+              <div className="flex justify-between gap-4">
+                <span className="text-soc-textMuted">Primary Model</span>
+                <span className="text-soc-text font-medium">
                   {(finding as any).confidence_breakdown?.model || `${finding.engine || 'VIVEKA'}-SupervisoryEngine-v2`}
                 </span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-soc-textSecondary">Statistical Certainty:</span>
-                <span className="text-emerald-400 font-bold">
+              <div className="flex justify-between gap-4">
+                <span className="text-soc-textMuted">Statistical Certainty</span>
+                <span className="text-soc-ok font-semibold tabular-nums">
                   {Math.round(finding.confidence * 100)}% Match
                 </span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-soc-textSecondary">Ground-Truth Alignment:</span>
-                <span className="text-soc-textPrimary">Verified Deterministic</span>
+              <div className="flex justify-between gap-4">
+                <span className="text-soc-textMuted">Ground-Truth Alignment</span>
+                <span className="text-soc-text">Verified Deterministic</span>
               </div>
             </div>
           </div>
 
-          {/* 7. RECOMMENDATION & ACTIONS */}
-          <div className="bg-soc-panel border border-soc-border rounded-lg p-5">
-            <div className="flex items-center gap-2 mb-2 text-severity-critical font-mono text-xs font-bold uppercase tracking-wider">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>7. RECOMMENDATION (Supervisory Remediation)</span>
-            </div>
-            <div className="p-3.5 bg-soc-base rounded border border-soc-border text-xs text-soc-textPrimary mb-4 leading-relaxed">
+          <div className="soc-panel p-4">
+            {stageHeader('07', 'RECOMMENDATION — Supervisory Remediation', <CheckCircle2 className="w-3.5 h-3.5" />, 'crit')}
+            <div className={`${bodyBox} mb-4`}>
               {finding.recommendation}
             </div>
 
@@ -225,28 +211,27 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => handleExecuteAction(finding.suggested_action)}
-                className="flex-1 py-2 px-3 bg-soc-accent hover:bg-soc-accentHover text-white font-mono text-xs font-semibold rounded flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+                className="btn-primary flex-1"
               >
-                <span>Execute Action: {finding.suggested_action}</span>
+                <span>Execute: {finding.suggested_action}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => handleExecuteAction('OPEN_INVESTIGATION_CASE')}
-                className="py-2 px-3 bg-soc-raised hover:bg-soc-elevated border border-soc-border text-soc-textPrimary font-mono text-xs rounded transition-colors"
+                className="btn-ghost"
               >
                 Open Case
               </button>
             </div>
 
             {actionConfirmed && (
-              <div className="mt-3 p-2 bg-emerald-950/40 border border-emerald-800/60 rounded text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+              <div className="mt-3 px-2.5 py-2 bg-soc-okDim border border-soc-ok/30 rounded-sm text-2xs font-mono text-soc-ok flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5" />
-                Action [{actionConfirmed}] dispatched and recorded to Audit Hash Chain.
+                Action [{actionConfirmed}] dispatched and recorded to the SAKṢĪ audit hash chain.
               </div>
             )}
           </div>
 
-          {/* Itemized Risk Breakdown */}
           <RiskFactorBreakdown factors={finding.risk_factors} totalScore={finding.risk_score} />
         </div>
       </div>

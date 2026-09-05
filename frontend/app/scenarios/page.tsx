@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SCENARIOS } from '@/lib/mockData';
 import { evaluateScenario } from '@/lib/api';
-import { Play, RefreshCw, Layers } from 'lucide-react';
+import { Play, RefreshCw } from 'lucide-react';
 
 export default function ScenariosPage() {
   const router = useRouter();
@@ -21,56 +21,61 @@ export default function ScenariosPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Simulation &amp; Benchmark Hub
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              MĀYĀ + PARĪKṢA
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>SIMULATION</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Simulation &amp; Benchmark Hub</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Evaluate ANVĪKṢA offline supervisory detection across 7 synthetic benchmark attack scenarios.
           </p>
         </div>
+        <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+          {SCENARIOS.length} benchmark scenarios
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs">
+      {/* Scenario cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
         {SCENARIOS.map((sc) => (
           <div
             key={sc.id}
-            className="soc-panel p-5 flex flex-col justify-between space-y-3 hover:border-slate-300 transition-colors"
+            className="soc-panel card-hover overflow-hidden flex flex-col justify-between"
           >
-            <div>
-              <div className="flex justify-between items-center">
-                <span className="text-xs font-bold text-slate-900 font-sans">{sc.name}</span>
-                <span className="text-[10.5px] text-slate-700 font-bold bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-                  10,000 EVT
-                </span>
+            <div className="p-4 space-y-2">
+              <div className="flex justify-between items-center gap-3">
+                <span className="text-xs font-medium text-soc-text">{sc.name}</span>
+                <span className="soc-badge badge-neutral whitespace-nowrap">10,000 EVT</span>
               </div>
-              <p className="text-xs text-slate-600 mt-1.5 font-sans leading-relaxed">{sc.desc}</p>
+              <p className="text-xs text-soc-textSecondary leading-relaxed">{sc.desc}</p>
             </div>
 
-            <button
-              onClick={() => handleLaunchScenario(sc.id)}
-              disabled={runningId === sc.id}
-              className="w-full py-2.5 bg-slate-900 text-white hover:bg-slate-800 font-bold text-xs rounded flex items-center justify-center gap-2 transition-colors disabled:opacity-50 shadow-xs"
-            >
-              {runningId === sc.id ? (
-                <>
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                  <span>EVALUATING MĀYĀ ENGINE...</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-3.5 h-3.5" />
-                  <span>EXECUTE SCENARIO IN COMMAND CENTRE</span>
-                </>
-              )}
-            </button>
+            <div className="border-t border-soc-border p-3">
+              <button
+                onClick={() => handleLaunchScenario(sc.id)}
+                disabled={runningId === sc.id}
+                className="btn-primary w-full disabled:opacity-50"
+              >
+                {runningId === sc.id ? (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                    <span>Evaluating Māyā engine...</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5" />
+                    <span>Execute scenario in command centre</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         ))}
       </div>

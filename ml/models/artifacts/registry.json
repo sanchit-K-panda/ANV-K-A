@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "trained_at": "2026-09-05T15:50:53.479442+00:00",
+  "decision_threshold": 0.82,
+  "if_features": [
+    "mean_closure_minutes",
+    "investigation_rate",
+    "escalation_rate_critical",
+    "mean_actions_per_incident"
+  ],
+  "clf_features": [
+    "mean_closure_minutes",
+    "median_closure_minutes",
+    "investigation_rate",
+    "escalation_rate_critical",
+    "mean_actions_per_incident",
+    "critical_case_share",
+    "closure_completeness",
+    "total_incidents",
+    "critical_incidents",
+    "total_actions"
+  ],
+  "metadata": {
+    "corpus": {
+      "scenarios": [
+        "healthy",
+        "investigation_gap",
+        "negative_space",
+        "kpi_manipulation",
+        "analyst_overload",
+        "recurring_threat",
+        "identity_anomaly"
+      ],
+      "seeds": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54
+      ],
+      "events_per_run": 10000,
+      "soc_count": 2,
+      "dense_telemetry": true,
+      "runs_per_scenario": {
+        "healthy": 12,
+        "investigation_gap": 12,
+        "negative_space": 12,
+        "kpi_manipulation": 12,
+        "analyst_overload": 12,
+        "recurring_threat": 12,
+        "identity_anomaly": 12
+      }
+    },
+    "samples": {
+      "total": 3063,
+      "positives": 62
+    },
+    "training": {
+      "isolation_forest": {
+        "trained": true,
+        "n_benign_samples": 440,
+        "n_features": 4,
+        "contamination": 0.02,
+        "n_estimators": 300,
+        "flagged_rate_on_benign_train": 0.0205,
+        "mean_decision_function": 0.151
+      },
+      "classifier": {
+        "trained": true,
+        "model_type": "RandomForestClassifier",
+        "n_estimators": 400,
+        "n_samples": 3063,
+        "n_positives": 62,
+        "class_balance": 0.0202,
+        "oof_roc_auc": 1.0,
+        "decision_threshold": 0.82,
+        "oof_precision": 1.0,
+        "oof_recall": 1.0,
+        "oof_f1": 1.0,
+        "oof_confusion": {
+          "tp": 62,
+          "fp": 0,
+          "fn": 0
+        },
+        "oof_by_scenario": {
+          "analyst_overload": {
+            "positives": 12,
+            "oof_precision": 1.0,
+            "oof_recall": 1.0,
+            "max_probability": 1.0
+          },
+          "kpi_manipulation": {
+            "positives": 50,
+            "oof_precision": 1.0,
+            "oof_recall": 1.0,
+            "max_probability": 1.0
+          }
+        },
+        "healthy_max_probability": 0.0125
+      }
+    },
+    "python": "3.14.0",
+    "source": "soc-simulator (bundled, offline)"
+  }
+}

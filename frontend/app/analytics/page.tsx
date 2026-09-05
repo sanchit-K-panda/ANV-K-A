@@ -16,7 +16,18 @@ import {
   LineChart,
   Line,
 } from 'recharts';
-import { Check, X, BarChart3, Activity, Users, ShieldAlert, Cpu } from 'lucide-react';
+
+const CHART_GRID = 'rgb(var(--soc-border))';
+const CHART_TICK = { fill: 'rgb(var(--soc-textMuted))', fontSize: 11, fontFamily: 'var(--font-jetbrains)' };
+const TOOLTIP_STYLE = {
+  backgroundColor: 'rgb(var(--soc-panel))',
+  border: '1px solid rgb(var(--soc-borderStrong))',
+  borderRadius: '8px',
+  fontSize: '12px',
+  fontFamily: 'var(--font-inter)',
+  color: 'rgb(var(--soc-text))',
+  boxShadow: 'var(--shadow-dropdown)',
+};
 
 export default function AnalyticsPage() {
   const [activeTab, setActiveTab] = useState<
@@ -41,47 +52,57 @@ export default function AnalyticsPage() {
     { range: '>60m', observed: 0, baseline: 10 },
   ];
 
+  const tabs = [
+    { id: 'VIVEKA', label: 'Execution Gaps (VIVEKA)' },
+    { id: 'ABHĀVA', label: 'Negative Space (ABHĀVA)' },
+    { id: 'VIKĀRA', label: 'Behavioural ML (VIKĀRA)' },
+    { id: 'PERFORMANCE', label: 'SOC Performance Lifecycle' },
+    { id: 'PUNARĀVṚTTI', label: 'Threat Recurrence' },
+    { id: 'WORKLOAD', label: 'Analyst Workload Matrix' },
+  ] as const;
+
+  const sopSteps = ['Alert Ingestion', 'Triage & Correlation', 'Mandatory Forensic Investigation', 'Tier 2 Escalation', 'Host & Network Response', 'Supervisory Case Closure'];
+
+  const actualExecution = [
+    { label: '1. Alert Ingestion', ok: true },
+    { label: '2. Triage & Correlation', ok: true },
+    { label: '3. Forensic Investigation (Omitted)', ok: false },
+    { label: '4. Escalation (Bypassed)', ok: false },
+    { label: '5. Response (Partial Containment)', ok: true },
+    { label: '6. Direct Closure (False Positive Claim)', ok: false },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
+    <div className="space-y-4 pb-16">
       {/* Title Header */}
-      <div className="soc-panel p-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-end justify-between gap-3 border-b border-soc-border pb-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight">
-              MEDHĀ Supervisory Analytics
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200 font-mono">
-              ANALYTIC ENGINES
-            </span>
+          <div className="flex items-center gap-2.5">
+            <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Supervisory Analytics</h1>
+            <span className="soc-badge badge-accent">MEDHĀ ENGINES</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <p className="text-xs text-soc-textMuted mt-1">
             Offline operational intelligence: Execution Gaps, Negative Space, Behavioural Deviations, and Threat Recurrence.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-slate-500">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span>Local Inference Engine Active</span>
+        <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-ok" aria-hidden="true" />
+          <span>LOCAL INFERENCE ENGINE ACTIVE</span>
         </div>
       </div>
 
-      {/* Reusable Enterprise Tabs */}
-      <div className="flex flex-wrap gap-1 font-mono text-xs">
-        {[
-          { id: 'VIVEKA', label: 'Execution Gaps (VIVEKA)' },
-          { id: 'ABHĀVA', label: 'Negative Space (ABHĀVA)' },
-          { id: 'VIKĀRA', label: 'Behavioural ML (VIKĀRA)' },
-          { id: 'PERFORMANCE', label: 'SOC Performance Lifecycle' },
-          { id: 'PUNARĀVṚTTI', label: 'Threat Recurrence' },
-          { id: 'WORKLOAD', label: 'Analyst Workload Matrix' },
-        ].map((tab) => (
+      {/* Engine Tabs */}
+      <div className="flex flex-wrap gap-1">
+        {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
-            className={`px-3 py-1.5 font-semibold rounded transition-colors ${
+            onClick={() => setActiveTab(tab.id)}
+            aria-pressed={activeTab === tab.id}
+            className={`px-3 py-1.5 text-2xs font-mono tracking-wide rounded-sm border transition-colors ${
               activeTab === tab.id
-                ? 'bg-slate-900 text-white'
-                : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200'
+                ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
+                : 'bg-transparent border-soc-border text-soc-textSecondary hover:text-soc-text hover:bg-soc-raised'
             }`}
           >
             {tab.label}
@@ -89,229 +110,220 @@ export default function AnalyticsPage() {
         ))}
       </div>
 
-      {/* Tab 1: VIVEKA — Execution Gaps */}
+      {/* VIVEKA — Execution Gaps */}
       {activeTab === 'VIVEKA' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="flex justify-between items-center border-b border-slate-100 pb-2.5">
+        <div className="soc-panel">
+          <div className="soc-panel-header">
             <div>
-              <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                VIVEKA — Expected vs Actual Operational Workflow
-              </h2>
-              <p className="text-[11px] text-slate-500 font-sans mt-0.5">
+              <h2 className="panel-label">VIVEKA — Expected vs Actual Operational Workflow</h2>
+              <p className="text-2xs text-soc-textMuted mt-0.5 font-sans">
                 Pinpoints where human analyst actions omitted or bypassed mandatory SOC standard operating procedures.
               </p>
             </div>
-            <span className="text-rose-700 font-bold text-xs bg-rose-50 px-2 py-0.5 rounded border border-rose-200">
-              14 EXECUTION GAPS
-            </span>
+            <span className="soc-badge badge-critical">14 EXECUTION GAPS</span>
           </div>
 
-          {/* Visual Comparison Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            {/* Expected */}
-            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded space-y-2">
-              <div className="text-[10.5px] font-bold text-slate-700 uppercase tracking-wider">
-                Expected Workflow (SOP Standard)
+          <div className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Expected */}
+              <div className="p-3.5 bg-soc-overlay rounded-lg space-y-2">
+                <div className="panel-label">Expected Workflow — SOP Standard</div>
+                <div className="space-y-1.5">
+                  {sopSteps.map((step, i) => (
+                    <div key={i} className="flex items-center justify-between px-2.5 py-2 bg-soc-panel border border-soc-border rounded-sm text-xs text-soc-textSecondary">
+                      <span>{i + 1}. {step}</span>
+                      <span className="w-4 h-4 rounded-sm border border-soc-ok/50 text-soc-ok flex items-center justify-center font-mono text-2xs">
+                        ✓
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="space-y-1.5">
-                {['Alert Ingestion', 'Triage & Correlation', 'Mandatory Forensic Investigation', 'Tier 2 Escalation', 'Host & Network Response', 'Supervisory Case Closure'].map((step, i) => (
-                  <div key={i} className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded text-slate-800">
-                    <span className="font-sans font-medium">{i + 1}. {step}</span>
-                    <span className="w-4 h-4 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">
-                      ✓
-                    </span>
-                  </div>
-                ))}
+
+              {/* Actual */}
+              <div className="p-3.5 bg-soc-overlay rounded-lg space-y-2">
+                <div className="panel-label">Actual Observed Execution — SOC-04</div>
+                <div className="space-y-1.5">
+                  {actualExecution.map((step) => (
+                    <div
+                      key={step.label}
+                      className={`flex items-center justify-between px-2.5 py-2 border rounded-sm text-xs ${
+                        step.ok
+                          ? 'bg-soc-panel border-soc-border text-soc-textSecondary'
+                          : 'bg-soc-critDim border-soc-crit/30 text-soc-crit font-medium'
+                      }`}
+                    >
+                      <span>{step.label}</span>
+                      <span
+                        className={`w-4 h-4 rounded-sm flex items-center justify-center font-mono text-2xs flex-shrink-0 ${
+                          step.ok
+                            ? 'border border-soc-ok/50 text-soc-ok'
+                            : 'border border-soc-crit/60 text-soc-crit'
+                        }`}
+                      >
+                        {step.ok ? '✓' : '✕'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Actual */}
-            <div className="p-3.5 bg-slate-50 border border-rose-200 rounded space-y-2">
-              <div className="text-[10.5px] font-bold text-slate-900 uppercase tracking-wider">
-                Actual Observed Execution (SOC-04)
-              </div>
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded text-slate-800">
-                  <span className="font-sans font-medium">1. Alert Ingestion</span>
-                  <span className="w-4 h-4 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">✓</span>
+            {/* Analytics Summary */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+              {[
+                { label: 'GAP FREQUENCY', value: '83 Alerts (74%)', tone: 'text-soc-text' },
+                { label: 'SEVERITY', value: 'CRITICAL', tone: 'text-soc-crit' },
+                { label: 'AFFECTED SOCS', value: 'SOC-04, SOC-02', tone: 'text-soc-text' },
+                { label: 'ASSIGNED ANALYST', value: 'Analyst A-01', tone: 'text-soc-text' },
+              ].map((s) => (
+                <div key={s.label} className="p-3.5 rounded-lg bg-soc-overlay">
+                  <div className="text-[11px] font-medium text-soc-textMuted">{s.label}</div>
+                  <div className={`text-sm font-semibold mt-1 ${s.tone}`}>{s.value}</div>
                 </div>
-                <div className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded text-slate-800">
-                  <span className="font-sans font-medium">2. Triage &amp; Correlation</span>
-                  <span className="w-4 h-4 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">✓</span>
-                </div>
-                <div className="flex items-center justify-between p-2 bg-rose-50 border border-rose-200 rounded text-rose-900 font-bold">
-                  <span className="font-sans">3. Forensic Investigation (Omitted ✕)</span>
-                  <span className="w-4 h-4 rounded bg-rose-600 text-white flex items-center justify-center font-bold text-[10px]">✕</span>
-                </div>
-                <div className="flex items-center justify-between p-2 bg-rose-50 border border-rose-200 rounded text-rose-900 font-bold">
-                  <span className="font-sans">4. Escalation (Bypassed ✕)</span>
-                  <span className="w-4 h-4 rounded bg-rose-600 text-white flex items-center justify-center font-bold text-[10px]">✕</span>
-                </div>
-                <div className="flex items-center justify-between p-2 bg-white border border-slate-200 rounded text-slate-800">
-                  <span className="font-sans font-medium">5. Response (Partial Containment)</span>
-                  <span className="w-4 h-4 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">✓</span>
-                </div>
-                <div className="flex items-center justify-between p-2 bg-rose-50 border border-rose-200 rounded text-rose-900 font-bold">
-                  <span className="font-sans">6. Direct Closure (False Positive Claim ✕)</span>
-                  <span className="w-4 h-4 rounded bg-rose-600 text-white flex items-center justify-center font-bold text-[10px]">✕</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Analytics Summary */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded">
-              <div className="text-slate-500 text-[10.5px]">Gap Frequency</div>
-              <div className="text-sm font-bold text-slate-900 mt-0.5">83 Alerts (74%)</div>
-            </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded">
-              <div className="text-slate-500 text-[10.5px]">Severity</div>
-              <div className="text-sm font-bold text-rose-700 mt-0.5">CRITICAL</div>
-            </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded">
-              <div className="text-slate-500 text-[10.5px]">Affected SOCs</div>
-              <div className="text-sm font-bold text-slate-900 mt-0.5">SOC-04, SOC-02</div>
-            </div>
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded">
-              <div className="text-slate-500 text-[10.5px]">Assigned Analyst</div>
-              <div className="text-sm font-bold text-slate-900 mt-0.5">Analyst A-01</div>
+              ))}
             </div>
           </div>
         </div>
       )}
 
-      {/* Tab 2: ABHĀVA — Negative Space */}
+      {/* ABHĀVA — Negative Space */}
       {activeTab === 'ABHĀVA' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="border-b border-slate-100 pb-2.5">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              ABHĀVA — Negative-Space Intelligence
-            </h2>
-            <p className="text-xs font-semibold text-slate-700 font-sans mt-0.5">
-              &ldquo;What actions should have occurred but didn&apos;t?&rdquo;
-            </p>
+        <div className="soc-panel">
+          <div className="soc-panel-header">
+            <div>
+              <h2 className="panel-label">ABHĀVA — Negative-Space Intelligence</h2>
+              <p className="text-xs font-medium text-soc-text mt-0.5">
+                &ldquo;What actions should have occurred but didn&apos;t?&rdquo;
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded text-center space-y-1.5">
-              <div className="text-[10.5px] text-slate-500 font-bold uppercase">INVESTIGATIONS</div>
-              <div className="text-2xl font-black text-slate-900">17 <span className="text-xs text-slate-400 font-normal">/ 80</span></div>
-              <div className="text-xs text-rose-700 font-bold">63 missing investigations</div>
-            </div>
-
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded text-center space-y-1.5">
-              <div className="text-[10.5px] text-slate-500 font-bold uppercase">ESCALATIONS</div>
-              <div className="text-2xl font-black text-slate-900">2 <span className="text-xs text-slate-400 font-normal">/ 30</span></div>
-              <div className="text-xs text-rose-700 font-bold">28 missing escalations</div>
-            </div>
-
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded text-center space-y-1.5">
-              <div className="text-[10.5px] text-slate-500 font-bold uppercase">EVIDENCE LOGS</div>
-              <div className="text-2xl font-black text-slate-900">21 <span className="text-xs text-slate-400 font-normal">/ 75</span></div>
-              <div className="text-xs text-rose-700 font-bold">54 missing evidence records</div>
+          <div className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {[
+                { label: 'INVESTIGATIONS', observed: 17, expected: 80, missing: 63, unit: 'investigations' },
+                { label: 'ESCALATIONS', observed: 2, expected: 30, missing: 28, unit: 'escalations' },
+                { label: 'EVIDENCE LOGS', observed: 21, expected: 75, missing: 54, unit: 'evidence records' },
+              ].map((item) => (
+                <div key={item.label} className="p-4 rounded-lg bg-soc-overlay space-y-2 card-hover">
+                  <div className="text-[11px] font-medium text-soc-textMuted">{item.label}</div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl font-semibold text-soc-text tabular-nums">{item.observed}</span>
+                    <span className="text-xs text-soc-textMuted">/ {item.expected}</span>
+                  </div>
+                  <div className="risk-factor-bar">
+                    <div className="risk-factor-fill bg-soc-crit" style={{ width: `${(item.observed / item.expected) * 100}%` }} />
+                  </div>
+                  <div className="text-2xs text-soc-crit font-medium">
+                    {item.missing} missing {item.unit}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       )}
 
-      {/* Tab 3: VIKĀRA — Behaviour */}
+      {/* VIKĀRA — Behaviour */}
       {activeTab === 'VIKĀRA' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="border-b border-slate-100 pb-2.5">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              VIKĀRA — Behavioural Anomaly Intelligence
-            </h2>
-            <p className="text-[11px] text-slate-500 font-sans mt-0.5">
-              Identifies MTTR manipulation, rapid alert dismissals, and burnout anomalies.
-            </p>
+        <div className="soc-panel">
+          <div className="soc-panel-header">
+            <div>
+              <h2 className="panel-label">VIKĀRA — Behavioural Anomaly Intelligence</h2>
+              <p className="text-2xs text-soc-textMuted mt-0.5 font-sans">
+                Identifies MTTR manipulation, rapid alert dismissals, and burnout anomalies.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 bg-slate-50 border border-slate-200 rounded space-y-2">
-              <div className="flex justify-between">
-                <span className="text-slate-500">NORMAL BASELINE:</span>
-                <span className="text-slate-900 font-bold">Closure: 35–55 min</span>
+          <div className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 bg-soc-overlay rounded-lg space-y-2 font-mono text-xs">
+                <div className="flex justify-between gap-3">
+                  <span className="text-soc-textMuted">NORMAL BASELINE</span>
+                  <span className="text-soc-text font-medium">Closure: 35-55 min</span>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <span className="text-soc-textMuted">OBSERVED EXECUTION</span>
+                  <span className="text-soc-crit font-semibold">Closure: 3-5 min</span>
+                </div>
+                <div className="flex justify-between gap-3 border-t border-soc-border pt-2">
+                  <span className="text-soc-textMuted">Investigation Evidence</span>
+                  <span className="text-soc-crit font-semibold">↓ 71%</span>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <span className="text-soc-textMuted">Escalation Rate</span>
+                  <span className="text-soc-crit font-semibold">↓ 63%</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">OBSERVED EXECUTION:</span>
-                <span className="text-rose-700 font-bold">Closure: 3–5 min</span>
-              </div>
-              <div className="flex justify-between border-t border-slate-200 pt-2">
-                <span className="text-slate-500">Investigation Evidence:</span>
-                <span className="text-rose-700 font-bold">↓ 71%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-500">Escalation Rate:</span>
-                <span className="text-rose-700 font-bold">↓ 63%</span>
-              </div>
-            </div>
 
-            {/* Closure Distribution Chart */}
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded">
-              <div className="text-[10.5px] text-slate-700 font-bold mb-1">Closure Dwell Distribution</div>
-              <div className="h-36 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={closureDistributionData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                    <XAxis dataKey="range" stroke="#64748B" fontSize={10} />
-                    <YAxis stroke="#64748B" fontSize={10} />
-                    <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', fontSize: '11px' }} />
-                    <Bar dataKey="observed" fill="#BE123C" name="Observed Bursts" />
-                    <Bar dataKey="baseline" fill="#94A3B8" name="Human Baseline" />
-                  </BarChart>
-                </ResponsiveContainer>
+              {/* Closure Distribution Chart */}
+              <div className="p-3 bg-soc-overlay rounded-lg">
+                <div className="panel-label mb-2">Closure Dwell Distribution</div>
+                <div className="h-40 w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={closureDistributionData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID} vertical={false} />
+                      <XAxis dataKey="range" tick={CHART_TICK} axisLine={{ stroke: CHART_GRID }} tickLine={false} />
+                      <YAxis tick={CHART_TICK} axisLine={false} tickLine={false} />
+                      <Tooltip contentStyle={TOOLTIP_STYLE} cursor={{ fill: 'rgba(79,168,201,0.06)' }} />
+                      <Bar dataKey="observed" fill="rgb(var(--soc-crit))" name="Observed Bursts" />
+                      <Bar dataKey="baseline" fill="rgb(var(--soc-low))" name="Human Baseline" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Tab 4: Performance Lifecycle */}
+      {/* Performance Lifecycle */}
       {activeTab === 'PERFORMANCE' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="border-b border-slate-100 pb-2.5">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              Operational Lifecycle Trend (24h)
-            </h2>
+        <div className="soc-panel">
+          <div className="soc-panel-header">
+            <h2 className="panel-label">Operational Lifecycle Trend (24h)</h2>
+            <span className="text-2xs font-mono text-soc-textMuted">SLA BENCHMARKS</span>
           </div>
-          <div className="h-60 w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={performanceTrendData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                <XAxis dataKey="hour" stroke="#64748B" fontSize={11} />
-                <YAxis stroke="#64748B" domain={[0, 100]} fontSize={11} />
-                <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', fontSize: '11px' }} />
-                <Line type="monotone" dataKey="detection" stroke="#10B981" name="Detection %" strokeWidth={2} />
-                <Line type="monotone" dataKey="investigation" stroke="#EF4444" name="Investigation %" strokeWidth={2} strokeDasharray="4 4" />
-                <Line type="monotone" dataKey="escalation" stroke="#F59E0B" name="Escalation %" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
+          <div className="p-4">
+            <div className="h-64 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={performanceTrendData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID} vertical={false} />
+                  <XAxis dataKey="hour" tick={CHART_TICK} axisLine={{ stroke: CHART_GRID }} tickLine={false} />
+                  <YAxis tick={CHART_TICK} domain={[0, 100]} axisLine={false} tickLine={false} />
+                  <Tooltip contentStyle={TOOLTIP_STYLE} />
+                  <Line type="monotone" dataKey="detection" stroke="rgb(var(--soc-ok))" name="Detection %" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="investigation" stroke="rgb(var(--soc-crit))" name="Investigation %" strokeWidth={1.5} strokeDasharray="4 4" dot={false} />
+                  <Line type="monotone" dataKey="escalation" stroke="rgb(var(--soc-med))" name="Escalation %" strokeWidth={1.5} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Tab 5: PUNARĀVṚTTI — Threats */}
+      {/* PUNARĀVṚTTI — Threats */}
       {activeTab === 'PUNARĀVṚTTI' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="border-b border-slate-100 pb-2.5">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              PUNARĀVṚTTI — Threat Recurrence Intelligence
-            </h2>
+        <div className="soc-panel">
+          <div className="soc-panel-header">
+            <h2 className="panel-label">PUNARĀVṚTTI — Threat Recurrence Intelligence</h2>
+            <span className="soc-badge badge-medium">{MOCK_THREAT_RECURRENCE.length} RECURRING</span>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="divide-y divide-soc-border">
             {MOCK_THREAT_RECURRENCE.map((t) => (
-              <div key={t.threat_id} className="p-3 bg-slate-50 border border-slate-200 rounded space-y-1">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold text-slate-900 font-sans">{t.name}</span>
-                  <span className="text-rose-700 font-bold text-[10.5px]">Recurrence Score: {t.recurrence_score}/100</span>
+              <div key={t.threat_id} className="px-4 py-3 space-y-1.5">
+                <div className="flex justify-between items-center gap-3">
+                  <span className="text-xs font-medium text-soc-text">{t.name}</span>
+                  <span className="font-mono text-2xs text-soc-crit tabular-nums">RECURRENCE SCORE {t.recurrence_score}/100</span>
                 </div>
-                <div className="text-[11px] text-slate-600">
-                  Incident Chain: {t.incident_chain.join(' → ')}
+                <div className="col-mono">
+                  INCIDENT CHAIN {t.incident_chain.join(' → ')}
                 </div>
-                <div className="text-[10.5px] text-slate-500">
-                  Resolution: {t.resolution_history}
+                <div className="text-2xs text-soc-textMuted font-mono">
+                  RESOLUTION {t.resolution_history}
                 </div>
               </div>
             ))}
@@ -319,13 +331,12 @@ export default function AnalyticsPage() {
         </div>
       )}
 
-      {/* Tab 6: Analyst Workload */}
+      {/* Analyst Workload */}
       {activeTab === 'WORKLOAD' && (
-        <div className="soc-panel p-5 space-y-4 font-mono">
-          <div className="border-b border-slate-100 pb-2.5">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              Analyst Workload Distribution &amp; Bottlenecks
-            </h2>
+        <div className="soc-panel overflow-hidden">
+          <div className="soc-panel-header">
+            <h2 className="panel-label">Analyst Workload Distribution &amp; Bottlenecks</h2>
+            <span className="text-2xs font-mono text-soc-textMuted">SINGLE POINT OF FAILURE DETECTION</span>
           </div>
 
           <div className="overflow-x-auto">
@@ -343,21 +354,13 @@ export default function AnalyticsPage() {
               <tbody>
                 {MOCK_WORKLOAD.map((w) => (
                   <tr key={w.analyst_id}>
-                    <td className="font-bold text-slate-900">{w.analyst_id} ({w.name})</td>
-                    <td className="text-slate-900 font-bold">{w.critical_cases}</td>
-                    <td className="text-slate-700">{w.active_cases}</td>
-                    <td className="text-slate-500">{w.mean_closure_minutes} min</td>
-                    <td className="text-slate-500">{Math.round(w.investigation_rate * 100)}%</td>
+                    <td className="text-soc-text font-medium">{w.name} <span className="col-mono ml-1">{w.analyst_id}</span></td>
+                    <td className="font-mono text-soc-text font-semibold tabular-nums">{w.critical_cases}</td>
+                    <td className="font-mono text-soc-textSecondary tabular-nums">{w.active_cases}</td>
+                    <td className="col-mono tabular-nums">{w.mean_closure_minutes} min</td>
+                    <td className="col-mono tabular-nums">{Math.round(w.investigation_rate * 100)}%</td>
                     <td className="text-right">
-                      <span
-                        className={
-                          w.workload_level === 'HIGH'
-                            ? 'badge-critical'
-                            : w.workload_level === 'NORMAL'
-                            ? 'badge-medium'
-                            : 'badge-low'
-                        }
-                      >
+                      <span className={`soc-badge ${w.workload_level === 'HIGH' ? 'badge-critical' : w.workload_level === 'NORMAL' ? 'badge-medium' : 'badge-low'}`}>
                         {w.workload_level}
                       </span>
                     </td>

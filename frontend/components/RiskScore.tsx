@@ -7,38 +7,39 @@ interface RiskScoreProps {
 }
 
 export const RiskScore: React.FC<RiskScoreProps> = ({ score, factorsCount, size = 'md' }) => {
-  let textClass = 'text-emerald-400';
-  let bgClass = 'bg-emerald-950/30 border-emerald-800/40';
+  let textClass = 'text-soc-low';
+  let bgClass = 'bg-soc-lowDim border-soc-low/30';
   let label = 'LOW RISK';
 
   if (score >= 80) {
-    textClass = 'text-severity-critical font-bold';
-    bgClass = 'bg-severity-criticalBg border-severity-criticalBorder';
+    textClass = 'text-soc-crit font-bold';
+    bgClass = 'bg-soc-critDim border-soc-crit/40';
     label = 'CRITICAL';
   } else if (score >= 60) {
-    textClass = 'text-severity-high font-semibold';
-    bgClass = 'bg-severity-highBg border-severity-highBorder';
+    textClass = 'text-soc-high font-semibold';
+    bgClass = 'bg-soc-highDim border-soc-high/40';
     label = 'HIGH';
   } else if (score >= 40) {
-    textClass = 'text-severity-medium';
-    bgClass = 'bg-severity-mediumBg border-severity-mediumBorder';
+    textClass = 'text-soc-med';
+    bgClass = 'bg-soc-medDim border-soc-med/40';
     label = 'MED';
   }
 
   const sizes = {
-    sm: 'text-xs px-2 py-0.5',
-    md: 'text-sm px-2.5 py-1',
-    lg: 'text-lg px-3.5 py-1.5',
+    sm: 'text-2xs px-1.5 py-0.5',
+    md: 'text-xs px-2 py-1',
+    lg: 'text-sm px-2.5 py-1.5',
   };
 
   return (
     <div className="inline-flex items-center gap-1.5">
-      <div className={`flex items-center gap-1.5 rounded border font-mono ${bgClass} ${sizes[size]}`}>
+      <div className={`flex items-center gap-1.5 rounded-sm border font-mono tabular-nums ${bgClass} ${sizes[size]}`}>
         <span className={textClass}>{score}</span>
-        <span className="text-[10px] uppercase text-soc-textSecondary">/100</span>
+        <span className="text-2xs uppercase text-soc-textMuted">/100</span>
+        <span className={`text-2xs uppercase tracking-wider ${textClass} hidden md:inline`}>{label}</span>
       </div>
       {factorsCount !== undefined && (
-        <span className="text-[11px] text-soc-textSecondary font-mono hidden sm:inline">
+        <span className="text-2xs text-soc-textMuted font-mono hidden sm:inline">
           ({factorsCount} factors)
         </span>
       )}

@@ -13,38 +13,46 @@ export const SeverityBadge: React.FC<SeverityBadgeProps> = ({ severity }) => {
   switch (norm) {
     case 'CRITICAL':
       return (
-        <span className="badge-critical">
-          <span className="w-1.5 h-1.5 rounded-full bg-rose-600" />
+        <span className="soc-badge badge-critical">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-crit" />
           CRITICAL
         </span>
       );
     case 'HIGH':
       return (
-        <span className="badge-high">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-600" />
+        <span className="soc-badge badge-high">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-high" />
           HIGH
         </span>
       );
     case 'MEDIUM':
     case 'WARNING':
       return (
-        <span className="badge-medium">
-          <span className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+        <span className="soc-badge badge-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-med" />
           MEDIUM
         </span>
       );
     case 'LOW':
     case 'INFO':
       return (
-        <span className="badge-low">
-          <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+        <span className="soc-badge badge-low">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-low" />
           LOW
+        </span>
+      );
+    case 'VERIFIED':
+    case 'OK':
+    case 'TRUSTED':
+      return (
+        <span className="soc-badge badge-ok">
+          <span className="w-1.5 h-1.5 rounded-full bg-soc-ok" />
+          {norm}
         </span>
       );
     default:
       return (
-        <span className="badge-verified">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+        <span className="soc-badge badge-neutral">
           {norm}
         </span>
       );

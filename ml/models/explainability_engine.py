@@ -17,6 +17,7 @@ from ml.behaviour.isolation_forest import BehavioralIsolationForest
 from ml.behaviour.kpi_manipulation import KpiManipulationEngine
 from ml.biometric.continuous_monitor import ContinuousIdentityMonitor
 from ml.models.correlation_engine import CorrelatedFindingGroup, CorrelationEngine
+from ml.models.registry import ModelRegistry, TrainedBehaviourModels
 from ml.models.risk_engine import RiskEngine
 from ml.preprocessing.dataset_loader import LoadedDataset
 from ml.preprocessing.feature_extraction import AnalystFeatures, FeatureExtractor, IncidentTraceFeatures
@@ -103,9 +104,20 @@ class ExplainabilityEngine:
 
 
 class SupervisoryAnalyticsPipeline:
-    """Master analytical pipeline orchestrating all Person 1 AI/Data engines."""
+    """Master analytical pipeline orchestrating all Person 1 AI/Data engines.
 
-    def __init__(self):
+    When trained behaviour artifacts exist (ml/models/artifacts/, committed for
+    air-gapped deployments) they are loaded automatically and used by the
+    behavioural detector; otherwise the pipeline falls back to per-cohort
+    statistical fitting. Pass `auto_load=False` plus explicit `trained_models`
+    to control the model set manually (tests, benchmarks, A/B).
+    """
+
+    def __init__(
+        self,
+        trained_models: Optional[TrainedBehaviourModels] = None,
+        auto_load: bool = True,
+    ):
         self.exec_gap_engine = ExecutionGapEngine()
         self.negative_space_engine = NegativeSpaceEngine()
         self.workload_engine = WorkloadEngine()
@@ -114,6 +126,9 @@ class SupervisoryAnalyticsPipeline:
         self.recurrence_engine = ThreatRecurrenceEngine()
         self.identity_monitor = ContinuousIdentityMonitor()
         self.correlation_engine = CorrelationEngine()
+        if trained_models is None and auto_load:
+            trained_models = ModelRegistry().load()
+        self.trained_models = trained_models
 
     def run(self, dataset: LoadedDataset) -> List[FindingOutput]:
         """Runs all detection engines, correlates outputs, computes risks, and renders explainable findings."""
@@ -136,8 +151,10 @@ class SupervisoryAnalyticsPipeline:
         # Phase 6: KPI Manipulation
         raw_detections.extend(self.kpi_engine.analyze(dataset, traces, analyst_map))
 
-        # Phase 6: Unsupervised Isolation Forest
-        raw_detections.extend(self.isolation_forest.analyze_analysts(dataset, analyst_map))
+        # Phase 6: Unsupervised Isolation Forest (trained artifacts used when available)
+        raw_detections.extend(
+            self.isolation_forest.analyze_analysts(dataset, analyst_map, trained=self.trained_models)
+        )
 
         # Phase 7: Threat Recurrence
         raw_detections.extend(self.recurrence_engine.analyze(dataset))

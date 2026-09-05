@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Check, X, ArrowRight, ShieldAlert } from 'lucide-react';
+import { ArrowRight, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 
 interface WorkflowStep {
@@ -55,21 +55,19 @@ const STEPS: WorkflowStep[] = [
 
 export function WorkflowGapDiagram() {
   return (
-    <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 font-mono select-none shadow-card">
+    <div className="soc-panel space-y-4 p-5 font-mono select-none">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-soc-border pb-3">
         <div className="flex items-center gap-2">
-          <ShieldAlert className="w-4 h-4 text-rose-600" />
-          <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-            SOP Execution vs Observed Actions (FND-EXEC-001)
-          </h3>
+          <ShieldAlert className="h-3.5 w-3.5 text-soc-crit" aria-hidden="true" />
+          <h3 className="panel-label">SOP Execution vs Observed Actions (FND-EXEC-001)</h3>
         </div>
         <Link
           href="/findings/FND-EXEC-001"
-          className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+          className="flex items-center gap-1 text-[11px] text-soc-accent transition-colors hover:text-soc-accentBright"
         >
           <span>Finding Detail</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <ArrowRight className="h-3 w-3" aria-hidden="true" />
         </Link>
       </div>
 
@@ -83,52 +81,58 @@ export function WorkflowGapDiagram() {
           return (
             <div
               key={idx}
-              className={`p-3.5 border rounded-xl grid grid-cols-1 md:grid-cols-12 gap-3 items-center ${
+              className={`grid grid-cols-1 items-center gap-3 rounded-sm border p-3.5 md:grid-cols-12 ${
                 isPassed
-                  ? 'bg-slate-50 border-slate-200'
+                  ? 'border-soc-border bg-soc-overlay'
                   : isFailed
-                  ? 'bg-rose-50/70 border-rose-200'
-                  : 'bg-amber-50/70 border-amber-200'
+                  ? 'border-soc-crit/40 bg-soc-critDim/60'
+                  : 'border-soc-med/40 bg-soc-medDim/60'
               }`}
             >
               {/* Step Title (4 cols) */}
-              <div className="md:col-span-4 flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 md:col-span-4">
                 {isPassed ? (
-                  <div className="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-[10px]">
+                  <span
+                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-ok/40 bg-soc-okDim text-[10px] font-bold text-soc-ok"
+                    aria-label="Step executed"
+                  >
                     ✓
-                  </div>
+                  </span>
                 ) : (
-                  <div className="w-5 h-5 bg-rose-600 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-[10px]">
+                  <span
+                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-crit/40 bg-soc-critDim text-[10px] font-bold text-soc-crit"
+                    aria-label="Step not executed"
+                  >
                     ✕
-                  </div>
+                  </span>
                 )}
                 <div>
-                  <div className="text-xs font-bold text-slate-900">{step.name}</div>
-                  <div className="text-[10px] text-slate-500">Target SLA: {step.timeExpected}</div>
+                  <div className="text-xs font-bold text-soc-text">{step.name}</div>
+                  <div className="text-[10px] tabular-nums text-soc-textMuted">Target SLA: {step.timeExpected}</div>
                 </div>
               </div>
 
               {/* Status Badge (3 cols) */}
               <div className="md:col-span-3">
                 {isPassed && (
-                  <span className="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full border border-emerald-200">
+                  <span className="rounded-sm border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-ok">
                     EXECUTED ({step.timeObserved})
                   </span>
                 )}
                 {isFailed && (
-                  <span className="px-2.5 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded-full border border-rose-200">
+                  <span className="rounded-sm border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-crit">
                     ACTION OMITTED
                   </span>
                 )}
                 {isBypassed && (
-                  <span className="px-2.5 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded-full border border-amber-200">
+                  <span className="rounded-sm border border-soc-med/30 bg-soc-medDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-med">
                     QUEUE BYPASSED
                   </span>
                 )}
               </div>
 
               {/* Note (5 cols) */}
-              <div className="md:col-span-5 text-xs font-sans text-slate-600 border-t md:border-t-0 md:border-l border-slate-200 pt-1.5 md:pt-0 md:pl-3">
+              <div className="border-t border-soc-border pt-1.5 font-sans text-xs text-soc-textSecondary md:col-span-5 md:border-l md:border-t-0 md:pl-3 md:pt-0">
                 {step.note}
               </div>
             </div>
@@ -137,13 +141,13 @@ export function WorkflowGapDiagram() {
       </div>
 
       {/* Summary Footer */}
-      <div className="pt-3 border-t border-slate-100 text-xs flex flex-wrap items-center justify-between text-slate-500">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-soc-border pt-3 text-[11px] text-soc-textMuted">
         <div className="flex items-center gap-4">
-          <span>Affected Alerts: <strong className="text-slate-900 font-semibold">83 cases</strong></span>
-          <span>Target Asset: <strong className="text-slate-900 font-semibold">DC-PROD-01</strong></span>
-          <span>Dwell Deviation: <strong className="text-rose-700 font-bold">-98.4%</strong></span>
+          <span>Affected Alerts: <strong className="font-semibold tabular-nums text-soc-text">83 cases</strong></span>
+          <span>Target Asset: <strong className="font-semibold text-soc-text">DC-PROD-01</strong></span>
+          <span>Dwell Deviation: <strong className="font-bold tabular-nums text-soc-crit">-98.4%</strong></span>
         </div>
-        <span className="text-rose-700 font-bold">RISK SCORE: 91/100</span>
+        <span className="font-bold text-soc-crit">RISK SCORE: 91/100</span>
       </div>
     </div>
   );

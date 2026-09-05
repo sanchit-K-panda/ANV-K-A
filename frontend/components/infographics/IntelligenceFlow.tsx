@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Database, Sliders, Cpu, Search, FileCheck2, ShieldAlert, FileText, UserCheck, ChevronRight } from 'lucide-react';
+import { Cpu } from 'lucide-react';
 
 interface Stage {
   id: string;
@@ -27,24 +27,28 @@ export const IntelligenceFlow: React.FC = () => {
   const [selected, setSelected] = useState<Stage>(FLOW_STAGES[3]);
 
   return (
-    <div className="soc-panel p-5 space-y-4 font-mono select-none">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5 text-xs">
+    <div className="soc-panel space-y-4 p-5 font-mono select-none">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-soc-border pb-2.5">
         <div className="flex items-center gap-2">
-          <Cpu className="w-4 h-4 text-slate-700" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-            ANVĪKṢA Intelligence Architecture Flow
-          </h3>
+          <Cpu className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
+          <h3 className="panel-label">ANVĪKṢA Intelligence Architecture Flow</h3>
         </div>
-        <div className="flex items-center gap-2 text-[10.5px] text-slate-500">
-          <span className="flex items-center gap-1"><span className="dot-green" /> Nominal</span>
-          <span className="flex items-center gap-1"><span className="dot-amber" /> Findings Active</span>
-          <span className="text-slate-400">·</span>
-          <span className="text-slate-700 font-semibold">100% AIR-GAPPED</span>
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.1em] text-soc-textMuted">
+          <span className="flex items-center gap-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-soc-ok" aria-hidden="true" /> Nominal
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-soc-med" aria-hidden="true" /> Findings Active
+          </span>
+          <span className="text-soc-textDim" aria-hidden="true">·</span>
+          <span className="rounded-sm border border-soc-border bg-soc-raised px-2 py-0.5 text-[9.5px] font-bold tracking-[0.08em] text-soc-textSecondary">
+            100% AIR-GAPPED
+          </span>
         </div>
       </div>
 
       {/* Horizontal Flow Blocks */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
         {FLOW_STAGES.map((s, idx) => {
           const isSelected = selected.id === s.id;
           const isDegraded = s.status === 'DEGRADED';
@@ -54,51 +58,42 @@ export const IntelligenceFlow: React.FC = () => {
               key={s.id}
               type="button"
               onClick={() => setSelected(s)}
-              className={`p-2.5 text-left rounded border transition-all ${
+              aria-pressed={isSelected}
+              className={`rounded-sm border p-2.5 text-left transition-colors ${
                 isSelected
-                  ? 'bg-slate-900 border-slate-900 text-white shadow-xs'
-                  : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-100'
+                  ? 'border-soc-accent/60 bg-soc-accentInk'
+                  : 'border-soc-border bg-soc-panel hover:border-soc-borderStrong hover:bg-soc-overlay'
               }`}
             >
-              <div className="flex items-center justify-between text-[10px] mb-1">
-                <span className={`font-mono font-bold ${isSelected ? 'text-slate-300' : 'text-slate-400'}`}>
-                  0{idx + 1}
-                </span>
-                <span className={isDegraded ? 'dot-amber' : 'dot-green'} />
+              <div className="mb-1 flex items-center justify-between text-[10px]">
+                <span className={`font-bold ${isSelected ? 'text-soc-accentBright' : 'text-soc-textDim'}`}>0{idx + 1}</span>
+                <span className={`h-1.5 w-1.5 rounded-full ${isDegraded ? 'bg-soc-med' : 'bg-soc-ok'}`} aria-hidden="true" />
               </div>
-              <div className={`text-[11px] font-bold truncate ${isSelected ? 'text-white' : 'text-slate-900'}`}>
-                {s.name}
-              </div>
-              <div className={`text-[9.5px] truncate font-mono mt-0.5 ${isSelected ? 'text-slate-400' : 'text-slate-500'}`}>
-                {s.sanskrit}
-              </div>
-              <div className={`text-[10px] mt-1.5 font-bold ${isSelected ? 'text-slate-200' : 'text-slate-800'}`}>
-                {s.metric}
-              </div>
+              <div className={`truncate text-[11px] font-bold ${isSelected ? 'text-soc-text' : 'text-soc-textSecondary'}`}>{s.name}</div>
+              <div className={`mt-0.5 truncate text-[9.5px] ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`}>{s.sanskrit}</div>
+              <div className="mt-1.5 text-[10px] font-bold tabular-nums text-soc-text">{s.metric}</div>
             </button>
           );
         })}
       </div>
 
       {/* Stage Detail Card */}
-      <div className="p-3.5 bg-slate-50 border border-slate-200 rounded flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+      <div className="flex flex-col justify-between gap-3 rounded-sm border border-soc-border bg-soc-overlay p-3.5 text-xs md:flex-row md:items-center">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-900">{selected.name}</span>
-            <span className="text-[10px] text-slate-500 font-mono">({selected.sanskrit})</span>
+            <span className="text-xs font-bold text-soc-text">{selected.name}</span>
+            <span className="text-[10px] text-soc-textMuted">({selected.sanskrit})</span>
           </div>
-          <p className="text-slate-600 font-sans text-xs">{selected.desc}</p>
+          <p className="font-sans text-xs text-soc-textSecondary">{selected.desc}</p>
         </div>
-        <div className="flex items-center gap-4 text-xs font-mono border-t md:border-t-0 md:border-l border-slate-200 pt-2 md:pt-0 md:pl-4 flex-shrink-0">
+        <div className="flex flex-shrink-0 items-center gap-4 border-t border-soc-border pt-2 text-xs md:border-l md:border-t-0 md:pl-4 md:pt-0">
           <div>
-            <span className="text-slate-400 text-[10px] uppercase block">Engine State</span>
-            <span className={`font-bold ${selected.status === 'DEGRADED' ? 'text-amber-700' : 'text-emerald-700'}`}>
-              {selected.status}
-            </span>
+            <span className="block text-[9px] uppercase tracking-[0.1em] text-soc-textDim">Engine State</span>
+            <span className={`text-xs font-bold ${selected.status === 'DEGRADED' ? 'text-soc-med' : 'text-soc-ok'}`}>{selected.status}</span>
           </div>
           <div>
-            <span className="text-slate-400 text-[10px] uppercase block">Throughput</span>
-            <span className="text-slate-900 font-bold">{selected.metric}</span>
+            <span className="block text-[9px] uppercase tracking-[0.1em] text-soc-textDim">Throughput</span>
+            <span className="text-xs font-bold tabular-nums text-soc-text">{selected.metric}</span>
           </div>
         </div>
       </div>

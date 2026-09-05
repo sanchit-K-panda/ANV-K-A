@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Check, X } from 'lucide-react';
 
 export const SocLifecycleFlow: React.FC = () => {
   const lifecycle = [
@@ -14,40 +13,42 @@ export const SocLifecycleFlow: React.FC = () => {
   ];
 
   return (
-    <div className="soc-panel p-5 space-y-3 font-mono select-none">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-xs">
-        <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-          SOC Lifecycle Infographic: Expected vs Observed Path
-        </h3>
-        <span className="text-[10.5px] text-slate-400">END-TO-END AUDIT</span>
+    <div className="soc-panel space-y-3 p-5 font-mono select-none">
+      <div className="flex items-center justify-between gap-2 border-b border-soc-border pb-2.5">
+        <h3 className="panel-label">SOC Lifecycle Infographic: Expected vs Observed Path</h3>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">End-to-End Audit</span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
-        {lifecycle.map((item, i) => (
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        {lifecycle.map((item) => (
           <div
             key={item.stage}
-            className={`p-3 rounded border space-y-1.5 ${
-              item.pass ? 'bg-slate-50 border-slate-200' : 'bg-rose-50/70 border-rose-200'
+            className={`space-y-1.5 rounded-sm border p-3 ${
+              item.pass ? 'border-soc-border bg-soc-overlay' : 'border-soc-crit/40 bg-soc-critDim/60'
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-900 font-sans">{item.stage}</span>
+              <span className="font-sans text-xs font-bold text-soc-text">{item.stage}</span>
               {item.pass ? (
-                <span className="w-4 h-4 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">
+                <span
+                  className="flex h-4 w-4 items-center justify-center border border-soc-ok/40 text-[9px] font-bold text-soc-ok"
+                  aria-label="Expected behavior observed"
+                >
                   ✓
                 </span>
               ) : (
-                <span className="w-4 h-4 rounded bg-rose-600 text-white flex items-center justify-center font-bold text-[10px]">
+                <span
+                  className="flex h-4 w-4 items-center justify-center border border-soc-crit/40 text-[9px] font-bold text-soc-crit"
+                  aria-label="Expected behavior not observed"
+                >
                   ✕
                 </span>
               )}
             </div>
-            <div className="text-[10px] text-slate-500">
-              Expected: <strong className="text-slate-700 font-mono">{item.expected}</strong>
+            <div className="text-[10px] text-soc-textMuted">
+              Expected: <strong className="font-mono font-medium text-soc-textSecondary">{item.expected}</strong>
             </div>
-            <div className={`text-[10.5px] font-bold font-mono ${item.pass ? 'text-emerald-700' : 'text-rose-700'}`}>
-              {item.actual}
-            </div>
+            <div className={`text-[10.5px] font-bold ${item.pass ? 'text-soc-ok' : 'text-soc-crit'}`}>{item.actual}</div>
           </div>
         ))}
       </div>

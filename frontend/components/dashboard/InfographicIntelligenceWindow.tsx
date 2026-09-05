@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import {
   Layers,
   Maximize2,
-  Minimize2,
   Activity,
   Workflow,
   Search,
@@ -12,11 +11,7 @@ import {
   ShieldAlert,
   Repeat,
   Share2,
-  Users,
   Lock,
-  ChevronRight,
-  Info,
-  Download,
   X,
 } from 'lucide-react';
 import { SocLifecycleFlow } from '@/components/infographics/SocLifecycleFlow';
@@ -93,7 +88,7 @@ export const INFOGRAPHIC_VIEWS: InfographicViewOption[] = [
     category: 'PRATYAYA Engine',
     engine: 'PRATYAYA',
     icon: Share2,
-    description: 'Connects Raw Alert ➔ Incident ➔ Analyst ➔ Omission ➔ Threat ➔ Supervisory Finding.',
+    description: 'Connects Raw Alert → Incident → Analyst → Omission → Threat → Supervisory Finding.',
   },
   {
     id: 'airgap-enclave',
@@ -124,7 +119,6 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
 }) => {
   const [currentViewId, setCurrentViewId] = useState<string>(activeViewId);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const activeView = INFOGRAPHIC_VIEWS.find((v) => v.id === currentViewId) || INFOGRAPHIC_VIEWS[0];
 
@@ -164,44 +158,38 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
 
   return (
     <>
-      {/* Primary Embedded Infographic Window */}
-      <div className="soc-panel p-5 space-y-4 font-mono select-none border-2 border-slate-300 shadow-card">
+      {/* Primary Embedded Intelligence Window */}
+      <div className="soc-panel select-none">
         {/* Window Top Control Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded bg-blue-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-              <Layers className="w-4 h-4" />
+        <div className="soc-panel-header">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-7 h-7 rounded-sm border border-soc-accent/60 bg-soc-accentInk flex items-center justify-center flex-shrink-0">
+              <Layers className="w-3.5 h-3.5 text-soc-accent" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider font-sans">
-                  Infographic Intelligence Window (All SOC Data Visualizer)
-                </h2>
-                <span className="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-0.2 rounded border border-blue-200">
-                  09 VISUAL MODELS
-                </span>
+                <h2 className="panel-label">Intelligence Window — SOC Data Visualizer</h2>
+                <span className="soc-badge badge-accent hidden md:inline">{INFOGRAPHIC_VIEWS.length} VISUAL MODELS</span>
               </div>
-              <p className="text-[11px] text-slate-500 font-sans mt-0.5">
+              <p className="text-2xs text-soc-textMuted mt-0.5 truncate hidden lg:block">
                 Interactive analytical infographics mapping telemetry, execution omissions, risk, and forensic proof.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <button
-              type="button"
-              onClick={() => setIsFullscreen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded text-xs transition-colors border border-slate-200"
-              title="Expand into Fullscreen Infographic Studio"
-            >
-              <Maximize2 className="w-3.5 h-3.5" />
-              <span>Fullscreen Studio</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setIsFullscreen(true)}
+            className="btn-ghost flex-shrink-0"
+            title="Expand into Fullscreen Intelligence Studio"
+          >
+            <Maximize2 className="w-3 h-3" />
+            <span>FULLSCREEN</span>
+          </button>
         </div>
 
-        {/* Infographic Model Selector Ribbon */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+        {/* Model Selector Ribbon */}
+        <div className="flex items-center gap-1.5 overflow-x-auto px-4 py-2.5 border-b border-soc-border text-xs">
           {INFOGRAPHIC_VIEWS.map((v) => {
             const Icon = v.icon;
             const isSelected = v.id === currentViewId;
@@ -211,17 +199,16 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
                 key={v.id}
                 type="button"
                 onClick={() => handleSelectView(v.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs whitespace-nowrap transition-all border ${
+                aria-pressed={isSelected}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-2xs whitespace-nowrap transition-colors border font-mono tracking-wide ${
                   isSelected
-                    ? 'bg-slate-900 border-slate-900 text-white font-bold shadow-xs'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
+                    : 'bg-soc-raised/40 border-soc-border text-soc-textSecondary hover:text-soc-text hover:border-soc-borderStrong'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-500'}`} />
-                <span>{v.title}</span>
-                <span className={`text-[9.5px] px-1 py-0.1 rounded font-mono ${
-                  isSelected ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-600'
-                }`}>
+                <Icon className={`w-3 h-3 ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`} />
+                <span className="font-sans font-medium">{v.title}</span>
+                <span className={`px-1 rounded-sm text-2xs ${isSelected ? 'bg-soc-accent/20 text-soc-accentBright' : 'bg-soc-raised text-soc-textMuted'}`}>
                   {v.engine}
                 </span>
               </button>
@@ -229,54 +216,54 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
           })}
         </div>
 
-        {/* Infographic Display Stage */}
-        <div className="bg-slate-50/50 p-2 rounded-lg border border-slate-200">
+        {/* Display Stage */}
+        <div className="p-4 bg-soc-overlay/40">
           {renderActiveInfographic()}
         </div>
       </div>
 
-      {/* Fullscreen Infographic Studio Modal */}
+      {/* Fullscreen Intelligence Studio */}
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex flex-col font-mono text-xs animate-in fade-in duration-150 p-4 sm:p-6 overflow-hidden">
-          <div className="bg-white border border-slate-200 rounded-xl flex-1 flex flex-col overflow-hidden shadow-2xl">
-            {/* Modal Header */}
-            <div className="p-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <Layers className="w-5 h-5 text-blue-600" />
-                <div>
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex flex-col text-xs p-4 sm:p-6 overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="ANVĪKṢA Intelligence Studio"
+        >
+          <div className="bg-soc-panel border border-soc-borderStrong flex-1 flex flex-col overflow-hidden shadow-drawer">
+            {/* Studio Header */}
+            <div className="soc-panel-header px-4 py-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <Layers className="w-4 h-4 text-soc-accent flex-shrink-0" />
+                <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider font-sans">
-                      ANVĪKṢA Infographic Studio · {activeView.title}
+                    <h3 className="text-xs font-semibold text-soc-text tracking-wide">
+                      ANVĪKṢA Intelligence Studio · {activeView.title}
                     </h3>
-                    <span className="text-[10px] bg-slate-900 text-white font-bold px-2 py-0.2 rounded">
-                      {activeView.engine}
-                    </span>
+                    <span className="soc-badge badge-accent">{activeView.engine}</span>
                   </div>
-                  <p className="text-xs text-slate-500 font-sans mt-0.5">
+                  <p className="text-2xs text-soc-textMuted mt-0.5 truncate">
                     {activeView.description}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsFullscreen(false)}
-                  className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-200 rounded transition-colors"
-                  title="Close Fullscreen"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsFullscreen(false)}
+                className="p-1.5 text-soc-textMuted hover:text-soc-text hover:bg-soc-raised rounded-sm transition-colors"
+                title="Close Fullscreen"
+                aria-label="Close fullscreen studio"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
 
-            {/* Modal Body: Sidebar Nav + Stage */}
+            {/* Studio Body: Sidebar Nav + Stage */}
             <div className="flex-1 flex overflow-hidden">
               {/* Left View Switcher */}
-              <div className="w-72 bg-slate-50 border-r border-slate-200 p-3 space-y-2 overflow-y-auto flex-shrink-0">
-                <div className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider px-1">
-                  All Infographic Models
-                </div>
+              <div className="w-64 bg-soc-bg border-r border-soc-border p-3 space-y-2 overflow-y-auto flex-shrink-0 hidden md:block">
+                <div className="panel-label px-1 pb-1">All Infographic Models</div>
                 <div className="space-y-1">
                   {INFOGRAPHIC_VIEWS.map((v) => {
                     const Icon = v.icon;
@@ -287,19 +274,18 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
                         key={v.id}
                         type="button"
                         onClick={() => handleSelectView(v.id)}
-                        className={`w-full text-left p-2.5 rounded text-xs transition-all border ${
+                        aria-pressed={isSelected}
+                        className={`w-full text-left px-2.5 py-2 rounded-sm text-xs transition-colors border ${
                           isSelected
-                            ? 'bg-slate-900 border-slate-900 text-white font-bold shadow-xs'
-                            : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                            ? 'bg-soc-accentInk border-soc-accent/50 text-soc-text'
+                            : 'bg-transparent border-transparent text-soc-textSecondary hover:bg-soc-raised hover:text-soc-text'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-600'}`} />
-                            <span className="font-sans font-semibold text-xs">{v.title}</span>
-                          </div>
+                        <div className="flex items-center gap-2">
+                          <Icon className={`w-3.5 h-3.5 flex-shrink-0 ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`} />
+                          <span className="font-medium truncate">{v.title}</span>
                         </div>
-                        <div className={`text-[10px] mt-1 font-mono ${isSelected ? 'text-slate-300' : 'text-slate-400'}`}>
+                        <div className={`text-2xs mt-1 font-mono pl-6 ${isSelected ? 'text-soc-accentBright/70' : 'text-soc-textDim'}`}>
                           {v.category} · {v.engine}
                         </div>
                       </button>
@@ -309,7 +295,7 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
               </div>
 
               {/* Center Viewport */}
-              <div className="flex-1 p-6 overflow-y-auto bg-slate-100/50">
+              <div className="flex-1 p-5 overflow-y-auto bg-soc-overlay/40">
                 <div className="max-w-5xl mx-auto space-y-4">
                   {renderActiveInfographic()}
                 </div>

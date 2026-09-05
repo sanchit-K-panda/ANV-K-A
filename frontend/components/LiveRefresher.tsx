@@ -17,14 +17,13 @@ export function LiveRefresher() {
         setIsRefreshing(true);
         // Soft refresh the Next.js Server Component to fetch the latest data
         router.refresh();
-        
+
         // Remove the spinner after 1 second to show completion
         setTimeout(() => setIsRefreshing(false), 1000);
       }
     };
 
     eventSource.onerror = () => {
-      console.log('SSE Stream disconnected. Reconnecting...');
       eventSource.close();
       // Browser EventSource automatically reconnects
     };
@@ -34,13 +33,12 @@ export function LiveRefresher() {
     };
   }, [router]);
 
-  // A tiny unobtrusive visual indicator that data is being refreshed in the background
   if (!isRefreshing) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-soc-accent text-white px-3 py-1.5 rounded-sm flex items-center gap-2 text-xs font-mono border border-[#3A4050] shadow-lg animate-fade-in z-50">
-      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-      <span>STREAM: NEW DATA INGESTED</span>
+    <div className="fixed bottom-4 right-4 bg-soc-panel text-soc-text px-3 py-1.5 rounded-sm flex items-center gap-2 text-2xs font-mono border border-soc-border shadow-dropdown z-50 tracking-wider">
+      <RefreshCw className="w-3 h-3 animate-spin text-soc-accent" />
+      <span className="text-soc-textSecondary">STREAM: NEW DATA INGESTED</span>
     </div>
   );
 }

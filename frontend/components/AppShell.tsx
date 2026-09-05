@@ -11,24 +11,29 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isLoginPage) {
     return (
-      <main className="h-screen w-full bg-slate-50 text-slate-900 flex flex-col justify-center items-center p-3 sm:p-4 md:p-6 overflow-hidden selection:bg-slate-900 selection:text-white">
+      <main className="h-screen w-full bg-soc-bg text-soc-text flex flex-col overflow-hidden">
         {children}
       </main>
     );
   }
 
+  // Floating-panel shell: sidebar and topbar are inset rounded surfaces
+  // over the paper canvas — not edge-glued chrome.
   return (
-    <div className="flex min-h-screen w-full overflow-x-hidden bg-slate-50">
-      <Suspense fallback={<div className="w-60 bg-white border-r border-slate-200" />}>
+    <div className="flex h-screen w-full gap-3 p-3 overflow-hidden bg-soc-bg">
+      <Suspense fallback={<div className="w-60 rounded-2xl bg-soc-panel border border-soc-border" />}>
         <Sidebar />
       </Suspense>
 
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-slate-50">
+      <div className="flex-1 flex flex-col gap-3 min-w-0">
         <Topbar />
-        <main className="p-6 md:p-8 flex-1 max-w-7xl w-full mx-auto">
-          <Suspense fallback={<div className="p-8 font-mono text-xs text-slate-500">Loading telemetry...</div>}>
-            {children}
-          </Suspense>
+
+        <main className="flex-1 min-h-0 overflow-y-auto rounded-2xl border border-soc-border bg-soc-panel/40 shadow-card">
+          <div className="p-5 md:p-7 w-full max-w-console mx-auto">
+            <Suspense fallback={<div className="p-8 text-sm text-soc-textMuted">Loading telemetry...</div>}>
+              {children}
+            </Suspense>
+          </div>
         </main>
       </div>
     </div>

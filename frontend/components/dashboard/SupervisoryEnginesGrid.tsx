@@ -11,7 +11,6 @@ import {
   Lock,
   ShieldCheck,
   ChevronRight,
-  Cpu,
 } from 'lucide-react';
 
 export interface EngineItem {
@@ -36,12 +35,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'VIVEKA',
     role: 'SOP Bypass & Omission Detection',
     status: 'ALERT',
-    badge: '14 GAPS DETECTED',
+    badge: '14 gaps detected',
     summary: 'Identifies procedural omissions between incident SOPs and actual forensic actions.',
     metricLabel: 'Omission Rate',
     metricValue: '74% Bypass',
     icon: Zap,
-    color: 'text-rose-700 bg-rose-50 border-rose-200',
+    color: 'badge-critical',
     targetInfographicId: 'execution-gap',
   },
   {
@@ -50,12 +49,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'ABHĀVA',
     role: 'Omission Intelligence',
     status: 'ALERT',
-    badge: '6 OMISSIONS',
+    badge: '6 omissions',
     summary: 'Analyzes what should have happened but did not occur in telemetry.',
     metricLabel: 'Missing Dumps',
     metricValue: '63 Cases',
     icon: Search,
-    color: 'text-rose-700 bg-rose-50 border-rose-200',
+    color: 'badge-critical',
     targetInfographicId: 'negative-space',
   },
   {
@@ -64,12 +63,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'VIKĀRA',
     role: 'SLA & MTTR Anomaly Model',
     status: 'ALERT',
-    badge: '12 ANOMALIES',
+    badge: '12 anomalies',
     summary: 'Detects rapid alert closures, metric manipulation, and analyst burnout.',
     metricLabel: 'Mean Dwell Time',
     metricValue: '42s (vs 44m)',
     icon: Activity,
-    color: 'text-amber-700 bg-amber-50 border-amber-200',
+    color: 'badge-medium',
     targetInfographicId: 'behaviour-ml',
   },
   {
@@ -78,12 +77,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'MĀN',
     role: 'Bayesian Weight Decomposition',
     status: 'ALERT',
-    badge: 'RISK 91 / 100',
+    badge: 'Risk 91/100',
     summary: 'Decomposes composite SOC risk into additive mathematical factor weights.',
     metricLabel: 'Composite Score',
     metricValue: '91/100 (Critical)',
     icon: ShieldAlert,
-    color: 'text-rose-700 bg-rose-50 border-rose-200',
+    color: 'badge-critical',
     targetInfographicId: 'risk-decomposition',
   },
   {
@@ -92,12 +91,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'PUNARĀVṚTTI',
     role: 'Unresolved Attack Tracking',
     status: 'ALERT',
-    badge: '8 RECURRENCES',
+    badge: '8 recurrences',
     summary: 'Flags persistent attack signatures recurring on the same domain assets.',
     metricLabel: 'Repeat Frequency',
     metricValue: '3.2x Frequency',
     icon: Repeat,
-    color: 'text-amber-700 bg-amber-50 border-amber-200',
+    color: 'badge-medium',
     targetInfographicId: 'threat-recurrence',
   },
   {
@@ -106,26 +105,26 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'PRATYAYA',
     role: '7-Point Mathematical Proof',
     status: 'NOMINAL',
-    badge: '100% AUDITABLE',
+    badge: '100% auditable',
     summary: 'Answers WHAT, WHY, WHEN, WHERE, WHO, EVIDENCE, and RECOMMENDATION.',
     metricLabel: 'Confidence Mean',
     metricValue: '94% Confidence',
     icon: FileCheck2,
-    color: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+    color: 'badge-ok',
     targetInfographicId: 'correlation-graph',
   },
   {
     id: 'saksi',
     name: 'Cryptographic Audit',
-    sanskrit: 'SAKṢĪ + AKṢARA',
+    sanskrit: 'SAKṢĪ',
     role: 'Immutable Local Hash-Chain',
     status: 'NOMINAL',
-    badge: 'BLOCK #9905',
+    badge: 'Block #9905',
     summary: 'Append-only SHA-256 local ledger guaranteeing tamper-evident decision logs.',
     metricLabel: 'Chain Integrity',
     metricValue: '100% Verified',
     icon: Lock,
-    color: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+    color: 'badge-ok',
     targetInfographicId: 'airgap-enclave',
   },
   {
@@ -134,12 +133,12 @@ export const SUPERVISORY_ENGINES: EngineItem[] = [
     sanskrit: 'KAVACA',
     role: 'Biometrics + TPM Hardware Binding',
     status: 'NOMINAL',
-    badge: 'DEV-21 BOUND',
+    badge: 'DEV-21 bound',
     summary: 'DARŚANA optical verification + KṢAṆA 15-min rotating session credentials.',
     metricLabel: 'Session Token',
     metricValue: '15m Rotating',
     icon: ShieldCheck,
-    color: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+    color: 'badge-ok',
     targetInfographicId: 'secure-session',
   },
 ];
@@ -153,75 +152,90 @@ export const SupervisoryEnginesGrid: React.FC<SupervisoryEnginesGridProps> = ({
   selectedEngineId,
   onSelectEngine,
 }) => {
+  const alertCount = SUPERVISORY_ENGINES.filter((e) => e.status === 'ALERT').length;
+
   return (
-    <div className="soc-panel p-5 space-y-3 font-mono select-none">
+    <div className="soc-panel select-none">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2.5 text-xs">
-        <div className="flex items-center gap-2">
-          <Cpu className="w-4 h-4 text-slate-800" />
-          <h2 className="font-bold text-slate-900 uppercase tracking-wider text-xs font-sans">
-            ANVĪKṢA Core Supervisory Intelligence Engines
-          </h2>
+      <div className="soc-panel-header">
+        <div>
+          <span className="panel-label">Supervisory Intelligence Engines</span>
+          <p className="text-2xs text-soc-textMuted mt-0.5">
+            Eight analytical engines continuously interrogate the same telemetry
+          </p>
         </div>
-        <div className="flex items-center gap-2 text-[10.5px] text-slate-500">
-          <span className="flex items-center gap-1"><span className="dot-green" /> 3 Nominal</span>
-          <span className="flex items-center gap-1"><span className="dot-red" /> 5 Alert Findings</span>
-          <span className="text-slate-300">|</span>
-          <span className="text-slate-700 font-semibold">Click engine to launch Infographic</span>
+        <div className="flex items-center gap-3 text-2xs text-soc-textMuted">
+          <span className="flex items-center gap-1.5"><span className="dot-green" /> {SUPERVISORY_ENGINES.length - alertCount} nominal</span>
+          <span className="flex items-center gap-1.5"><span className="dot-red" /> {alertCount} alert</span>
         </div>
       </div>
 
-      {/* 8-Engine Bento Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {SUPERVISORY_ENGINES.map((eng) => {
+      {/* 8-Engine Grid — sigil cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-3">
+        {SUPERVISORY_ENGINES.map((eng, idx) => {
           const Icon = eng.icon;
           const isSelected = selectedEngineId === eng.id;
+          const isAlert = eng.status === 'ALERT';
+          const sigil = eng.sanskrit.charAt(0);
 
           return (
             <button
               key={eng.id}
               type="button"
               onClick={() => onSelectEngine(eng)}
-              className={`p-3.5 text-left rounded-lg border transition-all relative flex flex-col justify-between space-y-2 group ${
+              aria-pressed={isSelected}
+              className={`animate-sigil-in p-4 text-left transition-all flex flex-col justify-between space-y-3 group rounded-xl border card-hover ${
                 isSelected
-                  ? 'bg-slate-900 border-slate-900 text-white shadow-md ring-2 ring-slate-900/20'
-                  : 'bg-slate-50 border-slate-200 hover:border-slate-300 hover:bg-slate-100/80 text-slate-800'
+                  ? 'bg-soc-accentInk border-soc-accent/40'
+                  : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong'
               }`}
+              style={{ animationDelay: `${idx * 50}ms` }}
             >
               <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-slate-700'}`} />
-                    <span className={`text-[10px] font-bold font-mono ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
-                      {eng.sanskrit}
-                    </span>
-                  </div>
+                <div className="flex items-start justify-between mb-3">
+                  {/* Engine Sigil — the recurring identity motif */}
                   <span
-                    className={`text-[9.5px] font-mono font-bold px-1.5 py-0.2 rounded border ${
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
                       isSelected
-                        ? 'bg-slate-800 text-slate-200 border-slate-700'
-                        : eng.color
+                        ? 'bg-soc-accent text-white shadow-sm'
+                        : isAlert
+                        ? 'bg-soc-critDim text-soc-crit'
+                        : 'bg-soc-okDim text-soc-ok'
                     }`}
                   >
+                    <span className="font-display text-base font-bold leading-none">{sigil}</span>
+                    <span
+                      className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-soc-panel flex items-center justify-center ${
+                        isAlert ? 'bg-soc-crit' : 'bg-soc-ok'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <Icon className="w-1.5 h-1.5 text-white" />
+                    </span>
+                  </span>
+                  <span className={`soc-badge ${isSelected ? 'badge-accent' : eng.color}`}>
                     {eng.badge}
                   </span>
                 </div>
 
-                <div className={`text-xs font-bold font-sans ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                <div className="text-[10px] font-mono tracking-[0.1em] text-soc-textDim">
+                  {eng.sanskrit}
+                </div>
+                <div className="font-display text-sm font-bold text-soc-text leading-tight mt-0.5">
                   {eng.name}
                 </div>
-                <div className={`text-[10.5px] font-sans mt-0.5 line-clamp-1 ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
+                <div className="text-2xs text-soc-textMuted mt-1 line-clamp-1">
                   {eng.role}
                 </div>
               </div>
 
               {/* Metric & Interactive Trigger */}
-              <div className={`pt-2 border-t flex items-center justify-between text-[10.5px] ${
-                isSelected ? 'border-slate-800 text-slate-300' : 'border-slate-200/80 text-slate-600'
-              }`}>
-                <span>{eng.metricLabel}: <strong className={isSelected ? 'text-white' : 'text-slate-900'}>{eng.metricValue}</strong></span>
-                <span className="flex items-center gap-0.5 text-blue-600 font-semibold group-hover:translate-x-0.5 transition-transform">
-                  <span className={isSelected ? 'text-slate-300' : 'text-blue-600'}>View</span>
+              <div className="flex items-center justify-between pt-2.5 border-t border-soc-border/70">
+                <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+                  {eng.metricValue}
+                </span>
+                <span className={`flex items-center gap-0.5 text-2xs font-semibold transition-transform group-hover:translate-x-0.5 ${isSelected ? 'text-soc-accent' : 'text-soc-textDim group-hover:text-soc-accent'}`}>
+                  Open
                   <ChevronRight className="w-3 h-3" />
                 </span>
               </div>

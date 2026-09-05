@@ -12,29 +12,36 @@ export const SecureSessionEnclave: React.FC = () => {
   ];
 
   return (
-    <div className="soc-panel p-5 space-y-3 font-mono select-none">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-xs">
+    <div className="soc-panel space-y-3 p-5 font-mono select-none">
+      <div className="flex items-center justify-between gap-2 border-b border-soc-border pb-2.5">
         <div className="flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-            KAVACA Zero-Trust Session Enclave Architecture
-          </h3>
+          <ShieldCheck className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
+          <h3 className="panel-label">KAVACA Zero-Trust Session Enclave Architecture</h3>
         </div>
-        <span className="text-[10.5px] text-slate-500">CONTINUOUS TRUST PROTOCOL</span>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">Continuous Trust Protocol</span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {flow.map((step) => {
           const Icon = step.icon;
+          const isRotating = step.status === 'ROTATING';
           return (
-            <div key={step.title} className="p-3.5 bg-slate-50 border border-slate-200 rounded space-y-1.5">
+            <div key={step.title} className="space-y-1.5 rounded-sm border border-soc-border bg-soc-overlay p-3.5">
               <div className="flex items-center justify-between">
-                <Icon className="w-4 h-4 text-slate-700" />
-                <span className="badge-verified">{step.status}</span>
+                <Icon className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
+                <span
+                  className={`rounded-sm border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] ${
+                    isRotating
+                      ? 'border-soc-accent/35 bg-soc-accentDim text-soc-accent'
+                      : 'border-soc-ok/30 bg-soc-okDim text-soc-ok'
+                  }`}
+                >
+                  {step.status}
+                </span>
               </div>
-              <div className="text-xs font-bold text-slate-900 font-sans">{step.title}</div>
-              <div className="text-[10.5px] text-slate-500 font-mono">{step.subtitle}</div>
-              <p className="text-[11px] font-sans text-slate-600 pt-1 leading-snug">{step.desc}</p>
+              <div className="font-sans text-xs font-bold text-soc-text">{step.title}</div>
+              <div className="text-[10.5px] text-soc-textMuted">{step.subtitle}</div>
+              <p className="pt-1 font-sans text-[11px] leading-snug text-soc-textSecondary">{step.desc}</p>
             </div>
           );
         })}

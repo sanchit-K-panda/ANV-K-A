@@ -2,61 +2,77 @@
 
 import React from 'react';
 import { MOCK_WORKLOAD } from '@/lib/mockData';
-import { Users, AlertTriangle } from 'lucide-react';
 
 export default function WorkloadPage() {
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Analyst Workload &amp; Capacity
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              VIKĀRA / WORKLOAD
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>WORKLOAD</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Analyst Workload &amp; Capacity</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Supervisory monitoring of alert fatigue, rapid-closure anomalies, and ticket concentration.
           </p>
         </div>
+        <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+          {MOCK_WORKLOAD.length} analysts on shift
+        </span>
       </div>
 
-      <div className="soc-panel overflow-hidden">
+      {/* Workload table */}
+      <div className="soc-panel card-hover overflow-hidden animate-fade-up" style={{ animationDelay: '60ms' }}>
+        <div className="soc-panel-header">
+          <div>
+            <span className="panel-label">Capacity Matrix</span>
+            <p className="text-2xs text-soc-textMuted mt-0.5">Tier assignment load</p>
+          </div>
+        </div>
+
         <div className="overflow-x-auto">
-          <table className="soc-table font-mono">
+          <table className="soc-table">
             <thead>
               <tr>
-                <th>ANALYST</th>
-                <th>ROLE</th>
-                <th>CRITICAL CASES</th>
-                <th>ACTIVE CASES</th>
-                <th>MEAN CLOSURE</th>
-                <th>INVESTIGATION RATE</th>
-                <th className="text-right">WORKLOAD STATUS</th>
+                <th>Analyst</th>
+                <th>Role</th>
+                <th>Critical cases</th>
+                <th>Active cases</th>
+                <th>Mean closure</th>
+                <th>Investigation rate</th>
+                <th className="text-right">Workload status</th>
               </tr>
             </thead>
             <tbody>
               {MOCK_WORKLOAD.map((w) => (
-                <tr key={w.analyst_id} className="hover:bg-slate-50 transition-colors">
-                  <td className="font-bold text-slate-900 font-sans">{w.name} ({w.analyst_id})</td>
-                  <td className="text-slate-600 font-sans">{w.role}</td>
-                  <td className="text-slate-900 font-bold">{w.critical_cases}</td>
-                  <td className="text-slate-700">{w.active_cases}</td>
-                  <td className="text-slate-500">{w.mean_closure_minutes} min</td>
-                  <td className="text-slate-900 font-bold">{Math.round(w.investigation_rate * 100)}%</td>
+                <tr key={w.analyst_id}>
+                  <td className="text-soc-text font-medium">
+                    {w.name} <span className="col-mono">({w.analyst_id})</span>
+                  </td>
+                  <td className="text-soc-textSecondary">{w.role}</td>
+                  <td className="font-mono text-2xs text-soc-text tabular-nums">{w.critical_cases}</td>
+                  <td className="font-mono text-2xs text-soc-textSecondary tabular-nums">{w.active_cases}</td>
+                  <td className="col-mono">{w.mean_closure_minutes} min</td>
+                  <td className="font-mono text-2xs text-soc-text tabular-nums">
+                    {Math.round(w.investigation_rate * 100)}%
+                  </td>
                   <td className="text-right whitespace-nowrap">
                     <span
-                      className={
+                      className={`soc-badge ${
                         w.workload_level === 'HIGH'
                           ? 'badge-critical'
                           : w.workload_level === 'NORMAL'
-                          ? 'badge-medium'
+                          ? 'badge-ok'
                           : 'badge-low'
-                      }
+                      }`}
                     >
-                      {w.workload_level} {w.is_bottleneck ? '· BOTTLENECK' : ''}
+                      {w.workload_level}
+                      {w.is_bottleneck ? ' · BOTTLENECK' : ''}
                     </span>
                   </td>
                 </tr>

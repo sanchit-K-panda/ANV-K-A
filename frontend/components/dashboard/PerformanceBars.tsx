@@ -24,7 +24,7 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
       target: 85,
       unit: '%',
       status: detectionScore >= 85 ? 'NOMINAL' : 'DEFICIT',
-      color: '#10B981',
+      bar: 'bg-soc-ok',
       deficit: 85 - detectionScore,
     },
     {
@@ -33,7 +33,7 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
       target: 85,
       unit: '%',
       status: investigationScore >= 85 ? 'NOMINAL' : 'DEFICIT',
-      color: '#EF4444',
+      bar: 'bg-soc-crit',
       deficit: 85 - investigationScore,
     },
     {
@@ -42,7 +42,7 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
       target: 80,
       unit: '%',
       status: escalationScore >= 80 ? 'NOMINAL' : 'DEFICIT',
-      color: '#F59E0B',
+      bar: 'bg-soc-high',
       deficit: 80 - escalationScore,
     },
     {
@@ -51,56 +51,48 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
       target: 75,
       unit: '%',
       status: responseScore >= 75 ? 'NOMINAL' : 'DEFICIT',
-      color: '#3B82F6',
+      bar: 'bg-soc-accent',
       deficit: 75 - responseScore,
     },
   ];
 
   return (
-    <div className="soc-panel p-5 flex flex-col justify-between select-none">
+    <div className="soc-panel flex flex-col justify-between select-none h-full">
       <div>
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 font-mono text-xs">
-          <span className="font-bold text-slate-500 uppercase tracking-wider text-[11px]">
-            LIFECYCLE EFFECTIVENESS
-          </span>
-          <span className="text-slate-400 text-[10.5px]">SLA BENCHMARK</span>
+        <div className="soc-panel-header">
+          <span className="panel-label">Lifecycle Effectiveness</span>
+          <span className="text-2xs font-mono text-soc-textMuted">SLA BENCHMARK</span>
         </div>
 
         {/* Horizontal Bars */}
-        <div className="py-3 space-y-3.5">
+        <div className="px-4 py-3.5 space-y-3.5">
           {metrics.map((m) => {
             const isDeficit = m.status === 'DEFICIT';
 
             return (
-              <div key={m.name} className="space-y-1">
+              <div key={m.name} className="space-y-1.5">
                 <div className="flex justify-between items-center text-xs">
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-slate-900 font-sans">{m.name}</span>
+                    <span className="font-medium text-soc-text">{m.name}</span>
                     {isDeficit && (
-                      <span className="text-[10px] font-mono text-rose-700 bg-rose-50 px-1.5 py-0.2 rounded border border-rose-200">
-                        -{m.deficit}% SLA DEFICIT
-                      </span>
+                      <span className="soc-badge badge-critical">-{m.deficit}% SLA DEFICIT</span>
                     )}
                   </div>
-                  <div className="font-mono text-xs text-slate-700">
-                    <strong className="text-slate-900 font-bold">{m.score}{m.unit}</strong>
-                    <span className="text-slate-400 ml-1.5 font-normal">/ {m.target}{m.unit} target</span>
+                  <div className="font-mono text-2xs text-soc-textMuted tabular-nums">
+                    <span className="text-soc-text font-semibold text-xs">{m.score}{m.unit}</span>
+                    <span className="ml-1.5">/ {m.target}{m.unit} TARGET</span>
                   </div>
                 </div>
 
-                {/* Progress Track */}
-                <div className="relative w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                {/* Progress Track with SLA Target Pin */}
+                <div className="relative w-full h-1.5 bg-soc-raised rounded-sm overflow-visible">
                   <div
-                    className="h-full rounded-full transition-all duration-300"
-                    style={{
-                      width: `${m.score}%`,
-                      backgroundColor: m.color,
-                    }}
+                    className={`h-full rounded-sm transition-all duration-300 ${m.bar}`}
+                    style={{ width: `${m.score}%` }}
                   />
-                  {/* SLA Target Pin */}
                   <div
-                    className="absolute top-0 bottom-0 w-0.5 bg-slate-900 z-10"
+                    className="absolute top-[-3px] bottom-[-3px] w-px bg-soc-textDim z-10"
                     style={{ left: `${m.target}%` }}
                     title={`SLA Target: ${m.target}%`}
                   />
@@ -112,11 +104,11 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
       </div>
 
       {/* Footer Insight */}
-      <div className="pt-3 mt-2 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
-        <span className="text-[11px] truncate">Detection nominal (92%), severe investigation drop (31%)</span>
-        <Link href="/analytics" className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-0.5 text-xs flex-shrink-0">
-          <span>Lifecycle Analysis</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
+      <div className="px-4 py-3 border-t border-soc-border flex items-center justify-between text-xs font-mono gap-3">
+        <span className="text-2xs text-soc-textMuted truncate">Detection nominal (92%), severe investigation drop (31%)</span>
+        <Link href="/analytics" className="text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-0.5 text-2xs flex-shrink-0 transition-colors">
+          <span>LIFECYCLE</span>
+          <ArrowUpRight className="w-3 h-3" />
         </Link>
       </div>
     </div>

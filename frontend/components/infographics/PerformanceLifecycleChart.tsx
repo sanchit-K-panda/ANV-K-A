@@ -25,7 +25,6 @@ export function PerformanceLifecycleChart({
       unit: '%',
       status: detectionScore >= 85 ? 'HEALTHY' : 'DEFICIT',
       description: 'Percentage of raw telemetry alerts properly triggered by SIEM/EDR rules.',
-      color: '#10B981',
     },
     {
       name: 'Investigation Rate',
@@ -34,7 +33,6 @@ export function PerformanceLifecycleChart({
       unit: '%',
       status: investigationScore >= 85 ? 'HEALTHY' : 'DEFICIT',
       description: 'Percentage of high/critical alerts receiving forensic memory/process inspection.',
-      color: '#EF4444',
     },
     {
       name: 'Escalation Integrity',
@@ -43,7 +41,6 @@ export function PerformanceLifecycleChart({
       unit: '%',
       status: escalationScore >= 80 ? 'HEALTHY' : 'DEFICIT',
       description: 'Cases appropriately routed to Tier 2/3 and incident commander queues.',
-      color: '#F59E0B',
     },
     {
       name: 'Response Dwell SLA',
@@ -52,26 +49,23 @@ export function PerformanceLifecycleChart({
       unit: '%',
       status: responseScore >= 75 ? 'HEALTHY' : 'DEFICIT',
       description: 'Mean containment and host isolation completed within compliance timeframes.',
-      color: '#3B82F6',
     },
   ];
 
   return (
-    <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 font-mono select-none shadow-card">
+    <div className="soc-panel space-y-4 p-5 font-mono select-none">
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-xs">
+      <div className="flex items-center justify-between gap-2 border-b border-soc-border pb-3">
         <div className="flex items-center gap-2">
-          <BarChart3 className="w-4 h-4 text-slate-700" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider">
-            SOC Lifecycle Performance vs SLA
-          </h3>
+          <BarChart3 className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
+          <h3 className="panel-label">SOC Lifecycle Performance vs SLA</h3>
         </div>
-        <Link href="/analytics" className="text-xs text-blue-600 hover:text-blue-700 font-medium">
+        <Link href="/analytics" className="text-[11px] text-soc-accent transition-colors hover:text-soc-accentBright">
           MEDHĀ Analytics →
         </Link>
       </div>
 
-      {/* Progress Bars */}
+      {/* SLA bars */}
       <div className="space-y-4 text-xs">
         {metrics.map((m, idx) => {
           const isDeficit = m.status === 'DEFICIT';
@@ -80,52 +74,50 @@ export function PerformanceLifecycleChart({
             <div key={idx} className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-900">{m.name}</span>
+                  <span className="font-bold text-soc-text">{m.name}</span>
                   {isDeficit ? (
-                    <span className="px-2 py-0.5 bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold rounded-full">
+                    <span className="rounded-sm border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-crit">
                       DEFICIT (-{m.target - m.score}%)
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold rounded-full">
+                    <span className="rounded-sm border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-ok">
                       NOMINAL
                     </span>
                   )}
                 </div>
                 <div className="text-xs">
-                  <strong className="text-slate-900 font-bold">{m.score}{m.unit}</strong>
-                  <span className="text-slate-400 ml-1.5 font-normal">SLA: {m.target}{m.unit}</span>
+                  <strong className="font-bold tabular-nums text-soc-text">{m.score}{m.unit}</strong>
+                  <span className="ml-1.5 font-normal tabular-nums text-soc-textMuted">SLA: {m.target}{m.unit}</span>
                 </div>
               </div>
 
-              {/* Progress Bar with SLA Pin and Soft Corners */}
-              <div className="relative w-full h-3 bg-slate-100 border border-slate-200 overflow-hidden rounded-full">
+              {/* Progress bar with 1px SLA target pin */}
+              <div className="relative h-2.5 w-full overflow-hidden border border-soc-border bg-soc-raised">
                 <div
-                  className="h-full rounded-full transition-all duration-500"
+                  className="h-full transition-all duration-500"
                   style={{
                     width: `${m.score}%`,
-                    backgroundColor: m.color,
+                    backgroundColor: isDeficit ? 'rgb(var(--soc-crit))' : 'rgb(var(--soc-ok))',
                   }}
                 />
                 <div
-                  className="absolute top-0 bottom-0 w-1 bg-slate-900 z-10"
+                  className="absolute inset-y-0 z-10 w-px bg-soc-text"
                   style={{ left: `${m.target}%` }}
                   title={`Target SLA: ${m.target}%`}
                 />
               </div>
 
-              <div className="text-[11px] font-sans text-slate-500">
-                {m.description}
-              </div>
+              <div className="font-sans text-[11px] text-soc-textMuted">{m.description}</div>
             </div>
           );
         })}
       </div>
 
       {/* Footer Insight */}
-      <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 flex items-center gap-2">
-        <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0" />
+      <div className="flex items-center gap-2 border-t border-soc-border pt-3 text-[11px] text-soc-textSecondary">
+        <AlertCircle className="h-4 w-4 flex-shrink-0 text-soc-med" aria-hidden="true" />
         <span>
-          <strong className="text-slate-900 font-semibold">Insight:</strong> High detection (92%) masks downstream investigation bypass (31%).
+          <strong className="font-semibold text-soc-text">Insight:</strong> High detection (92%) masks downstream investigation bypass (31%).
         </span>
       </div>
     </div>

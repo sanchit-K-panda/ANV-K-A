@@ -13,24 +13,16 @@ import { Finding, SocHealthOverview, QuadrantScore } from '@/types';
 import { SCENARIOS } from '@/lib/mockData';
 import {
   RefreshCw,
-  Search,
-  ChevronRight,
   ArrowRight,
-  Check,
-  AlertTriangle,
-  Clock,
-  Shield,
-  ShieldAlert,
-  Zap,
-  Filter,
   CheckCircle2,
-  Activity,
-  Layers,
+  ShieldAlert,
+  ChevronDown,
 } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
 import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
+import { PerformanceBars } from '@/components/dashboard/PerformanceBars';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
@@ -88,7 +80,6 @@ export default function CommandCentrePage() {
 
   const handleSelectEngine = (engine: EngineItem) => {
     setActiveInfographicViewId(engine.targetInfographicId);
-    // Smooth scroll down to Infographic Window if needed
     const elem = document.getElementById('infographic-window-section');
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
@@ -98,73 +89,77 @@ export default function CommandCentrePage() {
   const topFinding = findings[0] || null;
 
   return (
-    <div className="max-w-7xl mx-auto space-y-5 font-sans text-xs pb-16">
-      {/* 1. Header Toolbar */}
-      <div className="soc-panel p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 font-mono">
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded bg-slate-900 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">
-            N
+    <div className="space-y-4 pb-10">
+      {/* 1. Page Header */}
+      <div className="animate-fade-up flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-1">
+        <div>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>COMMAND CENTRE</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xs font-bold text-slate-900 tracking-wider uppercase">
-                ANVĪKṢA Command Centre
-              </h1>
-              <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-1.5 py-0.2 rounded border border-slate-200">
-                SOC-04
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-500 font-sans mt-0.5">
-              Supervisory Operational Analytics &amp; Decision Integrity Enclave
-            </p>
-          </div>
+          <h1 className="font-display text-[26px] leading-tight font-bold tracking-tight text-soc-text">
+            SOC Effectiveness, measured — not assumed
+          </h1>
+          <p className="text-sm text-soc-textMuted mt-1 max-w-xl">
+            Is the Security Operations Centre actually effective, or does its activity only appear healthy?
+          </p>
         </div>
 
-        {/* Benchmark Selector */}
-        <div className="flex items-center gap-2 flex-wrap text-xs">
-          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded">
-            <Filter className="w-3.5 h-3.5 text-slate-500" />
-            <span className="text-slate-500 text-[11px]">Scenario:</span>
+        {/* Benchmark Controls */}
+        <div className="flex items-center gap-2.5 flex-shrink-0">
+          <div className="relative">
             <select
               value={currentScenario}
               onChange={(e) => setCurrentScenario(e.target.value)}
-              className="bg-transparent text-slate-900 font-bold focus:outline-none cursor-pointer text-xs"
+              className="appearance-none soc-input !w-auto !pr-9 !py-2.5 font-medium cursor-pointer"
+              aria-label="Evaluation scenario"
             >
               {SCENARIOS.map((scen) => (
-                <option key={scen.id} value={scen.id} className="bg-white text-slate-900">
+                <option key={scen.id} value={scen.id}>
                   {scen.name}
                 </option>
               ))}
             </select>
+            <ChevronDown className="w-3.5 h-3.5 text-soc-textMuted absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
           <button
             type="button"
             onClick={handleRecalculate}
-            disabled={evaluating}
-            className="flex items-center gap-1.5 px-3 py-1 bg-slate-900 text-white font-bold text-xs rounded hover:bg-slate-800 transition-colors disabled:opacity-50 shadow-xs"
+            disabled={evaluating || loading}
+            className="btn-primary"
           >
-            <RefreshCw className={`w-3 h-3 ${evaluating ? 'animate-spin' : ''}`} />
-            <span>{evaluating ? 'RE-EVALUATING...' : 'RE-EVALUATE'}</span>
+            <RefreshCw className={`w-4 h-4 ${evaluating ? 'animate-spin' : ''}`} />
+            <span>{evaluating ? 'Re-evaluating...' : 'Re-evaluate'}</span>
           </button>
         </div>
       </div>
 
       {/* Action Notification */}
       {actionNotice && (
-        <div className="p-3 bg-emerald-50 border border-emerald-200 rounded text-xs font-mono text-emerald-900 flex items-center justify-between shadow-xs">
+        <div className="animate-fade-up px-4 py-3 bg-soc-okDim border border-soc-ok/30 rounded-xl text-xs font-medium text-soc-ok flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <CheckCircle2 className="w-4 h-4" />
             <span>{actionNotice}</span>
           </div>
-          <span className="text-[10px] text-emerald-700 font-semibold font-mono">SAKṢĪ #9905</span>
+          <span className="text-2xs font-mono">SAKṢĪ #9905</span>
         </div>
       )}
 
-      {/* 2. TOTAL RISK STAT METER & SOC HEALTH STATUS (BALANCED 50/50 ROW AT THE TOP) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        {/* Total Risk Stat Meter */}
-        <div className="lg:col-span-6 flex flex-col">
+      {/* 2. Verdict Strip — health, composite risk, lifecycle in one band */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 items-stretch">
+        <div className="animate-fade-up" style={{ animationDelay: '50ms' }}>
+          <SocHealthScore
+            score={overview?.health_score ?? 78}
+            grade={quadrants?.composite_grade ?? 'C-'}
+            status={overview?.status ?? 'DEGRADED'}
+            primaryDriver="Investigation effectiveness (-31 pts)"
+          />
+        </div>
+        <div className="animate-fade-up" style={{ animationDelay: '110ms' }}>
           <TotalRiskMeter
             score={91}
             maxScore={100}
@@ -173,106 +168,115 @@ export default function CommandCentrePage() {
             trendDelta="+18 pts (Shift Delta)"
           />
         </div>
-
-        {/* SOC Health Assessment */}
-        <div className="lg:col-span-6 flex flex-col">
-          <SocHealthScore
-            score={overview?.health_score ?? 78}
-            grade={quadrants?.composite_grade ?? 'C-'}
-            status={overview?.status ?? 'DEGRADED'}
-            primaryDriver="Investigation effectiveness (-31 pts)"
+        <div className="animate-fade-up" style={{ animationDelay: '170ms' }}>
+          <PerformanceBars
+            detectionScore={quadrants?.detection_score ?? 92}
+            investigationScore={quadrants?.investigation_score ?? 31}
+            escalationScore={quadrants?.escalation_score ?? 48}
+            responseScore={quadrants?.response_score ?? 64}
           />
         </div>
       </div>
 
-      {/* 3. ALL SUPERVISORY INTELLIGENCE ENGINES */}
-      <SupervisoryEnginesGrid
-        onSelectEngine={handleSelectEngine}
-      />
+      {/* 3. Supervisory Intelligence Engines */}
+      <div className="animate-fade-up" style={{ animationDelay: '230ms' }}>
+        <SupervisoryEnginesGrid
+          onSelectEngine={handleSelectEngine}
+        />
+      </div>
 
-      {/* 4. DEDICATED INFOGRAPHIC INTELLIGENCE WINDOW (ALL DATA VISUALIZER) */}
-      <div id="infographic-window-section">
+      {/* 4. Intelligence Window (all data visualizer) */}
+      <div id="infographic-window-section" className="animate-fade-up" style={{ animationDelay: '290ms' }}>
         <InfographicIntelligenceWindow
           activeViewId={activeInfographicViewId}
           onViewChange={setActiveInfographicViewId}
         />
       </div>
 
-      {/* 5. Top Priority Critical Finding Spotlight */}
-      <TopFindingSpotlight
-        finding={topFinding}
-        onActionDispatch={handleActionDispatch}
-      />
-
-      {/* 6. Live Activity Stream & Tamper-Evident Ledger (BALANCED 50/50 SPLIT) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        <div className="lg:col-span-6 flex flex-col">
-          <HashChainLedger />
+      {/* 5. Top Finding + Live Stream — asymmetric 8/4 split */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        <div className="lg:col-span-8 animate-fade-up flex flex-col" style={{ animationDelay: '350ms' }}>
+          <TopFindingSpotlight
+            finding={topFinding}
+            onActionDispatch={handleActionDispatch}
+          />
         </div>
-        <div className="lg:col-span-6 flex flex-col">
+        <div className="lg:col-span-4 animate-fade-up flex flex-col" style={{ animationDelay: '410ms' }}>
           <LiveActivityStream />
         </div>
       </div>
 
-      {/* 7. Prioritized Supervisory Findings Queue Table */}
-      <div className="soc-panel overflow-hidden">
-        <div className="p-3.5 border-b border-slate-100 flex items-center justify-between font-mono">
-          <div className="flex items-center gap-2">
-            <ShieldAlert className="w-4 h-4 text-slate-700" />
-            <h3 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              Prioritized Supervisory Findings Queue
-            </h3>
+      {/* 6. Findings Queue + Ledger — asymmetric 8/4 split */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        <div className="lg:col-span-8 animate-fade-up" style={{ animationDelay: '470ms' }}>
+          <div className="soc-panel overflow-hidden">
+            <div className="soc-panel-header">
+              <div className="flex items-center gap-2.5">
+                <span className="w-7 h-7 rounded-lg bg-soc-critDim flex items-center justify-center">
+                  <ShieldAlert className="w-3.5 h-3.5 text-soc-crit" />
+                </span>
+                <div>
+                  <span className="panel-label">Prioritized Findings Queue</span>
+                  <p className="text-2xs text-soc-textMuted mt-0.5">Ranked by composite risk score</p>
+                </div>
+              </div>
+              <Link href="/findings" className="text-xs text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-1 transition-colors">
+                <span>All findings</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="soc-table">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Finding</th>
+                    <th>Confidence</th>
+                    <th>Affected scope</th>
+                    <th className="text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {findings.map((f) => (
+                    <tr
+                      key={f.id}
+                      onClick={() => router.push(`/findings/${f.id}`)}
+                      className="cursor-pointer"
+                    >
+                      <td className="whitespace-nowrap">
+                        <SeverityBadge severity={f.severity} />
+                      </td>
+                      <td className="max-w-[300px]">
+                        <div className="font-semibold text-soc-text text-xs leading-snug line-clamp-2">
+                          {f.title}
+                        </div>
+                        <div className="col-mono mt-0.5">{f.id}</div>
+                      </td>
+                      <td className="text-xs font-semibold text-soc-text tabular-nums whitespace-nowrap">
+                        {Math.round(f.confidence * 100)}%
+                      </td>
+                      <td className="text-xs text-soc-textSecondary whitespace-nowrap">{f.affected_scope}</td>
+                      <td className="text-right whitespace-nowrap">
+                        <StatusBadge status={f.status} />
+                      </td>
+                    </tr>
+                  ))}
+                  {findings.length === 0 && !loading && (
+                    <tr>
+                      <td colSpan={5} className="text-center py-10 text-sm text-soc-textMuted">
+                        No findings in the current scenario
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <Link href="/findings" className="text-xs text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1 font-sans">
-            <span>View all 07 Findings</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="soc-table">
-            <thead>
-              <tr>
-                <th>SEVERITY</th>
-                <th>FINDING &amp; IDENTIFIER</th>
-                <th>ENGINE / TYPE</th>
-                <th>CONFIDENCE</th>
-                <th>SOC</th>
-                <th>AFFECTED SCOPE</th>
-                <th>DETECTED</th>
-                <th className="text-right">STATUS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {findings.map((f) => (
-                <tr
-                  key={f.id}
-                  onClick={() => router.push(`/findings/${f.id}`)}
-                  className="cursor-pointer hover:bg-slate-50 transition-colors"
-                >
-                  <td className="whitespace-nowrap">
-                    <SeverityBadge severity={f.severity} />
-                  </td>
-                  <td>
-                    <div className="font-sans font-bold text-slate-900 text-xs hover:text-blue-600">
-                      {f.title}
-                    </div>
-                    <div className="text-[10px] text-slate-400 font-mono">{f.id}</div>
-                  </td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap font-mono">{f.type}</td>
-                  <td className="text-xs text-slate-900 font-bold whitespace-nowrap font-mono">
-                    {Math.round(f.confidence * 100)}%
-                  </td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap font-mono">{f.soc_scope}</td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap">{f.affected_scope}</td>
-                  <td className="text-xs text-slate-400 whitespace-nowrap font-mono">{f.detected_time}</td>
-                  <td className="text-right whitespace-nowrap">
-                    <StatusBadge status={f.status} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="lg:col-span-4 animate-fade-up" style={{ animationDelay: '530ms' }}>
+          <HashChainLedger />
         </div>
       </div>
     </div>

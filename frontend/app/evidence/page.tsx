@@ -2,82 +2,100 @@
 
 import React from 'react';
 import { MOCK_FINDINGS } from '@/lib/mockData';
-import { Search, Clock, MapPin, User, ShieldCheck } from 'lucide-react';
+import { Clock, MapPin, User } from 'lucide-react';
 
 export default function EvidencePage() {
   const f = MOCK_FINDINGS[0];
 
+  const points = [
+    { num: '01', label: 'What happened?', content: <p className="text-xs text-soc-text leading-relaxed">{f.what}</p> },
+    { num: '02', label: 'Why detected?', content: <p className="text-xs text-soc-textSecondary leading-relaxed">{f.why}</p> },
+    {
+      num: '03',
+      label: 'When occurred?',
+      content: (
+        <div className="flex items-center gap-2 text-xs text-soc-text font-medium">
+          <Clock className="w-3.5 h-3.5 text-soc-textMuted" />
+          <span className="font-mono text-2xs tabular-nums">{f.when_detected}</span>
+        </div>
+      ),
+    },
+    {
+      num: '04',
+      label: 'Where (scope)?',
+      content: (
+        <div className="flex items-center gap-2 text-xs text-soc-text font-medium">
+          <MapPin className="w-3.5 h-3.5 text-soc-textMuted" />
+          <span className="font-mono text-2xs">{f.where_scope}</span>
+        </div>
+      ),
+    },
+    {
+      num: '05',
+      label: 'Who was involved?',
+      content: (
+        <div className="flex items-center gap-2 text-xs text-soc-text font-medium">
+          <User className="w-3.5 h-3.5 text-soc-textMuted" />
+          <span>Analyst A-01 · Tier 1 Triage</span>
+        </div>
+      ),
+    },
+    {
+      num: '06',
+      label: 'Confidence & risk?',
+      content: (
+        <div className="flex items-center gap-2 text-xs">
+          <span className="font-mono text-soc-text font-semibold tabular-nums">94% CONFIDENCE</span>
+          <span className="text-soc-textDim">·</span>
+          <span className="soc-badge badge-critical">91/100 RISK SCORE</span>
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Evidence &amp; Explainability Explorer
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              PRATYAYA
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>EVIDENCE</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Evidence &amp; Explainability Explorer</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Cryptographic forensic provenance and mathematical reasoning behind supervisory findings.
           </p>
         </div>
       </div>
 
       {/* 7-Point Explainability Framework */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 font-mono text-xs">
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">1. WHAT HAPPENED?</div>
-          <p className="text-slate-900 font-sans text-xs font-semibold">{f.what}</p>
-        </div>
-
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">2. WHY DETECTED?</div>
-          <p className="text-slate-600 font-sans text-xs">{f.why}</p>
-        </div>
-
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">3. WHEN OCCURRED?</div>
-          <div className="flex items-center gap-2 text-slate-900 font-semibold">
-            <Clock className="w-3.5 h-3.5 text-slate-500" />
-            <span>{f.when_detected}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
+        {points.map((pt) => (
+          <div key={pt.num} className="soc-panel">
+            <div className="soc-panel-header">
+              <span className="panel-label">
+                {pt.num} · {pt.label}
+              </span>
+            </div>
+            <div className="p-4">{pt.content}</div>
           </div>
-        </div>
-
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">4. WHERE (SCOPE)?</div>
-          <div className="flex items-center gap-2 text-slate-900 font-semibold">
-            <MapPin className="w-3.5 h-3.5 text-slate-500" />
-            <span>{f.where_scope}</span>
-          </div>
-        </div>
-
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">5. WHO WAS INVOLVED?</div>
-          <div className="flex items-center gap-2 text-slate-900 font-semibold">
-            <User className="w-3.5 h-3.5 text-slate-500" />
-            <span>Analyst A-01 · Tier 1 Triage</span>
-          </div>
-        </div>
-
-        <div className="soc-panel p-4 space-y-1.5">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">6. CONFIDENCE &amp; RISK?</div>
-          <div className="text-slate-900 font-bold">
-            94% Confidence · <span className="text-rose-700">91/100 Risk Score</span>
-          </div>
-        </div>
+        ))}
       </div>
 
       {/* Raw Forensic Evidence Payload */}
-      <div className="soc-panel p-5 space-y-2 font-mono text-xs">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-          <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-            7. Raw Forensic Evidence Payload (PRATYAYA JSON)
-          </h2>
-          <span className="text-emerald-700 font-bold text-[10.5px]">HASH VERIFIED ✓</span>
+      <div className="soc-panel card-hover overflow-hidden animate-fade-up" style={{ animationDelay: '120ms' }}>
+        <div className="soc-panel-header">
+          <span className="panel-label">07 · Raw Forensic Evidence Payload (PRATYAYA JSON)</span>
+          <span className="soc-badge badge-verified">
+            <span className="dot-green" />
+            HASH VERIFIED
+          </span>
         </div>
-        <pre className="p-3 bg-slate-50 border border-slate-200 rounded text-slate-800 text-[10.5px] overflow-x-auto font-mono">
+        <pre className="p-4 bg-soc-overlay border-t border-soc-border text-soc-textSecondary text-2xs overflow-x-auto font-mono leading-relaxed">
           {JSON.stringify(f.evidence, null, 2)}
         </pre>
       </div>

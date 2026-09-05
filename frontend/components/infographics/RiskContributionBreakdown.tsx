@@ -5,27 +5,25 @@ import { ShieldAlert } from 'lucide-react';
 
 export const RiskContributionBreakdown: React.FC = () => {
   const factors = [
-    { name: 'Investigation Gap (VIVEKA)', score: 31, color: '#BE123C', percent: 34 },
-    { name: 'Escalation Anomaly', score: 24, color: '#B45309', percent: 26 },
-    { name: 'Negative Space Omission (ABHĀVA)', score: 18, color: '#854D0E', percent: 20 },
-    { name: 'Closure Speed MTTR Gaming (VIKĀRA)', score: 11, color: '#475569', percent: 12 },
-    { name: 'Threat Recurrence (PUNARĀVṚTTI)', score: 7, color: '#64748B', percent: 8 },
+    { name: 'Investigation Gap (VIVEKA)', score: 31, color: 'rgb(var(--soc-crit))', percent: 34 },
+    { name: 'Escalation Anomaly', score: 24, color: 'rgb(var(--soc-high))', percent: 26 },
+    { name: 'Negative Space Omission (ABHĀVA)', score: 18, color: 'rgb(var(--soc-med))', percent: 20 },
+    { name: 'Closure Speed MTTR Gaming (VIKĀRA)', score: 11, color: 'rgb(var(--soc-low))', percent: 12 },
+    { name: 'Threat Recurrence (PUNARĀVṚTTI)', score: 7, color: 'rgb(var(--soc-textDim))', percent: 8 },
   ];
 
   return (
-    <div className="soc-panel p-5 space-y-3 font-mono select-none">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-xs">
+    <div className="soc-panel space-y-3 p-5 font-mono select-none">
+      <div className="flex items-center justify-between gap-2 border-b border-soc-border pb-2.5">
         <div className="flex items-center gap-2">
-          <ShieldAlert className="w-4 h-4 text-rose-600" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-            Risk Contribution Infographic (91 / 100)
-          </h3>
+          <ShieldAlert className="h-3.5 w-3.5 text-soc-crit" aria-hidden="true" />
+          <h3 className="panel-label">Risk Contribution Infographic (91 / 100)</h3>
         </div>
-        <span className="text-[10.5px] text-slate-500">MĀN MATHEMATICAL DECOMPOSITION</span>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">MĀN Mathematical Decomposition</span>
       </div>
 
-      {/* Stacked Percentage Bar */}
-      <div className="w-full h-3 rounded-full overflow-hidden flex bg-slate-100">
+      {/* Stacked Contribution Bar */}
+      <div className="flex h-2.5 w-full overflow-hidden bg-soc-raised">
         {factors.map((f) => (
           <div
             key={f.name}
@@ -35,14 +33,14 @@ export const RiskContributionBreakdown: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 pt-2 text-xs">
+      <div className="grid grid-cols-1 gap-2.5 pt-2 text-xs sm:grid-cols-2 lg:grid-cols-3">
         {factors.map((f) => (
-          <div key={f.name} className="p-2.5 bg-slate-50 border border-slate-200 rounded flex items-center justify-between">
+          <div key={f.name} className="flex items-center justify-between rounded-sm border border-soc-border bg-soc-overlay p-2.5">
             <div className="flex items-center gap-2 truncate">
-              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: f.color }} />
-              <span className="truncate text-slate-700 font-sans">{f.name}</span>
+              <span className="h-2 w-2 flex-shrink-0" style={{ backgroundColor: f.color }} aria-hidden="true" />
+              <span className="truncate font-sans text-[11px] text-soc-textSecondary">{f.name}</span>
             </div>
-            <span className="font-bold text-slate-900 font-mono flex-shrink-0">+{f.score}</span>
+            <span className="flex-shrink-0 font-mono text-xs font-bold tabular-nums text-soc-text">+{f.score}</span>
           </div>
         ))}
       </div>

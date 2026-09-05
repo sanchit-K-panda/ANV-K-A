@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Settings, Shield, Lock, KeyRound, Database, Sliders, Users } from 'lucide-react';
+import { Shield, Lock, KeyRound, Database, Sliders, Users } from 'lucide-react';
 
 export default function AdminPage() {
   const sections = [
@@ -14,37 +14,42 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Administration &amp; Enclave Policy
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              SYSTEM
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>ADMINISTRATION</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Administration &amp; Enclave Policy</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Local security policies, biometric hardware thresholds, and offline ingestion configurations.
           </p>
         </div>
+        <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+          {sections.length} policy domains
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 font-mono text-xs">
+      {/* Policy domain cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
         {sections.map((sec) => {
           const Icon = sec.icon;
           return (
             <div
               key={sec.title}
-              className="soc-panel p-5 hover:border-slate-300 transition-colors space-y-3 cursor-pointer"
+              className="soc-panel card-hover p-4 cursor-pointer space-y-3"
             >
-              <div className="w-8 h-8 rounded bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-800">
-                <Icon className="w-4 h-4" />
-              </div>
+              <span className="w-7 h-7 rounded-lg bg-soc-accentDim flex items-center justify-center">
+                <Icon className="w-3.5 h-3.5 text-soc-accent" />
+              </span>
               <div>
-                <h2 className="text-xs font-bold text-slate-900 font-sans">{sec.title}</h2>
-                <p className="text-[11px] text-slate-500 mt-1 font-sans leading-normal">{sec.desc}</p>
+                <h2 className="text-xs font-medium text-soc-text">{sec.title}</h2>
+                <p className="text-xs text-soc-textMuted mt-1 leading-relaxed">{sec.desc}</p>
               </div>
             </div>
           );

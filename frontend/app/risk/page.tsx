@@ -1,9 +1,6 @@
 'use client';
 
 import React from 'react';
-import { MOCK_FINDINGS } from '@/lib/mockData';
-import { ShieldAlert, ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
 
 export default function RiskPage() {
   const riskFactors = [
@@ -15,66 +12,83 @@ export default function RiskPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      <div className="soc-panel p-4 flex items-center justify-between font-mono">
+    <div className="space-y-5 pb-16">
+      {/* Page header */}
+      <div className="animate-fade-up flex flex-col md:flex-row md:items-end justify-between gap-3 pb-1">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight font-sans">
-              Risk Quantification &amp; Factor Decomposition
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200">
-              MĀN
-            </span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
+            <span>ANVĪKṢA</span>
+            <span className="text-soc-textDim">/</span>
+            <span>RISK</span>
+            <span className="text-soc-textDim">/</span>
+            <span className="text-soc-accent">SOC-04</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Risk Quantification &amp; Factor Decomposition</h1>
+          <p className="text-xs text-soc-textMuted mt-1">
             Quantitative risk index calculated from uninvestigated alerts, negative space, and recurrence vectors.
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 font-mono text-xs">
-        {/* Main SOC Risk Gauge */}
-        <div className="lg:col-span-4 soc-panel p-5 flex flex-col justify-between text-center space-y-3">
-          <div>
-            <div className="text-[10.5px] text-slate-500 font-bold uppercase tracking-wider">
-              COMPOSITE SOC RISK
-            </div>
-            <div className="text-4xl font-black text-rose-700 mt-3 font-mono">
-              91 <span className="text-sm text-slate-400 font-normal">/ 100</span>
-            </div>
-            <div className="text-xs text-rose-700 font-bold mt-1 bg-rose-50 border border-rose-200 py-0.5 rounded inline-block px-2">
-              CRITICAL OPERATIONAL RISK
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        {/* Composite SOC risk gauge */}
+        <div className="lg:col-span-4 soc-panel card-hover overflow-hidden self-start animate-fade-up" style={{ animationDelay: '60ms' }}>
+          <div className="soc-panel-header">
+            <div>
+              <span className="panel-label">Composite SOC Risk</span>
+              <p className="text-2xs text-soc-textMuted mt-0.5">MĀN additive weights</p>
             </div>
           </div>
+          <div className="p-5 space-y-5">
+            <div className="text-center space-y-3">
+              <div className="font-mono text-4xl font-semibold text-soc-crit tabular-nums tracking-tight">
+                91 <span className="text-sm text-soc-textMuted font-normal">/ 100</span>
+              </div>
+              <span className="soc-badge badge-critical">CRITICAL OPERATIONAL RISK</span>
+            </div>
 
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded text-left text-xs space-y-1">
-            <div className="text-slate-500">Scope: <strong className="text-slate-900">SOC-04</strong></div>
-            <div className="text-slate-500">Confidence: <strong className="text-slate-900">94%</strong></div>
-            <div className="text-slate-500">Engine: <strong className="text-slate-900">MĀN Additive Weights</strong></div>
+            <div className="border-t border-soc-border">
+              <div className="kv-row">
+                <span className="kv-key">Scope</span>
+                <span className="kv-val font-medium text-soc-text">SOC-04</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-key">Confidence</span>
+                <span className="kv-val font-mono tabular-nums">94%</span>
+              </div>
+              <div className="kv-row">
+                <span className="kv-key">Engine</span>
+                <span className="kv-val">MĀN Additive Weights</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Risk Breakdown Table */}
-        <div className="lg:col-span-8 soc-panel p-5 space-y-3">
-          <div className="border-b border-slate-100 pb-2 flex justify-between items-center">
-            <h2 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-              Risk Factor Decomposition (MĀN)
-            </h2>
-            <span className="text-rose-700 font-bold">TOTAL: +91 PTS</span>
+        {/* Risk factor decomposition */}
+        <div className="lg:col-span-8 soc-panel card-hover overflow-hidden animate-fade-up" style={{ animationDelay: '120ms' }}>
+          <div className="soc-panel-header">
+            <span className="panel-label">Risk Factor Decomposition (MĀN)</span>
+            <span className="font-mono text-2xs font-semibold text-soc-crit tabular-nums">Total: +91 pts</span>
           </div>
 
-          <div className="space-y-2">
+          <div className="divide-y divide-soc-border">
             {riskFactors.map((rf) => (
-              <div
-                key={rf.name}
-                className="p-3 bg-slate-50 border border-slate-200 rounded flex items-center justify-between"
-              >
-                <div>
-                  <div className="font-bold text-slate-900 text-xs font-sans">{rf.name}</div>
-                  <div className="text-[11px] text-slate-500 font-sans mt-0.5">{rf.desc}</div>
-                  <div className="text-[10px] text-slate-400 font-mono mt-0.5">Factor Weight: {rf.weight}</div>
+              <div key={rf.name} className="px-4 py-3.5 flex items-center gap-4">
+                <div className="flex-1 min-w-0 space-y-1.5">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="text-xs font-medium text-soc-text">{rf.name}</span>
+                    <span className="font-mono text-2xs text-soc-textMuted tabular-nums whitespace-nowrap">
+                      Weight {rf.weight}
+                    </span>
+                  </div>
+                  <div className="risk-factor-bar">
+                    <div className="risk-factor-fill" style={{ width: `${rf.score}%` }} />
+                  </div>
+                  <div className="text-2xs text-soc-textMuted">{rf.desc}</div>
                 </div>
-                <span className="text-sm font-bold text-rose-700 font-mono">+{rf.score}</span>
+                <span className="font-mono text-sm font-semibold text-soc-text tabular-nums whitespace-nowrap">
+                  +{rf.score}
+                </span>
               </div>
             ))}
           </div>

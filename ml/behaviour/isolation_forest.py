@@ -2,16 +2,29 @@
 
 Identifies complex multivariate deviations in analyst operational behavior
 (e.g., unusual combinations of rapid closure, low action count, and missing evidence).
+
+Two detection modes:
+- **Trained mode** (default when artifacts exist): the Isolation Forest was fit
+  offline on benign `healthy` corpora only (semi-supervised anomaly detection)
+  and is applied unchanged — evaluation data never contaminates the model. A
+  supervised classifier may additionally rescue divergent analysts the forest
+  scores as inliers and calibrate confidence.
+- **Fallback mode** (no artifacts, e.g. fresh checkout): the forest is fit on
+  the current cohort, exactly as in the legacy behavior.
 """
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, List, Optional
 import numpy as np
 from sklearn.ensemble import IsolationForest
 
 from ml.preprocessing.dataset_loader import LoadedDataset
 from ml.preprocessing.feature_extraction import AnalystFeatures, FeatureExtractor, IncidentTraceFeatures
 from ml.schemas import FindingSeverity, FindingType, RawFinding
+from ml.training.sample_builder import analyst_feature_row
+
+if TYPE_CHECKING:  # runtime import would cycle through ml.models.__init__
+    from ml.models.registry import TrainedBehaviourModels
 
 
 class BehavioralIsolationForest:
@@ -27,7 +40,10 @@ class BehavioralIsolationForest:
         )
 
     def analyze_analysts(
-        self, dataset: LoadedDataset, analyst_map: Optional[Dict[str, AnalystFeatures]] = None
+        self,
+        dataset: LoadedDataset,
+        analyst_map: Optional[Dict[str, AnalystFeatures]] = None,
+        trained: Optional[TrainedBehaviourModels] = None,
     ) -> List[RawFinding]:
         if analyst_map is None:
             analyst_map = FeatureExtractor.extract_analyst_features(dataset)
@@ -52,14 +68,38 @@ class BehavioralIsolationForest:
             feature_matrix.append(row)
 
         X = np.array(feature_matrix, dtype=np.float32)
-        
+
         # Replace NaNs/Infs
         X = np.nan_to_num(X, nan=0.0, posinf=100.0, neginf=0.0)
 
-        # Fit and predict: -1 is outlier, 1 is inlier
-        self.model.fit(X)
-        preds = self.model.predict(X)
-        scores = self.model.decision_function(X)  # lower score = more abnormal
+        # Detection mode 1: offline-trained semi-supervised model (benign-only fit).
+        if trained is not None and trained.isolation_forest is not None:
+            preds = trained.isolation_forest.predict(X)
+            scores = trained.isolation_forest.decision_function(X)
+            detection_mode = "trained_benign_isolation_forest"
+        else:
+            # Detection mode 2 (legacy fallback): fit on the current cohort.
+            self.model.fit(X)
+            preds = self.model.predict(X)
+            scores = self.model.decision_function(X)  # lower score = more abnormal
+            detection_mode = "per_cohort_fit"
+
+        # Optional supervised classifier (trained mode only): independent
+        # probability that this analyst's behaviour is anomalous. Built with
+        # the exact same feature extractor used at training time.
+        p_anom: Optional[np.ndarray] = None
+        threshold = 0.5
+        if trained is not None and trained.classifier is not None:
+            clf_X = np.array(
+                [
+                    [analyst_feature_row(a)[name] for name in trained.clf_features]
+                    for a in active_analysts
+                ],
+                dtype=np.float32,
+            )
+            clf_X = np.nan_to_num(clf_X, nan=0.0, posinf=100.0, neginf=0.0)
+            p_anom = trained.classifier.predict_proba(clf_X)[:, 1]
+            threshold = trained.decision_threshold
 
         findings: List[RawFinding] = []
 
@@ -75,10 +115,33 @@ class BehavioralIsolationForest:
                 or a.investigation_rate <= 0.40
             )
 
-            if pred == -1 and score <= -0.10 and has_behavioral_divergence:
-                # Severity and confidence based on anomaly score
+            if_anomaly = bool(pred == -1 and score <= -0.10)
+            clf_probability = float(p_anom[idx]) if p_anom is not None else None
+            clf_anomaly = clf_probability is not None and clf_probability >= threshold
+            # The classifier can rescue a divergent analyst the benign-trained
+            # forest scored as inlier; the forest confirms a classifier hit.
+            flagged = (if_anomaly or clf_anomaly) and has_behavioral_divergence
+
+            if flagged:
                 anomaly_depth = float(np.clip(-score, 0.1, 1.0))
                 conf = round(min(0.95, 0.70 + anomaly_depth * 0.3), 3)
+                if clf_probability is not None and clf_anomaly:
+                    conf = round(max(conf, 0.60 + 0.35 * clf_probability), 3)
+
+                evidence = {
+                    "analyst_id": a.analyst_id,
+                    "analyst_name": a.name,
+                    "detection_mode": detection_mode,
+                    "isolation_forest_score": float(score),
+                    "anomaly_depth": anomaly_depth,
+                    "observed_mean_closure_min": a.mean_closure_minutes,
+                    "cohort_median_closure_min": round(median_closure, 2),
+                    "observed_investigation_rate": a.investigation_rate,
+                    "cohort_median_investigation_rate": round(median_inv_rate, 2),
+                    "total_incidents_handled": a.total_incidents,
+                }
+                if clf_probability is not None:
+                    evidence["classifier_anomaly_probability"] = round(clf_probability, 4)
 
                 findings.append(
                     RawFinding(
@@ -94,17 +157,7 @@ class BehavioralIsolationForest:
                         ),
                         entity_type="analyst",
                         entity_id=a.analyst_id,
-                        evidence={
-                            "analyst_id": a.analyst_id,
-                            "analyst_name": a.name,
-                            "isolation_forest_score": float(score),
-                            "anomaly_depth": anomaly_depth,
-                            "observed_mean_closure_min": a.mean_closure_minutes,
-                            "cohort_median_closure_min": round(median_closure, 2),
-                            "observed_investigation_rate": a.investigation_rate,
-                            "cohort_median_investigation_rate": round(median_inv_rate, 2),
-                            "total_incidents_handled": a.total_incidents,
-                        },
+                        evidence=evidence,
                         baseline_metrics={
                             "cohort_median_closure_min": round(median_closure, 2),
                             "cohort_median_investigation_rate": round(median_inv_rate, 2),

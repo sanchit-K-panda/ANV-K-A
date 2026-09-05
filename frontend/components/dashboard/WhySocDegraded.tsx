@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TrendingDown, TrendingUp, AlertCircle } from 'lucide-react';
-import Link from 'next/link';
+import { AlertCircle } from 'lucide-react';
 
 export const WhySocDegraded: React.FC = () => {
   const drivers = [
@@ -41,35 +40,35 @@ export const WhySocDegraded: React.FC = () => {
   ];
 
   return (
-    <div className="soc-panel p-5 space-y-3">
+    <div className="soc-panel">
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 font-mono text-xs">
-        <div className="flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-600" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-            Why SOC-04 is Degraded
-          </h3>
+      <div className="soc-panel-header">
+        <div className="flex items-center gap-2.5">
+          <span className="w-7 h-7 rounded-lg bg-soc-critDim flex items-center justify-center">
+            <AlertCircle className="w-3.5 h-3.5 text-soc-crit" />
+          </span>
+          <h3 className="panel-label">Why SOC-04 is Degraded</h3>
         </div>
-        <span className="text-[10.5px] text-slate-400 font-mono">MATHEMATICAL ROOT CAUSE</span>
+        <span className="text-2xs text-soc-textMuted">Mathematical root cause</span>
       </div>
 
       {/* 4-Item Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-3">
         {drivers.map((d) => (
           <div
             key={d.num}
-            className="p-3.5 bg-slate-50 border border-slate-200 rounded space-y-1.5 hover:border-slate-300 transition-colors"
+            className="p-4 rounded-lg bg-soc-overlay space-y-2 card-hover"
           >
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="font-bold text-slate-400">{d.num}</span>
-              <span className="font-bold text-rose-700 text-xs bg-rose-50 px-1.5 py-0.2 rounded border border-rose-200">
+            <div className="flex items-center justify-between">
+              <span className="col-mono">{d.num}</span>
+              <span className={`soc-badge ${d.trend === 'up' ? 'badge-medium' : 'badge-critical'}`}>
                 {d.metric}
               </span>
             </div>
 
-            <div className="text-xs font-bold text-slate-900 font-sans">{d.title}</div>
-            <div className="text-[10.5px] text-slate-500">{d.detail}</div>
-            <p className="text-[11px] font-sans text-slate-600 pt-1 leading-snug border-t border-slate-200/60">
+            <div className="text-[13px] font-semibold text-soc-text">{d.title}</div>
+            <div className="text-2xs text-soc-textMuted">{d.detail}</div>
+            <p className="text-2xs text-soc-textSecondary pt-2 leading-relaxed border-t border-soc-border/70">
               {d.sub}
             </p>
           </div>

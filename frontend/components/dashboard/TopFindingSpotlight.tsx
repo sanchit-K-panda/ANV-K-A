@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Finding } from '@/types';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
-import { ArrowRight, AlertTriangle, Search, Activity, Zap } from 'lucide-react';
+import { ArrowRight, Activity, Search, Zap } from 'lucide-react';
 
 interface TopFindingSpotlightProps {
   finding: Finding | null;
@@ -22,102 +22,101 @@ export const TopFindingSpotlight: React.FC<TopFindingSpotlightProps> = ({
   if (!finding) return null;
 
   return (
-    <div className="soc-panel p-5 space-y-4 border-l-4 border-l-rose-500">
+    <div className="soc-panel border-l-4 border-l-soc-crit card-hover h-full flex flex-col">
       {/* Top Header Row */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-        <div className="flex items-center gap-2.5">
+      <div className="px-5 py-3.5 flex flex-wrap items-center justify-between gap-2 border-b border-soc-border">
+        <div className="flex items-center gap-2.5 min-w-0">
           <SeverityBadge severity={finding.severity} />
-          <span className="font-mono text-xs font-bold text-slate-900">{finding.id}</span>
-          <span className="text-slate-300">·</span>
-          <span className="text-xs font-semibold text-slate-900">{finding.title}</span>
+          <span className="col-mono">{finding.id}</span>
+          <span className="text-xs font-medium text-soc-text truncate">{finding.title}</span>
         </div>
 
-        <div className="flex items-center gap-4 text-xs font-mono">
+        <div className="flex items-center gap-4 text-2xs flex-shrink-0">
           <div>
-            <span className="text-slate-500">RISK: </span>
-            <strong className="text-rose-700 font-bold text-sm">{finding.risk_score}/100</strong>
+            <span className="text-soc-textMuted">Risk </span>
+            <span className="text-soc-crit font-semibold tabular-nums">{finding.risk_score}/100</span>
           </div>
           <div>
-            <span className="text-slate-500">CONFIDENCE: </span>
-            <strong className="text-slate-900 font-bold">{Math.round(finding.confidence * 100)}%</strong>
+            <span className="text-soc-textMuted">Confidence </span>
+            <span className="text-soc-text font-semibold tabular-nums">{Math.round(finding.confidence * 100)}%</span>
           </div>
           <StatusBadge status={finding.status} />
         </div>
       </div>
 
       {/* 3-Column Explanatory Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 text-xs">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-3 flex-1">
         {/* Why Detected (Mathematical Gap) */}
-        <div className="lg:col-span-4 bg-slate-50 p-3.5 rounded border border-slate-200/80 space-y-2 font-mono">
-          <div className="text-[10.5px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-blue-600" />
-            <span>Why Detected (Mathematical Gap)</span>
+        <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-2.5 h-full">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+            <Activity className="w-3.5 h-3.5 text-soc-accent" />
+            <span>Why detected — mathematical gap</span>
           </div>
-          <div className="space-y-1 text-xs pt-1">
-            <div className="flex justify-between">
-              <span className="text-slate-500">Investigation Baseline:</span>
-              <span className="text-slate-900 font-bold">{finding.baseline_value}</span>
+          <div className="space-y-1.5 text-xs">
+            <div className="flex justify-between gap-3">
+              <span className="text-soc-textMuted">Investigation baseline</span>
+              <span className="text-soc-text font-medium tabular-nums">{finding.baseline_value}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Observed Execution:</span>
-              <span className="text-rose-700 font-bold">{finding.observed_value}</span>
+            <div className="flex justify-between gap-3">
+              <span className="text-soc-textMuted">Observed execution</span>
+              <span className="text-soc-crit font-semibold tabular-nums">{finding.observed_value}</span>
             </div>
-            <div className="flex justify-between border-t border-slate-200 pt-1">
-              <span className="text-slate-500">Net Deviation:</span>
-              <span className="text-rose-700 font-bold">{finding.deviation}</span>
+            <div className="flex justify-between gap-3 border-t border-soc-border pt-1.5">
+              <span className="text-soc-textMuted">Net deviation</span>
+              <span className="text-soc-crit font-semibold tabular-nums">{finding.deviation}</span>
             </div>
           </div>
-          <p className="text-[11.5px] font-sans text-slate-600 pt-1 leading-normal">
+          <p className="text-2xs text-soc-textMuted leading-relaxed">
             Mean dwell time was 42 seconds versus 44 minutes human baseline.
           </p>
         </div>
 
         {/* Evidence Scope */}
-        <div className="lg:col-span-4 bg-slate-50 p-3.5 rounded border border-slate-200/80 space-y-2 font-mono">
-          <div className="text-[10.5px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-            <Search className="w-3.5 h-3.5 text-blue-600" />
-            <span>Forensic Scope &amp; Evidence</span>
+        <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-2.5 h-full">
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+            <Search className="w-3.5 h-3.5 text-soc-accent" />
+            <span>Forensic scope &amp; evidence</span>
           </div>
-          <div className="space-y-1 text-xs pt-1 text-slate-700">
-            <div>Target Asset: <strong className="text-slate-900">DC-PROD-01 (10.14.2.1)</strong></div>
-            <div>Assigned Analyst: <strong className="text-slate-900">Analyst A-01</strong></div>
-            <div>Affected Alerts: <strong className="text-rose-700 font-bold">83 critical alerts</strong></div>
+          <div className="space-y-1.5 text-xs">
+            <div className="text-soc-textMuted">Target asset: <span className="text-soc-text font-medium">DC-PROD-01 (10.14.2.1)</span></div>
+            <div className="text-soc-textMuted">Assigned analyst: <span className="text-soc-text font-medium">Analyst A-01</span></div>
+            <div className="text-soc-textMuted">Affected alerts: <span className="text-soc-crit font-semibold">83 critical alerts</span></div>
           </div>
           <Link
             href={`/findings/${finding.id}`}
-            className="text-xs text-blue-600 hover:text-blue-700 font-medium pt-1 inline-flex items-center gap-1"
+            className="text-2xs text-soc-accent hover:text-soc-accentBright font-medium inline-flex items-center gap-1 transition-colors"
           >
-            <span>Inspect 7-Point Explainability Card</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>Inspect 7-point explainability card</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
         {/* Recommended Action (UPĀYA) */}
-        <div className="lg:col-span-4 bg-slate-50 p-3.5 rounded border border-slate-200/80 space-y-2.5 flex flex-col justify-between font-mono">
+        <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-3 flex flex-col justify-between h-full">
           <div>
-            <div className="text-[10.5px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-              <Zap className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Recommended Action (UPĀYA)</span>
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+              <Zap className="w-3.5 h-3.5 text-soc-ok" />
+              <span>Recommended action (UPĀYA)</span>
             </div>
-            <p className="text-xs font-sans text-slate-800 mt-1.5 leading-snug">
+            <p className="text-xs text-soc-textSecondary mt-2 leading-relaxed">
               &ldquo;{finding.recommendation}&rdquo;
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2 pt-1">
+          <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => router.push(`/findings/${finding.id}`)}
-              className="px-3 py-1.5 bg-slate-900 text-white font-bold text-xs rounded hover:bg-slate-800 transition-colors shadow-xs"
+              className="btn-primary"
             >
-              INVESTIGATE
+              Investigate
             </button>
             <button
               type="button"
               onClick={() => onActionDispatch('REOPEN_83_ALERTS')}
-              className="px-3 py-1.5 bg-white border border-slate-300 text-slate-700 font-semibold text-xs rounded hover:bg-slate-100 transition-colors"
+              className="btn-ghost"
             >
-              REOPEN ALERTS
+              Reopen alerts
             </button>
           </div>
         </div>

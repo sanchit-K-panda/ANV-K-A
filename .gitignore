@@ -28,6 +28,9 @@ skills-lock.json
 postgres-data/
 redis-data/
 
+# ML training corpus cache (regenerable deterministically from seeds)
+ml/training_data/
+
 # OS junk
 Thumbs.db
 .DS_Store

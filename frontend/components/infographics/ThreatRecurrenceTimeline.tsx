@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 export const ThreatRecurrenceTimeline: React.FC = () => {
   const steps = [
@@ -14,35 +14,34 @@ export const ThreatRecurrenceTimeline: React.FC = () => {
   ];
 
   return (
-    <div className="soc-panel p-5 space-y-3 font-mono select-none">
-      <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 text-xs">
+    <div className="soc-panel space-y-3 p-5 font-mono select-none">
+      <div className="flex items-center justify-between gap-2 border-b border-soc-border pb-2.5">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4 text-amber-600" />
-          <h3 className="font-bold text-slate-900 uppercase tracking-wider text-xs">
-            Threat Recurrence Timeline (PUNARĀVṚTTI)
-          </h3>
+          <AlertTriangle className="h-3.5 w-3.5 text-soc-med" aria-hidden="true" />
+          <h3 className="panel-label">Threat Recurrence Timeline (PUNARĀVṚTTI)</h3>
         </div>
-        <span className="text-[10.5px] text-slate-500">REPEAT INCIDENT CHRONOLOGY</span>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">Repeat Incident Chronology</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-2.5">
-        {steps.map((s, idx) => (
-          <div
-            key={idx}
-            className={`p-3 rounded border space-y-1.5 ${
-              s.state === 'GAP' || s.state === 'RECURRENCE' || s.state === 'FINDING'
-                ? 'bg-rose-50/70 border-rose-200 text-rose-900'
-                : 'bg-slate-50 border-slate-200 text-slate-800'
-            }`}
-          >
-            <div className="flex items-center justify-between text-[10px]">
-              <span className="font-bold text-slate-400">0{idx + 1}</span>
-              <span className="text-slate-500">{s.time}</span>
+      <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 lg:grid-cols-6">
+        {steps.map((s, idx) => {
+          const flagged = s.state === 'GAP' || s.state === 'RECURRENCE' || s.state === 'FINDING';
+          return (
+            <div
+              key={idx}
+              className={`space-y-1.5 rounded-sm border p-3 ${
+                flagged ? 'border-soc-crit/40 bg-soc-critDim/60' : 'border-soc-border bg-soc-overlay'
+              }`}
+            >
+              <div className="flex items-center justify-between text-[10px]">
+                <span className="font-bold text-soc-textDim">0{idx + 1}</span>
+                <span className="tabular-nums text-soc-textMuted">{s.time}</span>
+              </div>
+              <div className={`font-sans text-xs font-bold ${flagged ? 'text-soc-crit' : 'text-soc-text'}`}>{s.title}</div>
+              <p className="font-sans text-[11px] leading-snug text-soc-textSecondary">{s.desc}</p>
             </div>
-            <div className="text-xs font-bold text-slate-900 font-sans">{s.title}</div>
-            <p className="text-[11px] font-sans text-slate-600 leading-snug">{s.desc}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

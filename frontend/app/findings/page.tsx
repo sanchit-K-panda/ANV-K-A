@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { fetchFindings } from '@/lib/api';
 import { Finding } from '@/types';
-import { Search, ChevronRight, SlidersHorizontal, ShieldAlert, ArrowUpDown, Filter } from 'lucide-react';
+import { Search, ShieldAlert } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
 
@@ -52,47 +52,48 @@ export default function FindingsPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto space-y-4 font-sans text-xs pb-16">
-      {/* Title Header Bar */}
-      <div className="soc-panel p-4 flex flex-wrap items-center justify-between gap-3">
+    <div className="space-y-4 pb-16">
+      {/* Title Header */}
+      <div className="flex flex-wrap items-end justify-between gap-3 border-b border-soc-border pb-4">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-sm font-bold text-slate-900 tracking-tight">
-              Supervisory Findings Centre
-            </h1>
-            <span className="text-[10px] bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded border border-slate-200 font-mono">
-              VIVEKA + ABHĀVA
-            </span>
+          <div className="flex items-center gap-2.5">
+            <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Findings Centre</h1>
+            <span className="soc-badge badge-accent">VIVEKA + ABHĀVA</span>
           </div>
-          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+          <p className="text-xs text-soc-textMuted mt-1">
             Offline supervisory anomaly detections, execution omissions, and behavioural deviations across active SOC enclaves.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 font-mono text-xs text-slate-500">
-          <span>Active Findings: <strong className="text-slate-900 font-bold">{filteredFindings.length}</strong></span>
-          <span className="text-slate-300">·</span>
-          <span>Air-Gap Verified</span>
+        <div className="flex items-center gap-3 font-mono text-2xs text-soc-textMuted">
+          <span>ACTIVE FINDINGS <span className="text-soc-text font-semibold tabular-nums">{filteredFindings.length}</span></span>
+          <span className="text-soc-borderStrong">|</span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-soc-ok" aria-hidden="true" />
+            AIR-GAP VERIFIED
+          </span>
         </div>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="soc-panel p-3 flex flex-wrap items-center gap-2.5 font-mono text-xs">
+      <div className="soc-panel px-3 py-2.5 flex flex-wrap items-center gap-2">
         <div className="relative flex-1 min-w-[220px]">
-          <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-slate-400" />
+          <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-soc-textMuted" />
           <input
             type="text"
             placeholder="Filter finding title, ID, entity, or engine..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 pl-8 pr-2.5 py-1.5 text-slate-900 rounded text-xs placeholder-slate-400 focus:outline-none focus:border-slate-400"
+            className="soc-input !pl-8"
+            aria-label="Search findings"
           />
         </div>
 
         <select
           value={severityFilter}
           onChange={(e) => setSeverityFilter(e.target.value)}
-          className="bg-slate-50 border border-slate-200 px-2.5 py-1.5 text-slate-700 rounded focus:outline-none focus:border-slate-400 cursor-pointer text-xs"
+          className="soc-input !w-auto cursor-pointer"
+          aria-label="Severity filter"
         >
           <option value="ALL">Severity: ALL</option>
           <option value="CRITICAL">CRITICAL</option>
@@ -104,7 +105,8 @@ export default function FindingsPage() {
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="bg-slate-50 border border-slate-200 px-2.5 py-1.5 text-slate-700 rounded focus:outline-none focus:border-slate-400 cursor-pointer text-xs"
+          className="soc-input !w-auto cursor-pointer"
+          aria-label="Engine type filter"
         >
           <option value="ALL">Type: ALL</option>
           <option value="Execution Gap">Execution Gap (VIVEKA)</option>
@@ -116,7 +118,8 @@ export default function FindingsPage() {
         <select
           value={socFilter}
           onChange={(e) => setSocFilter(e.target.value)}
-          className="bg-slate-50 border border-slate-200 px-2.5 py-1.5 text-slate-700 rounded focus:outline-none focus:border-slate-400 cursor-pointer text-xs"
+          className="soc-input !w-auto cursor-pointer"
+          aria-label="SOC filter"
         >
           <option value="ALL">SOC: ALL</option>
           <option value="SOC-04">SOC-04</option>
@@ -127,7 +130,8 @@ export default function FindingsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-slate-50 border border-slate-200 px-2.5 py-1.5 text-slate-700 rounded focus:outline-none focus:border-slate-400 cursor-pointer text-xs"
+          className="soc-input !w-auto cursor-pointer"
+          aria-label="Status filter"
         >
           <option value="ALL">Status: ALL</option>
           <option value="OPEN">OPEN</option>
@@ -137,10 +141,10 @@ export default function FindingsPage() {
         </select>
       </div>
 
-      {/* Unified Enterprise Table */}
+      {/* Findings Table */}
       <div className="soc-panel overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="soc-table font-sans">
+          <table className="soc-table">
             <thead>
               <tr>
                 <th>SEVERITY</th>
@@ -154,33 +158,57 @@ export default function FindingsPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredFindings.map((f) => (
+              {loading && (
+                <tr>
+                  <td colSpan={8} className="py-8">
+                    <div className="space-y-2 px-4">
+                      {[0, 1, 2].map((i) => (
+                        <div key={i} className="h-8 bg-soc-raised rounded-sm animate-pulse" />
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              )}
+
+              {!loading && filteredFindings.map((f) => (
                 <tr
                   key={f.id}
                   onClick={() => router.push(`/findings/${f.id}`)}
-                  className="cursor-pointer hover:bg-slate-50 transition-colors"
+                  className="cursor-pointer group"
                 >
                   <td className="whitespace-nowrap">
                     <SeverityBadge severity={f.severity} />
                   </td>
                   <td>
-                    <div className="font-sans font-bold text-slate-900 text-xs hover:text-blue-600">
+                    <div className="font-medium text-soc-text text-xs group-hover:text-soc-accent transition-colors">
                       {f.title}
                     </div>
-                    <div className="text-[10.5px] text-slate-400 font-mono">{f.id}</div>
+                    <div className="col-mono">{f.id}</div>
                   </td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap font-mono">{f.type}</td>
-                  <td className="text-xs text-slate-900 font-bold whitespace-nowrap font-mono">
+                  <td className="text-xs text-soc-textSecondary whitespace-nowrap font-mono">{f.type}</td>
+                  <td className="text-xs text-soc-text font-semibold whitespace-nowrap font-mono tabular-nums">
                     {Math.round(f.confidence * 100)}%
                   </td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap font-mono">{f.soc_scope}</td>
-                  <td className="text-xs text-slate-600 whitespace-nowrap">{f.affected_scope}</td>
-                  <td className="text-xs text-slate-400 whitespace-nowrap font-mono">{f.detected_time}</td>
+                  <td className="col-mono whitespace-nowrap">{f.soc_scope}</td>
+                  <td className="text-xs text-soc-textSecondary whitespace-nowrap">{f.affected_scope}</td>
+                  <td className="col-mono whitespace-nowrap">{f.detected_time}</td>
                   <td className="text-right whitespace-nowrap">
                     <StatusBadge status={f.status} />
                   </td>
                 </tr>
               ))}
+
+              {!loading && filteredFindings.length === 0 && (
+                <tr>
+                  <td colSpan={8} className="text-center py-10">
+                    <ShieldAlert className="w-5 h-5 text-soc-textDim mx-auto mb-2" />
+                    <div className="panel-label mb-1">No findings match the current filters</div>
+                    <div className="text-2xs text-soc-textMuted font-mono">
+                      Adjust severity, type, or status filters, or re-evaluate the scenario.
+                    </div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
