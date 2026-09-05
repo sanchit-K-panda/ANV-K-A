@@ -8,6 +8,7 @@ import { Finding } from '@/types';
 import { ArrowLeft, CheckCircle2, Copy, Check } from 'lucide-react';
 import { SeverityBadge } from '@/components/SeverityBadge';
 import { StatusBadge } from '@/components/StatusBadge';
+import { SupervisoryExplanationSection } from '@/components/SupervisoryExplanationSection';
 
 export default function FindingDetailPage() {
   const params = useParams();
@@ -99,6 +100,9 @@ export default function FindingDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* SUPERVISORY REASONING & EXPLANATION (PRATYAYA · DeepSeek-R1 8B) */}
+      <SupervisoryExplanationSection finding={finding} />
 
       {/* WHY DETECTED + RISK FACTORS + TIMELINE */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">

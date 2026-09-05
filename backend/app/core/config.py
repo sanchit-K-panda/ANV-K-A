@@ -34,5 +34,10 @@ class Settings(BaseSettings):
     # Frontend
     FRONTEND_URL: str = "http://localhost:3000"
 
+    # Local LLM (Ollama — air-gapped supervisory reasoning layer)
+    OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
+    OLLAMA_MODEL: str = "deepseek-r1:8b"
+    OLLAMA_TIMEOUT_SECONDS: float = 90.0
+
 
 settings = Settings()

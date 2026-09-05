@@ -5,6 +5,7 @@ import { StatusBadge } from './StatusBadge';
 import { ConfidenceIndicator } from './ConfidenceIndicator';
 import { RiskScore } from './RiskScore';
 import { RiskFactorBreakdown } from './RiskFactorBreakdown';
+import { SupervisoryExplanationSection } from './SupervisoryExplanationSection';
 import {
   HelpCircle,
   FileText,
@@ -102,6 +103,9 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
           </p>
         </div>
       </div>
+
+      {/* SUPERVISORY REASONING & EVIDENCE (PRATYAYA · DeepSeek-R1 8B) */}
+      <SupervisoryExplanationSection finding={finding} />
 
       {/* 7-PART EXPLAINABILITY MATRIX — WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">

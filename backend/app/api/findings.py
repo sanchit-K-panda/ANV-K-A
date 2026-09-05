@@ -15,20 +15,22 @@ analytics_service = AnalyticsService()
 _CACHED_FINDINGS: dict[str, FindingOutput] = {}
 
 
-@router.post("/analytics/evaluate-scenario/{scenario_name}", response_model=list[FindingOutput])
-async def evaluate_scenario_endpoint(scenario_name: str):
-    """Executes the complete Supervisory Analytics Pipeline against a simulator scenario dataset."""
+def _find_dataset_dir(scenario_name: str) -> Path | None:
     candidates = [
         Path("soc-simulator/datasets") / scenario_name,
         Path("../soc-simulator/datasets") / scenario_name,
         Path(__file__).resolve().parent.parent.parent.parent / "soc-simulator" / "datasets" / scenario_name,
     ]
-    dataset_path = None
     for p in candidates:
         if p.exists():
-            dataset_path = p
-            break
-    
+            return p
+    return None
+
+
+@router.post("/analytics/evaluate-scenario/{scenario_name}", response_model=list[FindingOutput])
+async def evaluate_scenario_endpoint(scenario_name: str):
+    """Executes the complete Supervisory Analytics Pipeline against a simulator scenario dataset."""
+    dataset_path = _find_dataset_dir(scenario_name)
     if not dataset_path:
         raise HTTPException(status_code=404, detail=f"Scenario dataset '{scenario_name}' not found.")
 
@@ -52,8 +54,8 @@ async def list_findings(
     findings = list(_CACHED_FINDINGS.values())
     if not findings:
         # Default load investigation_gap scenario if cache empty
-        default_path = Path("soc-simulator/datasets/investigation_gap")
-        if default_path.exists():
+        default_path = _find_dataset_dir("investigation_gap")
+        if default_path:
             findings = analytics_service.evaluate_dataset_dir(default_path)
             for f in findings:
                 _CACHED_FINDINGS[f.id] = f
@@ -76,8 +78,8 @@ async def get_finding_detail(finding_id: str):
     
     # Try finding across all default scenarios
     for s_name in ("investigation_gap", "negative_space", "kpi_manipulation", "analyst_overload", "recurring_threat", "identity_anomaly"):
-        p = Path("soc-simulator/datasets") / s_name
-        if p.exists():
+        p = _find_dataset_dir(s_name)
+        if p:
             for f in analytics_service.evaluate_dataset_dir(p):
                 _CACHED_FINDINGS[f.id] = f
                 if f.id == finding_id:

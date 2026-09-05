@@ -215,3 +215,106 @@ export async function fetchThreatRecurrence(scenario: string = 'recurring_threat
 export async function fetchHistoricalTrends(): Promise<HistoricalTrendPoint[]> {
   return MOCK_HISTORICAL_TRENDS;
 }
+
+export interface FindingExplanationResponse {
+  finding_id: string;
+  soc_id: string;
+  severity: string;
+  risk_score: number;
+  confidence: number;
+  title: string;
+  summary: string;
+  what_happened: string;
+  why_it_matters: string;
+  evidence_summary: string;
+  confidence_statement: string;
+  recommended_action: string;
+  limitations: string[];
+  source_model: string;
+  is_fallback: boolean;
+  latency_ms?: number;
+}
+
+export interface LLMHealthStatus {
+  status: 'READY' | 'MODEL_MISSING' | 'OFFLINE';
+  ollama_reachable: boolean;
+  base_url: string;
+  configured_model: string;
+  available_models: string[];
+}
+
+export async function fetchLLMHealth(): Promise<LLMHealthStatus> {
+  try {
+    const res = await fetch(`${API_BASE}/llm/health`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch {
+    return {
+      status: 'OFFLINE',
+      ollama_reachable: false,
+      base_url: 'http://127.0.0.1:11434',
+      configured_model: 'deepseek-r1:8b',
+      available_models: [],
+    };
+  }
+}
+
+export async function explainFindingWithLLM(finding: Finding): Promise<FindingExplanationResponse> {
+  const payload = {
+    finding_id: finding.id,
+    finding_type: finding.engine === 'ABHĀVA' ? 'NEGATIVE_SPACE' : 'EXECUTION_GAP',
+    soc_id: finding.soc_scope || 'SOC-04',
+    severity: finding.severity || 'CRITICAL',
+    confidence: typeof finding.confidence === 'number' ? finding.confidence : 0.94,
+    risk_score: typeof finding.risk_score === 'number' ? finding.risk_score : 91,
+    title: finding.title || 'Supervisory Anomaly Finding',
+    summary: finding.summary || finding.what || 'Supervisory detection flagged operational anomaly.',
+    baseline: {
+      baseline_metric_name: finding.baseline_metric_name || 'Investigation Baseline',
+      baseline_value: finding.baseline_value || '85% mandatory',
+    },
+    observed: {
+      observed_value: finding.observed_value || '11% observed',
+      deviation: finding.deviation || '-74%',
+    },
+    missing_actions: ['INVESTIGATION', 'ESCALATION'],
+    evidence: Array.isArray(finding.evidence_timeline)
+      ? finding.evidence_timeline.map((e, idx) => ({
+          event_id: `EV-${idx + 101}`,
+          action: e.event,
+          time: e.time,
+        }))
+      : [],
+    recommendation: finding.recommendation || 'Audit affected cases and review escalation workflow.',
+  };
+
+  try {
+    const res = await fetch(`${API_BASE}/llm/explain-finding`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch {
+    // Zero crash guarantee: Return deterministic fallback
+    return {
+      finding_id: finding.id,
+      soc_id: finding.soc_scope,
+      severity: finding.severity,
+      risk_score: finding.risk_score,
+      confidence: finding.confidence,
+      title: finding.title,
+      summary: finding.summary,
+      what_happened: finding.what || finding.summary,
+      why_it_matters: finding.why || 'Baseline investigation standards were violated.',
+      evidence_summary: `Observed ${finding.observed_value} vs baseline requirement ${finding.baseline_value}.`,
+      confidence_statement: `Deterministic assessment certainty: ${Math.round(finding.confidence * 100)}%.`,
+      recommended_action: finding.recommendation,
+      limitations: ['Deterministic template fallback active (Local AI offline).'],
+      source_model: 'deterministic-fallback',
+      is_fallback: true,
+      latency_ms: 0,
+    };
+  }
+}

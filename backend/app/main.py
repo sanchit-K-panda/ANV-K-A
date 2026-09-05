@@ -17,6 +17,7 @@ from app.api.auth import router as auth_router
 from app.api.audit import router as audit_router
 from app.api.findings import router as findings_router
 from app.api.analytics import router as analytics_router
+from app.api.llm import router as llm_router
 from app.api.ingestion import router as ingestion_router
 from app.api.ingestion import alias_router as ingestion_alias_router
 from app.api.ingestion import live_router as ingestion_live_router
@@ -43,7 +44,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL, "http://localhost:3000"],
+    allow_origins=[
+        settings.FRONTEND_URL,
+        "http://localhost:3000",
+        "http://localhost:5231",
+        "http://127.0.0.1:5231",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,6 +60,7 @@ app.include_router(auth_router, prefix="/api")
 app.include_router(audit_router, prefix="/api")
 app.include_router(findings_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
+app.include_router(llm_router, prefix="/api")
 app.include_router(stream_router, prefix="/api")
 app.include_router(ingestion_live_router, prefix="/api")
 app.include_router(ingestion_router, prefix="/api")

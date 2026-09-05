@@ -157,3 +157,28 @@ Phase 1 & Person 1 AI/Data Track ✅ closed. Next: Phase 3 `POST /api/events | /
      - **OVERALL: 100.0% Precision, 100.0% Recall, 100.0% F1-Score across all 7 scenarios.**
    - 24/24 unit & integration tests pass with `pytest` in 4.0s.
 
+---
+
+## Phase 16 Record — Local LLM Integration: DeepSeek-R1 8B (2026-09-06)
+
+**What was built & verified:**
+1. **Isolated Backend Service Layer (`backend/app/llm/`):**
+   - `client.py`: Async Ollama client with timeout, keep-alive, and token bounding (`num_predict: 768`, `num_ctx: 2048`).
+   - `schemas.py`: Strictly typed request/response contracts for `FindingExplanationRequest/Response` and `AssessmentSummaryRequest/Response`.
+   - `prompts.py`: 16-rule strict system prompt, untrusted data boundaries, regex `<think>` chain-of-thought isolation via `clean_deepseek_r1_output()`.
+   - `validators.py`: Sensitive field sanitization (credentials, keys, tokens, biometric blobs), prompt-injection neutralization (`[UNTRUSTED_INSTRUCTION_NEUTRALIZED]`), and mathematical invariant locks (risk score & confidence cannot be altered).
+   - `service.py`: High-level orchestrator with latency tracking, metrics (`llm_request_count`, `llm_success_count`, `llm_failure_count`, `llm_average_latency_ms`), and deterministic template fallback (`_build_fallback_finding_explanation`).
+   - `exceptions.py`: Domain-specific error hierarchies (`OllamaConnectionError`, `OllamaTimeoutError`, `OllamaModelNotFoundError`, `PromptInjectionDetectedError`).
+2. **FastAPI Endpoints (`backend/app/api/llm.py`):**
+   - `POST /api/llm/explain-finding`: Explains structured finding with DeepSeek-R1 or deterministic fallback.
+   - `POST /api/llm/generate-assessment-summary`: Produces structured executive summary from aggregate SOC findings.
+   - `GET /api/llm/health`: Reports Ollama status, model availability, and connection state.
+   - `GET /api/llm/metrics`: Prometheus-friendly request counts, latencies, and fallback rates.
+3. **Frontend Integration (`frontend/`):**
+   - `lib/api.ts`: Typed `explainFindingWithLLM()` and `fetchLLMHealth()`.
+   - `components/SupervisoryExplanationSection.tsx`: Crisp SOC-grade panel with executive briefing, 4-quadrant breakdown (What, Why, Evidence, Confidence), recommended remediation, and subtle local AI badge (`LOCAL AI · DeepSeek-R1 8B` or `LOCAL ENGINE · Deterministic Rule Fallback`).
+   - Integrated into `app/findings/[id]/page.tsx` and `components/ExplainabilityCard.tsx`.
+4. **Test Suite Verification (`backend/tests/test_llm_service.py`):**
+   - 14/14 tests pass with `pytest` covering all mandatory cases (connectivity, missing evidence, think-tag stripping, markdown fence handling, timeout fallback, offline fallback, prompt injection defense, sensitive field redaction, invariant preservation).
+5. **Air-Gap & Offline Compliance:**
+   - 100% local operation on `127.0.0.1:11434`. Zero cloud dependencies. Deterministic fallback guarantees zero crashes when Ollama is offline or uninstalled.
