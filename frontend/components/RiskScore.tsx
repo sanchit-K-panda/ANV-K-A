@@ -33,7 +33,7 @@ export const RiskScore: React.FC<RiskScoreProps> = ({ score, factorsCount, size 
 
   return (
     <div className="inline-flex items-center gap-1.5">
-      <div className={`flex items-center gap-1.5 rounded-sm border font-mono tabular-nums ${bgClass} ${sizes[size]}`}>
+      <div className={`flex items-center gap-1.5 rounded-md border font-mono tabular-nums ${bgClass} ${sizes[size]}`}>
         <span className={textClass}>{score}</span>
         <span className="text-2xs uppercase text-soc-textMuted">/100</span>
         <span className={`text-2xs uppercase tracking-wider ${textClass} hidden md:inline`}>{label}</span>

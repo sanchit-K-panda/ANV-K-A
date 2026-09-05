@@ -17,20 +17,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Floating-panel shell: sidebar and topbar are inset rounded surfaces
-  // over the paper canvas — not edge-glued chrome.
+  // Unified enterprise console shell: docked sidebar, hairline headers, no floating islands
   return (
-    <div className="flex h-screen w-full gap-3 p-3 overflow-hidden bg-soc-bg">
-      <Suspense fallback={<div className="w-60 rounded-2xl bg-soc-panel border border-soc-border" />}>
+    <div className="flex h-screen w-full overflow-hidden bg-soc-bg text-soc-text">
+      <Suspense fallback={<div className="w-64 border-r border-soc-border bg-soc-panel" />}>
         <Sidebar />
       </Suspense>
 
-      <div className="flex-1 flex flex-col gap-3 min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         <Topbar />
 
-        <main className="flex-1 min-h-0 overflow-y-auto rounded-2xl border border-soc-border bg-soc-panel/40 shadow-card">
-          <div className="p-5 md:p-7 w-full max-w-console mx-auto">
-            <Suspense fallback={<div className="p-8 text-sm text-soc-textMuted">Loading telemetry...</div>}>
+        <main className="flex-1 min-h-0 overflow-y-auto bg-soc-bg">
+          <div className="p-4 md:p-6 w-full max-w-[1600px] mx-auto">
+            <Suspense fallback={<div className="p-6 text-xs font-mono text-soc-textMuted">INITIALIZING_TELEMETRY...</div>}>
               {children}
             </Suspense>
           </div>

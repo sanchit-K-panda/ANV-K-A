@@ -55,7 +55,7 @@ export const SocHealthScore: React.FC<SocHealthScoreProps> = ({
 
         {/* Contributing Factors Decomposition */}
         <div className="border-t border-soc-border px-5 py-3.5 space-y-2">
-          <div className="text-[11px] font-medium text-soc-textMuted mb-0.5">Contributing factor drag</div>
+          <div className="text-2xs font-medium text-soc-textMuted mb-0.5">Contributing factor drag</div>
           {factors.map((f) => (
             <div key={f.label} className="flex justify-between items-center text-xs">
               <span className="text-soc-textSecondary">{f.label}</span>

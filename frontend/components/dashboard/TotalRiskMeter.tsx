@@ -55,47 +55,39 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
           <span className={`soc-badge ${riskLevel.badge}`}>{riskLevel.label}</span>
         </div>
 
-        {/* Main Readout with Arc Gauge */}
-        <div className="px-5 pt-5 pb-2 flex items-center justify-between gap-4">
+        {/* Main Readout with Technical Precision Gauge */}
+        <div className="px-4 pt-3 pb-2 flex items-center justify-between gap-4">
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-display text-[44px] leading-none font-bold tracking-tight text-soc-text tabular-nums">
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-mono text-3xl font-bold tracking-tight text-soc-text tabular-nums">
                 {score}
               </span>
-              <span className="text-sm text-soc-textDim font-mono">/ {maxScore}</span>
+              <span className="text-xs text-soc-textMuted font-mono">/ {maxScore}</span>
             </div>
-            <div className="text-2xs text-soc-textMuted mt-2">
-              Scope <span className="font-semibold text-soc-textSecondary font-mono">{scope}</span>
-              <span className="mx-1.5 text-soc-textDim">·</span>
-              Confidence <span className="font-semibold text-soc-accent">{confidence}%</span>
+            <div className="text-[11px] text-soc-textMuted mt-1 font-mono">
+              SCOPE: <span className="font-semibold text-soc-text">{scope}</span>
+              <span className="mx-1 text-soc-textDim">·</span>
+              CONF: <span className="font-semibold text-soc-accent">{confidence}%</span>
             </div>
           </div>
 
-          {/* Arc Gauge */}
-          <div className="relative w-32 h-16 flex items-end justify-center flex-shrink-0">
-            <svg className="w-32 h-16 overflow-visible" viewBox="0 0 140 78" role="img" aria-label={`Composite risk ${score} of ${maxScore}`}>
-              <defs>
-                <linearGradient id={gradId} x1="0%" y1="100%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgb(var(--soc-accent))" />
-                  <stop offset="100%" stopColor={riskLevel.tip} />
-                </linearGradient>
-              </defs>
+          {/* Precision Gauge */}
+          <div className="relative w-28 h-14 flex items-end justify-center flex-shrink-0">
+            <svg className="w-28 h-14 overflow-visible" viewBox="0 0 140 75" role="img" aria-label={`Composite risk ${score} of ${maxScore}`}>
               <path
-                d="M 10 70 A 60 60 0 0 1 130 70"
+                d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
                 stroke="rgb(var(--soc-raised))"
-                strokeWidth="11"
-                strokeLinecap="round"
+                strokeWidth="6"
               />
               <path
-                d="M 10 70 A 60 60 0 0 1 130 70"
+                d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
-                stroke={`url(#${gradId})`}
-                strokeWidth="11"
-                strokeLinecap="round"
+                stroke={score >= 80 ? '#ef4444' : score >= 60 ? '#f97316' : score >= 35 ? '#eab308' : '#10b981'}
+                strokeWidth="6"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-1000 ease-out"
+                className="transition-all duration-700 ease-out"
               />
             </svg>
           </div>
@@ -103,7 +95,7 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
 
         {/* Contributing Factors — always itemized, never opaque */}
         <div className="border-t border-soc-border px-5 py-3.5 space-y-2">
-          <div className="flex justify-between text-[11px] font-medium text-soc-textMuted">
+          <div className="flex justify-between text-2xs font-medium text-soc-textMuted">
             <span>Primary risk drivers</span>
             <span className="text-soc-crit font-semibold">Total +{score} pts</span>
           </div>

@@ -86,9 +86,9 @@ export const PerformanceBars: React.FC<PerformanceBarsProps> = ({
                 </div>
 
                 {/* Progress Track with SLA Target Pin */}
-                <div className="relative w-full h-1.5 bg-soc-raised rounded-sm overflow-visible">
+                <div className="relative w-full h-1.5 bg-soc-raised rounded-md overflow-visible">
                   <div
-                    className={`h-full rounded-sm transition-all duration-300 ${m.bar}`}
+                    className={`h-full rounded-md transition-all duration-300 ${m.bar}`}
                     style={{ width: `${m.score}%` }}
                   />
                   <div

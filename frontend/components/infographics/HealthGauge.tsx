@@ -31,7 +31,7 @@ export function HealthGauge({ score = 78, grade = 'C-', status = 'DEGRADED' }: H
           <span className={`h-2 w-2 rounded-full ${currentTheme.dot}`} aria-hidden="true" />
           <h3 className="panel-label">Overall SOC Health Score</h3>
         </div>
-        <span className="rounded-sm border border-soc-border bg-soc-raised px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-textSecondary">
+        <span className="rounded-md border border-soc-border bg-soc-raised px-2 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] text-soc-textSecondary">
           GRADE: {grade}
         </span>
       </div>
@@ -61,7 +61,7 @@ export function HealthGauge({ score = 78, grade = 'C-', status = 'DEGRADED' }: H
             <span className="ml-0.5 text-sm font-normal text-soc-textMuted">/100</span>
           </div>
           <span
-            className={`mt-1 rounded-sm border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] ${currentTheme.bg} ${currentTheme.text} ${currentTheme.border}`}
+            className={`mt-1 rounded-md border px-2 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] ${currentTheme.bg} ${currentTheme.text} ${currentTheme.border}`}
           >
             {status}
           </span>
@@ -69,7 +69,7 @@ export function HealthGauge({ score = 78, grade = 'C-', status = 'DEGRADED' }: H
       </div>
 
       {/* Driver Decomposition Footer */}
-      <div className="flex items-center justify-between border-t border-soc-border pt-3 text-[11px]">
+      <div className="flex items-center justify-between border-t border-soc-border pt-3 text-2xs">
         <span className="flex items-center gap-1.5 text-soc-textMuted">
           <TrendingDown className="h-3.5 w-3.5 text-soc-med" aria-hidden="true" />
           <span>
@@ -79,7 +79,7 @@ export function HealthGauge({ score = 78, grade = 'C-', status = 'DEGRADED' }: H
             </strong>
           </span>
         </span>
-        <Link href="/risk" className="flex items-center gap-0.5 text-[11px] text-soc-accent transition-colors hover:text-soc-accentBright">
+        <Link href="/risk" className="flex items-center gap-0.5 text-2xs text-soc-accent transition-colors hover:text-soc-accentBright">
           <span>MĀN Model</span>
           <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
         </Link>

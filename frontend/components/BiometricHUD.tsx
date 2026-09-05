@@ -124,7 +124,7 @@ export function BiometricHUD({
           ))}
 
           {authStage === 'IDLE' && (
-            <div className="text-center space-y-1.5 z-10 bg-soc-panel/90 px-4 py-3 rounded-sm border border-soc-border max-w-[220px]">
+            <div className="text-center space-y-1.5 z-10 bg-soc-panel/90 px-4 py-3 rounded-md border border-soc-border max-w-[220px]">
               <Scan className="w-4 h-4 text-soc-accent mx-auto" />
               <div className="text-2xs font-medium text-soc-text tracking-wide">OPTICAL TERMINAL READY</div>
               <div className="text-2xs text-soc-textMuted leading-tight">
@@ -150,7 +150,7 @@ export function BiometricHUD({
           )}
 
           {authStage === 'VERIFIED' && (
-            <div className="text-center space-y-1.5 z-10 bg-soc-okDim/90 border border-soc-ok/40 px-4 py-3 rounded-sm max-w-[210px]">
+            <div className="text-center space-y-1.5 z-10 bg-soc-okDim/90 border border-soc-ok/40 px-4 py-3 rounded-md max-w-[210px]">
               <span className="w-6 h-6 bg-soc-ok/20 border border-soc-ok/50 rounded-full mx-auto flex items-center justify-center">
                 <Check className="w-3.5 h-3.5 text-soc-ok" />
               </span>
@@ -160,7 +160,7 @@ export function BiometricHUD({
           )}
 
           {authStage === 'DENIED' && (
-            <div className="text-center space-y-1.5 z-10 bg-soc-critDim/90 border border-soc-crit/40 px-4 py-3 rounded-sm max-w-[230px]">
+            <div className="text-center space-y-1.5 z-10 bg-soc-critDim/90 border border-soc-crit/40 px-4 py-3 rounded-md max-w-[230px]">
               <span className="w-6 h-6 bg-soc-crit/20 border border-soc-crit/50 rounded-full mx-auto flex items-center justify-center">
                 <X className="w-3.5 h-3.5 text-soc-crit" />
               </span>
@@ -173,10 +173,10 @@ export function BiometricHUD({
         </div>
 
         {/* Telemetry Badges */}
-        <div className="absolute bottom-1.5 left-1.5 text-2xs font-mono text-soc-textSecondary bg-soc-panel/85 px-1.5 py-0.5 rounded-sm border border-soc-border">
+        <div className="absolute bottom-1.5 left-1.5 text-2xs font-mono text-soc-textSecondary bg-soc-panel/85 px-1.5 py-0.5 rounded-md border border-soc-border">
           LIVENESS: <span className={mode === 'ENHANCED_3D' ? 'text-soc-accent' : 'text-soc-text'}>{mode === 'ENHANCED_3D' ? '3D ACTIVE' : 'BASELINE'}</span>
         </div>
-        <div className="absolute bottom-1.5 right-1.5 text-2xs font-mono text-soc-textSecondary bg-soc-panel/85 px-1.5 py-0.5 rounded-sm border border-soc-border tabular-nums">
+        <div className="absolute bottom-1.5 right-1.5 text-2xs font-mono text-soc-textSecondary bg-soc-panel/85 px-1.5 py-0.5 rounded-md border border-soc-border tabular-nums">
           CONF: <span className="text-soc-text">{authStage === 'SCANNING' ? confidence : '99.4'}%</span>
         </div>
       </div>

@@ -99,7 +99,7 @@ export default function AnalyticsPage() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             aria-pressed={activeTab === tab.id}
-            className={`px-3 py-1.5 text-2xs font-mono tracking-wide rounded-sm border transition-colors ${
+            className={`px-3 py-1.5 text-2xs font-mono tracking-wide rounded-md border transition-colors ${
               activeTab === tab.id
                 ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
                 : 'bg-transparent border-soc-border text-soc-textSecondary hover:text-soc-text hover:bg-soc-raised'
@@ -130,9 +130,9 @@ export default function AnalyticsPage() {
                 <div className="panel-label">Expected Workflow — SOP Standard</div>
                 <div className="space-y-1.5">
                   {sopSteps.map((step, i) => (
-                    <div key={i} className="flex items-center justify-between px-2.5 py-2 bg-soc-panel border border-soc-border rounded-sm text-xs text-soc-textSecondary">
+                    <div key={i} className="flex items-center justify-between px-2.5 py-2 bg-soc-panel border border-soc-border rounded-md text-xs text-soc-textSecondary">
                       <span>{i + 1}. {step}</span>
-                      <span className="w-4 h-4 rounded-sm border border-soc-ok/50 text-soc-ok flex items-center justify-center font-mono text-2xs">
+                      <span className="w-4 h-4 rounded-md border border-soc-ok/50 text-soc-ok flex items-center justify-center font-mono text-2xs">
                         ✓
                       </span>
                     </div>
@@ -147,7 +147,7 @@ export default function AnalyticsPage() {
                   {actualExecution.map((step) => (
                     <div
                       key={step.label}
-                      className={`flex items-center justify-between px-2.5 py-2 border rounded-sm text-xs ${
+                      className={`flex items-center justify-between px-2.5 py-2 border rounded-md text-xs ${
                         step.ok
                           ? 'bg-soc-panel border-soc-border text-soc-textSecondary'
                           : 'bg-soc-critDim border-soc-crit/30 text-soc-crit font-medium'
@@ -155,7 +155,7 @@ export default function AnalyticsPage() {
                     >
                       <span>{step.label}</span>
                       <span
-                        className={`w-4 h-4 rounded-sm flex items-center justify-center font-mono text-2xs flex-shrink-0 ${
+                        className={`w-4 h-4 rounded-md flex items-center justify-center font-mono text-2xs flex-shrink-0 ${
                           step.ok
                             ? 'border border-soc-ok/50 text-soc-ok'
                             : 'border border-soc-crit/60 text-soc-crit'
@@ -178,7 +178,7 @@ export default function AnalyticsPage() {
                 { label: 'ASSIGNED ANALYST', value: 'Analyst A-01', tone: 'text-soc-text' },
               ].map((s) => (
                 <div key={s.label} className="p-3.5 rounded-lg bg-soc-overlay">
-                  <div className="text-[11px] font-medium text-soc-textMuted">{s.label}</div>
+                  <div className="text-2xs font-medium text-soc-textMuted">{s.label}</div>
                   <div className={`text-sm font-semibold mt-1 ${s.tone}`}>{s.value}</div>
                 </div>
               ))}
@@ -207,7 +207,7 @@ export default function AnalyticsPage() {
                 { label: 'EVIDENCE LOGS', observed: 21, expected: 75, missing: 54, unit: 'evidence records' },
               ].map((item) => (
                 <div key={item.label} className="p-4 rounded-lg bg-soc-overlay space-y-2 card-hover">
-                  <div className="text-[11px] font-medium text-soc-textMuted">{item.label}</div>
+                  <div className="text-2xs font-medium text-soc-textMuted">{item.label}</div>
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-2xl font-semibold text-soc-text tabular-nums">{item.observed}</span>
                     <span className="text-xs text-soc-textMuted">/ {item.expected}</span>

@@ -266,7 +266,7 @@ function LoginContent() {
 
           {/* Session lock alert */}
           {isLocked && (
-            <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-soc-critDim border border-soc-crit/40 rounded-sm text-2xs font-mono text-soc-crit">
+            <div className="flex items-center gap-2.5 px-3.5 py-2.5 bg-soc-critDim border border-soc-crit/40 rounded-md text-2xs font-mono text-soc-crit">
               <ShieldAlert className="w-4 h-4 flex-shrink-0" />
               <span>SESSION LOCKED — IDENTITY MISMATCH DETECTED. BIOMETRIC RE-AUTHENTICATION REQUIRED.</span>
             </div>
@@ -284,7 +284,7 @@ function LoginContent() {
                     type="button"
                     onClick={() => selectProfile(p)}
                     aria-pressed={isSelected}
-                    className={`p-3 text-left rounded-sm border transition-colors ${
+                    className={`p-3 text-left rounded-md border transition-colors ${
                       isSelected
                         ? 'bg-soc-accentInk border-soc-accent/50'
                         : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong hover:bg-soc-raised'
@@ -312,7 +312,7 @@ function LoginContent() {
                 type="button"
                 onClick={() => { setAuthMethod('BIOMETRIC'); resetToIdle(); }}
                 aria-pressed={authMethod === 'BIOMETRIC'}
-                className={`flex items-center justify-center gap-2 py-2.5 rounded-sm text-xs font-medium border transition-colors ${
+                className={`flex items-center justify-center gap-2 py-2.5 rounded-md text-xs font-medium border transition-colors ${
                   authMethod === 'BIOMETRIC'
                     ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
                     : 'bg-soc-panel border-soc-border text-soc-textSecondary hover:bg-soc-raised'
@@ -325,7 +325,7 @@ function LoginContent() {
                 type="button"
                 onClick={() => { setAuthMethod('PIN'); resetToIdle(); }}
                 aria-pressed={authMethod === 'PIN'}
-                className={`flex items-center justify-center gap-2 py-2.5 rounded-sm text-xs font-medium border transition-colors ${
+                className={`flex items-center justify-center gap-2 py-2.5 rounded-md text-xs font-medium border transition-colors ${
                   authMethod === 'PIN'
                     ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
                     : 'bg-soc-panel border-soc-border text-soc-textSecondary hover:bg-soc-raised'
@@ -417,7 +417,7 @@ function LoginContent() {
                 <div key={stage.id} className="rounded-lg bg-soc-overlay p-3 space-y-1.5">
                   <div className="flex items-center justify-between">
                     {stageIcon(stageStates[i])}
-                    <span className="text-[11px] font-semibold text-soc-textSecondary">{stage.label}</span>
+                    <span className="text-2xs font-semibold text-soc-textSecondary">{stage.label}</span>
                   </div>
                   <div className="text-2xs text-soc-textMuted leading-tight">{stage.detail}</div>
                 </div>
@@ -457,7 +457,7 @@ function LoginContent() {
                 type="button"
                 onClick={() => handleStartAuth('SPOOF_MASK')}
                 disabled={authStage === 'SCANNING'}
-                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-crit/50 rounded-sm text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
+                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-crit/50 rounded-md text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
               >
                 <div className="font-medium flex items-center gap-1.5 text-xs">
                   <EyeOff className="w-3 h-3 text-soc-crit shrink-0" />
@@ -470,7 +470,7 @@ function LoginContent() {
                 type="button"
                 onClick={() => handleStartAuth('UNTRUSTED_DEVICE')}
                 disabled={authStage === 'SCANNING'}
-                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-high/50 rounded-sm text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
+                className="p-3 text-left bg-soc-panel border border-soc-border hover:border-soc-high/50 rounded-md text-soc-textSecondary transition-colors text-2xs disabled:opacity-50"
               >
                 <div className="font-medium flex items-center gap-1.5 text-xs">
                   <Server className="w-3 h-3 text-soc-high shrink-0" />

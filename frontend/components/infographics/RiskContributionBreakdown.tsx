@@ -19,7 +19,7 @@ export const RiskContributionBreakdown: React.FC = () => {
           <ShieldAlert className="h-3.5 w-3.5 text-soc-crit" aria-hidden="true" />
           <h3 className="panel-label">Risk Contribution Infographic (91 / 100)</h3>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">MĀN Mathematical Decomposition</span>
+        <span className="text-2xs uppercase tracking-[0.14em] text-soc-textDim">MĀN Mathematical Decomposition</span>
       </div>
 
       {/* Stacked Contribution Bar */}
@@ -35,10 +35,10 @@ export const RiskContributionBreakdown: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-2.5 pt-2 text-xs sm:grid-cols-2 lg:grid-cols-3">
         {factors.map((f) => (
-          <div key={f.name} className="flex items-center justify-between rounded-sm border border-soc-border bg-soc-overlay p-2.5">
+          <div key={f.name} className="flex items-center justify-between rounded-md border border-soc-border bg-soc-overlay p-2.5">
             <div className="flex items-center gap-2 truncate">
               <span className="h-2 w-2 flex-shrink-0" style={{ backgroundColor: f.color }} aria-hidden="true" />
-              <span className="truncate font-sans text-[11px] text-soc-textSecondary">{f.name}</span>
+              <span className="truncate font-sans text-2xs text-soc-textSecondary">{f.name}</span>
             </div>
             <span className="flex-shrink-0 font-mono text-xs font-bold tabular-nums text-soc-text">+{f.score}</span>
           </div>

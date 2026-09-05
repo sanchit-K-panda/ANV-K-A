@@ -170,13 +170,12 @@ export const SupervisoryEnginesGrid: React.FC<SupervisoryEnginesGridProps> = ({
         </div>
       </div>
 
-      {/* 8-Engine Grid — sigil cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-3">
-        {SUPERVISORY_ENGINES.map((eng, idx) => {
+      {/* 8-Engine Grid — crisp enterprise telemetry matrix */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 p-3">
+        {SUPERVISORY_ENGINES.map((eng) => {
           const Icon = eng.icon;
           const isSelected = selectedEngineId === eng.id;
           const isAlert = eng.status === 'ALERT';
-          const sigil = eng.sanskrit.charAt(0);
 
           return (
             <button
@@ -184,58 +183,41 @@ export const SupervisoryEnginesGrid: React.FC<SupervisoryEnginesGridProps> = ({
               type="button"
               onClick={() => onSelectEngine(eng)}
               aria-pressed={isSelected}
-              className={`animate-sigil-in p-4 text-left transition-all flex flex-col justify-between space-y-3 group rounded-xl border card-hover ${
+              className={`p-3 text-left transition-colors flex flex-col justify-between space-y-2.5 group rounded border ${
                 isSelected
-                  ? 'bg-soc-accentInk border-soc-accent/40'
-                  : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong'
+                  ? 'bg-soc-raised border-soc-accent text-soc-text shadow-sm'
+                  : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong hover:bg-soc-raised/40'
               }`}
-              style={{ animationDelay: `${idx * 50}ms` }}
             >
               <div>
-                <div className="flex items-start justify-between mb-3">
-                  {/* Engine Sigil — the recurring identity motif */}
-                  <span
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center relative ${
-                      isSelected
-                        ? 'bg-soc-accent text-white shadow-sm'
-                        : isAlert
-                        ? 'bg-soc-critDim text-soc-crit'
-                        : 'bg-soc-okDim text-soc-ok'
-                    }`}
-                  >
-                    <span className="font-display text-base font-bold leading-none">{sigil}</span>
-                    <span
-                      className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-soc-panel flex items-center justify-center ${
-                        isAlert ? 'bg-soc-crit' : 'bg-soc-ok'
-                      }`}
-                      aria-hidden="true"
-                    >
-                      <Icon className="w-1.5 h-1.5 text-white" />
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlert ? 'bg-red-500' : 'bg-emerald-500'}`} />
+                    <span className="text-[11px] font-mono font-bold tracking-wider text-soc-text truncate uppercase">
+                      {eng.sanskrit}
                     </span>
-                  </span>
+                  </div>
                   <span className={`soc-badge ${isSelected ? 'badge-accent' : eng.color}`}>
                     {eng.badge}
                   </span>
                 </div>
 
-                <div className="text-[10px] font-mono tracking-[0.1em] text-soc-textDim">
-                  {eng.sanskrit}
+                <div className="text-xs font-semibold text-soc-text leading-tight flex items-center gap-1.5">
+                  <Icon className="w-3.5 h-3.5 text-soc-textMuted flex-shrink-0" />
+                  <span className="truncate">{eng.name}</span>
                 </div>
-                <div className="font-display text-sm font-bold text-soc-text leading-tight mt-0.5">
-                  {eng.name}
-                </div>
-                <div className="text-2xs text-soc-textMuted mt-1 line-clamp-1">
+                <div className="text-[11px] text-soc-textMuted mt-1 line-clamp-1">
                   {eng.role}
                 </div>
               </div>
 
-              {/* Metric & Interactive Trigger */}
-              <div className="flex items-center justify-between pt-2.5 border-t border-soc-border/70">
-                <span className="font-mono text-2xs text-soc-textMuted tabular-nums">
+              {/* Metric & Trigger */}
+              <div className="flex items-center justify-between pt-2 border-t border-soc-border/60 text-[11px]">
+                <span className="font-mono text-soc-textSecondary font-medium tabular-nums truncate max-w-[140px]">
                   {eng.metricValue}
                 </span>
-                <span className={`flex items-center gap-0.5 text-2xs font-semibold transition-transform group-hover:translate-x-0.5 ${isSelected ? 'text-soc-accent' : 'text-soc-textDim group-hover:text-soc-accent'}`}>
-                  Open
+                <span className={`flex items-center gap-0.5 text-[10px] font-mono font-semibold uppercase ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted group-hover:text-soc-text'}`}>
+                  Inspect
                   <ChevronRight className="w-3 h-3" />
                 </span>
               </div>

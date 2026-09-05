@@ -91,30 +91,30 @@ export default function CommandCentrePage() {
   return (
     <div className="space-y-4 pb-10">
       {/* 1. Page Header */}
-      <div className="animate-fade-up flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-1">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-1 border-b border-soc-border">
         <div>
-          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
-            <span>ANVĪKṢA</span>
-            <span className="text-soc-textDim">/</span>
-            <span>COMMAND CENTRE</span>
-            <span className="text-soc-textDim">/</span>
-            <span className="text-soc-accent">SOC-04</span>
+          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-0.5">
+            <span className="font-semibold text-soc-text">ANVĪKṢA</span>
+            <span>/</span>
+            <span>COMMAND_CENTRE</span>
+            <span>/</span>
+            <span className="text-soc-accent font-medium">ENCLAVE_SOC-04</span>
           </div>
-          <h1 className="font-display text-[26px] leading-tight font-bold tracking-tight text-soc-text">
-            SOC Effectiveness, measured — not assumed
+          <h1 className="text-lg font-bold tracking-tight text-soc-text">
+            Supervisory SOC Command Centre
           </h1>
-          <p className="text-sm text-soc-textMuted mt-1 max-w-xl">
-            Is the Security Operations Centre actually effective, or does its activity only appear healthy?
+          <p className="text-xs text-soc-textSecondary mt-0.5">
+            Real-time supervisory telemetry, SOP omission verification & cryptographic decision audit
           </p>
         </div>
 
         {/* Benchmark Controls */}
-        <div className="flex items-center gap-2.5 flex-shrink-0">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <div className="relative">
             <select
               value={currentScenario}
               onChange={(e) => setCurrentScenario(e.target.value)}
-              className="appearance-none soc-input !w-auto !pr-9 !py-2.5 font-medium cursor-pointer"
+              className="appearance-none soc-input !w-auto !pr-8 !py-1.5 font-medium cursor-pointer text-xs"
               aria-label="Evaluation scenario"
             >
               {SCENARIOS.map((scen) => (
@@ -123,7 +123,7 @@ export default function CommandCentrePage() {
                 </option>
               ))}
             </select>
-            <ChevronDown className="w-3.5 h-3.5 text-soc-textMuted absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-soc-textMuted absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
           <button
@@ -132,8 +132,8 @@ export default function CommandCentrePage() {
             disabled={evaluating || loading}
             className="btn-primary"
           >
-            <RefreshCw className={`w-4 h-4 ${evaluating ? 'animate-spin' : ''}`} />
-            <span>{evaluating ? 'Re-evaluating...' : 'Re-evaluate'}</span>
+            <RefreshCw className={`w-3.5 h-3.5 ${evaluating ? 'animate-spin' : ''}`} />
+            <span>{evaluating ? 'Evaluating...' : 'Re-evaluate'}</span>
           </button>
         </div>
       </div>

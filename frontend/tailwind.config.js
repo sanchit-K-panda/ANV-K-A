@@ -53,7 +53,6 @@ module.exports = {
           "sans-serif",
         ],
         display: [
-          "var(--font-grotesk)",
           "var(--font-inter)",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -66,28 +65,26 @@ module.exports = {
           "ui-monospace",
           "SFMono-Regular",
           "Menlo",
-          "Monaco",
           "Consolas",
-          "Liberation Mono",
           "monospace",
         ],
       },
       fontSize: {
-        "2xs": ["0.6875rem", { lineHeight: "1rem" }],     // 11px
-        xs: ["0.75rem", { lineHeight: "1.125rem" }],       // 12px
-        sm: ["0.8125rem", { lineHeight: "1.25rem" }],      // 13px body
-        base: ["0.875rem", { lineHeight: "1.375rem" }],    // 14px
-        lg: ["1rem", { lineHeight: "1.5rem" }],            // 16px
-        xl: ["1.125rem", { lineHeight: "1.65rem" }],       // 18px
-        "2xl": ["1.375rem", { lineHeight: "1.8rem" }],     // 22px page title
+        "2xs": ["0.6875rem", { lineHeight: "0.95rem" }],    // 11px
+        xs: ["0.75rem", { lineHeight: "1.05rem" }],        // 12px
+        sm: ["0.8125rem", { lineHeight: "1.15rem" }],      // 13px
+        base: ["0.875rem", { lineHeight: "1.25rem" }],     // 14px
+        lg: ["1rem", { lineHeight: "1.375rem" }],          // 16px
+        xl: ["1.125rem", { lineHeight: "1.5rem" }],        // 18px
+        "2xl": ["1.25rem", { lineHeight: "1.65rem" }],     // 20px
       },
       borderRadius: {
-        sm: "7px",
-        DEFAULT: "9px",
-        md: "10px",
-        lg: "12px",
-        xl: "14px",
-        "2xl": "18px",
+        sm: "4px",
+        DEFAULT: "6px",
+        md: "6px",
+        lg: "8px",
+        xl: "10px",
+        "2xl": "12px",
         full: "9999px",
       },
       boxShadow: {

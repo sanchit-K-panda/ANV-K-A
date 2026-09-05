@@ -39,7 +39,7 @@ export const AirGapDrawer: React.FC<AirGapDrawerProps> = ({ isOpen, onClose }) =
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 text-soc-textMuted hover:text-soc-text rounded-sm hover:bg-soc-raised transition-colors"
+              className="p-1.5 text-soc-textMuted hover:text-soc-text rounded-md hover:bg-soc-raised transition-colors"
               aria-label="Close manifest"
             >
               <X className="w-4 h-4" />

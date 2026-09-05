@@ -48,7 +48,7 @@ export const TopFindingSpotlight: React.FC<TopFindingSpotlightProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-3 flex-1">
         {/* Why Detected (Mathematical Gap) */}
         <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-2.5 h-full">
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+          <div className="flex items-center gap-1.5 text-2xs font-semibold text-soc-textSecondary">
             <Activity className="w-3.5 h-3.5 text-soc-accent" />
             <span>Why detected — mathematical gap</span>
           </div>
@@ -73,7 +73,7 @@ export const TopFindingSpotlight: React.FC<TopFindingSpotlightProps> = ({
 
         {/* Evidence Scope */}
         <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-2.5 h-full">
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+          <div className="flex items-center gap-1.5 text-2xs font-semibold text-soc-textSecondary">
             <Search className="w-3.5 h-3.5 text-soc-accent" />
             <span>Forensic scope &amp; evidence</span>
           </div>
@@ -94,7 +94,7 @@ export const TopFindingSpotlight: React.FC<TopFindingSpotlightProps> = ({
         {/* Recommended Action (UPĀYA) */}
         <div className="lg:col-span-4 p-4 rounded-lg bg-soc-overlay space-y-3 flex flex-col justify-between h-full">
           <div>
-            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary">
+            <div className="flex items-center gap-1.5 text-2xs font-semibold text-soc-textSecondary">
               <Zap className="w-3.5 h-3.5 text-soc-ok" />
               <span>Recommended action (UPĀYA)</span>
             </div>

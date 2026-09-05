@@ -33,7 +33,7 @@ export const IntelligenceFlow: React.FC = () => {
           <Cpu className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
           <h3 className="panel-label">ANVĪKṢA Intelligence Architecture Flow</h3>
         </div>
-        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.1em] text-soc-textMuted">
+        <div className="flex items-center gap-2 text-2xs uppercase tracking-[0.1em] text-soc-textMuted">
           <span className="flex items-center gap-1">
             <span className="h-1.5 w-1.5 rounded-full bg-soc-ok" aria-hidden="true" /> Nominal
           </span>
@@ -41,7 +41,7 @@ export const IntelligenceFlow: React.FC = () => {
             <span className="h-1.5 w-1.5 rounded-full bg-soc-med" aria-hidden="true" /> Findings Active
           </span>
           <span className="text-soc-textDim" aria-hidden="true">·</span>
-          <span className="rounded-sm border border-soc-border bg-soc-raised px-2 py-0.5 text-[9.5px] font-bold tracking-[0.08em] text-soc-textSecondary">
+          <span className="rounded-md border border-soc-border bg-soc-raised px-2 py-0.5 text-[9.5px] font-bold tracking-[0.08em] text-soc-textSecondary">
             100% AIR-GAPPED
           </span>
         </div>
@@ -59,40 +59,40 @@ export const IntelligenceFlow: React.FC = () => {
               type="button"
               onClick={() => setSelected(s)}
               aria-pressed={isSelected}
-              className={`rounded-sm border p-2.5 text-left transition-colors ${
+              className={`rounded-md border p-2.5 text-left transition-colors ${
                 isSelected
                   ? 'border-soc-accent/60 bg-soc-accentInk'
                   : 'border-soc-border bg-soc-panel hover:border-soc-borderStrong hover:bg-soc-overlay'
               }`}
             >
-              <div className="mb-1 flex items-center justify-between text-[10px]">
+              <div className="mb-1 flex items-center justify-between text-2xs">
                 <span className={`font-bold ${isSelected ? 'text-soc-accentBright' : 'text-soc-textDim'}`}>0{idx + 1}</span>
                 <span className={`h-1.5 w-1.5 rounded-full ${isDegraded ? 'bg-soc-med' : 'bg-soc-ok'}`} aria-hidden="true" />
               </div>
-              <div className={`truncate text-[11px] font-bold ${isSelected ? 'text-soc-text' : 'text-soc-textSecondary'}`}>{s.name}</div>
+              <div className={`truncate text-2xs font-bold ${isSelected ? 'text-soc-text' : 'text-soc-textSecondary'}`}>{s.name}</div>
               <div className={`mt-0.5 truncate text-[9.5px] ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`}>{s.sanskrit}</div>
-              <div className="mt-1.5 text-[10px] font-bold tabular-nums text-soc-text">{s.metric}</div>
+              <div className="mt-1.5 text-2xs font-bold tabular-nums text-soc-text">{s.metric}</div>
             </button>
           );
         })}
       </div>
 
       {/* Stage Detail Card */}
-      <div className="flex flex-col justify-between gap-3 rounded-sm border border-soc-border bg-soc-overlay p-3.5 text-xs md:flex-row md:items-center">
+      <div className="flex flex-col justify-between gap-3 rounded-md border border-soc-border bg-soc-overlay p-3.5 text-xs md:flex-row md:items-center">
         <div className="space-y-0.5">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-soc-text">{selected.name}</span>
-            <span className="text-[10px] text-soc-textMuted">({selected.sanskrit})</span>
+            <span className="text-2xs text-soc-textMuted">({selected.sanskrit})</span>
           </div>
           <p className="font-sans text-xs text-soc-textSecondary">{selected.desc}</p>
         </div>
         <div className="flex flex-shrink-0 items-center gap-4 border-t border-soc-border pt-2 text-xs md:border-l md:border-t-0 md:pl-4 md:pt-0">
           <div>
-            <span className="block text-[9px] uppercase tracking-[0.1em] text-soc-textDim">Engine State</span>
+            <span className="block text-2xs uppercase tracking-[0.1em] text-soc-textDim">Engine State</span>
             <span className={`text-xs font-bold ${selected.status === 'DEGRADED' ? 'text-soc-med' : 'text-soc-ok'}`}>{selected.status}</span>
           </div>
           <div>
-            <span className="block text-[9px] uppercase tracking-[0.1em] text-soc-textDim">Throughput</span>
+            <span className="block text-2xs uppercase tracking-[0.1em] text-soc-textDim">Throughput</span>
             <span className="text-xs font-bold tabular-nums text-soc-text">{selected.metric}</span>
           </div>
         </div>

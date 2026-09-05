@@ -11,68 +11,68 @@
 @layer base {
   :root {
     /* Surfaces */
-    --soc-bg: 249 249 247;            /* #F9F9F7 warm paper */
-    --soc-panel: 255 255 255;
-    --soc-raised: 245 245 243;
-    --soc-overlay: 250 250 248;
+    --soc-bg: 248 250 252;            /* Slate-50 */
+    --soc-panel: 255 255 255;         /* Crisp white */
+    --soc-raised: 241 245 249;        /* Slate-100 */
+    --soc-overlay: 248 250 252;
     /* Borders */
-    --soc-border: 229 229 224;        /* warm hairline */
-    --soc-borderStrong: 206 207 200;
-    /* Text — ink */
-    --soc-text: 24 26 28;
-    --soc-textSecondary: 84 89 95;
-    --soc-textMuted: 129 134 140;
-    --soc-textDim: 174 178 182;
-    /* Accent — deep teal, the "intelligence precision" register */
-    --soc-accent: 15 118 110;         /* teal-700 */
-    --soc-accentBright: 13 148 136;   /* teal-600 */
-    --soc-accentDim: 236 250 248;
-    --soc-accentInk: 209 244 239;
-    /* Severity — 600-level, AA-legible in both themes, security states only */
-    --soc-crit: 220 38 38;
-    --soc-critDim: 254 241 241;
-    --soc-high: 234 88 12;
-    --soc-highDim: 255 246 236;
-    --soc-med: 202 138 4;
-    --soc-medDim: 254 250 230;
-    --soc-low: 100 116 139;
-    --soc-lowDim: 244 246 248;
-    --soc-ok: 5 150 105;
-    --soc-okDim: 233 250 243;
+    --soc-border: 226 232 240;        /* Slate-200 */
+    --soc-borderStrong: 203 213 225;  /* Slate-300 */
+    /* Text */
+    --soc-text: 15 23 42;             /* Slate-900 */
+    --soc-textSecondary: 71 85 105;   /* Slate-600 */
+    --soc-textMuted: 100 116 139;     /* Slate-500 */
+    --soc-textDim: 148 163 184;       /* Slate-400 */
+    /* Accent — Precision Cyan / Teal */
+    --soc-accent: 14 116 144;         /* Cyan-700 */
+    --soc-accentBright: 8 145 178;    /* Cyan-600 */
+    --soc-accentDim: 236 254 255;     /* Cyan-50 */
+    --soc-accentInk: 207 250 254;     /* Cyan-100 */
+    /* Severity — 600-level, AA-compliant, operational security states */
+    --soc-crit: 220 38 38;            /* Red-600 */
+    --soc-critDim: 254 242 242;       /* Red-50 */
+    --soc-high: 234 88 12;            /* Orange-600 */
+    --soc-highDim: 255 247 237;       /* Orange-50 */
+    --soc-med: 217 119 6;             /* Amber-600 */
+    --soc-medDim: 254 252 232;       /* Amber-50 */
+    --soc-low: 100 116 139;           /* Slate-500 */
+    --soc-lowDim: 241 245 249;        /* Slate-100 */
+    --soc-ok: 16 149 193;             /* Emerald-600 */
+    --soc-okDim: 236 253 245;         /* Emerald-50 */
     /* Elevation */
-    --shadow-card: 0 1px 2px rgb(28 25 23 / 0.04), 0 1px 3px rgb(28 25 23 / 0.05);
-    --shadow-card-hover: 0 2px 4px rgb(28 25 23 / 0.03), 0 12px 28px rgb(28 25 23 / 0.09);
-    --shadow-dropdown: 0 10px 28px rgb(28 25 23 / 0.13), 0 2px 8px rgb(28 25 23 / 0.06);
+    --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+    --shadow-card-hover: 0 4px 12px 0 rgb(15 23 42 / 0.08);
+    --shadow-dropdown: 0 8px 20px -4px rgb(15 23 42 / 0.12), 0 2px 6px -1px rgb(15 23 42 / 0.06);
   }
 
   .dark {
-    --soc-bg: 9 13 17;                /* #090D11, teal-cast ink */
-    --soc-panel: 16 22 28;
-    --soc-raised: 26 33 41;
-    --soc-overlay: 21 27 34;
-    --soc-border: 39 49 59;
-    --soc-borderStrong: 60 74 88;
-    --soc-text: 234 239 242;
-    --soc-textSecondary: 158 170 181;
-    --soc-textMuted: 118 130 141;
-    --soc-textDim: 90 101 112;
-    --soc-accent: 45 212 191;         /* teal-400 */
-    --soc-accentBright: 94 234 212;   /* teal-300 */
-    --soc-accentDim: 11 51 47;
-    --soc-accentInk: 13 64 59;
-    --soc-crit: 248 113 113;
-    --soc-critDim: 47 24 26;
-    --soc-high: 251 146 60;
-    --soc-highDim: 48 32 18;
-    --soc-med: 250 204 21;
-    --soc-medDim: 46 40 14;
-    --soc-low: 148 163 184;
-    --soc-lowDim: 30 36 44;
-    --soc-ok: 52 211 153;
-    --soc-okDim: 16 42 32;
-    --shadow-card: 0 0 0 1px rgb(255 255 255 / 0.02);
-    --shadow-card-hover: 0 0 0 1px rgb(255 255 255 / 0.05), 0 10px 28px rgb(0 0 0 / 0.4);
-    --shadow-dropdown: 0 10px 28px rgb(0 0 0 / 0.55);
+    --soc-bg: 10 14 20;               /* Deep obsidian slate */
+    --soc-panel: 15 20 28;            /* Dark console panel */
+    --soc-raised: 22 30 42;           /* Raised surface */
+    --soc-overlay: 18 24 34;          /* Overlay surface */
+    --soc-border: 30 41 59;           /* Slate-800 hairline */
+    --soc-borderStrong: 45 60 84;     /* Crisp strong border */
+    --soc-text: 241 245 249;          /* Slate-100 */
+    --soc-textSecondary: 148 163 184; /* Slate-400 */
+    --soc-textMuted: 100 116 139;     /* Slate-500 */
+    --soc-textDim: 71 85 105;         /* Slate-600 */
+    --soc-accent: 56 189 248;         /* Sky-400 cyber */
+    --soc-accentBright: 125 211 252;  /* Sky-300 */
+    --soc-accentDim: 12 42 62;        /* Dark sky tint */
+    --soc-accentInk: 14 55 82;
+    --soc-crit: 248 113 113;          /* Red-400 */
+    --soc-critDim: 45 15 17;
+    --soc-high: 251 146 60;           /* Orange-400 */
+    --soc-highDim: 48 24 14;
+    --soc-med: 250 204 21;            /* Amber-400 */
+    --soc-medDim: 45 35 12;
+    --soc-low: 148 163 184;           /* Slate-400 */
+    --soc-lowDim: 22 30 42;
+    --soc-ok: 52 211 153;             /* Emerald-400 */
+    --soc-okDim: 12 38 28;
+    --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+    --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.5);
+    --shadow-dropdown: 0 10px 24px -4px rgb(0 0 0 / 0.6);
   }
 
   * {
@@ -94,22 +94,22 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 0.8125rem;
-    transition: background-color 250ms ease, color 250ms ease;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
     color: rgb(var(--soc-text));
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
 
   ::selection {
-    background: rgb(var(--soc-accent) / 0.18);
+    background: rgb(var(--soc-accent) / 0.22);
   }
 
   :focus-visible {
     outline: 2px solid rgb(var(--soc-accent) / 0.7);
-    outline-offset: 2px;
-    border-radius: 6px;
+    outline-offset: 1px;
+    border-radius: 4px;
   }
 
   input, textarea, select {
@@ -170,26 +170,26 @@
   .soc-panel {
     background-color: rgb(var(--soc-panel));
     border: 1px solid rgb(var(--soc-border));
-    border-radius: 14px;
+    border-radius: 8px;
     box-shadow: var(--shadow-card);
   }
 
   .card-hover {
-    transition: box-shadow 220ms ease, transform 220ms ease, border-color 220ms ease;
+    transition: box-shadow 150ms ease, border-color 150ms ease;
   }
   .card-hover:hover {
+    border-color: rgb(var(--soc-borderStrong));
     box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
   }
 
   .soc-panel-header {
-    padding: 14px 18px;
+    padding: 10px 14px;
     border-bottom: 1px solid rgb(var(--soc-border));
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    min-height: 52px;
+    min-height: 44px;
   }
 
   /* Section label */
@@ -197,7 +197,10 @@
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: -0.01em;
-    color: rgb(var(--soc-textSecondary));
+    color: rgb(var(--soc-text));
+    text-transform: uppercase;
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    letter-spacing: 0.04em;
   }
   .panel-label-accent {
     color: rgb(var(--soc-accent));
@@ -205,8 +208,8 @@
 
   /* Ops dot-grid texture — for hero/manifest surfaces */
   .tex-grid {
-    background-image: radial-gradient(rgb(var(--soc-borderStrong) / 0.55) 1px, transparent 1px);
-    background-size: 18px 18px;
+    background-image: radial-gradient(rgb(var(--soc-borderStrong) / 0.4) 1px, transparent 1px);
+    background-size: 16px 16px;
   }
 
   /* ── Data table ───────────────────────────────────────────────────── */
@@ -214,17 +217,19 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-variant-numeric: tabular-nums;
   }
 
   .soc-table th {
-    background-color: rgb(var(--soc-overlay));
+    background-color: rgb(var(--soc-raised) / 0.6);
     color: rgb(var(--soc-textMuted));
     font-weight: 600;
     font-size: 0.6875rem;
-    letter-spacing: 0.015em;
-    padding: 10px 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    padding: 8px 14px;
     text-align: left;
     border-bottom: 1px solid rgb(var(--soc-border));
     white-space: nowrap;
@@ -232,8 +237,8 @@
   }
 
   .soc-table td {
-    padding: 12px 18px;
-    border-bottom: 1px solid rgb(var(--soc-border) / 0.55);
+    padding: 10px 14px;
+    border-bottom: 1px solid rgb(var(--soc-border) / 0.5);
     color: rgb(var(--soc-text));
     vertical-align: middle;
   }
@@ -243,10 +248,10 @@
   }
 
   .soc-table tbody tr {
-    transition: background-color 150ms ease;
+    transition: background-color 100ms ease;
   }
   .soc-table tbody tr:hover td {
-    background-color: rgb(var(--soc-raised) / 0.7);
+    background-color: rgb(var(--soc-raised) / 0.5);
   }
 
   /* Monospace data columns */
@@ -257,31 +262,33 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* ── Semantic badges — tinted pills ───────────────────────────────── */
+  /* ── Semantic badges — crisp enterprise tags ─────────────────────── */
   .soc-badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-weight: 500;
-    font-size: 0.6875rem;
-    letter-spacing: 0.01em;
-    padding: 2.5px 10px;
-    border-radius: 9999px;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 0.625rem;
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
     border: 1px solid transparent;
     white-space: nowrap;
-    line-height: 1.45;
-    transition: background-color 150ms ease, border-color 150ms ease;
+    line-height: 1.35;
+    transition: background-color 120ms ease, border-color 120ms ease;
   }
 
   .badge-critical {
-    background-color: rgb(var(--soc-crit) / 0.08);
+    background-color: rgb(var(--soc-crit) / 0.1);
     color: rgb(var(--soc-crit));
-    border-color: rgb(var(--soc-crit) / 0.22);
+    border-color: rgb(var(--soc-crit) / 0.25);
   }
   .badge-high {
-    background-color: rgb(var(--soc-high) / 0.09);
+    background-color: rgb(var(--soc-high) / 0.1);
     color: rgb(var(--soc-high));
-    border-color: rgb(var(--soc-high) / 0.25);
+    border-color: rgb(var(--soc-high) / 0.28);
   }
   .badge-medium {
     background-color: rgb(var(--soc-med) / 0.1);
@@ -289,25 +296,25 @@
     border-color: rgb(var(--soc-med) / 0.3);
   }
   .badge-low {
-    background-color: rgb(var(--soc-low) / 0.08);
+    background-color: rgb(var(--soc-low) / 0.1);
     color: rgb(var(--soc-low));
     border-color: rgb(var(--soc-low) / 0.25);
   }
   .badge-verified,
   .badge-ok {
-    background-color: rgb(var(--soc-ok) / 0.09);
+    background-color: rgb(var(--soc-ok) / 0.1);
     color: rgb(var(--soc-ok));
-    border-color: rgb(var(--soc-ok) / 0.25);
+    border-color: rgb(var(--soc-ok) / 0.28);
   }
   .badge-neutral {
-    background-color: rgb(var(--soc-textMuted) / 0.08);
+    background-color: rgb(var(--soc-raised));
     color: rgb(var(--soc-textSecondary));
     border-color: rgb(var(--soc-border));
   }
   .badge-accent {
-    background-color: rgb(var(--soc-accent) / 0.08);
+    background-color: rgb(var(--soc-accent) / 0.1);
     color: rgb(var(--soc-accent));
-    border-color: rgb(var(--soc-accent) / 0.25);
+    border-color: rgb(var(--soc-accent) / 0.28);
   }
 
   /* ── Status dots ──────────────────────────────────────────────────── */
@@ -328,66 +335,64 @@
   .soc-input {
     background-color: rgb(var(--soc-panel));
     border: 1px solid rgb(var(--soc-border));
-    border-radius: 10px;
+    border-radius: 6px;
     color: rgb(var(--soc-text));
-    font-size: 0.8125rem;
-    padding: 9px 13px;
+    font-size: 0.75rem;
+    padding: 7px 11px;
     width: 100%;
-    box-shadow: 0 1px 2px rgb(28 25 23 / 0.03);
-    transition: border-color 150ms ease, box-shadow 150ms ease;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    transition: border-color 120ms ease;
   }
   .soc-input::placeholder { color: rgb(var(--soc-textDim)); }
   .soc-input:hover { border-color: rgb(var(--soc-borderStrong)); }
   .soc-input:focus {
     outline: none;
     border-color: rgb(var(--soc-accent));
-    box-shadow: 0 0 0 3.5px rgb(var(--soc-accent) / 0.13);
+    box-shadow: 0 0 0 2px rgb(var(--soc-accent) / 0.18);
   }
 
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 6px;
     background-color: rgb(var(--soc-accent));
     color: #fff;
     font-weight: 600;
-    font-size: 0.8125rem;
-    padding: 9px 17px;
-    border-radius: 10px;
+    font-size: 0.75rem;
+    padding: 7px 13px;
+    border-radius: 6px;
     border: 1px solid rgb(var(--soc-accent));
-    box-shadow: 0 1px 2px rgb(28 25 23 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.12);
-    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    transition: background-color 120ms ease;
   }
   .btn-primary:hover {
     background-color: rgb(var(--soc-accentBright));
     border-color: rgb(var(--soc-accentBright));
-    box-shadow: 0 3px 10px rgb(15 118 110 / 0.32), inset 0 1px 0 rgb(255 255 255 / 0.12);
   }
-  .btn-primary:active { transform: scale(0.97); }
+  .btn-primary:active { opacity: 0.9; }
   .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
+    gap: 6px;
     background-color: rgb(var(--soc-panel));
     color: rgb(var(--soc-textSecondary));
     font-weight: 500;
-    font-size: 0.8125rem;
-    padding: 9px 17px;
-    border-radius: 10px;
+    font-size: 0.75rem;
+    padding: 7px 13px;
+    border-radius: 6px;
     border: 1px solid rgb(var(--soc-border));
-    box-shadow: 0 1px 2px rgb(28 25 23 / 0.03);
-    transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease, transform 100ms ease;
+    transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease;
   }
   .btn-ghost:hover {
     color: rgb(var(--soc-text));
     border-color: rgb(var(--soc-borderStrong));
     background-color: rgb(var(--soc-raised));
   }
-  .btn-ghost:active { transform: scale(0.97); }
+  .btn-ghost:active { background-color: rgb(var(--soc-raised)); }
 
   /* ── Key-value manifest rows ──────────────────────────────────────── */
   .kv-row {

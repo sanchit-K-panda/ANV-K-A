@@ -36,7 +36,7 @@ export function LiveRefresher() {
   if (!isRefreshing) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 bg-soc-panel text-soc-text px-3 py-1.5 rounded-sm flex items-center gap-2 text-2xs font-mono border border-soc-border shadow-dropdown z-50 tracking-wider">
+    <div className="fixed bottom-4 right-4 bg-soc-panel text-soc-text px-3 py-1.5 rounded-md flex items-center gap-2 text-2xs font-mono border border-soc-border shadow-dropdown z-50 tracking-wider">
       <RefreshCw className="w-3 h-3 animate-spin text-soc-accent" />
       <span className="text-soc-textSecondary">STREAM: NEW DATA INGESTED</span>
     </div>

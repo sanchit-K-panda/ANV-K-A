@@ -55,7 +55,7 @@ export default function AuditPage() {
 
       {/* Verification Status */}
       {verificationResult && (
-        <div className="px-3.5 py-2.5 bg-soc-okDim border border-soc-ok/30 rounded-sm flex items-center justify-between gap-3 text-xs font-mono text-soc-ok">
+        <div className="px-3.5 py-2.5 bg-soc-okDim border border-soc-ok/30 rounded-md flex items-center justify-between gap-3 text-xs font-mono text-soc-ok">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
             <span>{verificationResult}</span>

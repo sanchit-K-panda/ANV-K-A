@@ -29,10 +29,10 @@ export default function FindingDetailPage() {
   if (!finding) {
     return (
       <div className="space-y-3 p-1">
-        <div className="h-5 w-64 bg-soc-raised rounded-sm animate-pulse" />
+        <div className="h-5 w-64 bg-soc-raised rounded-md animate-pulse" />
         <div className="soc-panel p-5 space-y-3">
-          <div className="h-4 w-1/3 bg-soc-raised rounded-sm animate-pulse" />
-          <div className="h-4 w-2/3 bg-soc-raised rounded-sm animate-pulse" />
+          <div className="h-4 w-1/3 bg-soc-raised rounded-md animate-pulse" />
+          <div className="h-4 w-2/3 bg-soc-raised rounded-md animate-pulse" />
         </div>
         <div className="font-mono text-2xs text-soc-textMuted">LOADING FORENSIC FINDING {id}...</div>
       </div>
@@ -65,7 +65,7 @@ export default function FindingDetailPage() {
 
       {/* Action Notice */}
       {actionNotice && (
-        <div className="px-3.5 py-2.5 bg-soc-okDim border border-soc-ok/30 rounded-sm text-xs font-mono text-soc-ok flex items-center gap-2">
+        <div className="px-3.5 py-2.5 bg-soc-okDim border border-soc-ok/30 rounded-md text-xs font-mono text-soc-ok flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4" />
           <span>{actionNotice}</span>
         </div>
@@ -109,7 +109,7 @@ export default function FindingDetailPage() {
             <span className="soc-badge badge-critical">ANOMALY</span>
           </div>
 
-          <div className="space-y-1.5 bg-soc-raised/50 p-3 rounded-sm border border-soc-border font-mono text-xs">
+          <div className="space-y-1.5 bg-soc-raised/50 p-3 rounded-md border border-soc-border font-mono text-xs">
             <div className="flex justify-between gap-3">
               <span className="text-soc-textMuted">{finding.baseline_metric_name}</span>
               <span className="text-soc-text font-medium tabular-nums">{finding.baseline_value}</span>
@@ -165,7 +165,7 @@ export default function FindingDetailPage() {
             {finding.evidence_timeline.map((step, idx) => (
               <div
                 key={idx}
-                className={`p-2.5 rounded-sm border ${
+                className={`p-2.5 rounded-md border ${
                   step.isAnomaly
                     ? 'bg-soc-critDim border-soc-crit/30'
                     : 'bg-soc-raised/40 border-soc-border'
@@ -189,7 +189,7 @@ export default function FindingDetailPage() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               aria-pressed={activeTab === tab}
-              className={`px-3 py-1.5 text-2xs font-mono tracking-wider rounded-sm transition-colors border ${
+              className={`px-3 py-1.5 text-2xs font-mono tracking-wider rounded-md transition-colors border ${
                 activeTab === tab
                   ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
                   : 'bg-transparent border-transparent text-soc-textMuted hover:text-soc-text hover:bg-soc-raised'
@@ -252,7 +252,7 @@ export default function FindingDetailPage() {
           {activeTab === 'EVIDENCE' && (
             <div>
               <div className="panel-label mb-2.5">PRATYAYA Raw Evidence JSON</div>
-              <pre className="p-3 bg-soc-bg border border-soc-border rounded-sm text-2xs text-soc-accentBright overflow-x-auto font-mono leading-relaxed">
+              <pre className="p-3 bg-soc-bg border border-soc-border rounded-md text-2xs text-soc-accentBright overflow-x-auto font-mono leading-relaxed">
                 {JSON.stringify(finding.evidence, null, 2)}
               </pre>
             </div>
@@ -267,7 +267,7 @@ export default function FindingDetailPage() {
                   <span className="text-soc-text break-all">{AUDIT_HASH}</span>
                   <button
                     onClick={handleCopyHash}
-                    className="p-1 text-soc-textMuted hover:text-soc-text rounded-sm hover:bg-soc-raised transition-colors"
+                    className="p-1 text-soc-textMuted hover:text-soc-text rounded-md hover:bg-soc-raised transition-colors"
                     aria-label="Copy audit hash"
                   >
                     {copiedHash ? <Check className="w-3 h-3 text-soc-ok" /> : <Copy className="w-3 h-3" />}

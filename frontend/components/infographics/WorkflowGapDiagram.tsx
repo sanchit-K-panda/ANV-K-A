@@ -64,7 +64,7 @@ export function WorkflowGapDiagram() {
         </div>
         <Link
           href="/findings/FND-EXEC-001"
-          className="flex items-center gap-1 text-[11px] text-soc-accent transition-colors hover:text-soc-accentBright"
+          className="flex items-center gap-1 text-2xs text-soc-accent transition-colors hover:text-soc-accentBright"
         >
           <span>Finding Detail</span>
           <ArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -81,7 +81,7 @@ export function WorkflowGapDiagram() {
           return (
             <div
               key={idx}
-              className={`grid grid-cols-1 items-center gap-3 rounded-sm border p-3.5 md:grid-cols-12 ${
+              className={`grid grid-cols-1 items-center gap-3 rounded-md border p-3.5 md:grid-cols-12 ${
                 isPassed
                   ? 'border-soc-border bg-soc-overlay'
                   : isFailed
@@ -93,14 +93,14 @@ export function WorkflowGapDiagram() {
               <div className="flex items-center gap-2.5 md:col-span-4">
                 {isPassed ? (
                   <span
-                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-ok/40 bg-soc-okDim text-[10px] font-bold text-soc-ok"
+                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-ok/40 bg-soc-okDim text-2xs font-bold text-soc-ok"
                     aria-label="Step executed"
                   >
                     ✓
                   </span>
                 ) : (
                   <span
-                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-crit/40 bg-soc-critDim text-[10px] font-bold text-soc-crit"
+                    className="flex h-5 w-5 flex-shrink-0 items-center justify-center border border-soc-crit/40 bg-soc-critDim text-2xs font-bold text-soc-crit"
                     aria-label="Step not executed"
                   >
                     ✕
@@ -108,24 +108,24 @@ export function WorkflowGapDiagram() {
                 )}
                 <div>
                   <div className="text-xs font-bold text-soc-text">{step.name}</div>
-                  <div className="text-[10px] tabular-nums text-soc-textMuted">Target SLA: {step.timeExpected}</div>
+                  <div className="text-2xs tabular-nums text-soc-textMuted">Target SLA: {step.timeExpected}</div>
                 </div>
               </div>
 
               {/* Status Badge (3 cols) */}
               <div className="md:col-span-3">
                 {isPassed && (
-                  <span className="rounded-sm border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-ok">
+                  <span className="rounded-md border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] text-soc-ok">
                     EXECUTED ({step.timeObserved})
                   </span>
                 )}
                 {isFailed && (
-                  <span className="rounded-sm border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-crit">
+                  <span className="rounded-md border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] text-soc-crit">
                     ACTION OMITTED
                   </span>
                 )}
                 {isBypassed && (
-                  <span className="rounded-sm border border-soc-med/30 bg-soc-medDim px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-soc-med">
+                  <span className="rounded-md border border-soc-med/30 bg-soc-medDim px-2 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] text-soc-med">
                     QUEUE BYPASSED
                   </span>
                 )}
@@ -141,7 +141,7 @@ export function WorkflowGapDiagram() {
       </div>
 
       {/* Summary Footer */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-soc-border pt-3 text-[11px] text-soc-textMuted">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-soc-border pt-3 text-2xs text-soc-textMuted">
         <div className="flex items-center gap-4">
           <span>Affected Alerts: <strong className="font-semibold tabular-nums text-soc-text">83 cases</strong></span>
           <span>Target Asset: <strong className="font-semibold text-soc-text">DC-PROD-01</strong></span>

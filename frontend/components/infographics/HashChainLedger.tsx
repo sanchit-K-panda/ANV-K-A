@@ -89,7 +89,7 @@ export function HashChainLedger() {
                   <span className="text-soc-textDim">·</span>
                   <span className="font-mono tabular-nums flex-shrink-0">{block.timestamp.replace(' UTC', '')}</span>
                 </div>
-                <div className="font-mono text-[10px] text-soc-textDim mt-1 truncate">
+                <div className="font-mono text-2xs text-soc-textDim mt-1 truncate">
                   {block.hash}
                 </div>
               </div>

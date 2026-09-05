@@ -72,7 +72,7 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
               </span>
               <button
                 onClick={handleCopyId}
-                className="p-1 rounded-sm text-soc-textMuted hover:text-soc-text hover:bg-soc-raised transition-colors"
+                className="p-1 rounded-md text-soc-textMuted hover:text-soc-text hover:bg-soc-raised transition-colors"
                 title="Copy Finding ID"
                 aria-label="Copy Finding ID"
               >
@@ -134,7 +134,7 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
                 {finding.affected_entities.map((entity, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-soc-raised border border-soc-border text-2xs"
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-soc-raised border border-soc-border text-2xs"
                   >
                     <span className="text-soc-textMuted uppercase tracking-wider">{entity.type}</span>
                     <span className="text-soc-text font-medium">{entity.id}</span>
@@ -225,7 +225,7 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
             </div>
 
             {actionConfirmed && (
-              <div className="mt-3 px-2.5 py-2 bg-soc-okDim border border-soc-ok/30 rounded-sm text-2xs font-mono text-soc-ok flex items-center gap-1.5">
+              <div className="mt-3 px-2.5 py-2 bg-soc-okDim border border-soc-ok/30 rounded-md text-2xs font-mono text-soc-ok flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5" />
                 Action [{actionConfirmed}] dispatched and recorded to the SAKṢĪ audit hash chain.
               </div>
