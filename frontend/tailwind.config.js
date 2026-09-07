@@ -53,7 +53,8 @@ module.exports = {
           "sans-serif",
         ],
         display: [
-          "var(--font-inter)",
+          "var(--font-grotesk)",
+          "Space Grotesk",
           "-apple-system",
           "BlinkMacSystemFont",
           "Inter",
@@ -62,6 +63,7 @@ module.exports = {
         ],
         mono: [
           "var(--font-jetbrains)",
+          "JetBrains Mono",
           "ui-monospace",
           "SFMono-Regular",
           "Menlo",
@@ -70,31 +72,33 @@ module.exports = {
         ],
       },
       fontSize: {
+        "3xs": ["0.625rem", { lineHeight: "0.85rem" }],    // 10px
         "2xs": ["0.6875rem", { lineHeight: "0.95rem" }],    // 11px
         xs: ["0.75rem", { lineHeight: "1.05rem" }],        // 12px
         sm: ["0.8125rem", { lineHeight: "1.15rem" }],      // 13px
         base: ["0.875rem", { lineHeight: "1.25rem" }],     // 14px
         lg: ["1rem", { lineHeight: "1.375rem" }],          // 16px
         xl: ["1.125rem", { lineHeight: "1.5rem" }],        // 18px
-        "2xl": ["1.25rem", { lineHeight: "1.65rem" }],     // 20px
+        "2xl": ["1.35rem", { lineHeight: "1.75rem" }],     // 21px
+        "3xl": ["1.65rem", { lineHeight: "2rem" }],        // 26px
       },
       borderRadius: {
         sm: "4px",
         DEFAULT: "6px",
         md: "6px",
         lg: "8px",
-        xl: "10px",
-        "2xl": "12px",
+        xl: "12px",
+        "2xl": "16px",
         full: "9999px",
       },
       boxShadow: {
         card: "var(--shadow-card)",
         "card-hover": "var(--shadow-card-hover)",
         dropdown: "var(--shadow-dropdown)",
-        drawer: "-16px 0 48px rgb(16 24 40 / 0.18)",
+        drawer: "-8px 0 24px rgb(0 0 0 / 0.3)",
       },
       maxWidth: {
-        console: "1440px",
+        console: "1600px",
       },
     },
   },

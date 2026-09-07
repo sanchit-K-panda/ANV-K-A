@@ -45,30 +45,30 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
   const stageHeader = (num: string, title: string, icon: React.ReactNode, tone: 'accent' | 'warn' | 'muted' | 'ok' | 'crit' = 'muted') => {
     const tones = {
       accent: 'text-soc-accent',
-      warn: 'text-soc-med',
+      warn: 'text-soc-high',
       muted: 'text-soc-textSecondary',
       ok: 'text-soc-ok',
       crit: 'text-soc-crit',
     };
     return (
-      <div className={`flex items-center gap-2 mb-2.5 font-mono text-2xs font-medium uppercase tracking-[0.14em] ${tones[tone]}`}>
+      <div className={`flex items-center gap-2 mb-2.5 font-mono text-2xs font-bold uppercase tracking-[0.14em] ${tones[tone]}`}>
         {icon}
         <span>{num} · {title}</span>
       </div>
     );
   };
 
-  const bodyBox = 'px-3.5 py-3 bg-soc-overlay rounded-lg text-xs text-soc-text leading-relaxed';
+  const bodyBox = 'px-3.5 py-3 bg-soc-overlay rounded-lg text-xs text-soc-text leading-relaxed border border-soc-border/60';
 
   return (
     <div className="space-y-5">
       {/* Finding Header */}
-      <div className="soc-panel">
+      <div className="soc-panel shadow-card border-soc-border">
         <div className="p-5">
           <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-soc-border">
             <div className="flex items-center gap-3">
               <SeverityBadge severity={finding.severity} />
-              <span className="col-mono text-sm text-soc-text">
+              <span className="col-mono text-sm font-bold text-soc-accent">
                 {finding.id}
               </span>
               <button

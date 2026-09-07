@@ -13,15 +13,15 @@ export const RiskScore: React.FC<RiskScoreProps> = ({ score, factorsCount, size 
 
   if (score >= 80) {
     textClass = 'text-soc-crit font-bold';
-    bgClass = 'bg-soc-critDim border-soc-crit/40';
+    bgClass = 'bg-soc-crit/15 border-soc-crit/40';
     label = 'CRITICAL';
   } else if (score >= 60) {
-    textClass = 'text-soc-high font-semibold';
-    bgClass = 'bg-soc-highDim border-soc-high/40';
+    textClass = 'text-soc-high font-bold';
+    bgClass = 'bg-soc-high/15 border-soc-high/40';
     label = 'HIGH';
   } else if (score >= 40) {
-    textClass = 'text-soc-med';
-    bgClass = 'bg-soc-medDim border-soc-med/40';
+    textClass = 'text-soc-med font-bold';
+    bgClass = 'bg-soc-med/15 border-soc-med/40';
     label = 'MED';
   }
 

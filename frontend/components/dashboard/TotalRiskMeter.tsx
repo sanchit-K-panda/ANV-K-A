@@ -44,22 +44,22 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
   ];
 
   return (
-    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover">
+    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover bg-soc-panel">
       <div>
         {/* Header */}
         <div className="soc-panel-header">
           <div>
-            <span className="panel-label">Total Composite Risk</span>
-            <p className="text-2xs text-soc-textMuted mt-0.5">MĀN · additive factor decomposition</p>
+            <span className="panel-label">COMPOSITE RISK VECTOR</span>
+            <p className="text-2xs font-mono text-soc-textMuted mt-0.5">MĀN · Bayesian Additive Weights</p>
           </div>
           <span className={`soc-badge ${riskLevel.badge}`}>{riskLevel.label}</span>
         </div>
 
         {/* Main Readout with Technical Precision Gauge */}
-        <div className="px-4 pt-3 pb-2 flex items-center justify-between gap-4">
+        <div className="px-4 pt-4 pb-2 flex items-center justify-between gap-4">
           <div>
             <div className="flex items-baseline gap-1.5">
-              <span className="font-mono text-3xl font-bold tracking-tight text-soc-text tabular-nums">
+              <span className={`font-mono text-4xl font-extrabold tracking-tight tabular-nums ${score >= 80 ? 'text-soc-crit' : score >= 60 ? 'text-soc-high' : 'text-soc-text'}`}>
                 {score}
               </span>
               <span className="text-xs text-soc-textMuted font-mono">/ {maxScore}</span>
@@ -78,13 +78,15 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
                 d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
                 stroke="rgb(var(--soc-raised))"
-                strokeWidth="6"
+                strokeWidth="7"
+                strokeLinecap="round"
               />
               <path
                 d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
-                stroke={score >= 80 ? '#ef4444' : score >= 60 ? '#f97316' : score >= 35 ? '#eab308' : '#10b981'}
-                strokeWidth="6"
+                stroke={score >= 80 ? 'rgb(var(--soc-crit))' : score >= 60 ? 'rgb(var(--soc-high))' : score >= 35 ? 'rgb(var(--soc-med))' : 'rgb(var(--soc-ok))'}
+                strokeWidth="7"
+                strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
                 className="transition-all duration-700 ease-out"
@@ -94,31 +96,41 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
         </div>
 
         {/* Contributing Factors — always itemized, never opaque */}
-        <div className="border-t border-soc-border px-5 py-3.5 space-y-2">
-          <div className="flex justify-between text-2xs font-medium text-soc-textMuted">
-            <span>Primary risk drivers</span>
-            <span className="text-soc-crit font-semibold">Total +{score} pts</span>
+        <div className="border-t border-soc-border px-4 py-3 space-y-2">
+          <div className="flex justify-between text-2xs font-mono font-bold text-soc-textMuted uppercase tracking-wider">
+            <span>Primary Risk Drivers</span>
+            <span className="text-soc-crit">+{score} PTS TOTAL</span>
           </div>
-          {factorContributions.map((f) => (
-            <div key={f.label} className="flex justify-between items-center text-xs">
-              <span className="text-soc-textSecondary">{f.label}</span>
-              <span className="font-mono text-2xs tabular-nums">
-                <span className="text-soc-crit font-semibold">{f.pts}</span>
-                <span className="text-soc-textDim ml-1.5">({f.percent})</span>
-              </span>
-            </div>
-          ))}
+          <div className="space-y-2">
+            {factorContributions.map((f) => (
+              <div key={f.label} className="space-y-1">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-soc-textSecondary text-[11px] truncate max-w-[200px]">{f.label}</span>
+                  <span className="text-2xs tabular-nums">
+                    <span className="text-soc-crit font-bold">{f.pts}</span>
+                    <span className="text-soc-textDim ml-1">({f.percent})</span>
+                  </span>
+                </div>
+                <div className="w-full bg-soc-raised h-1 rounded-full overflow-hidden">
+                  <div
+                    className="bg-soc-crit h-full rounded-full transition-all duration-500"
+                    style={{ width: f.percent }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Footer Link */}
-      <div className="px-5 py-3.5 border-t border-soc-border flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-2xs text-soc-high font-medium">
+      <div className="px-4 py-3 border-t border-soc-border flex items-center justify-between bg-soc-raised/30">
+        <div className="flex items-center gap-1.5 text-2xs font-mono text-soc-high font-bold">
           <TrendingUp className="w-3.5 h-3.5" />
           <span>{trendDelta}</span>
         </div>
-        <Link href="/risk" className="text-xs text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-0.5 transition-colors">
-          <span>All factors</span>
+        <Link href="/risk" className="text-xs font-mono text-soc-accent hover:text-soc-accentBright font-bold flex items-center gap-0.5 transition-colors">
+          <span>ALL FACTORS</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>

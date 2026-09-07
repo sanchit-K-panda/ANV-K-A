@@ -143,29 +143,29 @@ export function BiometricHUD({
                 }
               `}</style>
               <div
-                className="h-px w-full bg-soc-accent"
+                className="h-0.5 w-full bg-soc-accent"
                 style={{ animation: 'darsana-sweep 1.6s ease-in-out infinite alternate' }}
               />
             </div>
           )}
 
           {authStage === 'VERIFIED' && (
-            <div className="text-center space-y-1.5 z-10 bg-soc-okDim/90 border border-soc-ok/40 px-4 py-3 rounded-md max-w-[210px]">
-              <span className="w-6 h-6 bg-soc-ok/20 border border-soc-ok/50 rounded-full mx-auto flex items-center justify-center">
-                <Check className="w-3.5 h-3.5 text-soc-ok" />
+            <div className="text-center space-y-1.5 z-10 bg-soc-ok/15 border border-soc-ok/50 px-4 py-3 rounded-md max-w-[210px]">
+              <span className="w-6 h-6 bg-soc-ok/20 border border-soc-ok/60 rounded-full mx-auto flex items-center justify-center">
+                <Check className="w-3.5 h-3.5 text-soc-ok font-bold" />
               </span>
-              <div className="text-2xs font-semibold text-soc-ok tracking-wider">IDENTITY VERIFIED</div>
-              <div className="text-2xs text-soc-ok/70 font-mono">Template matched · 99.8%</div>
+              <div className="text-2xs font-bold text-soc-ok tracking-wider">IDENTITY VERIFIED</div>
+              <div className="text-2xs text-soc-ok/80 font-mono">Template matched · 99.8%</div>
             </div>
           )}
 
           {authStage === 'DENIED' && (
-            <div className="text-center space-y-1.5 z-10 bg-soc-critDim/90 border border-soc-crit/40 px-4 py-3 rounded-md max-w-[230px]">
-              <span className="w-6 h-6 bg-soc-crit/20 border border-soc-crit/50 rounded-full mx-auto flex items-center justify-center">
-                <X className="w-3.5 h-3.5 text-soc-crit" />
+            <div className="text-center space-y-1.5 z-10 bg-soc-crit/15 border border-soc-crit/50 px-4 py-3 rounded-md max-w-[230px]">
+              <span className="w-6 h-6 bg-soc-crit/20 border border-soc-crit/60 rounded-full mx-auto flex items-center justify-center">
+                <X className="w-3.5 h-3.5 text-soc-crit font-bold" />
               </span>
-              <div className="text-2xs font-semibold text-soc-crit tracking-wider">VERIFICATION FAILED</div>
-              <div className="text-2xs text-soc-crit/80 font-mono leading-tight">
+              <div className="text-2xs font-bold text-soc-crit tracking-wider">VERIFICATION FAILED</div>
+              <div className="text-2xs text-soc-crit/90 font-mono leading-tight">
                 {denyReason || 'Biometric anomaly detected.'}
               </div>
             </div>

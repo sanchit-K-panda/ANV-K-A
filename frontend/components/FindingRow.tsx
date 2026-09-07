@@ -18,7 +18,7 @@ export const FindingRow: React.FC<FindingRowProps> = ({ finding }) => {
       <td className="whitespace-nowrap">
         <div className="flex items-center gap-2.5">
           <SeverityBadge severity={finding.severity} size="sm" />
-          <span className="col-mono text-soc-text">
+          <span className="col-mono text-soc-accent font-bold">
             {finding.id}
           </span>
         </div>
@@ -34,10 +34,10 @@ export const FindingRow: React.FC<FindingRowProps> = ({ finding }) => {
       {/* Title & Forensic Scope */}
       <td className="max-w-md">
         <Link href={`/findings/${finding.id}`} className="block">
-          <div className="text-xs font-medium text-soc-text group-hover:text-soc-accent transition-colors line-clamp-1">
+          <div className="text-xs font-semibold text-soc-text group-hover:text-soc-accent transition-colors line-clamp-1">
             {finding.title}
           </div>
-          <div className="col-mono truncate mt-0.5">
+          <div className="col-mono truncate mt-0.5 text-soc-textMuted">
             {finding.where_scope}
           </div>
         </Link>
@@ -62,11 +62,11 @@ export const FindingRow: React.FC<FindingRowProps> = ({ finding }) => {
       <td className="whitespace-nowrap text-right">
         <Link
           href={`/findings/${finding.id}`}
-          className="inline-flex items-center gap-1 text-xs text-soc-textMuted group-hover:text-soc-accent transition-colors font-mono"
+          className="inline-flex items-center gap-1 text-xs text-soc-textMuted group-hover:text-soc-accent transition-all font-mono font-bold"
           aria-label={`Examine finding ${finding.id}`}
         >
           <span>EXAMINE</span>
-          <ChevronRight className="w-3.5 h-3.5" />
+          <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </td>
     </tr>

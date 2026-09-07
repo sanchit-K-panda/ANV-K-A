@@ -30,46 +30,61 @@ export const SocHealthScore: React.FC<SocHealthScoreProps> = ({
   const statusBadge = isDegraded ? 'badge-critical' : isHealthy ? 'badge-ok' : 'badge-medium';
 
   return (
-    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover">
+    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover bg-soc-panel">
       <div>
         {/* Header */}
         <div className="soc-panel-header">
-          <span className="panel-label">SOC Health Assessment</span>
-          <span className="soc-badge badge-neutral">Grade {grade}</span>
+          <div>
+            <span className="panel-label">SOC HEALTH VECTOR</span>
+            <p className="text-2xs font-mono text-soc-textMuted mt-0.5">MEDHĀ · Operational Resilience</p>
+          </div>
+          <span className="soc-badge badge-neutral font-mono font-bold">GRADE {grade}</span>
         </div>
 
         {/* Main Score Readout */}
-        <div className="px-5 py-4">
+        <div className="px-4 pt-4 pb-2">
           <div className="flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tracking-tight text-soc-text tabular-nums">
+            <span className={`font-mono text-4xl font-extrabold tracking-tight tabular-nums ${isDegraded ? 'text-soc-crit' : isHealthy ? 'text-soc-ok' : 'text-soc-high'}`}>
               {score}
             </span>
-            <span className="text-sm text-soc-textMuted font-mono">/ 100</span>
-            <span className={`soc-badge ${statusBadge} ml-2`}>{status}</span>
+            <span className="text-xs text-soc-textMuted font-mono">/ 100</span>
+            <span className={`soc-badge ${statusBadge} ml-2 font-mono font-bold`}>{status}</span>
           </div>
 
-          <div className="text-2xs text-soc-textMuted mt-2">
-            Primary driver: <span className="font-medium text-soc-textSecondary">{primaryDriver}</span>
+          <div className="text-2xs font-mono text-soc-textMuted mt-2">
+            PRIMARY DRIVER: <span className="font-bold text-soc-text">{primaryDriver}</span>
           </div>
         </div>
 
         {/* Contributing Factors Decomposition */}
-        <div className="border-t border-soc-border px-5 py-3.5 space-y-2">
-          <div className="text-2xs font-medium text-soc-textMuted mb-0.5">Contributing factor drag</div>
-          {factors.map((f) => (
-            <div key={f.label} className="flex justify-between items-center text-xs">
-              <span className="text-soc-textSecondary">{f.label}</span>
-              <span className="font-mono text-soc-crit font-medium tabular-nums">{f.impact} pts</span>
-            </div>
-          ))}
+        <div className="border-t border-soc-border px-4 py-3 space-y-2">
+          <div className="text-2xs font-mono font-bold text-soc-textMuted uppercase tracking-wider">
+            Factor Drag Vector
+          </div>
+          <div className="space-y-2">
+            {factors.map((f) => (
+              <div key={f.label} className="space-y-1">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-soc-textSecondary text-[11px] truncate max-w-[180px]">{f.label}</span>
+                  <span className="text-soc-crit font-bold text-2xs tabular-nums">{f.impact} PTS</span>
+                </div>
+                <div className="w-full bg-soc-raised h-1 rounded-full overflow-hidden">
+                  <div
+                    className="bg-soc-crit/80 h-full rounded-full"
+                    style={{ width: `${Math.min(Math.abs(f.impact) * 2.5, 100)}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Footer Link */}
-      <div className="px-5 py-3.5 border-t border-soc-border flex items-center justify-between">
-        <span className="text-2xs text-soc-textMuted">Quantified via MĀN Engine</span>
-        <Link href="/risk" className="text-xs text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-0.5 transition-colors">
-          <span>Decomposition</span>
+      <div className="px-4 py-3 border-t border-soc-border flex items-center justify-between bg-soc-raised/30">
+        <span className="text-2xs font-mono text-soc-textMuted">MĀN QUANTIFICATION</span>
+        <Link href="/risk" className="text-xs font-mono text-soc-accent hover:text-soc-accentBright font-bold flex items-center gap-0.5 transition-colors">
+          <span>DECOMPOSITION</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>

@@ -30,23 +30,30 @@ export default function AuditPage() {
   );
 
   return (
-    <div className="space-y-4 pb-16">
+    <div className="space-y-5 pb-16">
       {/* Header */}
-      <div className="flex flex-wrap items-end justify-between gap-3 border-b border-soc-border pb-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 pb-2 border-b border-soc-border">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Audit &amp; Integrity</h1>
-            <span className="soc-badge badge-accent">SAKṢĪ LEDGER</span>
+          <div className="flex items-center gap-2 text-3xs font-mono text-soc-textMuted mb-1">
+            <span className="font-bold text-soc-text">ANVĪKṢA</span>
+            <span>/</span>
+            <span>AUDIT_LEDGER</span>
+            <span>/</span>
+            <span className="text-soc-accent font-bold">SAKṢĪ MERKLE CHAIN</span>
           </div>
-          <p className="text-xs text-soc-textMuted mt-1">
-            Tamper-evident cryptographic ledger recording every supervisor decision, case modification, and evidence inspection.
+          <h1 className="font-display text-2xl font-bold tracking-tight text-soc-text flex items-center gap-2.5">
+            <span>Cryptographic Merkle Audit &amp; Integrity Ledger</span>
+            <span className="h-2 w-2 rounded-full bg-soc-ok" />
+          </h1>
+          <p className="text-2xs font-mono text-soc-textSecondary mt-0.5">
+            Tamper-evident cryptographic ledger recording every supervisor decision, case modification, and evidence inspection
           </p>
         </div>
 
         <button
           onClick={handleVerifyChain}
           disabled={verifying}
-          className="btn-primary"
+          className="btn-primary font-mono text-xs !px-3.5"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${verifying ? 'animate-spin' : ''}`} />
           <span>{verifying ? 'VERIFYING SHA-256 CHAIN...' : 'VERIFY CRYPTOGRAPHIC PROOFS'}</span>
@@ -55,45 +62,51 @@ export default function AuditPage() {
 
       {/* Verification Status */}
       {verificationResult && (
-        <div className="px-3.5 py-2.5 bg-soc-okDim border border-soc-ok/30 rounded-md flex items-center justify-between gap-3 text-xs font-mono text-soc-ok">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-            <span>{verificationResult}</span>
+        <div className="px-4 py-3 bg-soc-ok/10 border border-soc-ok/40 rounded-lg flex items-center justify-between gap-3 text-xs font-mono text-soc-ok animate-fade-up">
+          <div className="flex items-center gap-2.5">
+            <CheckCircle2 className="w-4 h-4 flex-shrink-0 text-soc-ok" />
+            <span className="font-medium">{verificationResult}</span>
           </div>
-          <span className="text-2xs font-semibold whitespace-nowrap">STATUS: VERIFIED</span>
+          <span className="text-3xs font-extrabold whitespace-nowrap px-2 py-0.5 rounded bg-soc-ok/20 border border-soc-ok/40">
+            STATUS: 100% SEALED
+          </span>
         </div>
       )}
 
       {/* Cryptographic Block Sequence */}
-      <div className="soc-panel">
+      <div className="soc-panel overflow-hidden animate-fade-up">
         <div className="soc-panel-header">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-soc-ok" />
+            <ShieldCheck className="w-4 h-4 text-soc-ok" />
             <h2 className="panel-label">SAKṢĪ Cryptographic Block Sequence</h2>
           </div>
-          <span className="text-2xs font-mono text-soc-textMuted">SHA-256 HASH CHAIN · APPEND-ONLY</span>
+          <span className="text-3xs font-mono text-soc-accent font-semibold">
+            SHA-256 HASH CHAIN · APPEND-ONLY LOCAL ENCLAVE
+          </span>
         </div>
 
-        <div className="p-4">
+        <div className="p-4 bg-soc-panel">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { block: '9901', action: 'DARŚANA_AUTH', user: 'Dr. A. Sharma', hash: 'ef2d12...884a', prev: 'Genesis' },
-              { block: '9902', action: 'OPEN_FINDING', user: 'VIVEKA Engine', hash: '4b2277...19cf', prev: 'ef2d12...' },
-              { block: '9903', action: 'VIEW_EVIDENCE', user: 'Dr. A. Sharma', hash: '9f86d0...cc01', prev: '4b2277...' },
-              { block: '9904', action: 'SUPERVISOR_ACTION', user: 'Dr. A. Sharma', hash: '5e8848...d2a8', prev: '9f86d0...' },
+              { block: '9901', action: 'DARŚANA_AUTH', user: 'Dr. A. Sharma', hash: 'ef2d12884a89901f', prev: '0000000000000000' },
+              { block: '9902', action: 'OPEN_FINDING', user: 'VIVEKA Engine', hash: '4b227719cf219902', prev: 'ef2d12884a89901f' },
+              { block: '9903', action: 'VIEW_EVIDENCE', user: 'Dr. A. Sharma', hash: '9f86d0cc01a39903', prev: '4b227719cf219902' },
+              { block: '9904', action: 'SUPERVISOR_ACTION', user: 'Dr. A. Sharma', hash: '5e8848d2a8009904', prev: '9f86d0cc01a39903' },
             ].map((b) => (
-              <div key={b.block} className="p-3 bg-soc-overlay rounded-lg space-y-1.5">
+              <div key={b.block} className="p-3.5 bg-soc-overlay/90 rounded-lg border border-soc-border space-y-2 card-hover">
                 <div className="flex justify-between items-center">
-                  <span className="soc-badge badge-accent">BLOCK #{b.block}</span>
-                  <span className="soc-badge badge-ok">VERIFIED</span>
+                  <span className="soc-badge badge-accent font-bold">BLOCK #{b.block}</span>
+                  <span className="soc-badge badge-ok font-bold">VERIFIED</span>
                 </div>
-                <div className="text-xs font-mono font-medium text-soc-text mt-1">{b.action}</div>
-                <div className="text-2xs text-soc-textMuted">{b.user}</div>
-                <div className="col-mono pt-1.5 border-t border-soc-border truncate">
-                  HASH {b.hash}
+                <div className="text-xs font-mono font-bold text-soc-text mt-1">{b.action}</div>
+                <div className="text-2xs font-mono text-soc-textSecondary">{b.user}</div>
+                <div className="col-mono pt-2 border-t border-soc-border truncate text-3xs">
+                  <span className="text-soc-textMuted">HASH: </span>
+                  <span className="text-soc-accent font-bold">{b.hash}</span>
                 </div>
-                <div className="col-mono truncate">
-                  PREV {b.prev}
+                <div className="col-mono truncate text-3xs">
+                  <span className="text-soc-textMuted">PREV: </span>
+                  <span className="text-soc-textDim">{b.prev}</span>
                 </div>
               </div>
             ))}

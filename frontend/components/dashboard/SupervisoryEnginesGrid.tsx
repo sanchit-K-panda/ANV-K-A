@@ -183,16 +183,16 @@ export const SupervisoryEnginesGrid: React.FC<SupervisoryEnginesGridProps> = ({
               type="button"
               onClick={() => onSelectEngine(eng)}
               aria-pressed={isSelected}
-              className={`p-3 text-left transition-colors flex flex-col justify-between space-y-2.5 group rounded border ${
+              className={`p-3 text-left transition-all duration-150 flex flex-col justify-between space-y-2.5 group rounded-md border ${
                 isSelected
-                  ? 'bg-soc-raised border-soc-accent text-soc-text shadow-sm'
+                  ? 'bg-soc-accent/10 border-soc-accent text-soc-text font-medium'
                   : 'bg-soc-panel border-soc-border hover:border-soc-borderStrong hover:bg-soc-raised/40'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlert ? 'bg-red-500' : 'bg-emerald-500'}`} />
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${isAlert ? 'bg-soc-crit' : 'bg-soc-ok'}`} />
                     <span className="text-[11px] font-mono font-bold tracking-wider text-soc-text truncate uppercase">
                       {eng.sanskrit}
                     </span>
@@ -203,22 +203,22 @@ export const SupervisoryEnginesGrid: React.FC<SupervisoryEnginesGridProps> = ({
                 </div>
 
                 <div className="text-xs font-semibold text-soc-text leading-tight flex items-center gap-1.5">
-                  <Icon className="w-3.5 h-3.5 text-soc-textMuted flex-shrink-0" />
+                  <Icon className={`w-3.5 h-3.5 flex-shrink-0 ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`} />
                   <span className="truncate">{eng.name}</span>
                 </div>
-                <div className="text-[11px] text-soc-textMuted mt-1 line-clamp-1">
+                <div className="text-[11px] font-mono text-soc-textMuted mt-1 line-clamp-1">
                   {eng.role}
                 </div>
               </div>
 
               {/* Metric & Trigger */}
-              <div className="flex items-center justify-between pt-2 border-t border-soc-border/60 text-[11px]">
-                <span className="font-mono text-soc-textSecondary font-medium tabular-nums truncate max-w-[140px]">
+              <div className="flex items-center justify-between pt-2 border-t border-soc-border/60 text-[11px] font-mono">
+                <span className="text-soc-textSecondary font-semibold tabular-nums truncate max-w-[140px]">
                   {eng.metricValue}
                 </span>
-                <span className={`flex items-center gap-0.5 text-[10px] font-mono font-semibold uppercase ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted group-hover:text-soc-text'}`}>
-                  Inspect
-                  <ChevronRight className="w-3 h-3" />
+                <span className={`flex items-center gap-0.5 text-[10px] font-semibold uppercase transition-colors ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted group-hover:text-soc-accent'}`}>
+                  INSPECT
+                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </span>
               </div>
             </button>

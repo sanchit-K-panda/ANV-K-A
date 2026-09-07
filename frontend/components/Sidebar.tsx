@@ -45,21 +45,21 @@ export const Sidebar: React.FC = () => {
     {
       title: 'Operations',
       items: [
-        { href: '/alerts', label: 'Alerts', icon: Bell },
+        { href: '/alerts', label: 'Alert Streams', icon: Bell },
         { href: '/incidents', label: 'Incidents', icon: Flame },
         { href: '/investigations', label: 'Investigations', icon: Briefcase },
-        { href: '/cases', label: 'Cases', icon: FolderGit2 },
-        { href: '/evidence', label: 'Evidence', sublabel: 'PRATYAYA', icon: Search },
+        { href: '/cases', label: 'Supervisory Cases', icon: FolderGit2 },
+        { href: '/evidence', label: 'Evidence Vault', sublabel: 'PRATYAYA', icon: Search },
       ],
     },
     {
       title: 'Trust & System',
       items: [
-        { href: '/audit', label: 'Audit & Integrity', sublabel: 'SAKṢĪ', icon: FileCheck },
-        { href: '/login-sessions', label: 'Session Ledger', icon: MonitorDot },
+        { href: '/audit', label: 'SAKṢĪ Hash Ledger', sublabel: 'SAKṢĪ', icon: FileCheck },
+        { href: '/login-sessions', label: 'Session Enclave', sublabel: 'KAVACA', icon: MonitorDot },
         { href: '/reports', label: 'Reports', icon: FileText },
         { href: '/scenarios', label: 'Simulation Hub', sublabel: 'MĀYĀ', icon: Layers },
-        { href: '/admin', label: 'Administration', icon: Settings },
+        { href: '/admin', label: 'Enclave Settings', icon: Settings },
       ],
     },
   ];
@@ -68,17 +68,17 @@ export const Sidebar: React.FC = () => {
     <aside className="w-60 flex-shrink-0 h-full border-r border-soc-border bg-soc-panel flex flex-col select-none z-30 overflow-hidden">
       <div className="flex flex-col h-full">
         {/* Brand Header */}
-        <div className="px-4 py-3.5 border-b border-soc-border">
+        <div className="px-4 py-3.5 border-b border-soc-border bg-soc-bg/30">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-md bg-soc-accent text-white flex items-center justify-center flex-shrink-0 font-mono font-bold text-xs">
+            <div className="w-6 h-6 rounded bg-soc-accent text-white flex items-center justify-center flex-shrink-0 font-mono font-bold text-xs">
               A
             </div>
             <div className="min-w-0">
               <div className="font-mono text-xs font-bold text-soc-text tracking-wider uppercase leading-none">
                 ANVĪKṢA
               </div>
-              <div className="text-[10px] text-soc-textMuted tracking-tight mt-1 font-mono uppercase">
-                SUPERVISORY SOC INTEL
+              <div className="text-3xs text-soc-textMuted tracking-tight mt-0.5 font-mono">
+                Supervisory SOC Intel
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ export const Sidebar: React.FC = () => {
         <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-3.5">
           {navSections.map((section) => (
             <div key={section.title} className="space-y-0.5">
-              <div className="px-2 pb-1 text-[10px] font-mono font-semibold uppercase tracking-wider text-soc-textDim">
+              <div className="px-2.5 pb-1 text-3xs font-mono font-semibold uppercase tracking-wider text-soc-textDim">
                 {section.title}
               </div>
               {section.items.map((item) => {
@@ -102,16 +102,20 @@ export const Sidebar: React.FC = () => {
                     aria-current={isActive ? 'page' : undefined}
                     className={`group flex items-center justify-between gap-2 px-2.5 py-1.5 text-xs rounded transition-colors ${
                       isActive
-                        ? 'bg-soc-raised text-soc-text font-semibold border-l-2 border-soc-accent'
+                        ? 'bg-soc-accent/10 text-soc-accent font-medium'
                         : 'text-soc-textSecondary hover:text-soc-text hover:bg-soc-raised/60'
                     }`}
                   >
                     <span className="flex items-center gap-2.5 min-w-0">
-                      <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-soc-accent' : 'text-soc-textMuted group-hover:text-soc-textSecondary'}`} />
+                      <Icon
+                        className={`w-3.5 h-3.5 flex-shrink-0 transition-colors ${
+                          isActive ? 'text-soc-accent' : 'text-soc-textMuted group-hover:text-soc-textSecondary'
+                        }`}
+                      />
                       <span className="truncate">{item.label}</span>
                     </span>
                     {item.sublabel && !isActive && (
-                      <span className="hidden 2xl:inline text-[10px] font-mono text-soc-textDim">
+                      <span className="text-3xs font-mono text-soc-textDim">
                         {item.sublabel}
                       </span>
                     )}
@@ -125,20 +129,14 @@ export const Sidebar: React.FC = () => {
           ))}
         </nav>
 
-        {/* Footer Diagnostics */}
-        <div className="p-2 border-t border-soc-border">
-          <div className="rounded border border-soc-border bg-soc-raised/50 px-2.5 py-2">
-            <div className="flex items-center justify-between">
-              <span className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span className="text-[10px] font-mono font-semibold text-soc-textSecondary uppercase">Air-Gap Active</span>
-              </span>
-              <span className="text-[10px] font-mono text-soc-textMuted">0 B/s</span>
-            </div>
-            <div className="mt-1 flex items-center justify-between text-[9px] font-mono text-soc-textDim">
-              <span>LOCAL ENCLAVE</span>
-              <span>v0.1.0</span>
-            </div>
+        {/* Footer Status */}
+        <div className="p-2.5 border-t border-soc-border bg-soc-bg/30">
+          <div className="rounded border border-soc-border bg-soc-raised/50 px-2.5 py-1.5 flex items-center justify-between text-3xs font-mono">
+            <span className="flex items-center gap-1.5 text-soc-ok font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-soc-ok" />
+              Air-Gapped
+            </span>
+            <span className="text-soc-textMuted">0 B/s egress</span>
           </div>
         </div>
       </div>

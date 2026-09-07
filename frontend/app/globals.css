@@ -10,69 +10,75 @@
    ──────────────────────────────────────────────────────────────────────── */
 @layer base {
   :root {
-    /* Surfaces */
-    --soc-bg: 248 250 252;            /* Slate-50 */
-    --soc-panel: 255 255 255;         /* Crisp white */
-    --soc-raised: 241 245 249;        /* Slate-100 */
-    --soc-overlay: 248 250 252;
+    /* Surfaces — Minimalist Crisp Light Mode */
+    --soc-bg: 248 250 252;            /* Slate-50 Clean Canvas #F8FAFC */
+    --soc-panel: 255 255 255;         /* Pure White #FFFFFF */
+    --soc-raised: 241 245 249;        /* Slate-100 Raised Surface #F1F5F9 */
+    --soc-overlay: 248 250 252;       /* Slate-50 Overlay #F8FAFC */
     /* Borders */
-    --soc-border: 226 232 240;        /* Slate-200 */
-    --soc-borderStrong: 203 213 225;  /* Slate-300 */
+    --soc-border: 226 232 240;        /* Slate-200 Hairline #E2E8F0 */
+    --soc-borderStrong: 203 213 225;  /* Slate-300 Strong #CBD5E1 */
     /* Text */
-    --soc-text: 15 23 42;             /* Slate-900 */
-    --soc-textSecondary: 71 85 105;   /* Slate-600 */
-    --soc-textMuted: 100 116 139;     /* Slate-500 */
-    --soc-textDim: 148 163 184;       /* Slate-400 */
-    /* Accent — Precision Cyan / Teal */
-    --soc-accent: 14 116 144;         /* Cyan-700 */
-    --soc-accentBright: 8 145 178;    /* Cyan-600 */
-    --soc-accentDim: 236 254 255;     /* Cyan-50 */
-    --soc-accentInk: 207 250 254;     /* Cyan-100 */
-    /* Severity — 600-level, AA-compliant, operational security states */
-    --soc-crit: 220 38 38;            /* Red-600 */
-    --soc-critDim: 254 242 242;       /* Red-50 */
-    --soc-high: 234 88 12;            /* Orange-600 */
-    --soc-highDim: 255 247 237;       /* Orange-50 */
-    --soc-med: 217 119 6;             /* Amber-600 */
-    --soc-medDim: 254 252 232;       /* Amber-50 */
-    --soc-low: 100 116 139;           /* Slate-500 */
-    --soc-lowDim: 241 245 249;        /* Slate-100 */
-    --soc-ok: 16 149 193;             /* Emerald-600 */
-    --soc-okDim: 236 253 245;         /* Emerald-50 */
-    /* Elevation */
-    --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.05);
-    --shadow-card-hover: 0 4px 12px 0 rgb(15 23 42 / 0.08);
-    --shadow-dropdown: 0 8px 20px -4px rgb(15 23 42 / 0.12), 0 2px 6px -1px rgb(15 23 42 / 0.06);
+    --soc-text: 15 23 42;             /* Slate-900 Primary #0F172A */
+    --soc-textSecondary: 71 85 105;   /* Slate-600 Secondary #475569 */
+    --soc-textMuted: 100 116 139;     /* Slate-500 Muted #64748B */
+    --soc-textDim: 148 163 184;       /* Slate-400 Dim #94A3B8 */
+    /* Accent — Refined Electric Blue */
+    --soc-accent: 14 165 233;         /* Sky-500 #0EA5E9 */
+    --soc-accentBright: 2 132 199;    /* Sky-600 #0284C7 */
+    --soc-accentDim: 240 249 255;     /* Sky-50 #F0F9FF */
+    --soc-accentInk: 224 242 254;     /* Sky-100 #E0F2FE */
+    /* Severity — Professional semantic palette */
+    --soc-crit: 225 29 72;            /* Rose-600 #E11D48 */
+    --soc-critDim: 255 241 242;       /* Rose-50 #FFF1F2 */
+    --soc-high: 234 88 12;            /* Orange-600 #EA580C */
+    --soc-highDim: 255 247 237;       /* Orange-50 #FFF7ED */
+    --soc-med: 217 119 6;             /* Amber-600 #D97706 */
+    --soc-medDim: 254 252 232;       /* Amber-50 #FEFCE8 */
+    --soc-low: 100 116 139;           /* Slate-500 #64748B */
+    --soc-lowDim: 241 245 249;        /* Slate-100 #F1F5F9 */
+    --soc-ok: 16 185 129;             /* Emerald-500 #10B981 */
+    --soc-okDim: 236 253 245;         /* Emerald-50 #ECFDF5 */
+    /* Elevation — Subtle, crisp card shadows */
+    --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.05), 0 0 0 1px rgb(226 232 240 / 0.9);
+    --shadow-card-hover: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 0 0 1px rgb(203 213 225 / 0.9);
+    --shadow-dropdown: 0 10px 25px -4px rgb(15 23 42 / 0.1), 0 0 0 1px rgb(226 232 240 / 0.9);
   }
 
   .dark {
-    --soc-bg: 10 14 20;               /* Deep obsidian slate */
-    --soc-panel: 15 20 28;            /* Dark console panel */
-    --soc-raised: 22 30 42;           /* Raised surface */
-    --soc-overlay: 18 24 34;          /* Overlay surface */
-    --soc-border: 30 41 59;           /* Slate-800 hairline */
-    --soc-borderStrong: 45 60 84;     /* Crisp strong border */
-    --soc-text: 241 245 249;          /* Slate-100 */
-    --soc-textSecondary: 148 163 184; /* Slate-400 */
-    --soc-textMuted: 100 116 139;     /* Slate-500 */
-    --soc-textDim: 71 85 105;         /* Slate-600 */
-    --soc-accent: 56 189 248;         /* Sky-400 cyber */
-    --soc-accentBright: 125 211 252;  /* Sky-300 */
-    --soc-accentDim: 12 42 62;        /* Dark sky tint */
-    --soc-accentInk: 14 55 82;
-    --soc-crit: 248 113 113;          /* Red-400 */
-    --soc-critDim: 45 15 17;
-    --soc-high: 251 146 60;           /* Orange-400 */
-    --soc-highDim: 48 24 14;
-    --soc-med: 250 204 21;            /* Amber-400 */
-    --soc-medDim: 45 35 12;
-    --soc-low: 148 163 184;           /* Slate-400 */
-    --soc-lowDim: 22 30 42;
-    --soc-ok: 52 211 153;             /* Emerald-400 */
-    --soc-okDim: 12 38 28;
-    --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.35);
-    --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.5);
-    --shadow-dropdown: 0 10px 24px -4px rgb(0 0 0 / 0.6);
+    /* Surfaces — Refined Minimalist Midnight Slate */
+    --soc-bg: 11 15 23;               /* Midnight Slate #0B0F17 */
+    --soc-panel: 17 24 39;            /* Charcoal Surface #111827 */
+    --soc-raised: 31 41 55;           /* Raised Slate #1F2937 */
+    --soc-overlay: 15 23 42;          /* Slate 900 #0F172A */
+    /* Borders */
+    --soc-border: 30 41 59;           /* Slate-800 Hairline #1E293B */
+    --soc-borderStrong: 51 65 85;     /* Slate-700 Strong #334155 */
+    /* Text */
+    --soc-text: 248 250 252;          /* Slate-50 High Contrast #F8FAFC */
+    --soc-textSecondary: 148 163 184; /* Slate-400 Secondary #94A3B8 */
+    --soc-textMuted: 100 116 139;     /* Slate-500 Muted #64748B */
+    --soc-textDim: 71 85 105;         /* Slate-600 Dim #475569 */
+    /* Accent — Clean Technical Sky Blue */
+    --soc-accent: 56 189 248;         /* Sky-400 #38BDF8 */
+    --soc-accentBright: 125 211 252;  /* Sky-300 #7DD3FC */
+    --soc-accentDim: 12 74 110;       /* Sky-900 #0C4A6E */
+    --soc-accentInk: 8 47 73;         /* Deep Sky #082F49 */
+    /* Severity — Professional high-legibility status colors */
+    --soc-crit: 244 63 94;            /* Rose-500 #F43F5E */
+    --soc-critDim: 76 5 25;           /* Rose-950 */
+    --soc-high: 249 115 22;           /* Orange-500 #F97316 */
+    --soc-highDim: 67 26 4;           /* Orange-950 */
+    --soc-med: 245 158 11;            /* Amber-500 #F59E0B */
+    --soc-medDim: 69 39 0;            /* Amber-950 */
+    --soc-low: 148 163 184;          /* Slate-400 */
+    --soc-lowDim: 30 41 59;           /* Slate-800 */
+    --soc-ok: 16 185 129;             /* Emerald-500 #10B981 */
+    --soc-okDim: 6 78 59;             /* Emerald-950 */
+    /* Elevation — Calm matte shadows without neon glow */
+    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 0 0 1px rgb(30 41 59 / 0.8);
+    --shadow-card-hover: 0 4px 14px -2px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(51 65 85 / 0.9);
+    --shadow-dropdown: 0 12px 28px -4px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(30 41 59 / 0.9);
   }
 
   * {
@@ -166,16 +172,17 @@
 }
 
 @layer components {
-  /* ── Panel ────────────────────────────────────────────────────────── */
+  /* ── Panel — Clean Minimalist Flat Cards ───────────────────────── */
   .soc-panel {
     background-color: rgb(var(--soc-panel));
     border: 1px solid rgb(var(--soc-border));
     border-radius: 8px;
     box-shadow: var(--shadow-card);
+    position: relative;
   }
 
   .card-hover {
-    transition: box-shadow 150ms ease, border-color 150ms ease;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
   }
   .card-hover:hover {
     border-color: rgb(var(--soc-borderStrong));
@@ -183,33 +190,27 @@
   }
 
   .soc-panel-header {
-    padding: 10px 14px;
+    padding: 10px 16px;
     border-bottom: 1px solid rgb(var(--soc-border));
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 12px;
     min-height: 44px;
+    background: transparent;
   }
 
   /* Section label */
   .panel-label {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
-    color: rgb(var(--soc-text));
+    letter-spacing: 0.05em;
+    color: rgb(var(--soc-textSecondary));
     text-transform: uppercase;
     font-family: var(--font-jetbrains), ui-monospace, monospace;
-    letter-spacing: 0.04em;
   }
   .panel-label-accent {
     color: rgb(var(--soc-accent));
-  }
-
-  /* Ops dot-grid texture — for hero/manifest surfaces */
-  .tex-grid {
-    background-image: radial-gradient(rgb(var(--soc-borderStrong) / 0.4) 1px, transparent 1px);
-    background-size: 16px 16px;
   }
 
   /* ── Data table ───────────────────────────────────────────────────── */
@@ -222,11 +223,11 @@
   }
 
   .soc-table th {
-    background-color: rgb(var(--soc-raised) / 0.6);
+    background-color: rgb(var(--soc-raised) / 0.5);
     color: rgb(var(--soc-textMuted));
     font-weight: 600;
     font-size: 0.6875rem;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     font-family: var(--font-jetbrains), ui-monospace, monospace;
     padding: 8px 14px;
@@ -237,8 +238,8 @@
   }
 
   .soc-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid rgb(var(--soc-border) / 0.5);
+    padding: 9px 14px;
+    border-bottom: 1px solid rgb(var(--soc-border) / 0.6);
     color: rgb(var(--soc-text));
     vertical-align: middle;
   }
@@ -251,7 +252,7 @@
     transition: background-color 100ms ease;
   }
   .soc-table tbody tr:hover td {
-    background-color: rgb(var(--soc-raised) / 0.5);
+    background-color: rgb(var(--soc-raised) / 0.6);
   }
 
   /* Monospace data columns */
@@ -270,7 +271,7 @@
     font-weight: 600;
     font-size: 0.625rem;
     font-family: var(--font-jetbrains), ui-monospace, monospace;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     padding: 2px 7px;
     border-radius: 4px;
@@ -283,12 +284,12 @@
   .badge-critical {
     background-color: rgb(var(--soc-crit) / 0.1);
     color: rgb(var(--soc-crit));
-    border-color: rgb(var(--soc-crit) / 0.25);
+    border-color: rgb(var(--soc-crit) / 0.3);
   }
   .badge-high {
     background-color: rgb(var(--soc-high) / 0.1);
     color: rgb(var(--soc-high));
-    border-color: rgb(var(--soc-high) / 0.28);
+    border-color: rgb(var(--soc-high) / 0.3);
   }
   .badge-medium {
     background-color: rgb(var(--soc-med) / 0.1);
@@ -304,7 +305,7 @@
   .badge-ok {
     background-color: rgb(var(--soc-ok) / 0.1);
     color: rgb(var(--soc-ok));
-    border-color: rgb(var(--soc-ok) / 0.28);
+    border-color: rgb(var(--soc-ok) / 0.3);
   }
   .badge-neutral {
     background-color: rgb(var(--soc-raised));
@@ -314,7 +315,7 @@
   .badge-accent {
     background-color: rgb(var(--soc-accent) / 0.1);
     color: rgb(var(--soc-accent));
-    border-color: rgb(var(--soc-accent) / 0.28);
+    border-color: rgb(var(--soc-accent) / 0.3);
   }
 
   /* ── Status dots ──────────────────────────────────────────────────── */
@@ -338,9 +339,8 @@
     border-radius: 6px;
     color: rgb(var(--soc-text));
     font-size: 0.75rem;
-    padding: 7px 11px;
+    padding: 6px 10px;
     width: 100%;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.03);
     transition: border-color 120ms ease;
   }
   .soc-input::placeholder { color: rgb(var(--soc-textDim)); }
@@ -348,7 +348,7 @@
   .soc-input:focus {
     outline: none;
     border-color: rgb(var(--soc-accent));
-    box-shadow: 0 0 0 2px rgb(var(--soc-accent) / 0.18);
+    box-shadow: 0 0 0 2px rgb(var(--soc-accent) / 0.15);
   }
 
   .btn-primary {
@@ -358,13 +358,12 @@
     gap: 6px;
     background-color: rgb(var(--soc-accent));
     color: #fff;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 0.75rem;
-    padding: 7px 13px;
+    padding: 6px 12px;
     border-radius: 6px;
     border: 1px solid rgb(var(--soc-accent));
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
-    transition: background-color 120ms ease;
+    transition: background-color 120ms ease, opacity 120ms ease;
   }
   .btn-primary:hover {
     background-color: rgb(var(--soc-accentBright));
@@ -378,11 +377,11 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background-color: rgb(var(--soc-panel));
+    background-color: transparent;
     color: rgb(var(--soc-textSecondary));
     font-weight: 500;
     font-size: 0.75rem;
-    padding: 7px 13px;
+    padding: 6px 12px;
     border-radius: 6px;
     border: 1px solid rgb(var(--soc-border));
     transition: color 120ms ease, border-color 120ms ease, background-color 120ms ease;
@@ -392,16 +391,14 @@
     border-color: rgb(var(--soc-borderStrong));
     background-color: rgb(var(--soc-raised));
   }
-  .btn-ghost:active { background-color: rgb(var(--soc-raised)); }
-
   /* ── Key-value manifest rows ──────────────────────────────────────── */
   .kv-row {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 12px;
-    padding: 10px 16px;
-    border-bottom: 1px solid rgb(var(--soc-border) / 0.55);
+    padding: 8px 14px;
+    border-bottom: 1px solid rgb(var(--soc-border) / 0.6);
     font-size: 0.75rem;
   }
   .kv-row:last-child { border-bottom: none; }
@@ -424,6 +421,7 @@
     height: 100%;
     background-color: rgb(var(--soc-accent));
     border-radius: 9999px;
-    transition: width 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 500ms ease;
   }
 }
+
