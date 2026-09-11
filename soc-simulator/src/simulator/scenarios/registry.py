@@ -23,7 +23,7 @@ REGISTRY: dict[str, type[Scenario]] = {
 }
 
 
-def build_scenario(name: str, cfg: SimConfig) -> Dataset:  # noqa: F821
+def build_scenario(name: str, cfg: SimConfig, multi_soc_profiles: bool = False) -> Dataset:  # noqa: F821
     from simulator.schemas.entities import Dataset
     cls = REGISTRY[ScenarioName(name)]
-    return cls(cfg).build()
+    return cls(cfg, multi_soc_profiles=multi_soc_profiles).build()

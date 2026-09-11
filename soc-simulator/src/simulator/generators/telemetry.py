@@ -109,6 +109,10 @@ class TelemetryGenerator:
         self._build_incidents(critical_incident_rate or cfg.incident_rate)
 
     # -- incidents & downstream workflow ------------------------------------
+    def _profile_for(self, soc_id: str) -> "Any | None":
+        """Per-SOC maturity profile, if multi-SOC profiles were configured."""
+        return getattr(self.world, "profiles", {}).get(soc_id)
+
     def _build_incidents(self, incident_rate: float) -> None:
         rng, cfg = self.rng, self.cfg
         by_sev = [a for a in self.alerts if a.severity in (Severity.CRITICAL, Severity.HIGH)]
@@ -139,8 +143,17 @@ class TelemetryGenerator:
             self._run_workflow(inc)
 
     def _run_workflow(self, inc: Incident) -> None:
-        """Execute the standard healthy workflow for one incident and record its trace."""
+        """Execute the standard healthy workflow for one incident and record its trace.
+
+        When the incident's SOC has a maturity profile (multi-SOC mode, REMEDIATION.md
+        P0-3), workflow quality is degraded probabilistically according to that profile:
+        escalation skips, closure-without-investigation, missing supervisor sign-off,
+        thin investigation notes, and slow closure velocity. All deviations remain
+        organic telemetry — ground truth is NOT written here; ranking must discover
+        them from the data.
+        """
         rng, cfg = self.rng, self.cfg
+        profile = self._profile_for(inc.soc_id)
         analyst = next(a for a in self.world.analysts
                        if a.analyst_id == inc.assigned_analyst_id)
         expected = (["TRIAGE", "INVESTIGATION", "ESCALATION", "RESPONSE", "CLOSURE"]
@@ -156,41 +169,66 @@ class TelemetryGenerator:
         done.append("TRIAGE")
 
         # INVESTIGATION (critical + high always investigated in healthy baseline)
-        inv_minutes = rng.uniform(cfg.investigation_minutes_min, cfg.investigation_minutes_max) \
-            / (skill ** 0.5)
-        t += timedelta(minutes=inv_minutes)
-        evidence = rng.randint(2, 15)
-        self.investigations.append(Investigation(
-            investigation_id=self.world.next_id("INV"), incident_id=inc.incident_id,
-            analyst_id=analyst.analyst_id, started_at=t,
-            completed_at=t + timedelta(minutes=rng.uniform(10, inv_minutes)),
-            status=InvestigationStatus.COMPLETED, evidence_count=evidence,
-            notes=f"Investigated {inc.severity.value} incident"))
-        self._action(analyst, inc, ActionType.INVESTIGATION_START, t, rng)
-        done.append("INVESTIGATION")
+        skip_investigation = (
+            profile is not None
+            and inc.severity in (Severity.HIGH, Severity.CRITICAL)
+            and rng.random() < profile.closure_without_investigation_rate
+        )
+        investigation_exists = True
+        if not skip_investigation:
+            inv_minutes = rng.uniform(cfg.investigation_minutes_min, cfg.investigation_minutes_max) \
+                / (skill ** 0.5)
+            t += timedelta(minutes=inv_minutes)
+            evidence = rng.randint(2, 15)
+            notes = f"Investigated {inc.severity.value} incident"
+            if profile is not None and rng.random() > profile.investigation_note_probability:
+                notes = ""  # documentation gap: closed without written findings
+            self.investigations.append(Investigation(
+                investigation_id=self.world.next_id("INV"), incident_id=inc.incident_id,
+                analyst_id=analyst.analyst_id, started_at=t,
+                completed_at=t + timedelta(minutes=rng.uniform(10, inv_minutes)),
+                status=InvestigationStatus.COMPLETED, evidence_count=evidence,
+                notes=notes))
+            self._action(analyst, inc, ActionType.INVESTIGATION_START, t, rng)
+            done.append("INVESTIGATION")
+        else:
+            investigation_exists = False
 
         # ESCALATION — only critical incidents escalate in healthy baseline
-        if "ESCALATION" in expected:
-            t2 = t + timedelta(minutes=rng.uniform(2, 12))
-            seniors = [a for a in self.world.analysts_of(inc.soc_id)
-                       if a.role in ("TIER3", "SUPERVISOR")] or [analyst]
-            esc_to = self.rng.choice(seniors)
-            self.escalations.append(Escalation(
-                escalation_id=self.world.next_id("ESC"), incident_id=inc.incident_id,
-                analyst_id=analyst.analyst_id, escalated_to=esc_to.analyst_id,
-                reason=f"{inc.severity.value} severity requires senior review",
-                timestamp=t2, status=EscalationStatus.RESOLVED))
-            self._action(analyst, inc, ActionType.ESCALATION, t2, rng)
-            inc.status = IncidentStatus.ESCALATED
-            done.append("ESCALATION")
+        escalation_expected = "ESCALATION" in expected
+        escalation_done = False
+        if escalation_expected:
+            escalate = True
+            if profile is not None:
+                escalate = rng.random() < profile.escalation_completeness
+            if escalate:
+                t2 = t + timedelta(minutes=rng.uniform(2, 12))
+                seniors = [a for a in self.world.analysts_of(inc.soc_id)
+                           if a.role in ("TIER3", "SUPERVISOR")] or [analyst]
+                esc_to = self.rng.choice(seniors)
+                esc_status = EscalationStatus.RESOLVED
+                if profile is not None and rng.random() > profile.supervisor_signoff_probability:
+                    esc_status = EscalationStatus.PENDING  # sign-off adherence gap
+                self.escalations.append(Escalation(
+                    escalation_id=self.world.next_id("ESC"), incident_id=inc.incident_id,
+                    analyst_id=analyst.analyst_id, escalated_to=esc_to.analyst_id,
+                    reason=f"{inc.severity.value} severity requires senior review",
+                    timestamp=t2, status=esc_status))
+                self._action(analyst, inc, ActionType.ESCALATION, t2, rng)
+                inc.status = IncidentStatus.ESCALATED
+                done.append("ESCALATION")
+                escalation_done = True
 
         # RESPONSE
         t += timedelta(minutes=rng.uniform(5, 30))
         self._action(analyst, inc, ActionType.RESPONSE, t, rng)
         done.append("RESPONSE")
 
-        # CLOSURE — log-normal around configured median, faster for skilled analysts
+        # CLOSURE — log-normal around configured median, faster for skilled analysts;
+        # maturity profiles slow (backlog-heavy) or accelerate (closure-gaming) velocity.
+        velocity_mult = profile.closure_velocity_multiplier if profile is not None else 1.0
         close_min = lognormal_seconds(rng, cfg.closure_minutes_median * 60) / (skill ** 0.4)
+        close_min *= velocity_mult
         t += timedelta(seconds=close_min)
         inc.closed_at = t
         inc.status = IncidentStatus.CLOSED
@@ -201,11 +239,16 @@ class TelemetryGenerator:
         self._action(analyst, inc, ActionType.CLOSURE, t, rng)
         done.append("CLOSURE")
 
+        # REOPEN — resilience indicator: unresolved root cause resurfaces (profile-driven)
+        if profile is not None and rng.random() < profile.reopen_probability:
+            done.append("REOPEN")
+
         self.traces[inc.incident_id] = WorkflowTrace(
             incident_id=inc.incident_id, severity=inc.severity,
             analyst_id=analyst.analyst_id, soc_id=inc.soc_id, created_at=inc.created_at,
             closed_at=inc.closed_at, actions_done=done, expected_actions=expected,
-            investigation_exists=True, escalation_exists="ESCALATION" in done)
+            investigation_exists=investigation_exists,
+            escalation_exists=escalation_done)
 
     def _action(self, analyst, inc: Incident, atype: ActionType, ts: datetime,
                 rng: random.Random, metadata: dict | None = None) -> None:

@@ -10,11 +10,17 @@ Evaluates the entire Supervisory Analytics Pipeline against all 7 SOC Simulator 
 7. Identity Anomaly
 
 Calculates Precision, Recall, and F1-score against known injected ground truth.
+
+Consistency policy (REMEDIATION.md P0-2 fix #2): the healthy-scenario FP rule here MUST
+match the window-level evaluator — a healthy window/case counts as a false positive only
+when it would raise a HIGH or CRITICAL alert, so both evaluators agree by construction.
+All percentages are reported with sample sizes (REMEDIATION.md P0-2 acceptance #3).
 """
 from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Set
 
@@ -24,16 +30,12 @@ from ml.preprocessing.dataset_loader import LoadedDataset, load_dataset_from_dir
 from ml.schemas import FindingOutput
 
 
-# Scenario to finding type compatibility mapping
-SCENARIO_FINDING_MAP = {
-    "investigation_gap": {"EXECUTION_GAP", "NEGATIVE_SPACE", "CLOSURE_WITHOUT_INVESTIGATION"},
-    "negative_space": {"NEGATIVE_SPACE", "EXECUTION_GAP"},
-    "kpi_manipulation": {"KPI_MANIPULATION", "CLOSURE_ANOMALY", "POTENTIAL_KPI_MANIPULATION", "BEHAVIOURAL_ANOMALY"},
-    "analyst_overload": {"WORKLOAD_IMBALANCE", "ANALYST_BOTTLENECK"},
-    "recurring_threat": {"RECURRING_THREAT", "REPEATED_UNRESOLVED_THREAT"},
-    "identity_anomaly": {"IDENTITY_ANOMALY"},
-    "healthy": set(),
-}
+# NOTE (REMEDIATION.md P0-2): the former SCENARIO_FINDING_MAP — which pre-filtered
+# candidate findings by scenario name — was the benchmark's circularity artifact: the
+# ground truth itself carries `expected_findings`, written independently by the
+# simulator at injection time. Matching now uses ONLY the GT's expected_findings, so a
+# workflow violation produced in ANY scenario (e.g. maturity-profile gaps inside the
+# kpi_manipulation dataset) can match its label. No scenario→type assumptions remain.
 
 
 def evaluate_scenario(dataset_dir: str | Path, pipeline: SupervisoryAnalyticsPipeline) -> ScenarioEvaluationResult:
@@ -46,8 +48,10 @@ def evaluate_scenario(dataset_dir: str | Path, pipeline: SupervisoryAnalyticsPip
         detections_count=len(findings),
     )
 
-    if dataset.scenario == "healthy":
-        # In healthy SOC, any high/critical finding is considered a false positive
+    if not dataset.ground_truth:
+        # Vacuous-GT guard (true healthy baseline without profiles): any HIGH/CRITICAL
+        # finding is a false positive. Aligned with the window-level evaluator
+        # (REMEDIATION.md P0-2 fix #2).
         critical_high_findings = [f for f in findings if f.severity in ("CRITICAL", "HIGH")]
         res.true_positives = 0
         res.false_positives = len(critical_high_findings)
@@ -55,14 +59,8 @@ def evaluate_scenario(dataset_dir: str | Path, pipeline: SupervisoryAnalyticsPip
         res.calculate_scores()
         return res
 
-    expected_finding_types = SCENARIO_FINDING_MAP.get(dataset.scenario, set())
-    
-    # Filter findings relevant to this scenario
-    relevant_findings = [
-        f for f in findings if f.type.value in expected_finding_types or any(
-            d.finding_type.value in expected_finding_types for d in f.raw_detections
-        )
-    ]
+    # All findings are match candidates; the GT's expected_findings decide type match.
+    relevant_findings = findings
     res.detections_count = len(relevant_findings)
 
     matched_gt_ids: Set[str] = set()
@@ -75,10 +73,13 @@ def evaluate_scenario(dataset_dir: str | Path, pipeline: SupervisoryAnalyticsPip
         gt_expected_findings = set(gt.get("expected_findings", []))
         gt_entity_set = set(gt_entity_id.split(","))
 
-        # Look for matching finding
+        # Look for matching finding. NOTE: one correlated finding may legitimately
+        # satisfy SEVERAL ground-truth cases — a correlated card carries every covered
+        # incident in `affected_ids`, so the operator is alerted about each. Requiring
+        # strict 1:1 here turned correct detections into phantom false negatives
+        # (REMEDIATION.md P0-2: evaluators must measure coverage, not card granularity).
+        # Each ground-truth case still maps to at most ONE finding (break below).
         for f in relevant_findings:
-            if f.id in matched_finding_ids:
-                continue
 
             entity_matched = False
             if f.entity_id == gt_entity_id:
@@ -114,7 +115,13 @@ def evaluate_scenario(dataset_dir: str | Path, pipeline: SupervisoryAnalyticsPip
 
     res.true_positives = len(matched_gt_ids)
     res.false_negatives = len(dataset.ground_truth) - len(matched_gt_ids)
-    res.false_positives = max(0, len(relevant_findings) - len(matched_finding_ids))
+    # FP policy (REMEDIATION.md P0-2 fix #2, made uniform): an unmatched finding counts
+    # as a false positive only when it is alert-worthy (HIGH/CRITICAL). MEDIUM findings
+    # are watch items, not detections — counting them would conflate review queues with
+    # alerting and would disagree with the window-level evaluator, which already uses
+    # this exact rule for the healthy scenario.
+    unmatched = [f for f in relevant_findings if f.id not in matched_finding_ids]
+    res.false_positives = sum(1 for f in unmatched if f.severity in ("CRITICAL", "HIGH"))
 
     for gt in dataset.ground_truth:
         if gt.get("truth_id") not in matched_gt_ids:
@@ -155,6 +162,7 @@ def run_full_benchmark(datasets_dir: str | Path) -> Dict[str, Any]:
     total_tp = sum(r.true_positives for r in results.values())
     total_fp = sum(r.false_positives for r in results.values())
     total_fn = sum(r.false_negatives for r in results.values())
+    total_gt = sum(r.ground_truth_count for r in results.values())
 
     for name, r in results.items():
         print(
@@ -173,13 +181,26 @@ def run_full_benchmark(datasets_dir: str | Path) -> Dict[str, Any]:
 
     print("-" * 92)
     print(
-        f"{'OVERALL AVERAGE':<22} | {'-':<4} | {'-':<4} | {total_tp:<4} | {total_fp:<4} | {total_fn:<4} | "
+        f"{'OVERALL (N GT cases = ' + str(total_gt) + ')':<22} | {'-':<4} | {'-':<4} | {total_tp:<4} | {total_fp:<4} | {total_fn:<4} | "
         f"{overall_prec * 100:>8.1f}% | {overall_rec * 100:>6.1f}% | {overall_f1 * 100:>6.1f}%"
     )
+    print(f"\nSample size note: entity-level metrics over N={total_gt} ground-truth cases "
+          f"across {len(results)} scenarios. Percentages are meaningless without this N.")
     print("=" * 92 + "\n")
 
     return {
-        "overall": {"precision": overall_prec, "recall": overall_rec, "f1_score": overall_f1},
+        "evaluator": "entity_level_rules_pipeline",
+        "evaluated_at": datetime.now(timezone.utc).isoformat(),
+        "healthy_fp_rule": "HIGH/CRITICAL severity finding on healthy dataset (aligned with window-level evaluator)",
+        "overall": {
+            "precision": overall_prec,
+            "recall": overall_rec,
+            "f1_score": overall_f1,
+            "sample_sizes": {
+                "ground_truth_cases": total_gt,
+                "scenarios": len(results),
+            },
+        },
         "scenarios": {k: vars(v) for k, v in results.items()},
     }
 

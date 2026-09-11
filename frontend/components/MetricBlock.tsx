@@ -8,7 +8,7 @@ interface MetricBlockProps {
   trend?: 'up' | 'down' | 'neutral';
   trendValue?: string;
   severity?: 'critical' | 'high' | 'medium' | 'low' | 'normal' | 'verified';
-  icon?: LucideIcon;
+  icon?: React.ComponentType<{ className?: string; size?: number | string }> | LucideIcon;
   onClick?: () => void;
 }
 

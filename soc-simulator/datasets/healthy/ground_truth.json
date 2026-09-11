@@ -1,1 +1,554 @@
-[]
+[
+ {
+  "truth_id": "GT-0001",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00003",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "escalation_lagging"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-04T19:29:31.020328Z",
+  "end_time": "2026-08-04T20:53:32.124518Z"
+ },
+ {
+  "truth_id": "GT-0002",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00007",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "backlog_heavy"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-01T22:50:07.033818Z",
+  "end_time": "2026-08-02T01:54:03.789682Z"
+ },
+ {
+  "truth_id": "GT-0003",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00014",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "backlog_heavy"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-09T13:54:12.210341Z",
+  "end_time": "2026-08-09T17:14:09.680838Z"
+ },
+ {
+  "truth_id": "GT-0004",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00015",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-04T10:05:32.088436Z",
+  "end_time": "2026-08-04T10:27:15.842153Z"
+ },
+ {
+  "truth_id": "GT-0005",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00018",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION",
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION",
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-13T09:15:19.454576Z",
+  "end_time": "2026-08-13T09:28:26.412110Z"
+ },
+ {
+  "truth_id": "GT-0006",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00023",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "backlog_heavy"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-11T02:42:26.728183Z",
+  "end_time": "2026-08-11T04:49:04.633262Z"
+ },
+ {
+  "truth_id": "GT-0007",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00024",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "ESCALATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-05T15:04:58.838522Z",
+  "end_time": "2026-08-05T15:17:30.328826Z"
+ },
+ {
+  "truth_id": "GT-0008",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00027",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION",
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION",
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-14T20:18:23.313812Z",
+  "end_time": "2026-08-14T20:49:37.892528Z"
+ },
+ {
+  "truth_id": "GT-0009",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00032",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "ESCALATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-13T02:24:05.820612Z",
+  "end_time": "2026-08-13T02:39:15.426098Z"
+ },
+ {
+  "truth_id": "GT-0010",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00038",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-11T08:19:28.843735Z",
+  "end_time": "2026-08-11T08:54:41.048624Z"
+ },
+ {
+  "truth_id": "GT-0011",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00040",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "escalation_lagging"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-07T06:51:59.502448Z",
+  "end_time": "2026-08-07T09:17:02.488263Z"
+ },
+ {
+  "truth_id": "GT-0012",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00045",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "ESCALATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-01T15:18:28.639004Z",
+  "end_time": "2026-08-01T15:45:54.470482Z"
+ },
+ {
+  "truth_id": "GT-0013",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00059",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION",
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION",
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-07T20:48:59.145932Z",
+  "end_time": "2026-08-07T21:21:52.331642Z"
+ },
+ {
+  "truth_id": "GT-0014",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00063",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-12T18:02:37.823591Z",
+  "end_time": "2026-08-12T18:21:06.240969Z"
+ },
+ {
+  "truth_id": "GT-0015",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00064",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "ESCALATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "INVESTIGATION"
+   ]
+  },
+  "expected_findings": [
+   "EXECUTION_GAP",
+   "CLOSURE_WITHOUT_INVESTIGATION"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-07T16:53:36.219278Z",
+  "end_time": "2026-08-07T17:20:59.185421Z"
+ },
+ {
+  "truth_id": "GT-0016",
+  "scenario_id": "healthy",
+  "entity_type": "incident",
+  "entity_id": "INC-00067",
+  "expected_behaviour": {
+   "workflow": [
+    "TRIAGE",
+    "INVESTIGATION",
+    "ESCALATION",
+    "RESPONSE",
+    "CLOSURE"
+   ],
+   "soc_maturity_profile": "closure_gaming"
+  },
+  "actual_behaviour": {
+   "actions_done": [
+    "CLOSURE",
+    "INVESTIGATION",
+    "RESPONSE",
+    "TRIAGE"
+   ],
+   "missing_actions": [
+    "ESCALATION"
+   ]
+  },
+  "expected_findings": [
+   "NEGATIVE_SPACE"
+  ],
+  "severity": "HIGH",
+  "injected": true,
+  "start_time": "2026-08-06T21:30:17.472348Z",
+  "end_time": "2026-08-06T22:24:17.842725Z"
+ }
+]

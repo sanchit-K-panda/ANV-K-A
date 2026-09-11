@@ -1,0 +1,7 @@
+scenario,total_windows,anomalous_windows,normal_windows,tp,fp,fn,tn,precision,recall,f1_score,fpr
+analyst_overload,872,58,814,22,21,36,793,0.5116,0.3793,0.4356,0.0258
+healthy,874,32,842,21,21,11,821,0.5,0.6562,0.5676,0.0249
+investigation_gap,874,42,832,37,35,5,797,0.5139,0.881,0.6491,0.0421
+kpi_manipulation,856,61,795,33,19,28,776,0.6346,0.541,0.5841,0.0239
+negative_space,874,56,818,45,20,11,798,0.6923,0.8036,0.7438,0.0244
+recurring_threat,874,57,817,23,19,34,798,0.5476,0.4035,0.4646,0.0233

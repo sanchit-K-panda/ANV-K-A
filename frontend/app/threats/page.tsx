@@ -1,10 +1,24 @@
 'use client';
 
-import React from 'react';
-import { MOCK_THREAT_RECURRENCE } from '@/lib/mockData';
+import React, { useEffect, useState } from 'react';
+import { fetchThreatRecurrence } from '@/lib/api';
+import type { ThreatRecurrenceItem } from '@/types';
 import { ArrowRight } from 'lucide-react';
 
 export default function ThreatsPage() {
+  const [items, setItems] = useState<ThreatRecurrenceItem[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetchThreatRecurrence('recurring_threat')
+      .then((data) => { if (alive) setItems(data); })
+      .catch((err) => { if (alive) setError(err instanceof Error ? err.message : 'Backend unreachable'); });
+    return () => { alive = false; };
+  }, []);
+
+  const loading = items === null && !error;
+
   return (
     <div className="space-y-5 pb-16">
       {/* Page header */}
@@ -19,78 +33,86 @@ export default function ThreatsPage() {
           </div>
           <h1 className="font-display text-2xl font-bold tracking-tight text-soc-text flex items-center gap-2.5">
             <span>Threat Recurrence Intelligence &amp; Persistence Tracking</span>
-            <span className="h-2 w-2 rounded-full bg-soc-crit" />
           </h1>
           <p className="text-2xs font-mono text-soc-textSecondary mt-0.5">
             Detection of unresolved recurring threat signatures hitting SOC assets without root-cause remediation
           </p>
         </div>
         <span className="font-mono text-3xs text-soc-accent font-bold px-2.5 py-1 rounded-md bg-soc-accentDim border border-soc-accent/30 tabular-nums">
-          {MOCK_THREAT_RECURRENCE.length} RECURRING SIGNATURES TRACKED
+          {items ? `${items.length} RECURRING SIGNATURES TRACKED` : '—'}
         </span>
       </div>
 
-      {/* Threat recurrence records */}
-      <div className="space-y-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
-        {MOCK_THREAT_RECURRENCE.map((t) => (
-          <div key={t.threat_id} className="soc-panel card-hover overflow-hidden bg-soc-panel">
-            <div className="soc-panel-header">
-              <div className="min-w-0">
-                <div className="text-sm font-bold font-display text-soc-text truncate">{t.name}</div>
-                <div className="font-mono text-3xs text-soc-accent mt-0.5 font-bold">
-                  {t.threat_id} · {t.category}
-                </div>
-              </div>
-              <span
-                className={`soc-badge ${
-                  t.recurrence_score >= 80 ? 'badge-critical font-bold' : t.recurrence_score >= 50 ? 'badge-high font-bold' : 'badge-medium'
-                }`}
-              >
-                RECURRENCE SCORE: {t.recurrence_score} / 100
-              </span>
-            </div>
+      {loading && (
+        <div className="soc-panel p-8 text-center text-xs font-mono text-soc-textMuted animate-pulse">
+          LOADING THREAT RECURRENCE MATRIX…
+        </div>
+      )}
 
-            <div className="p-4 space-y-4">
-              {/* Incident chain progression */}
-              <div className="bg-soc-overlay/90 rounded-lg p-3.5 space-y-2 border border-soc-border">
-                <div className="panel-label">Incident Chain Progression</div>
-                <div className="flex flex-wrap items-center gap-2">
-                  {t.incident_chain.map((inc, idx) => (
-                    <React.Fragment key={inc}>
-                      <span className="px-2.5 py-1 bg-soc-raised border border-soc-borderStrong/70 rounded-md font-mono text-xs font-bold text-soc-text tabular-nums shadow-sm">
-                        {inc}
+      {error && (
+        <div className="soc-panel p-8 text-center">
+          <p className="text-xs font-mono text-red-500 mb-2">BACKEND UNREACHABLE — {error}</p>
+          <p className="text-2xs text-soc-textMuted">
+            This screen renders only backend-sourced threat telemetry.
+          </p>
+        </div>
+      )}
+
+      {items && items.length === 0 && (
+        <div className="soc-panel p-8 text-center text-xs font-mono text-emerald-500">
+          ✓ NO RECURRING THREATS OBSERVED in the current dataset.
+        </div>
+      )}
+
+      {items && items.length > 0 && (
+        <div className="space-y-4 animate-fade-up" style={{ animationDelay: '60ms' }}>
+          {items.map((t) => (
+            <div key={t.threat_id} className="soc-panel card-hover overflow-hidden bg-soc-panel">
+              <div className="soc-panel-header">
+                <div className="min-w-0">
+                  <div className="text-sm font-bold font-display text-soc-text truncate">{t.name}</div>
+                  <div className="font-mono text-3xs text-soc-accent mt-0.5 font-bold">
+                    {t.threat_id} · {t.category}
+                  </div>
+                </div>
+                <span
+                  className={`soc-badge ${
+                    t.incident_count >= 5 ? 'badge-critical font-bold' : t.incident_count >= 2 ? 'badge-high font-bold' : 'badge-medium'
+                  }`}
+                >
+                  {t.incident_count} INCIDENT{t.incident_count === 1 ? '' : 'S'}
+                  {t.all_closed ? ' · ALL CLOSED' : ' · OPEN'}
+                </span>
+                <span className={`soc-badge ${t.remediation_applied ? 'badge-ok' : 'badge-critical'}`}>
+                  {t.remediation_applied ? 'REMEDIATED' : 'NOT REMEDIATED'}
+                </span>
+              </div>
+
+              <div className="p-4 space-y-4">
+                {/* Affected assets */}
+                <div className="bg-soc-overlay/90 rounded-lg p-3.5 space-y-2 border border-soc-border">
+                  <div className="panel-label">Affected Assets</div>
+                  <div className="flex flex-wrap gap-2">
+                    {t.affected_assets.length === 0 && (
+                      <span className="font-mono text-2xs text-soc-textMuted">No assets linked in dataset</span>
+                    )}
+                    {t.affected_assets.slice(0, 12).map((a) => (
+                      <span key={a} className="px-2.5 py-1 bg-soc-raised border border-soc-borderStrong/70 rounded-md font-mono text-xs font-bold text-soc-text tabular-nums shadow-sm">
+                        {a}
                       </span>
-                      {idx < t.incident_chain.length - 1 && (
-                        <ArrowRight className="w-3.5 h-3.5 text-soc-accent flex-shrink-0" />
-                      )}
-                    </React.Fragment>
-                  ))}
-                </div>
-              </div>
-
-              {/* Observation grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-3 bg-soc-overlay rounded-lg border border-soc-border">
-                  <div className="panel-label mb-1 text-3xs">First Seen</div>
-                  <div className="font-mono text-2xs font-bold text-soc-text tabular-nums">{t.first_seen}</div>
-                </div>
-                <div className="p-3 bg-soc-overlay rounded-lg border border-soc-border">
-                  <div className="panel-label mb-1 text-3xs">Last Seen</div>
-                  <div className="font-mono text-2xs font-bold text-soc-accent tabular-nums">{t.last_seen}</div>
-                </div>
-                <div className="p-3 bg-soc-overlay rounded-lg border border-soc-border">
-                  <div className="panel-label mb-1 text-3xs">Target Assets</div>
-                  <div className="font-mono text-2xs font-bold text-soc-text">{t.affected_assets.join(', ')}</div>
-                </div>
-                <div className="p-3 bg-soc-overlay rounded-lg border border-soc-border">
-                  <div className="panel-label mb-1 text-3xs">Resolution History</div>
-                  <div className="text-2xs text-soc-crit font-bold leading-relaxed">{t.resolution_history}</div>
+                    ))}
+                    {t.affected_assets.length > 12 && (
+                      <span className="font-mono text-2xs text-soc-textMuted self-center">
+                        +{t.affected_assets.length - 12} more
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

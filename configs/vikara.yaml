@@ -1,0 +1,74 @@
+# ANVĪKṢA VIKĀRA v1 Model Configuration (prompt §17)
+#
+# Threshold policy (REMEDIATION.md P0-1): training data is a BENIGN-only baseline,
+# so `decision_threshold` is NOT hand-picked. On fit, the threshold is calibrated to
+# the `threshold_quantile` of healthy-window anomaly scores (default 99th percentile),
+# bounding healthy FPR at ≤ 1% by construction. `contamination` only shapes sklearn's
+# internal predict() (unused by our scoring path); the measured test anomaly prior is
+# ~0.22, recorded here for documentation, not as a training parameter.
+model:
+  name: IsolationForest
+  version: vikara-v1
+  feature_schema_version: "1.1"
+  n_estimators: 200
+  contamination: 0.01
+  max_samples: 1.0
+  max_features: 1.0
+  random_state: 42
+  window_size: 1h
+  calibrate_threshold: true
+  threshold_quantile: 0.99   # healthy-score quantile → healthy FPR ≤ 1%
+  measured_test_anomaly_prior: 0.2244  # documentation only (REMEDIATION.md P0-1)
+
+# Scenario scope (REMEDIATION.md P0-1 fix #3): identity_anomaly is a session/biometric
+# event stream invisible to window-level alert/case features — it is owned by the
+# identity layer (KAVACA continuous monitor) and excluded from window evaluation.
+evaluation:
+  exclude_scenarios:
+    - identity_anomaly
+
+preprocessing:
+  impute_strategy: median
+  clip_outliers: true
+
+features:
+  - alerts_received
+  - critical_alerts
+  - high_alerts
+  - investigations_started
+  - investigations_completed
+  - investigations_reopened
+  - escalations
+  - closures
+  - active_cases
+  - queue_depth
+  - avg_investigation_duration
+  - median_investigation_duration
+  - p95_investigation_duration
+  - avg_time_to_assignment
+  - avg_time_to_escalation
+  - avg_time_to_closure
+  - investigation_rate
+  - completion_rate
+  - escalation_rate
+  - closure_rate
+  - reopen_rate
+  - critical_alert_ratio
+  - alerts_per_analyst
+  - cases_per_analyst
+  - active_cases_per_analyst
+  - queue_growth_rate
+  - unique_alert_types
+  - unique_assets_touched
+  - unique_users_touched
+  - repeat_indicator_count
+  - repeat_campaign_count
+  # Schema v1.1 governance / discipline / resilience indicators (REMEDIATION.md P2-7)
+  - escalation_signoff_rate
+  - escalation_coverage_rate
+  - investigation_documentation_rate
+  - closure_discipline_rate
+  - closures_without_investigation
+  - closures_without_response
+  - critical_without_escalation
+  - threat_recurrence_rate

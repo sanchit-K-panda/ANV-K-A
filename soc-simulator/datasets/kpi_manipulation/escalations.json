@@ -1,56 +1,182 @@
 [
  {
   "escalation_id": "ESC-00001",
-  "incident_id": "INC-00002",
-  "analyst_id": "AN-00037",
-  "escalated_to": "AN-00026",
+  "incident_id": "INC-00001",
+  "analyst_id": "AN-00009",
+  "escalated_to": "AN-00018",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-07T08:50:04.901789Z",
+  "timestamp": "2026-08-09T03:05:17.312748Z",
   "status": "RESOLVED"
  },
  {
   "escalation_id": "ESC-00002",
-  "incident_id": "INC-00003",
-  "analyst_id": "AN-00033",
+  "incident_id": "INC-00002",
+  "analyst_id": "AN-00034",
   "escalated_to": "AN-00036",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-06T13:48:31.402543Z",
-  "status": "RESOLVED"
+  "timestamp": "2026-08-10T18:51:11.075607Z",
+  "status": "PENDING"
  },
  {
   "escalation_id": "ESC-00003",
   "incident_id": "INC-00005",
-  "analyst_id": "AN-00028",
-  "escalated_to": "AN-00026",
+  "analyst_id": "AN-00015",
+  "escalated_to": "AN-00007",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-09T11:12:34.697896Z",
+  "timestamp": "2026-08-03T08:06:52.048087Z",
   "status": "RESOLVED"
  },
  {
   "escalation_id": "ESC-00004",
-  "incident_id": "INC-00009",
-  "analyst_id": "AN-00033",
-  "escalated_to": "AN-00023",
+  "incident_id": "INC-00006",
+  "analyst_id": "AN-00001",
+  "escalated_to": "AN-00007",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-13T23:43:45.174778Z",
+  "timestamp": "2026-08-01T19:01:37.510346Z",
   "status": "RESOLVED"
  },
  {
   "escalation_id": "ESC-00005",
-  "incident_id": "INC-00012",
-  "analyst_id": "AN-00006",
-  "escalated_to": "AN-00006",
+  "incident_id": "INC-00020",
+  "analyst_id": "AN-00013",
+  "escalated_to": "AN-00009",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-10T01:21:30.926142Z",
+  "timestamp": "2026-08-06T01:43:34.789154Z",
   "status": "RESOLVED"
  },
  {
   "escalation_id": "ESC-00006",
-  "incident_id": "INC-00019",
-  "analyst_id": "AN-00032",
-  "escalated_to": "AN-00023",
+  "incident_id": "INC-00024",
+  "analyst_id": "AN-00063",
+  "escalated_to": "AN-00048",
   "reason": "CRITICAL severity requires senior review",
-  "timestamp": "2026-08-04T07:28:46.156576Z",
+  "timestamp": "2026-08-05T15:16:01.998748Z",
   "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00007",
+  "incident_id": "INC-00026",
+  "analyst_id": "AN-00019",
+  "escalated_to": "AN-00026",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-04T09:52:37.616284Z",
+  "status": "PENDING"
+ },
+ {
+  "escalation_id": "ESC-00008",
+  "incident_id": "INC-00028",
+  "analyst_id": "AN-00090",
+  "escalated_to": "AN-00076",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-07T11:25:35.463890Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00010",
+  "incident_id": "INC-00032",
+  "analyst_id": "AN-00052",
+  "escalated_to": "AN-00063",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-13T02:29:39.534498Z",
+  "status": "PENDING"
+ },
+ {
+  "escalation_id": "ESC-00011",
+  "incident_id": "INC-00039",
+  "analyst_id": "AN-00020",
+  "escalated_to": "AN-00036",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-14T21:08:40.745324Z",
+  "status": "PENDING"
+ },
+ {
+  "escalation_id": "ESC-00012",
+  "incident_id": "INC-00042",
+  "analyst_id": "AN-00031",
+  "escalated_to": "AN-00026",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-05T07:55:49.110808Z",
+  "status": "PENDING"
+ },
+ {
+  "escalation_id": "ESC-00013",
+  "incident_id": "INC-00045",
+  "analyst_id": "AN-00054",
+  "escalated_to": "AN-00063",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-01T15:29:34.751024Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00014",
+  "incident_id": "INC-00050",
+  "analyst_id": "AN-00067",
+  "escalated_to": "AN-00064",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-12T13:35:06.132976Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00015",
+  "incident_id": "INC-00051",
+  "analyst_id": "AN-00055",
+  "escalated_to": "AN-00056",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-04T19:57:28.280083Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00016",
+  "incident_id": "INC-00052",
+  "analyst_id": "AN-00048",
+  "escalated_to": "AN-00056",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-02T02:07:56.957949Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00017",
+  "incident_id": "INC-00056",
+  "analyst_id": "AN-00085",
+  "escalated_to": "AN-00086",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-12T03:15:05.237845Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00018",
+  "incident_id": "INC-00057",
+  "analyst_id": "AN-00044",
+  "escalated_to": "AN-00056",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-06T13:55:43.672694Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00019",
+  "incident_id": "INC-00062",
+  "analyst_id": "AN-00005",
+  "escalated_to": "AN-00009",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-05T16:34:33.444500Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00020",
+  "incident_id": "INC-00064",
+  "analyst_id": "AN-00050",
+  "escalated_to": "AN-00063",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-07T16:57:33.226381Z",
+  "status": "RESOLVED"
+ },
+ {
+  "escalation_id": "ESC-00021",
+  "incident_id": "INC-00065",
+  "analyst_id": "AN-00030",
+  "escalated_to": "AN-00036",
+  "reason": "CRITICAL severity requires senior review",
+  "timestamp": "2026-08-08T14:30:24.794352Z",
+  "status": "PENDING"
  }
 ]

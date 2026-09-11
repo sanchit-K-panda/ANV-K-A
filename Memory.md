@@ -6,36 +6,34 @@
 
 ---
 
-## Project snapshot (2026-08-28 — post-pull d1ff287)
+## Project snapshot (2026-09-11 — post-audit remediation)
 
 - **Product:** ANVĪKṢA — Supervisory Analytics Tool for SOC Assessment (SAT-SA), SIH26157, NTRO
-- **Repo:** https://github.com/sanchit-K-panda/ANV-K-A.git (branch `main`, HEAD `d1ff287` 2026-08-28 16:13)
-- **Author identity:** sanchit-K-panda <juug25btech30071@jainuniversity.ac.in> (set repo-locally; beware Antigravity IDE was signed in as a different GitHub account — necatiozmen — do not let it commit here)
+- **Repo:** https://github.com/sanchit-K-panda/ANV-K-A.git (branch `main`)
 - **Host OS:** Windows 11, git-bash shell; Python 3.14 via `py -3.14` (pytest + pydantic installed there); `PYTHONPATH=src` needed to run the simulator without installing
-- **Last pull:** `e7bcc69` (backend scaffold) → `7f2d6d2` (22-table freeze + Next.js + docker-compose) → `d1ff287` (PERSON_2_plan.md + healthy dataset regen). Full scaffold now on disk: `backend/`, `frontend/`, `ml/`, `biometric/`, `database/`, `infrastructure/`, `docs/` + 22-table Alembic 001
-- **Person 2 refs:** `PERSON_2_plan.md` (platform/security execution plan, P0→P2), `PERSON_2_memory.md` (personal runbook + DB quick ref + pull snapshot) — created 2026-08-28 for Person 2 local continuity alongside this team log
-- **Skills installed in project:** `.agents/skills/` (Leonxlnx taste-skill set); `awesome-design-md/` = cloned corpus of 74 DESIGN.md design systems from VoltAgent — useful references for Phase 10 UI (linear.app/vercel/cursor fit the dark dense SOC aesthetic)
+- **REMEDIATION.md (2026-09-10 audit) status:** P0-1 ✅ (VIKĀRA config recalibrated, honest feature imputation, moment-precise GT oracle, canonical eval artifacts), P0-2 ✅ (density config `configs/simulator-density.toml`, benchmark FP-rule aligned with window evaluator, sample sizes reported), P0-3 ✅ (multi-SOC maturity profiles + `ml/supervisory/ranking.py` + `/api/supervisory/ranking` + `/supervision` UI), P0-4 ✅ (`ml/supervisory/examiner.py` + `/samples` endpoint + examiner queue UI), P1-5 ✅ (cloud/TiDB/DeepSeek-API egress purged, air-gap re-verified), P1-6 ✅ (mockData.ts deleted, 7 pages migrated to backend, api.ts de-fabricated), P2-7 ✅ (feature schema v1.1: governance/discipline/resilience indicators), P2-8 ✅ (engine naming table PRD §7.2.1 + PROJECT.md), P2-9 ✅ (this refresh; duplicate eval artifacts removed; blockchain cursor deleted)
+- **P0-1/P0-2 acceptance caveat:** healthy FPR 0.9% ✅ meets target; window-level F1 remains low (single digits) with ROC-AUC 0.77/0.68 — recorded honestly in `data/evaluation/vikara/` as the canonical numbers. The PS-window overlap between hourly windows and moment-based injections is the documented limiting factor; do NOT claim model F1 ≥ 0.80 until the window/scenario alignment is redesigned.
 
 ## Phase status
 
 | Phase | Status | Notes |
 |---|---|---|
 | 1. Scaffold + Schema Freeze | ✅ DONE (2026-08-28) | Repo tree ✅, docker-compose valid ✅, SQLAlchemy 22 tables ✅, Alembic 001 head ✅, .env.example ✅, contracts-only frontend ✅. |
-| 2. SOC Simulator + Ground Truth | ✅ DONE | All 7 scenarios, 32/32 tests pass, datasets in `soc-simulator/datasets/` |
-| 3. Ingestion Pipeline | ⬜ not started | Person 2 track (Next P0) |
+| 2. SOC Simulator + Ground Truth | ✅ DONE | All 7 scenarios, datasets in `soc-simulator/datasets/` (regenerated 2026-09-11: 4 SOCs, maturity profiles, 20k events, seed 42) |
+| 3. Ingestion Pipeline | ✅ DONE | Person 2 track complete |
 | 4. Deterministic Rules Engines | ✅ DONE | ExecutionGapEngine + WorkloadEngine in `ml/anomaly/` |
 | 5. Negative-Space Engine | ✅ DONE | NegativeSpaceEngine in `ml/anomaly/negative_space.py` |
 | 6. Behavioural ML | ✅ DONE | BaselineEngine + BehavioralIsolationForest + KpiManipulationEngine in `ml/behaviour/` |
 | 7. Correlation + Recurrence Engine | ✅ DONE | CorrelationEngine (`ml/models/`) + ThreatRecurrenceEngine (`ml/recurrence/`) |
 | 8. Risk Engine | ✅ DONE | RiskEngine (`ml/models/risk_engine.py`) factor-sum scoring |
 | 9. Explainability Engine | ✅ DONE | ExplainabilityEngine (`ml/models/explainability_engine.py`) 7-part cards |
-| 10. Frontend | ✅ DONE (2026-08-30) | 5 Core Screens (`/`, `/login`, `/findings`, `/findings/[id]`, `/analytics`) + Offline Drawer + Explainability Cards. `npm run build` passes 11/11 routes. |
+| 10. Frontend | ✅ DONE (2026-09-11) | Full screen set incl. new `/supervision` (P0-3/P0-4). `npm run build` passes. Mock data deleted — all screens backend-sourced. |
 | 11. Secure Identity (AI part) | ✅ DONE | FaceEmbeddingEngine + LivenessEngine + ContinuousIdentityMonitor in `ml/biometric/` |
-| 12. Audit Chain | ⬜ not started | Person 2 track |
-| 13. Air-Gap Proof | ⬜ not started | Person 2 track |
-| 14. 7-Scenario Validation | ✅ DONE | `ml.evaluation.benchmark` — 100% Precision, 100% Recall, 100% F1 across all 7 scenarios! |
-| 15. Performance & Accuracy Metrics | ✅ DONE | 24/24 unit & scenario tests pass in 4.0s; 100% offline |
-| 16. SIH Demo / Hardening | ⬜ pending joint integration | Joint track |
+| 12. Audit Chain | ✅ DONE | Record + verify chain + tamper detection (`backend/app/audit/`) |
+| 13. Air-Gap Proof | ✅ DONE (re-verified 2026-09-11) | `infrastructure/verify_airgap.py` 6/6 checks passed post-P1-5 cloud purge |
+| 14. 7-Scenario Validation | ✅ DONE | `ml.evaluation.benchmark` — 100% P/R/F1 **entity-level, N ground-truth cases stated per run** (see P0-2 reconciliation in REMEDIATION.md) |
+| 15. Performance & Accuracy Metrics | ✅ DONE | Canonical VIKĀRA metrics in `data/evaluation/vikara/`; entity-level benchmark in `data/evaluation/vikara/pipeline.json` |
+| 16. SIH Demo / Hardening | 🔶 IN PROGRESS | Demo script updated: opens with two-org ranking → drill-down → examiner queue → honest metrics → air-gap proof |
 
 ## Phase 2 record — SOC Simulator (commit acea305)
 
@@ -106,14 +104,17 @@ python -m simulator summary datasets/investigation_gap
 - Features: Append-only cryptographic hash chain (`hash_n = SHA-256(record_n + hash_{n-1})`), `verify_audit_chain` integrity validation with pinpoint tamper detection, automated audit logging on privileged events (login, logout, session locking), privileged query endpoints.
 - Tests: `backend/tests/test_audit.py` — 4/4 passed (including intentional DB tampering detection test).
 
-## Phase 13 record — Air-Gap Proof (2026-08-28)
+## Phase 13 record — Air-Gap Proof (2026-08-28; re-verified 2026-09-11)
 - Script: `infrastructure/verify_airgap.py` — executes 6-step offline validation (schema, Argon2 user seed, cryptographic auth & session rotation, batch telemetry ingestion, SHA-256 hash chaining, and tamper detection).
 - Verification: 6/6 checks passed — platform is 100% offline & air-gap compliant.
+- **2026-09-11 re-verification (REMEDIATION.md P1-5):** deleted `inference/gateway/optional_cloud.py` (DeepSeek cloud egress), removed cloud gateway from `inference/gateway/{__init__,base}.py`, replaced TiDB `DATABASE_URL` in `.env.example` with local compose Postgres, removed TiDB SSL branch from `backend/app/models/base.py`, deleted `backend/.blockchain_cursor.txt` + `backend/app/workers/blockchain_poller.py` references. Air-gap script re-run: 6/6 PASS. Only local-model references to deepseek-r1:8b (Ollama on 127.0.0.1) remain — these are air-gap compliant.
 
-## Overall Backend Test Status
-- 29/29 tests passing across health, ingestion, auth, and audit modules.
-## Next up — Phase 3 Ingestion Pipeline (Person 2 Track)
-Phase 1 & Person 1 AI/Data Track ✅ closed. Next: Phase 3 `POST /api/events | /alerts | /incidents | /investigations | /escalations` with validation→normalization→correlation IDs→Postgres persistence.
+## Overall Test Status (2026-09-11)
+- Backend: all 57 tests pass (`py -3.14 -m pytest backend/tests -q`) incl. supervisory API tests (`tests/test_supervisory_api.py`).
+- ML: all 59 tests pass (`py -3.14 -m pytest ml/tests -q`) incl. supervisory ranking/examiner tests (`ml/tests/test_supervisory.py`), updated feature schema tests (v1.1, 39 features), and honest-imputation tests.
+- Frontend: `npm run build` clean (21 routes incl. `/supervision`).
+- Air-Gap: `python infrastructure/verify_airgap.py` — 6/6 checks PASS (100% offline).
+- Benchmark: `python -m ml.evaluation.benchmark --datasets soc-simulator/datasets --output data/evaluation/vikara/pipeline.json` — 139 GT cases evaluated across 7 scenarios (97.9% P, 100% R, 98.9% F1).
 
 ---
 
@@ -146,16 +147,15 @@ Phase 1 & Person 1 AI/Data Track ✅ closed. Next: Phase 3 `POST /api/events | /
    - `backend/app/analytics/service.py` — Service bridge connecting FastAPI to the ML pipeline.
    - `backend/app/api/findings.py` — REST endpoints (`GET /api/findings`, `GET /api/findings/{id}`, `POST /api/analytics/evaluate-scenario/{name}`).
 8. **7-Scenario Benchmark Validation (Phases 14–15):**
-   - `ml/evaluation/benchmark.py` — Validated against all 7 simulator ground truth datasets:
-     - `healthy`: 100% Precision, 100% Recall, 100% F1 (0 False Positives)
-     - `investigation_gap`: 100% Precision, 100% Recall, 100% F1
-     - `negative_space`: 100% Precision, 100% Recall, 100% F1
-     - `kpi_manipulation`: 100% Precision, 100% Recall, 100% F1
-     - `analyst_overload`: 100% Precision, 100% Recall, 100% F1
-     - `recurring_threat`: 100% Precision, 100% Recall, 100% F1
-     - `identity_anomaly`: 100% Precision, 100% Recall, 100% F1
-     - **OVERALL: 100.0% Precision, 100.0% Recall, 100.0% F1-Score across all 7 scenarios.**
-   - 24/24 unit & integration tests pass with `pytest` in 4.0s.
+   - `ml/evaluation/benchmark.py` — Validated against all 7 simulator ground truth datasets.
+   - **Reconciliation note (REMEDIATION.md P0-1/P0-2, 2026-09-11):** the 100% figures below are
+     **entity-level, rules-pipeline** metrics over the (small) per-scenario ground-truth case
+     sets — a different evaluator and sample from the **window-level VIKĀRA model metrics**
+     in `data/evaluation/vikara/` (which are much lower and reported with N). Both are
+     reproducible via one command each; never quote one as the other.
+   - Historical run (pre-density datasets): 100% P/R/F1 across all 7 scenarios, entity-level, N≈8 GT cases.
+   - Current canonical runs: regenerate with `python -m ml.evaluation.benchmark --datasets soc-simulator/datasets --output data/evaluation/vikara/pipeline.json` (sample sizes printed with every percentage).
+   - Unit & integration tests: all passing (count per run output; see snapshot above for 2026-09-11 status).
 
 ---
 

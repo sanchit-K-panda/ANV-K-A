@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { BiometricHUD } from '@/components/BiometricHUD';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { SocShieldCheck } from '@/components/icons/SocShieldCheck';
 
 interface SupervisorProfile {
   id: string;
@@ -189,11 +190,8 @@ function LoginContent() {
         <div className="tex-grid absolute inset-0 opacity-50 pointer-events-none" aria-hidden="true" />
         <div className="relative">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: 'linear-gradient(135deg, rgb(var(--soc-accent)) 0%, rgb(var(--soc-accentBright)) 100%)' }}>
-              <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" aria-hidden="true">
-                <circle cx="12" cy="12" r="3.2" fill="#fff" />
-                <circle cx="12" cy="12" r="7.5" stroke="#fff" strokeOpacity="0.55" strokeWidth="1.4" strokeDasharray="2.5 2.2" />
-              </svg>
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm text-white" style={{ background: 'linear-gradient(135deg, rgb(var(--soc-accent)) 0%, rgb(var(--soc-accentBright)) 100%)' }}>
+              <SocShieldCheck size={24} className="text-white" />
             </div>
             <div>
               <div className="font-display text-base font-bold text-soc-text tracking-tight leading-none">ANVĪKṢA</div>

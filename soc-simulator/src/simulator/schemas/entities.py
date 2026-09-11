@@ -28,6 +28,24 @@ class Soc(_Base):
     timezone: str
     status: Literal["ACTIVE", "INACTIVE"] = "ACTIVE"
     created_at: datetime
+    maturity_profile: str = "balanced"
+
+
+class SocMaturityProfile(_Base):
+    """Per-SOC workflow quality profile for multi-organisation mode (REMEDIATION.md P0-3).
+
+    Factors are multipliers or probabilities applied by the workflow engine so each SOC
+    exhibits measurably different operational discipline. Ranking (ml/supervisory)
+    must be able to recover the profile from telemetry alone — never from this label.
+    """
+    profile_id: str  # balanced | escalation_lagging | closure_gaming | backlog_heavy
+    escalation_completeness: float = 1.0   # share of critical incidents that escalate
+    supervisor_signoff_probability: float = 0.95
+    closure_velocity_multiplier: float = 1.0   # >1 = slower closures
+    closure_without_investigation_rate: float = 0.0
+    backlog_release_rate: float = 1.0   # share of queued work eventually closed
+    investigation_note_probability: float = 0.95
+    reopen_probability: float = 0.02
 
 
 class Analyst(_Base):

@@ -1,0 +1,20 @@
+:root {
+  --anviksa-bg: #0b111b;
+  --anviksa-surface: #111a29;
+  --anviksa-surface-active: #172c41;
+  --anviksa-border: #223149;
+  --anviksa-text: #9eacc0;
+  --anviksa-text-strong: #e8eef7;
+  --anviksa-muted: #53647c;
+  --anviksa-cyan: #27bdf3;
+  --anviksa-green: #00c896;
+  --anviksa-red: #ff3d67;
+  --anviksa-amber: #f5a400;
+  --anviksa-purple: #9b8cff;
+}
+.anviksa-icon { width: 20px; height: 20px; color: var(--anviksa-muted); flex: 0 0 auto; }
+.anviksa-icon--active { color: var(--anviksa-cyan); }
+.anviksa-icon--success { color: var(--anviksa-green); }
+.anviksa-icon--critical { color: var(--anviksa-red); }
+.anviksa-icon--warning { color: var(--anviksa-amber); }
+.anviksa-icon--intel { color: var(--anviksa-purple); }

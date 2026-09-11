@@ -117,7 +117,28 @@ Avoid feature creep. Explicitly out of scope:
 SOC Command Centre · SOC Health Score · Live SOC Status · Critical Findings / Active Anomalies / Execution Gap / Negative-Space / Behaviour Anomaly / Threat Recurrence counters · SOC Performance Overview (Detection / Investigation / Escalation / Response) · Historical SOC Trends
 
 ### 7.2 Supervisory Intelligence Engines
-Execution Gap Engine · Negative-Space Engine · Behavioural Anomaly Engine · Threat Recurrence Engine · Analyst Workload Engine · Correlation Engine · Risk Engine · Explainability Engine · Recommendation Engine · SOC Baseline Engine
+Execution Gap Engine · Negative-Space Engine · Behavioural Anomaly Engine · Threat Recurrence Engine · Analyst Workload Engine · Cross-Organisation Ranking Engine · Examiner Sample Prioritization Engine · Correlation Engine · Risk Engine · Explainability Engine · Recommendation Engine · SOC Baseline Engine
+
+#### 7.2.1 Canonical Engine Naming (Rules.md §9 — one name, one meaning, no synonyms)
+
+| Codename | PRD §7.2 component | Repo module (single canonical path) | One-line role |
+|---|---|---|---|
+| **MĀYĀ** | SOC Simulation & Testing (§7.13) | `soc-simulator/src/simulator/` | Synthetic SOC telemetry generator with ground-truth oracle |
+| **VIVEKA** | Execution Gap Engine | `ml/anomaly/execution_gap.py` | Detects mandatory workflow steps that were skipped |
+| **ABHĀVA** | Negative-Space Engine | `ml/anomaly/negative_space.py` | Detects expected-but-absent actions across the SOC |
+| **VIKĀRA** | Behavioural Anomaly Engine (ML) | `ml/vikara/` (model, train, evaluate) | Isolation-Forest anomaly scoring over 35 behavioural features |
+| **PUNARĀVṚTTI** | Threat Recurrence Engine | `ml/behaviour/recurrence.py` | Flags threats that recur without root-cause remediation |
+| **MEDHĀ** | Analytics aggregation layer | `backend/app/analytics/` + `ml/models/risk_engine.py` | Aggregates engine output into SOC health & analytics views |
+| **PRATYAYA** | Explainability Engine (+ local LLM narration) | `ml/models/explainability_engine.py`, `inference/gateway/` | 7-part explanation contract; local LLM synthesizes text only |
+| **KAVACA** | Continuous Identity/Session layer | `backend/app/auth/` (+ session enclave UI) | Biometric + rotating-credential session protection |
+| **SAKṢĪ** | Audit & Integrity ledger | `backend/app/audit/` | Append-only hash-chained tamper-evident audit log |
+| **MĀN** | Risk quantification view | `frontend/app/risk/` | UI surface for itemized risk-factor scores |
+| — (no codename) | Cross-Organisation Ranking Engine | `ml/supervisory/ranking.py` | Ranks multiple SOCs across 8 capability areas (P0-3 deliverable) |
+| — (no codename) | Examiner Sample Prioritization Engine | `ml/supervisory/examiner.py` | Prioritized, reasoned case-review queue (P0-4 deliverable) |
+
+Spelling is canonical exactly as in the table (diacritics included: VIKĀRA, ABHĀVA,
+PUNARĀVṚTTI, PRATYAYA, MĀYĀ, MEDHĀ, KAVACA, SAKṢĪ, MĀN, VIVEKA). Code identifiers use
+ASCII transliteration (VIKARA, ABHAVA, PUNARAVRTTI) — that mapping is fixed here.
 
 ### 7.3 Findings
 Findings Centre (filterable table) · Severity (Critical/High/Medium/Low) · Confidence Score · Finding Timeline · Evidence · Affected Assets/Analysts · Related Incidents/Alerts · Recommended Action · Finding Status · Investigation Assignment
@@ -196,9 +217,10 @@ The product is considered functionally complete for MVP once it correctly detect
 ## 10. Success Metrics
 
 **Detection quality** (development targets, not marketing claims — must be validated against the simulator):
-- Execution Gap Detection: Precision ≥ 90%, Recall ≥ 85%, F1 ≥ 87%
-- Negative-Space Detection: Precision ≥ 90%, Recall ≥ 85%
-- Anomaly Detection: F1 ≥ 85%
+- Execution Gap Detection (entity-level, rules pipeline): Precision ≥ 90%, Recall ≥ 85%, F1 ≥ 87%
+- Negative-Space Detection (entity-level): Precision ≥ 90%, Recall ≥ 85%
+- Behavioural anomaly (VIKĀRA, window-level, canonical artifacts in `data/evaluation/vikara/`): window-level F1 ≥ 0.80, healthy FPR ≤ 1%, ROC-AUC ≥ 0.85
+- Every reported percentage MUST state its evaluator, level (entity vs window), and sample size N
 
 **Operational:** processing latency, event throughput, API response time, dashboard latency.
 

@@ -134,14 +134,18 @@ def test_trained_mode_flags_injected_behaviour(smoke_trained):
 def test_pipeline_fallback_mode_without_artifacts():
     """No artifacts → legacy per-cohort fit path still works end-to-end.
 
-    Uses the committed eval dataset: a tiny smoke cohort is too concentrated
-    (injected fraction ≈ contamination) for per-cohort isolation to fire.
+    Uses the committed eval dataset: analyst_overload is the scenario with genuine
+    cohort-level behavioural divergence (one analyst hoards work), so the unsupervised
+    fallback fires there. kpi_manipulation no longer fires in fallback mode by design:
+    with multi-SOC maturity profiles the cohort medians include closure-gaming
+    analysts, so KPI gaming is no longer a per-cohort statistical outlier — that
+    behaviour is the trained-mode detector's job (see test_trained_mode_flags_injected_behaviour).
     """
     from ml.preprocessing.dataset_loader import load_dataset_from_dir
 
     pipeline = SupervisoryAnalyticsPipeline(auto_load=False)
     assert pipeline.trained_models is None
-    findings = pipeline.run(load_dataset_from_dir("soc-simulator/datasets/kpi_manipulation"))
+    findings = pipeline.run(load_dataset_from_dir("soc-simulator/datasets/analyst_overload"))
     assert isinstance(findings, list)
     behavioural = [
         d

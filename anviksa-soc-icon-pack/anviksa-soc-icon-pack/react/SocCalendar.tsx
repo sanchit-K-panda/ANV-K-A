@@ -1,0 +1,12 @@
+import * as React from "react";
+import { SocIcon, SocIconProps } from "./SocIcon";
+
+export function SocCalendar(props: SocIconProps) {
+  return (
+    <SocIcon {...props}>
+      <rect x"3" y"5" width"18" height"16" rx"2" />
+      <path d"M16 3v4M8 3v4M3 10h18" />
+      <path d"M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01" />
+    </SocIcon>
+  );
+}

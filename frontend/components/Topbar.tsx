@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Clock, ShieldCheck, Search, Command } from 'lucide-react';
+import { Command } from 'lucide-react';
+import { SocLock, SocClock, SocShieldCheck, SocSearch } from '@/components/icons';
 import { AirGapDrawer } from './AirGapDrawer';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -59,7 +60,7 @@ export const Topbar: React.FC = () => {
             className="w-full flex items-center gap-2 px-3 py-1.5 rounded border border-soc-border bg-soc-bg text-left text-xs text-soc-textMuted hover:border-soc-borderStrong hover:text-soc-text transition-colors"
             onClick={() => router.push('/findings')}
           >
-            <Search className="w-3.5 h-3.5 text-soc-textMuted flex-shrink-0" />
+            <SocSearch className="w-3.5 h-3.5 text-soc-textMuted flex-shrink-0" />
             <span className="flex-1 text-2xs truncate font-sans">Search findings, alerts, evidence...</span>
             <span className="flex items-center gap-0.5 text-3xs font-mono text-soc-textMuted border border-soc-border rounded px-1.5 py-0.5 bg-soc-raised">
               <Command className="w-2.5 h-2.5" />K
@@ -73,7 +74,7 @@ export const Topbar: React.FC = () => {
             <div className="text-right leading-tight">
               <div className="text-xs font-medium text-soc-text">Dr. A. Sharma</div>
               <div className="text-3xs font-mono text-soc-ok flex items-center justify-end gap-1">
-                <ShieldCheck className="w-3 h-3 text-soc-ok" />
+                <SocShieldCheck className="w-3 h-3 text-soc-ok" />
                 VERIFIED
               </div>
             </div>
@@ -86,7 +87,7 @@ export const Topbar: React.FC = () => {
             className="flex items-center gap-1.5 px-2 py-1 rounded border border-soc-border bg-soc-raised/40 text-soc-textMuted text-xs"
             title="Session Renewal Timer"
           >
-            <Clock className="w-3 h-3 text-soc-textMuted" />
+            <SocClock className="w-3 h-3 text-soc-textMuted" />
             <span className="font-mono text-xs font-medium tabular-nums text-soc-text">{formatTimer(secondsToRenewal)}</span>
           </div>
 
@@ -99,7 +100,7 @@ export const Topbar: React.FC = () => {
             title="Lock Session"
             aria-label="Lock Session"
           >
-            <Lock className="w-3.5 h-3.5" />
+            <SocLock className="w-3.5 h-3.5" />
           </button>
         </div>
       </header>

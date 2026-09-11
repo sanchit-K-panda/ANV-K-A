@@ -6,8 +6,10 @@ from datetime import datetime, timedelta, timezone
 from ipaddress import IPv4Address
 
 from simulator.config import SimConfig
+from typing import Any
+
 from simulator.schemas.entities import (
-    Analyst, Asset, Device, Soc, Threat,
+    Analyst, Asset, Device, Soc, SocMaturityProfile, Threat,
 )
 from simulator.schemas.enums import (
     AnalystRole, AssetType, Criticality, DeviceType, Severity, Shift,
@@ -33,6 +35,44 @@ def _ip(rng: random.Random) -> str:
 class World:
     """Static SOC population plus ID counters and shared RNG state."""
 
+    # Maturity profiles for multi-organisation mode (REMEDIATION.md P0-3).
+    # Deterministic cycle: SOC-001 balanced, SOC-002 escalation-lagging,
+    # SOC-003 closure-gaming, SOC-004 backlog-heavy, then repeats.
+    MATURITY_PROFILES: dict[str, dict] = {
+        "balanced": {
+            "escalation_completeness": 1.0,
+            "supervisor_signoff_probability": 0.97,
+            "closure_velocity_multiplier": 1.0,
+            "closure_without_investigation_rate": 0.0,
+            "investigation_note_probability": 0.97,
+            "reopen_probability": 0.02,
+        },
+        "escalation_lagging": {
+            "escalation_completeness": 0.45,   # skips mandated senior review
+            "supervisor_signoff_probability": 0.55,
+            "closure_velocity_multiplier": 1.1,
+            "closure_without_investigation_rate": 0.05,
+            "investigation_note_probability": 0.85,
+            "reopen_probability": 0.05,
+        },
+        "closure_gaming": {
+            "escalation_completeness": 0.70,
+            "supervisor_signoff_probability": 0.80,
+            "closure_velocity_multiplier": 0.18,  # suspiciously fast closures
+            "closure_without_investigation_rate": 0.35,
+            "investigation_note_probability": 0.60,
+            "reopen_probability": 0.10,
+        },
+        "backlog_heavy": {
+            "escalation_completeness": 0.85,
+            "supervisor_signoff_probability": 0.90,
+            "closure_velocity_multiplier": 3.2,   # cases linger for days
+            "closure_without_investigation_rate": 0.02,
+            "investigation_note_probability": 0.90,
+            "reopen_probability": 0.15,
+        },
+    }
+
     def __init__(self, cfg: SimConfig, rng: random.Random, start: datetime):
         self.cfg = cfg
         self.rng = rng
@@ -43,6 +83,7 @@ class World:
         self.devices: list[Device] = []
         self.assets: list[Asset] = []
         self.threats: list[Threat] = []
+        self.profiles: dict[str, Any] = {}
         self._counters: dict[str, int] = {}
 
     def next_id(self, prefix: str) -> str:
@@ -56,15 +97,23 @@ class World:
         return self.start + timedelta(seconds=secs)
 
     # -- population -------------------------------------------------------
-    def build(self) -> None:
+    def build(self, multi_soc_profiles: bool = False) -> None:
         cfg, rng = self.cfg, self.rng
         created = self.start - timedelta(days=365)
+        profile_cycle = list(self.MATURITY_PROFILES.keys())
         for s in range(cfg.soc_count):
             soc_id = f"SOC-{s + 1:03d}"
+            if multi_soc_profiles and cfg.soc_count > 1:
+                profile_id = profile_cycle[s % len(profile_cycle)]
+                self.profiles[soc_id] = SocMaturityProfile(
+                    profile_id=profile_id, **self.MATURITY_PROFILES[profile_id])
+            else:
+                profile_id = "balanced"
             self.socs.append(Soc(
                 soc_id=soc_id, name=f"SOC {chr(65 + s)}", environment="PRODUCTION",
                 location=rng.choice(["Bengaluru, IN", "Delhi, IN", "Mumbai, IN"]),
-                timezone="Asia/Kolkata", status="ACTIVE", created_at=created))
+                timezone="Asia/Kolkata", status="ACTIVE", created_at=created,
+                maturity_profile=profile_id))
             for _ in range(rng.randint(cfg.analysts_per_soc_min, cfg.analysts_per_soc_max)):
                 self.analysts.append(Analyst(
                     analyst_id=self.next_id("AN"), soc_id=soc_id,

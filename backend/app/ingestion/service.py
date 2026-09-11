@@ -61,6 +61,7 @@ async def _upsert_soc(db: AsyncSession, data: SocIngest) -> bool:
             existing.location = data.location
             existing.timezone = data.timezone
             existing.status = data.status
+            existing.maturity_profile = data.maturity_profile
             existing.created_at = data.created_at
         else:
             db.add(Soc(
@@ -70,6 +71,7 @@ async def _upsert_soc(db: AsyncSession, data: SocIngest) -> bool:
                 location=data.location,
                 timezone=data.timezone,
                 status=data.status,
+                maturity_profile=data.maturity_profile,
                 created_at=data.created_at,
             ))
         return True

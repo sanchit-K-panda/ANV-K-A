@@ -81,7 +81,9 @@ def test_workload_engine():
     assert len(findings) == 1
     f = findings[0]
     assert f.finding_type == FindingType.WORKLOAD_IMBALANCE
-    assert f.entity_id == "AN-00024"
+    # Dominant analyst is dataset-generated (seeded); must match ground truth label.
+    gt = __import__("json").load(open("soc-simulator/datasets/analyst_overload/ground_truth.json"))
+    assert f.entity_id == gt[0]["entity_id"]
     assert f.evidence["dominant_share"] >= 0.50
 
 
@@ -95,7 +97,12 @@ def test_kpi_manipulation_engine():
     assert len(findings) >= 1
     f = findings[0]
     assert f.finding_type == FindingType.KPI_MANIPULATION
-    assert "AN-00012" in f.entity_id
+    # The flagged cohort must overlap the ground-truth manipulator group (seeded IDs
+    # vary per dataset regeneration; do not hardcode a specific analyst id).
+    gt = __import__("json").load(open("soc-simulator/datasets/kpi_manipulation/ground_truth.json"))
+    gt_ids = set(gt[0]["entity_id"].split(","))
+    flagged = set(f.entity_id.split(","))
+    assert flagged & gt_ids, f"KPI cohort {flagged} misses all ground-truth manipulators {gt_ids}"
 
 
 def test_threat_recurrence_engine():
@@ -106,7 +113,9 @@ def test_threat_recurrence_engine():
     assert len(findings) == 1
     f = findings[0]
     assert f.finding_type == FindingType.RECURRING_THREAT
-    assert f.entity_id == "THR-00006"
+    # Recurring threat id is dataset-generated (seeded); must match ground truth.
+    gt = __import__("json").load(open("soc-simulator/datasets/recurring_threat/ground_truth.json"))
+    assert f.entity_id == gt[0]["entity_id"]
     assert f.severity == FindingSeverity.CRITICAL
 
 
@@ -148,7 +157,9 @@ def test_continuous_identity_monitor():
     assert len(findings) == 1
     f = findings[0]
     assert f.finding_type == FindingType.IDENTITY_ANOMALY
-    assert f.entity_id == "SESS-0039"
+    # Anomaly session id derives from identity_session_count (seeded config).
+    gt = __import__("json").load(open("soc-simulator/datasets/identity_anomaly/ground_truth.json"))
+    assert f.entity_id == gt[0]["entity_id"]
     assert f.severity == FindingSeverity.CRITICAL
 
 

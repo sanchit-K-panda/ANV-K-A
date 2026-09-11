@@ -12,13 +12,12 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # Database — TiDB Cloud (MySQL-compatible) via asyncmy driver
+    # Database — local PostgreSQL via asyncpg (air-gapped; see docker-compose.yml)
     DATABASE_URL: str = (
-        "mysql+asyncmy://U8XmddPrYax4YJR.root:y0qTNQmOgaz5D3SH"
-        "@gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/test"
+        "postgresql+asyncpg://anviksa:anviksa_dev@localhost:5432/anviksa"
     )
-    # Set to True for TiDB Cloud (requires SSL)
-    DATABASE_SSL: bool = True
+    # SSL is only needed for remote databases; local compose runs without it
+    DATABASE_SSL: bool = False  # local compose only; no remote TLS endpoints (Rules.md §4)
 
     # Redis
     REDIS_URL: str = "redis://:anviksa_dev@localhost:6379/0"

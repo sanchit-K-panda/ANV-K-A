@@ -26,6 +26,11 @@ const grotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: 'ANVĪKṢA : Supervisory SOC Intelligence Command Centre',
   description: 'Air-gapped supervisory analytics and behavioural threat detection platform for Security Operations Centres.',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 // Applies the persisted theme before first paint.

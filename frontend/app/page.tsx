@@ -10,7 +10,7 @@ import {
   evaluateScenario,
 } from '@/lib/api';
 import { Finding, SocHealthOverview, QuadrantScore } from '@/types';
-import { SCENARIOS } from '@/lib/mockData';
+import { SCENARIOS } from '@/lib/scenarios';
 import {
   RefreshCw,
   ArrowRight,

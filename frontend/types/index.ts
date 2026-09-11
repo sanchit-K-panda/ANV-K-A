@@ -125,9 +125,9 @@ export interface AnalystWorkloadItem {
   analyst_id: string;
   name: string;
   role: string;
-  critical_cases: number;
-  active_cases: number;
-  workload_level: 'HIGH' | 'NORMAL' | 'LOW';
+  total_incidents: number;
+  critical_incidents: number;
+  critical_case_share: number;
   mean_closure_minutes: number;
   investigation_rate: number;
   is_bottleneck: boolean;
@@ -137,12 +137,10 @@ export interface ThreatRecurrenceItem {
   threat_id: string;
   name: string;
   category: string;
-  incident_chain: string[];
-  first_seen: string;
-  last_seen: string;
+  incident_count: number;
   affected_assets: string[];
-  resolution_history: string;
-  recurrence_score: number;
+  all_closed: boolean;
+  remediation_applied: boolean;
 }
 
 export interface AuditLogEntry {
@@ -157,4 +155,30 @@ export interface AuditLogEntry {
   previous_hash: string;
   current_hash: string;
   details: string;
+}
+
+export interface SocRankingResponse {
+  soc_id: string;
+  soc_name: string;
+  supervisory_risk_score: number;
+  status_tier: string;
+  rank?: number;
+  total_penalty?: number;
+  worst_area?: string;
+  capability_scores?: Record<string, number>;
+  sample_size?: Record<string, number>;
+  [key: string]: any;
+}
+
+export interface ExaminerSampleResponse {
+  case_id: string;
+  examiner_priority_score: number;
+  incident_id?: string;
+  alert_type?: string;
+  primary_reason: string;
+  detailed_rationale: string;
+  analyst_id?: string;
+  severity?: string;
+  reasons?: string[];
+  [key: string]: any;
 }

@@ -7,6 +7,13 @@ import logging
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from simulator.config import SimConfig
 from simulator.exporters.io import export_csv, export_json, export_sqlite
 from simulator.scenarios.registry import REGISTRY, build_scenario
@@ -19,6 +26,9 @@ def _add_common(p: argparse.ArgumentParser) -> None:
                    default="healthy")
     p.add_argument("--events", type=int, default=None)
     p.add_argument("--socs", type=int, default=None)
+    p.add_argument("--soc-profiles", action="store_true",
+                   help="assign per-SOC maturity profiles (balanced / escalation_lagging / "
+                        "closure_gaming / backlog_heavy) for cross-organisation ranking")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--config", type=Path, default=None)
     p.add_argument("--out", type=Path, default=Path("datasets"))
@@ -39,8 +49,9 @@ def cmd_generate(args: argparse.Namespace) -> int:
             cfg.events = args.events
         if args.socs:
             cfg.soc_count = args.socs
-        print(f"[+] Generating scenario '{scen}' (events={cfg.events}, seed={cfg.seed})...")
-        ds = build_scenario(scen, cfg)
+        print(f"[+] Generating scenario '{scen}' (events={cfg.events}, seed={cfg.seed}, "
+              f"profiles={args.soc_profiles})...")
+        ds = build_scenario(scen, cfg, multi_soc_profiles=args.soc_profiles)
         out_dir = args.out / scen
         export_json(ds, out_dir)
         if args.format in ("csv", "all"):

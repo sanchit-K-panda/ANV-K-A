@@ -423,5 +423,13 @@
     border-radius: 9999px;
     transition: width 500ms ease;
   }
+  /* ── ANViKSa SOC Icon Pack Classes ────────────────────────────────── */
+  .anviksa-icon { width: 20px; height: 20px; color: rgb(var(--soc-textMuted)); flex: 0 0 auto; }
+  .anviksa-icon--active { color: rgb(var(--soc-accent)); }
+  .anviksa-icon--success { color: rgb(var(--soc-ok)); }
+  .anviksa-icon--critical { color: rgb(var(--soc-crit)); }
+  .anviksa-icon--warning { color: rgb(var(--soc-med)); }
+  .anviksa-icon--intel { color: #9b8cff; }
 }
+
 
