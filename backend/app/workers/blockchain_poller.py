@@ -48,6 +48,12 @@ async def poll_loop():
                         valid_events = []
                         for e in events_raw:
                             try:
+                                if "eventType" in e and "event_type" not in e:
+                                    e["event_type"] = e["eventType"]
+                                if not e.get("soc_id"):
+                                    e["soc_id"] = "SOC-BANK-01"
+                                if not e.get("source"):
+                                    e["source"] = "CoreBankingLedger"
                                 valid_events.append(EventIngest.model_validate(e))
                             except Exception as ex:
                                 logger.error(f"Error parsing event: {ex}")
