@@ -1,0 +1,6 @@
+{
+  "total_windows_scored": 5224,
+  "total_inference_time_ms": 149.76,
+  "avg_ms_per_window": 0.0287,
+  "throughput_windows_per_sec": 34883.0
+}

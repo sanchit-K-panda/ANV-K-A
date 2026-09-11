@@ -44,89 +44,93 @@ export const TotalRiskMeter: React.FC<TotalRiskMeterProps> = ({
   ];
 
   return (
-    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover">
+    <div className="soc-panel flex flex-col justify-between select-none h-full card-hover bg-soc-panel">
       <div>
         {/* Header */}
         <div className="soc-panel-header">
           <div>
-            <span className="panel-label">Total Composite Risk</span>
-            <p className="text-2xs text-soc-textMuted mt-0.5">MĀN · additive factor decomposition</p>
+            <span className="panel-label">COMPOSITE RISK VECTOR</span>
+            <p className="text-2xs font-mono text-soc-textMuted mt-0.5">MĀN · Bayesian Additive Weights</p>
           </div>
           <span className={`soc-badge ${riskLevel.badge}`}>{riskLevel.label}</span>
         </div>
 
-        {/* Main Readout with Arc Gauge */}
-        <div className="px-5 pt-5 pb-2 flex items-center justify-between gap-4">
+        {/* Main Readout with Technical Precision Gauge */}
+        <div className="px-4 pt-4 pb-2 flex items-center justify-between gap-4">
           <div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-display text-[44px] leading-none font-bold tracking-tight text-soc-text tabular-nums">
+            <div className="flex items-baseline gap-1.5">
+              <span className={`font-mono text-4xl font-extrabold tracking-tight tabular-nums ${score >= 80 ? 'text-soc-crit' : score >= 60 ? 'text-soc-high' : 'text-soc-text'}`}>
                 {score}
               </span>
-              <span className="text-sm text-soc-textDim font-mono">/ {maxScore}</span>
+              <span className="text-xs text-soc-textMuted font-mono">/ {maxScore}</span>
             </div>
-            <div className="text-2xs text-soc-textMuted mt-2">
-              Scope <span className="font-semibold text-soc-textSecondary font-mono">{scope}</span>
-              <span className="mx-1.5 text-soc-textDim">·</span>
-              Confidence <span className="font-semibold text-soc-accent">{confidence}%</span>
+            <div className="text-[11px] text-soc-textMuted mt-1 font-mono">
+              SCOPE: <span className="font-semibold text-soc-text">{scope}</span>
+              <span className="mx-1 text-soc-textDim">·</span>
+              CONF: <span className="font-semibold text-soc-accent">{confidence}%</span>
             </div>
           </div>
 
-          {/* Arc Gauge */}
-          <div className="relative w-32 h-16 flex items-end justify-center flex-shrink-0">
-            <svg className="w-32 h-16 overflow-visible" viewBox="0 0 140 78" role="img" aria-label={`Composite risk ${score} of ${maxScore}`}>
-              <defs>
-                <linearGradient id={gradId} x1="0%" y1="100%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgb(var(--soc-accent))" />
-                  <stop offset="100%" stopColor={riskLevel.tip} />
-                </linearGradient>
-              </defs>
+          {/* Precision Gauge */}
+          <div className="relative w-28 h-14 flex items-end justify-center flex-shrink-0">
+            <svg className="w-28 h-14 overflow-visible" viewBox="0 0 140 75" role="img" aria-label={`Composite risk ${score} of ${maxScore}`}>
               <path
-                d="M 10 70 A 60 60 0 0 1 130 70"
+                d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
                 stroke="rgb(var(--soc-raised))"
-                strokeWidth="11"
+                strokeWidth="7"
                 strokeLinecap="round"
               />
               <path
-                d="M 10 70 A 60 60 0 0 1 130 70"
+                d="M 15 70 A 55 55 0 0 1 125 70"
                 fill="none"
-                stroke={`url(#${gradId})`}
-                strokeWidth="11"
+                stroke={score >= 80 ? 'rgb(var(--soc-crit))' : score >= 60 ? 'rgb(var(--soc-high))' : score >= 35 ? 'rgb(var(--soc-med))' : 'rgb(var(--soc-ok))'}
+                strokeWidth="7"
                 strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-1000 ease-out"
+                className="transition-all duration-700 ease-out"
               />
             </svg>
           </div>
         </div>
 
         {/* Contributing Factors — always itemized, never opaque */}
-        <div className="border-t border-soc-border px-5 py-3.5 space-y-2">
-          <div className="flex justify-between text-[11px] font-medium text-soc-textMuted">
-            <span>Primary risk drivers</span>
-            <span className="text-soc-crit font-semibold">Total +{score} pts</span>
+        <div className="border-t border-soc-border px-4 py-3 space-y-2">
+          <div className="flex justify-between text-2xs font-mono font-bold text-soc-textMuted uppercase tracking-wider">
+            <span>Primary Risk Drivers</span>
+            <span className="text-soc-crit">+{score} PTS TOTAL</span>
           </div>
-          {factorContributions.map((f) => (
-            <div key={f.label} className="flex justify-between items-center text-xs">
-              <span className="text-soc-textSecondary">{f.label}</span>
-              <span className="font-mono text-2xs tabular-nums">
-                <span className="text-soc-crit font-semibold">{f.pts}</span>
-                <span className="text-soc-textDim ml-1.5">({f.percent})</span>
-              </span>
-            </div>
-          ))}
+          <div className="space-y-2">
+            {factorContributions.map((f) => (
+              <div key={f.label} className="space-y-1">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-soc-textSecondary text-[11px] truncate max-w-[200px]">{f.label}</span>
+                  <span className="text-2xs tabular-nums">
+                    <span className="text-soc-crit font-bold">{f.pts}</span>
+                    <span className="text-soc-textDim ml-1">({f.percent})</span>
+                  </span>
+                </div>
+                <div className="w-full bg-soc-raised h-1 rounded-full overflow-hidden">
+                  <div
+                    className="bg-soc-crit h-full rounded-full transition-all duration-500"
+                    style={{ width: f.percent }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Footer Link */}
-      <div className="px-5 py-3.5 border-t border-soc-border flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-2xs text-soc-high font-medium">
+      <div className="px-4 py-3 border-t border-soc-border flex items-center justify-between bg-soc-raised/30">
+        <div className="flex items-center gap-1.5 text-2xs font-mono text-soc-high font-bold">
           <TrendingUp className="w-3.5 h-3.5" />
           <span>{trendDelta}</span>
         </div>
-        <Link href="/risk" className="text-xs text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-0.5 transition-colors">
-          <span>All factors</span>
+        <Link href="/risk" className="text-xs font-mono text-soc-accent hover:text-soc-accentBright font-bold flex items-center gap-0.5 transition-colors">
+          <span>ALL FACTORS</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>

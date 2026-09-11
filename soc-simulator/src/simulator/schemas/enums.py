@@ -39,6 +39,7 @@ class InvestigationStatus(StrEnum):
 class EscalationStatus(StrEnum):
     OPEN = "OPEN"
     ACKNOWLEDGED = "ACKNOWLEDGED"
+    PENDING = "PENDING"  # awaiting supervisor sign-off (governance indicator)
     RESOLVED = "RESOLVED"
 
 

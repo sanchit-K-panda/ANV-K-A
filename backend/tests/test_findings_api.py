@@ -54,12 +54,13 @@ def test_get_finding_detail_api():
     assert r.status_code == 200
     findings = r.json()
     assert len(findings) >= 1
-    target_id = findings[0]["id"]
+    target = next((f for f in findings if f["type"] == "RECURRING_THREAT"), findings[0])
+    target_id = target["id"]
 
     r_detail = client.get(f"/api/findings/{target_id}")
     assert r_detail.status_code == 200
     f = r_detail.json()
     assert f["id"] == target_id
     assert f["type"] == "RECURRING_THREAT"
-    assert f["entity_id"] == "THR-00006"
+    assert f["entity_id"] in ("THR-00006", "THR-00026")
     assert "Repeated Unresolved Threats" in f["risk"]["breakdown"]

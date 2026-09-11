@@ -42,40 +42,42 @@ export const ExecutionGapMatrix: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 p-3">
         {/* Left: Expected vs Actual Workflow */}
-        <div className="lg:col-span-7 p-4 rounded-lg bg-soc-overlay space-y-2.5">
-          <div className="text-[11px] font-semibold text-soc-textSecondary mb-1">SOP execution vs actual actions</div>
-          <div className="space-y-1.5">
+        <div className="lg:col-span-7 p-3 rounded border border-soc-border bg-soc-raised/40 space-y-2">
+          <div className="text-[11px] font-mono font-semibold uppercase tracking-wider text-soc-textMuted mb-1">
+            SOP Execution vs Forensic Telemetry
+          </div>
+          <div className="space-y-1">
             {steps.map((s, idx) => {
               const isFailed = !s.actual;
               return (
                 <div
                   key={idx}
-                  className={`px-3.5 py-2.5 rounded-lg border flex items-center justify-between gap-3 transition-colors ${
+                  className={`px-3 py-2 rounded border flex items-center justify-between gap-3 transition-colors ${
                     isFailed
-                      ? 'bg-soc-critDim border-soc-crit/25'
+                      ? 'bg-soc-panel border-red-500/30 dark:border-red-500/30'
                       : 'bg-soc-panel border-soc-border'
                   }`}
                 >
-                  <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
                     <span
-                      className={`w-5 h-5 rounded-full flex items-center justify-center font-mono text-[10px] flex-shrink-0 ${
+                      className={`w-4 h-4 rounded-sm flex items-center justify-center font-mono text-[10px] font-bold flex-shrink-0 ${
                         isFailed
-                          ? 'bg-soc-crit/10 text-soc-crit'
-                          : 'bg-soc-ok/10 text-soc-ok'
+                          ? 'bg-red-500/10 text-red-600 dark:text-red-400'
+                          : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                       }`}
                       aria-hidden="true"
                     >
                       {isFailed ? '✕' : '✓'}
                     </span>
-                    <span className={`text-xs truncate ${isFailed ? 'text-soc-crit font-medium' : 'text-soc-text'}`}>{s.name}</span>
+                    <span className={`text-xs font-mono truncate ${isFailed ? 'text-red-600 dark:text-red-400 font-semibold' : 'text-soc-text'}`}>{s.name}</span>
                   </div>
 
-                  <div className="flex items-center gap-3 flex-shrink-0">
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     {s.note && (
-                      <span className="text-2xs text-soc-textMuted hidden md:inline">{s.note}</span>
+                      <span className="text-[11px] text-soc-textMuted hidden md:inline font-mono">{s.note}</span>
                     )}
                     {s.duration && (
-                      <span className="col-mono hidden sm:inline">{s.duration}</span>
+                      <span className="col-mono hidden sm:inline text-[11px]">{s.duration}</span>
                     )}
                     <span className={`soc-badge ${isFailed ? 'badge-critical' : 'badge-ok'}`}>
                       {s.status}
@@ -88,36 +90,42 @@ export const ExecutionGapMatrix: React.FC = () => {
         </div>
 
         {/* Right: Negative Space Breakdown */}
-        <div className="lg:col-span-5 p-4 rounded-lg bg-soc-overlay space-y-3">
-          <div className="flex items-center gap-1.5 text-[11px] font-semibold text-soc-textSecondary mb-1">
+        <div className="lg:col-span-5 p-3 rounded border border-soc-border bg-soc-raised/40 space-y-2">
+          <div className="flex items-center gap-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-soc-textMuted mb-1">
             <FileSearch className="w-3.5 h-3.5 text-soc-accent" />
-            <span>Negative space — what was omitted</span>
+            <span>Negative Space · Omitted Forensics</span>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             {negativeSpaceItems.map((item) => (
-              <div key={item.label} className="p-3.5 bg-soc-panel border border-soc-border rounded-lg space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-xs font-medium text-soc-text">{item.label}</span>
-                  <span className="font-mono text-2xs text-soc-crit font-semibold tabular-nums">
+              <div key={item.label} className="p-2.5 bg-soc-panel border border-soc-border rounded space-y-1.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-semibold text-soc-text">{item.label}</span>
+                  <span className="font-mono text-[11px] text-red-600 dark:text-red-400 font-bold tabular-nums">
                     {item.missing} missing {item.unit}
                   </span>
                 </div>
-                <div className="flex justify-between text-2xs text-soc-textMuted tabular-nums">
-                  <span>Expected {item.expected}</span>
-                  <span>Observed <span className="text-soc-textSecondary font-medium">{item.observed}</span></span>
+                <div className="flex justify-between text-[11px] text-soc-textMuted font-mono tabular-nums">
+                  <span>Expected: {item.expected}</span>
+                  <span>Observed: <span className="text-soc-text font-semibold">{item.observed}</span></span>
                 </div>
-                {/* Visual Ratio Bar */}
-                <div className="risk-factor-bar flex">
-                  <div className="h-full bg-soc-ok" style={{ width: `${(item.observed / item.expected) * 100}%` }} />
-                  <div className="h-full bg-soc-crit" style={{ width: `${(item.missing / item.expected) * 100}%` }} />
+                {/* Ratio Bar */}
+                <div className="w-full h-1.5 rounded-sm bg-soc-raised overflow-hidden flex">
+                  <div
+                    className="h-full bg-emerald-500"
+                    style={{ width: `${(item.observed / item.expected) * 100}%` }}
+                  />
+                  <div
+                    className="h-full bg-red-500"
+                    style={{ width: `${(item.missing / item.expected) * 100}%` }}
+                  />
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="p-3 bg-soc-panel border border-soc-border rounded-lg text-2xs text-soc-textSecondary leading-relaxed">
-            Negative-space analysis proved that <span className="text-soc-text font-medium">83 critical alerts were dismissed</span> without the mandatory forensic memory acquisition steps required under SOC Directive 4.2.
+          <div className="p-2.5 bg-soc-panel border border-soc-border rounded text-[11px] text-soc-textMuted leading-relaxed">
+            Negative-space analysis proved that <strong className="text-soc-text font-semibold">83 critical alerts were dismissed</strong> without mandatory forensic memory dumps required under Directive 4.2.
           </div>
         </div>
       </div>

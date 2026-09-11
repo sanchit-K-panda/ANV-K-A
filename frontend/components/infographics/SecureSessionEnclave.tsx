@@ -18,7 +18,7 @@ export const SecureSessionEnclave: React.FC = () => {
           <ShieldCheck className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
           <h3 className="panel-label">KAVACA Zero-Trust Session Enclave Architecture</h3>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">Continuous Trust Protocol</span>
+        <span className="text-2xs uppercase tracking-[0.14em] text-soc-textDim">Continuous Trust Protocol</span>
       </div>
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -26,11 +26,11 @@ export const SecureSessionEnclave: React.FC = () => {
           const Icon = step.icon;
           const isRotating = step.status === 'ROTATING';
           return (
-            <div key={step.title} className="space-y-1.5 rounded-sm border border-soc-border bg-soc-overlay p-3.5">
+            <div key={step.title} className="space-y-1.5 rounded-md border border-soc-border bg-soc-overlay p-3.5">
               <div className="flex items-center justify-between">
                 <Icon className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
                 <span
-                  className={`rounded-sm border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] ${
+                  className={`rounded-md border px-1.5 py-0.5 text-2xs font-bold uppercase tracking-[0.08em] ${
                     isRotating
                       ? 'border-soc-accent/35 bg-soc-accentDim text-soc-accent'
                       : 'border-soc-ok/30 bg-soc-okDim text-soc-ok'
@@ -41,7 +41,7 @@ export const SecureSessionEnclave: React.FC = () => {
               </div>
               <div className="font-sans text-xs font-bold text-soc-text">{step.title}</div>
               <div className="text-[10.5px] text-soc-textMuted">{step.subtitle}</div>
-              <p className="pt-1 font-sans text-[11px] leading-snug text-soc-textSecondary">{step.desc}</p>
+              <p className="pt-1 font-sans text-2xs leading-snug text-soc-textSecondary">{step.desc}</p>
             </div>
           );
         })}

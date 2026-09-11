@@ -368,5 +368,545 @@
   "shift": "MORNING",
   "status": "ACTIVE",
   "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00038",
+  "soc_id": "SOC-003",
+  "name": "Anika Petrov",
+  "role": "TIER2",
+  "skill_level": 2,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00039",
+  "soc_id": "SOC-003",
+  "name": "Maria Haddad",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00040",
+  "soc_id": "SOC-003",
+  "name": "Yusuf Farouk",
+  "role": "TIER2",
+  "skill_level": 4,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00041",
+  "soc_id": "SOC-003",
+  "name": "Sara Okafor",
+  "role": "TIER2",
+  "skill_level": 3,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00042",
+  "soc_id": "SOC-003",
+  "name": "Kwame Silva",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00043",
+  "soc_id": "SOC-003",
+  "name": "Ravi Weber",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00044",
+  "soc_id": "SOC-003",
+  "name": "Dev Weber",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00045",
+  "soc_id": "SOC-003",
+  "name": "Chen Farouk",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00046",
+  "soc_id": "SOC-003",
+  "name": "Maria Haddad",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00047",
+  "soc_id": "SOC-003",
+  "name": "Elena Weber",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00048",
+  "soc_id": "SOC-003",
+  "name": "Maria Moreno",
+  "role": "SUPERVISOR",
+  "skill_level": 5,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00049",
+  "soc_id": "SOC-003",
+  "name": "Ingrid Haddad",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00050",
+  "soc_id": "SOC-003",
+  "name": "Viktor Costa",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00051",
+  "soc_id": "SOC-003",
+  "name": "Yusuf Haddad",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00052",
+  "soc_id": "SOC-003",
+  "name": "Elena Silva",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00053",
+  "soc_id": "SOC-003",
+  "name": "Ravi Petrov",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00054",
+  "soc_id": "SOC-003",
+  "name": "Dev Haddad",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00055",
+  "soc_id": "SOC-003",
+  "name": "Ravi Costa",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00056",
+  "soc_id": "SOC-003",
+  "name": "Ingrid Farouk",
+  "role": "TIER3",
+  "skill_level": 5,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00057",
+  "soc_id": "SOC-003",
+  "name": "Maria Novak",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00058",
+  "soc_id": "SOC-003",
+  "name": "Viktor Farouk",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00059",
+  "soc_id": "SOC-003",
+  "name": "Anika Novak",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00060",
+  "soc_id": "SOC-003",
+  "name": "Yusuf Silva",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00061",
+  "soc_id": "SOC-003",
+  "name": "Yusuf Patel",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00062",
+  "soc_id": "SOC-003",
+  "name": "Maria Iyer",
+  "role": "TIER2",
+  "skill_level": 3,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00063",
+  "soc_id": "SOC-003",
+  "name": "Ingrid Zhang",
+  "role": "TIER3",
+  "skill_level": 3,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00064",
+  "soc_id": "SOC-004",
+  "name": "Elena Larsen",
+  "role": "TIER3",
+  "skill_level": 4,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00065",
+  "soc_id": "SOC-004",
+  "name": "Aarav Weber",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00066",
+  "soc_id": "SOC-004",
+  "name": "Mei Costa",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00067",
+  "soc_id": "SOC-004",
+  "name": "Dev Kim",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00068",
+  "soc_id": "SOC-004",
+  "name": "Aarav Zhang",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00069",
+  "soc_id": "SOC-004",
+  "name": "Tomas Farouk",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00070",
+  "soc_id": "SOC-004",
+  "name": "Yusuf Larsen",
+  "role": "TIER2",
+  "skill_level": 3,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00071",
+  "soc_id": "SOC-004",
+  "name": "Chen Patel",
+  "role": "TIER3",
+  "skill_level": 4,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00072",
+  "soc_id": "SOC-004",
+  "name": "Maria Sharma",
+  "role": "TIER2",
+  "skill_level": 2,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00073",
+  "soc_id": "SOC-004",
+  "name": "Ingrid Kim",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00074",
+  "soc_id": "SOC-004",
+  "name": "Aarav Mensah",
+  "role": "TIER3",
+  "skill_level": 5,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00075",
+  "soc_id": "SOC-004",
+  "name": "Dev Mensah",
+  "role": "TIER2",
+  "skill_level": 4,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00076",
+  "soc_id": "SOC-004",
+  "name": "Yusuf Novak",
+  "role": "TIER3",
+  "skill_level": 3,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00077",
+  "soc_id": "SOC-004",
+  "name": "Chen Sharma",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00078",
+  "soc_id": "SOC-004",
+  "name": "Chen Farouk",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00079",
+  "soc_id": "SOC-004",
+  "name": "Anika Haddad",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00080",
+  "soc_id": "SOC-004",
+  "name": "Aarav Kim",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00081",
+  "soc_id": "SOC-004",
+  "name": "Ravi Petrov",
+  "role": "TIER2",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00082",
+  "soc_id": "SOC-004",
+  "name": "Sara Haddad",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00083",
+  "soc_id": "SOC-004",
+  "name": "Mei Novak",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00084",
+  "soc_id": "SOC-004",
+  "name": "Aarav Costa",
+  "role": "TIER1",
+  "skill_level": 1,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00085",
+  "soc_id": "SOC-004",
+  "name": "Anika Larsen",
+  "role": "TIER3",
+  "skill_level": 4,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00086",
+  "soc_id": "SOC-004",
+  "name": "Dev Sharma",
+  "role": "SUPERVISOR",
+  "skill_level": 5,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00087",
+  "soc_id": "SOC-004",
+  "name": "Chen Costa",
+  "role": "TIER2",
+  "skill_level": 3,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00088",
+  "soc_id": "SOC-004",
+  "name": "Anika Larsen",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "NIGHT",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00089",
+  "soc_id": "SOC-004",
+  "name": "Ravi Iyer",
+  "role": "TIER2",
+  "skill_level": 4,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00090",
+  "soc_id": "SOC-004",
+  "name": "Dev Patel",
+  "role": "TIER1",
+  "skill_level": 2,
+  "shift": "EVENING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
+ },
+ {
+  "analyst_id": "AN-00091",
+  "soc_id": "SOC-004",
+  "name": "Yusuf Silva",
+  "role": "TIER2",
+  "skill_level": 3,
+  "shift": "MORNING",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z"
  }
 ]

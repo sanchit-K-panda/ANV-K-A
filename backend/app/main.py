@@ -1,12 +1,18 @@
 """ANVĪKṢA FastAPI entrypoint."""
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
+# Ensure repo root and simulator src are on pythonpath regardless of cwd
+REPO_ROOT = Path(__file__).resolve().parents[2]
+for p in (str(REPO_ROOT), str(REPO_ROOT / "backend"), str(REPO_ROOT / "soc-simulator" / "src")):
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import asyncio
 from contextlib import asynccontextmanager
-
-from app.workers.blockchain_poller import poll_loop
 
 from app.core.config import settings
 from app.api.health import router as health_router
@@ -20,18 +26,12 @@ from app.api.analytics import router as analytics_router
 from app.api.ingestion import live_router as ingestion_live_router
 from app.api.biometric_registration import router as biometric_router
 from app.api.soc_events import router as soc_events_router
+from app.api.llm import router as llm_router
+from app.api.supervisory import router as supervisory_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Start the native blockchain polling task in the background
-    polling_task = asyncio.create_task(poll_loop())
     yield
-    # Cancel the task on shutdown gracefully
-    polling_task.cancel()
-    try:
-        await polling_task
-    except asyncio.CancelledError:
-        pass
 
 
 app = FastAPI(
@@ -43,7 +43,15 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL, "http://localhost:3000"],
+    allow_origins=[
+        settings.FRONTEND_URL,
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:5231",
+        "http://127.0.0.1:5231",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -56,6 +64,8 @@ app.include_router(soc_events_router, prefix="/api")
 app.include_router(audit_router, prefix="/api")
 app.include_router(findings_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
+app.include_router(supervisory_router, prefix="/api")
+app.include_router(llm_router, prefix="/api")
 app.include_router(stream_router, prefix="/api")
 app.include_router(ingestion_live_router, prefix="/api")
 app.include_router(ingestion_router, prefix="/api")

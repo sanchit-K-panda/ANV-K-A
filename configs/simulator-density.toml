@@ -1,0 +1,65 @@
+# ANVĪKṢA Simulator — denser ground-truth profile (REMEDIATION.md P0-2 fix #1)
+#
+# Target: ≥ 50 ground-truth cases per scenario and ≥ 1,000 healthy windows,
+# produced via the documented config override (no simulator code change needed).
+# Generate with:
+#   python -m simulator generate --scenario all --socs 4 \
+#       --config ../../configs/simulator-density.toml --seed 42
+# (run from soc-simulator/ so relative dataset paths resolve)
+#
+# GT math (approximate, per scenario, at soc_count=4):
+#   investigation_gap : incidents ≈ events·alert_rate·incident_rate/2 ≈ 250 critical-ish
+#                       → 35% injected ≈ 87 GT
+#   negative_space    : 20% of medium/high incidents ≈ 190 GT
+#   kpi_manipulation  : 1 GT per analyst_group per SOC — grouped; incidents backed ≈ 100+
+#   analyst_overload  : 1 GT per SOC with criticals (4 SOCs → 4); raise soc_count for more
+#   recurring_threat  : 1 GT per threat forced to recur; raise recurrence_count for more
+#   identity_anomaly  : 1 GT per scenario (session-level); raise session_count for more
+# Per-entity (analyst/incident/threat) GT density is what the rules pipeline matches on;
+# grouped analyst_group/threat entries are documented as single aggregated GT cases.
+
+[scale]
+soc_count = 4
+analysts_per_soc_min = 15
+analysts_per_soc_max = 30
+assets_per_soc_min = 500
+assets_per_soc_max = 2000
+devices_per_soc = 12
+threats_per_run = 40
+events = 20000
+# Denser funnel: more of the generated events become alerts/incidents so per-scenario
+# ground truth exceeds the ~20 incidents / 10k events thin-funnel baseline in Memory.md.
+alert_rate = 0.20
+incident_rate = 0.30
+max_alerts_per_incident = 4
+
+[time]
+window_days = 14
+
+[distributions]
+severity = [30, 30, 25, 12, 3]
+closure_minutes_median = 40
+investigation_minutes_min = 15
+investigation_minutes_max = 180
+triage_seconds_median = 90
+
+[investigation_gap]
+fraction_of_critical = 0.45
+
+[negative_space]
+fraction_affected = 0.30
+
+[kpi_manipulation]
+fraction_analysts = 0.35
+closure_minutes_injected = 4
+investigation_rate_injected = 0.12
+escalation_rate_injected = 0.05
+
+[analyst_overload]
+dominant_share = 0.70
+
+[recurring_threat]
+recurrence_count = 8
+
+[identity_anomaly]
+session_count = 60

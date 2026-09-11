@@ -60,7 +60,7 @@ export function PerformanceLifecycleChart({
           <BarChart3 className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
           <h3 className="panel-label">SOC Lifecycle Performance vs SLA</h3>
         </div>
-        <Link href="/analytics" className="text-[11px] text-soc-accent transition-colors hover:text-soc-accentBright">
+        <Link href="/analytics" className="text-2xs text-soc-accent transition-colors hover:text-soc-accentBright">
           MEDHĀ Analytics →
         </Link>
       </div>
@@ -76,11 +76,11 @@ export function PerformanceLifecycleChart({
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-soc-text">{m.name}</span>
                   {isDeficit ? (
-                    <span className="rounded-sm border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-crit">
+                    <span className="rounded-md border border-soc-crit/30 bg-soc-critDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-crit">
                       DEFICIT (-{m.target - m.score}%)
                     </span>
                   ) : (
-                    <span className="rounded-sm border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-ok">
+                    <span className="rounded-md border border-soc-ok/30 bg-soc-okDim px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[0.08em] text-soc-ok">
                       NOMINAL
                     </span>
                   )}
@@ -107,14 +107,14 @@ export function PerformanceLifecycleChart({
                 />
               </div>
 
-              <div className="font-sans text-[11px] text-soc-textMuted">{m.description}</div>
+              <div className="font-sans text-2xs text-soc-textMuted">{m.description}</div>
             </div>
           );
         })}
       </div>
 
       {/* Footer Insight */}
-      <div className="flex items-center gap-2 border-t border-soc-border pt-3 text-[11px] text-soc-textSecondary">
+      <div className="flex items-center gap-2 border-t border-soc-border pt-3 text-2xs text-soc-textSecondary">
         <AlertCircle className="h-4 w-4 flex-shrink-0 text-soc-med" aria-hidden="true" />
         <span>
           <strong className="font-semibold text-soc-text">Insight:</strong> High detection (92%) masks downstream investigation bypass (31%).

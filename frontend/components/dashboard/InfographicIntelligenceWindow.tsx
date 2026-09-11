@@ -36,47 +36,47 @@ export interface InfographicViewOption {
 export const INFOGRAPHIC_VIEWS: InfographicViewOption[] = [
   {
     id: 'execution-gap',
-    title: 'Execution Gap & SOP Bypasses',
-    category: 'VIVEKA Engine',
+    title: 'Execution Gap',
+    category: 'VIVEKA',
     engine: 'VIVEKA',
     icon: Zap,
     description: 'Compares established standard operating procedures against actual observed telemetry.',
   },
   {
     id: 'negative-space',
-    title: 'Negative Space & Omission Matrix',
-    category: 'ABHĀVA Engine',
+    title: 'Negative Space',
+    category: 'ABHĀVA',
     engine: 'ABHĀVA',
     icon: Search,
     description: 'Visualizes missing actions (unperformed memory dumps, skipped host isolations).',
   },
   {
     id: 'pipeline',
-    title: '8-Stage Intelligence Pipeline',
-    category: 'Architecture',
+    title: 'Pipeline Flow',
+    category: 'MEDHĀ',
     engine: 'MEDHĀ',
     icon: Workflow,
     description: 'End-to-end data ingestion, schema normalization, anomaly ML, and audit chaining.',
   },
   {
     id: 'lifecycle',
-    title: 'SOC Operational Workflow Flow',
-    category: 'SOP Audit',
+    title: 'Workflow Audit',
+    category: 'PARĪKṢA',
     engine: 'PARĪKṢA',
     icon: Activity,
     description: 'Step-by-step audit from raw alert ingestion to resolution and case closure.',
   },
   {
     id: 'risk-decomposition',
-    title: 'Risk Factor Decomposition (91/100)',
-    category: 'MĀN Engine',
+    title: 'Risk Factors',
+    category: 'MĀN',
     engine: 'MĀN',
     icon: ShieldAlert,
     description: 'Additive linear factor weights explaining composite risk score calculation.',
   },
   {
     id: 'threat-recurrence',
-    title: 'Threat Recurrence Chronology',
+    title: 'Recurrence',
     category: 'PUNARĀVṚTTI',
     engine: 'PUNARĀVṚTTI',
     icon: Repeat,
@@ -84,24 +84,24 @@ export const INFOGRAPHIC_VIEWS: InfographicViewOption[] = [
   },
   {
     id: 'correlation-graph',
-    title: 'Evidence Correlation Provenance Graph',
-    category: 'PRATYAYA Engine',
+    title: 'Correlation Graph',
+    category: 'PRATYAYA',
     engine: 'PRATYAYA',
     icon: Share2,
     description: 'Connects Raw Alert → Incident → Analyst → Omission → Threat → Supervisory Finding.',
   },
   {
     id: 'airgap-enclave',
-    title: 'Sovereign Air-Gap Architecture',
-    category: 'Infrastructure',
+    title: 'Air-Gap Enclave',
+    category: 'AKṢARA',
     engine: 'AKṢARA',
     icon: Lock,
     description: 'Hardware boundary proof with 0 B/s external network egress and local cryptographic storage.',
   },
   {
     id: 'secure-session',
-    title: 'Zero-Trust Biometric & Session Protocol',
-    category: 'KAVACA Enclave',
+    title: 'Session Enclave',
+    category: 'KAVACA',
     engine: 'KAVACA',
     icon: Lock,
     description: 'DARŚANA optical verification, BANDHA TPM binding, and KṢAṆA 15-min rotating tokens.',
@@ -162,25 +162,20 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
       <div className="soc-panel select-none">
         {/* Window Top Control Bar */}
         <div className="soc-panel-header">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-7 h-7 rounded-sm border border-soc-accent/60 bg-soc-accentInk flex items-center justify-center flex-shrink-0">
-              <Layers className="w-3.5 h-3.5 text-soc-accent" />
-            </div>
+          <div className="flex items-center gap-2 min-w-0">
+            <Layers className="w-4 h-4 text-soc-accent flex-shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="panel-label">Intelligence Window — SOC Data Visualizer</h2>
-                <span className="soc-badge badge-accent hidden md:inline">{INFOGRAPHIC_VIEWS.length} VISUAL MODELS</span>
+                <span className="panel-label">Telemetry Intelligence Visualizer</span>
+                <span className="soc-badge badge-neutral hidden md:inline">{INFOGRAPHIC_VIEWS.length} MODELS</span>
               </div>
-              <p className="text-2xs text-soc-textMuted mt-0.5 truncate hidden lg:block">
-                Interactive analytical infographics mapping telemetry, execution omissions, risk, and forensic proof.
-              </p>
             </div>
           </div>
 
           <button
             type="button"
             onClick={() => setIsFullscreen(true)}
-            className="btn-ghost flex-shrink-0"
+            className="btn-ghost flex-shrink-0 !py-1 !px-2.5 !text-[11px]"
             title="Expand into Fullscreen Intelligence Studio"
           >
             <Maximize2 className="w-3 h-3" />
@@ -188,8 +183,8 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
           </button>
         </div>
 
-        {/* Model Selector Ribbon */}
-        <div className="flex items-center gap-1.5 overflow-x-auto px-4 py-2.5 border-b border-soc-border text-xs">
+        {/* Tab Strip */}
+        <div className="flex items-center gap-1 overflow-x-auto px-2 border-b border-soc-border bg-soc-raised/30 text-xs">
           {INFOGRAPHIC_VIEWS.map((v) => {
             const Icon = v.icon;
             const isSelected = v.id === currentViewId;
@@ -200,15 +195,15 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
                 type="button"
                 onClick={() => handleSelectView(v.id)}
                 aria-pressed={isSelected}
-                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-2xs whitespace-nowrap transition-colors border font-mono tracking-wide ${
+                className={`flex items-center gap-1.5 px-3 py-2 text-xs whitespace-nowrap transition-colors border-b-2 font-medium ${
                   isSelected
-                    ? 'bg-soc-accentInk border-soc-accent/50 text-soc-accentBright'
-                    : 'bg-soc-raised/40 border-soc-border text-soc-textSecondary hover:text-soc-text hover:border-soc-borderStrong'
+                    ? 'border-soc-accent text-soc-text font-semibold bg-soc-panel'
+                    : 'border-transparent text-soc-textMuted hover:text-soc-text hover:bg-soc-panel/50'
                 }`}
               >
-                <Icon className={`w-3 h-3 ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`} />
-                <span className="font-sans font-medium">{v.title}</span>
-                <span className={`px-1 rounded-sm text-2xs ${isSelected ? 'bg-soc-accent/20 text-soc-accentBright' : 'bg-soc-raised text-soc-textMuted'}`}>
+                <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-soc-accent' : 'text-soc-textMuted'}`} />
+                <span>{v.title}</span>
+                <span className="text-[10px] font-mono opacity-60">
                   {v.engine}
                 </span>
               </button>
@@ -217,7 +212,7 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
         </div>
 
         {/* Display Stage */}
-        <div className="p-4 bg-soc-overlay/40">
+        <div className="p-4 bg-soc-panel">
           {renderActiveInfographic()}
         </div>
       </div>
@@ -251,7 +246,7 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
               <button
                 type="button"
                 onClick={() => setIsFullscreen(false)}
-                className="p-1.5 text-soc-textMuted hover:text-soc-text hover:bg-soc-raised rounded-sm transition-colors"
+                className="p-1.5 text-soc-textMuted hover:text-soc-text hover:bg-soc-raised rounded-md transition-colors"
                 title="Close Fullscreen"
                 aria-label="Close fullscreen studio"
               >
@@ -275,7 +270,7 @@ export const InfographicIntelligenceWindow: React.FC<InfographicIntelligenceWind
                         type="button"
                         onClick={() => handleSelectView(v.id)}
                         aria-pressed={isSelected}
-                        className={`w-full text-left px-2.5 py-2 rounded-sm text-xs transition-colors border ${
+                        className={`w-full text-left px-2.5 py-2 rounded-md text-xs transition-colors border ${
                           isSelected
                             ? 'bg-soc-accentInk border-soc-accent/50 text-soc-text'
                             : 'bg-transparent border-transparent text-soc-textSecondary hover:bg-soc-raised hover:text-soc-text'

@@ -1,70 +1,50 @@
-# Design.md — ANVĪKṢA Visual System
+# Design.md — ANVĪKṢA Visual System: Dark Mode Command Center (Void & Neon)
 
 ## Direction
-Desktop-first SOC command centre — not a generic SaaS dashboard, not an "AI futuristic" product. Restrained, dense, professional, evidence-driven. First Figma frame: **1440 × 1024**.
+Desktop-first SOC command centre — built for low eye strain in dark-room monitoring environments while elevating supervisory cyber intelligence with high-luminance neon telemetry accents. Restrained density, dark room contrast, professional, evidence-driven. Target frame: **1440 × 1024** and above.
 
 Do:
-- Dense but readable information; strong hierarchy
-- Persistent left navigation
-- Tables, timelines, charts, and evidence blocks as the primary UI elements
-- Severity colour used *only* for meaningful security states — never decoratively
-- Critical findings immediately visible on load
+- Deep obsidian void background paired with crisp, high-luminance neon signal accents
+- Persistent left navigation with Signal Cyan active telemetry path indicators
+- Tables, timelines, risk meters, and forensic evidence blocks as primary UI components
+- High-contrast neon severity colors reserved strictly for meaningful security states
+- Critical alerts highlighted with high-visibility Kinetic Pink neon signals
 
 Don't:
-- Rounded-card-heavy "dashboard template" look
-- Decorative gradients or glow effects
-- Color used for anything that isn't a status/severity signal
+- White or bright grey default backgrounds (avoid eye fatigue in dark rooms)
+- Decorative generic color usage — colors indicate data paths, security state, or alert severity
+- Muddy low-contrast text on dark backgrounds (maintain AA/AAA contrast using high-luminance off-white)
 
-## Theme
-Restrained **dark SOC styling** as the default (matches real SOC/NOC environments and makes severity colour pop without competing).
+## Theme & Palette (Void & Neon)
 
-Suggested base palette (tune during implementation, keep contrast AA+):
-- Background layers: near-black / very dark slate (e.g. `#0B0D10`, `#12151A` for panels, `#1B1F26` for raised surfaces)
-- Text: off-white primary (`#E8EAED`), muted grey secondary (`#8A919C`)
-- Borders/dividers: low-contrast dark grey (`#242A32`)
-- Accent (brand/interactive, used sparingly): a single restrained blue or teal — not neon
+Primary Command Center Palette:
+- **Void Black** (`#050508` / `rgb(5, 5, 8)`): Main application canvas background
+- **Console Panel** (`#0A0D14` / `rgb(10, 13, 20)`): Deep charcoal containers, cards, and data tables
+- **Raised Surface** (`#121722` / `rgb(18, 23, 34)`): Interactive hover states, elevated drawers, dropdowns
+- **Borders & Dividers** (`#1E2638` / `rgb(30, 38, 56)`): Hairline dark dividers with optional neon focus glow
 
-Severity palette (reserved exclusively for severity/status, never for branding or decoration):
-- CRITICAL — red
-- HIGH — orange
-- MEDIUM — amber/yellow
-- LOW — grey/blue-grey
-- VERIFIED / OK / TRUSTED — green
-- OFFLINE/LOCAL status indicator — neutral (green dot for "operating normally offline," not an error color)
+Neon Signal Palette:
+- **Signal Cyan** (`#00D4FF` / `rgb(0, 212, 255)`): Telemetry data paths, active nav links, focus rings, primary interactive elements
+- **Kinetic Pink** (`#FF51FA` / `rgb(255, 81, 250)`): CRITICAL security findings, active threat anomalies, high priority alerts
+- **Virus Green** (`#2FF801` / `rgb(47, 248, 1)`): Air-gapped enclave active status, verified credentials, clean audit records, OK status
+- **Neon Orange** (`#FF9900` / `rgb(255, 153, 0)`): HIGH severity threats & escalation warnings
+- **Neon Amber** (`#FFC700` / `rgb(255, 199, 0)`): MEDIUM severity findings
+
+Typography Palette:
+- **Primary Text**: High-Luminance Off-White (`#F0F6FC` / `rgb(240, 246, 252)`)
+- **Secondary Text**: Muted Slate (`#8B949E` / `rgb(139, 148, 158)`)
+- **Muted / Dim Text**: Low-Luminance Slate (`#484F58` / `rgb(72, 79, 88)`)
 
 ## Typography
-- One functional sans-serif for UI text (e.g. Inter / IBM Plex Sans) — legible at small sizes for dense tables
-- One monospace for IDs, hashes, timestamps, session/device identifiers, code-like values (e.g. IBM Plex Mono / JetBrains Mono) — reinforces the "forensic evidence" feel
-- Clear, limited type scale: page title, section header, table header, body, caption/label — avoid ad hoc sizes
+- **Inter / IBM Plex Sans**: Functional sans-serif for UI labels, dense tables, and navigation
+- **JetBrains Mono / IBM Plex Mono**: Monospace font for log hashes, IP addresses, timestamps, session keys, and risk factors
 
-## Layout system
-- Persistent left sidebar (Command Centre, Findings, Analytics, Alerts, Incidents, Investigations, Cases, Evidence, Risk, Reports, Audit, Administration)
-- Topbar: product mark, current SOC selector, **● LOCAL / OFFLINE** status, supervisor identity, session lock icon
-- Content area: metric blocks → tables/charts → detail drill-downs
-- Standard drill-down path everywhere: **Risk → Finding → Evidence → Original SOC events**
+## Layout System
+- **Sidebar**: Void Black background, Signal Cyan active indicator borders, Kinetic Pink alert badges, Virus Green enclave status
+- **Topbar**: Product mark, current SOC selector, **● AIR-GAP ACTIVE (LOCAL)** status chip in Virus Green, supervisor identity in Signal Cyan
+- **Content Area**: Telemetry metrics → Finding tables/charts → Forensic detail drill-downs
+- **Explainability Pattern**: `WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION`
 
-## Core reusable components
-Sidebar, Topbar/Header, Status Indicator, Severity Badge, Status Badge, Confidence Indicator, Risk Score, Finding Row, Alert/Incident/Investigation Row, Evidence Row, Risk Factor Row, Metric Block, Chart Container, Timeline Event, Filter Bar, Search Input, Modal, Drawer, Toast, Session Status, Authentication State, Empty/Loading/Error States
-
-## Explainability pattern (applies to every finding screen)
-Every finding card/detail follows the same structure so supervisors learn it once:
-```
-WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION
-```
-Risk scores are never shown as a bare number — always with a contributing-factors breakdown (e.g. Investigation Gap +31, Escalation Anomaly +24 …).
-
-## Offline/air-gapped visibility
-This is a selling point, not a footnote — make it visually persistent:
-```
-Runtime Mode: AIR-GAPPED
-Internet Connectivity: DISABLED
-AI Inference: LOCAL
-Database: LOCAL
-Authentication: LOCAL
-Audit: LOCAL
-External APIs: NONE
-```
-Shown as a status drawer off the topbar indicator; should be demonstrable live during SIH judging.
-
-## Secure session visual language
-Session state is always visible near the identity control: `Identity: VERIFIED`, `Device: TRUSTED`, `Session: ACTIVE`, `Credential: ROTATING`, countdown to next renewal, and a clear locked/failed state (`Identity verification failed → sensitive operations locked → re-authentication required`).
+## Secure Session & Offline Visual Language
+- Air-Gap status is permanently anchored in the Topbar and Sidebar footer (`Runtime: AIR-GAPPED`, `AI: LOCAL`, `Net: DISABLED`).
+- Identity status chip: `VERIFIED` in Virus Green or Signal Cyan, with session token countdown and tamper-proof log hashes.

@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, Clock, ShieldCheck, Search, Command } from 'lucide-react';
+import { Command } from 'lucide-react';
+import { SocLock, SocClock, SocShieldCheck, SocSearch } from '@/components/icons';
 import { AirGapDrawer } from './AirGapDrawer';
 import { ThemeToggle } from './ThemeToggle';
 
 export const Topbar: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [secondsToRenewal, setSecondsToRenewal] = useState(868);
-  const [lastEvaluatedSec, setLastEvaluatedSec] = useState(18);
   const [currentUser, setCurrentUser] = useState<{ name: string; email?: string; role?: string } | null>(null);
   const router = useRouter();
 
@@ -25,7 +25,6 @@ export const Topbar: React.FC = () => {
 
     const renewTimer = setInterval(() => {
       setSecondsToRenewal((prev) => (prev > 10 ? prev - 1 : 900));
-      setLastEvaluatedSec((prev) => (prev < 60 ? prev + 1 : 12));
     }, 1000);
     return () => clearInterval(renewTimer);
   }, []);
@@ -51,76 +50,76 @@ export const Topbar: React.FC = () => {
 
   return (
     <>
-      <header className="h-16 flex-shrink-0 rounded-2xl border border-soc-border bg-soc-panel shadow-card px-4 flex items-center justify-between gap-4 select-none">
-        {/* Left: SOC scope + air-gap */}
-        <div className="flex items-center gap-2.5">
-          <button
-            type="button"
-            className="flex items-center gap-2 pl-3 pr-3.5 py-2 rounded-xl border border-soc-border bg-soc-overlay hover:bg-soc-raised transition-colors"
-            title="Switch SOC scope"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-soc-accent" aria-hidden="true" />
-            <span className="font-display text-xs font-bold text-soc-text tracking-wide">SOC-04</span>
-            <span className="text-2xs text-soc-textMuted hidden xl:inline">Production Enclave</span>
-          </button>
+      <header className="h-12 flex-shrink-0 border-b border-soc-border bg-soc-panel px-4 flex items-center justify-between gap-4 select-none z-20">
+        {/* Left: Scope + Air-gap Status */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-soc-border bg-soc-raised/50 text-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-soc-accent" />
+            <span className="font-mono text-xs font-semibold text-soc-text">SOC-04</span>
+            <span className="text-3xs font-mono text-soc-textMuted hidden sm:inline">PROD</span>
+          </div>
 
           <button
+            type="button"
             onClick={() => setIsDrawerOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-soc-okDim border border-soc-ok/25 text-xs text-soc-ok transition-all hover:shadow-sm"
-            title="Inspect Air-Gap Security Manifest"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-soc-ok/30 bg-soc-ok/5 text-soc-ok text-xs transition-colors hover:bg-soc-ok/10"
+            title="Inspect Air-Gap Hardware Security Manifest"
           >
-            <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-soc-ok opacity-50" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-soc-ok" />
+            <span className="w-1.5 h-1.5 rounded-full bg-soc-ok" />
+            <span className="font-mono text-3xs font-semibold hidden sm:inline uppercase">
+              Air-Gapped (0 B/s)
             </span>
-            <span className="font-medium hidden sm:inline">LOCAL / AIR-GAPPED</span>
           </button>
         </div>
 
-        {/* Center: Command search */}
+        {/* Center: Command Search */}
         <div className="hidden md:block flex-1 max-w-sm">
           <button
             type="button"
-            className="w-full flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-soc-border bg-soc-overlay text-left text-xs text-soc-textDim hover:border-soc-borderStrong hover:bg-soc-raised transition-colors"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded border border-soc-border bg-soc-bg text-left text-xs text-soc-textMuted hover:border-soc-borderStrong hover:text-soc-text transition-colors"
             onClick={() => router.push('/findings')}
           >
-            <Search className="w-3.5 h-3.5 text-soc-textMuted" />
-            <span className="flex-1">Search findings, alerts, cases...</span>
-            <span className="flex items-center gap-0.5 text-[10px] font-mono text-soc-textMuted border border-soc-border rounded-md px-1.5 py-0.5 bg-soc-panel">
+            <SocSearch className="w-3.5 h-3.5 text-soc-textMuted flex-shrink-0" />
+            <span className="flex-1 text-2xs truncate font-sans">Search findings, alerts, evidence...</span>
+            <span className="flex items-center gap-0.5 text-3xs font-mono text-soc-textMuted border border-soc-border rounded px-1.5 py-0.5 bg-soc-raised">
               <Command className="w-2.5 h-2.5" />K
             </span>
           </button>
         </div>
 
-        {/* Right: identity, session, theme */}
-        <div className="flex items-center gap-2.5 text-xs">
-          <div className="hidden xl:flex items-center gap-2.5 pr-1">
+        {/* Right: Operator, Session, Theme, Lock */}
+        <div className="flex items-center gap-3 text-xs">
+          <div className="hidden lg:flex items-center gap-2 pr-1">
             <div className="text-right leading-tight">
-              <div className="text-xs font-semibold text-soc-text">{displayName}</div>
-              <div className="text-[10px] font-mono text-soc-ok flex items-center justify-end gap-1">
-                <ShieldCheck className="w-2.5 h-2.5" />
+              <div className="text-xs font-medium text-soc-text">{displayName}</div>
+              <div className="text-3xs font-mono text-soc-ok flex items-center justify-end gap-1">
+                <SocShieldCheck className="w-3 h-3 text-soc-ok" />
                 {currentUser?.role || 'SUPERVISOR'} · DEV-21
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-soc-accent to-soc-accentBright text-white flex items-center justify-center text-[11px] font-bold shadow-sm">
+            <div className="w-6 h-6 rounded bg-soc-raised border border-soc-border text-soc-text font-mono font-medium flex items-center justify-center text-xs">
               {getInitials(displayName)}
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-2 rounded-xl border border-soc-border bg-soc-overlay" title="KṢAṆA 15-Minute Rotating Session Credential">
-            <Clock className="w-3 h-3 text-soc-textMuted" />
-            <span className="font-mono text-xs font-medium text-soc-text tabular-nums">{formatTimer(secondsToRenewal)}</span>
+          <div
+            className="flex items-center gap-1.5 px-2 py-1 rounded border border-soc-border bg-soc-raised/40 text-soc-textMuted text-xs"
+            title="Session Renewal Timer"
+          >
+            <SocClock className="w-3 h-3 text-soc-textMuted" />
+            <span className="font-mono text-xs font-medium tabular-nums text-soc-text">{formatTimer(secondsToRenewal)}</span>
           </div>
 
           <ThemeToggle />
 
           <button
+            type="button"
             onClick={handleLockSession}
-            className="p-2 text-soc-textMuted hover:text-soc-crit hover:bg-soc-critDim rounded-xl transition-colors"
-            title="Lock Supervisory Session"
-            aria-label="Lock Supervisory Session"
+            className="p-1.5 text-soc-textMuted hover:text-soc-crit hover:bg-soc-raised rounded transition-colors"
+            title="Lock Session"
+            aria-label="Lock Session"
           >
-            <Lock className="w-4 h-4" />
+            <SocLock className="w-3.5 h-3.5" />
           </button>
         </div>
       </header>

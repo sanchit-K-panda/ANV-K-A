@@ -6,7 +6,8 @@
   "location": "Mumbai, IN",
   "timezone": "Asia/Kolkata",
   "status": "ACTIVE",
-  "created_at": "2025-08-01T00:00:00Z"
+  "created_at": "2025-08-01T00:00:00Z",
+  "maturity_profile": "balanced"
  },
  {
   "soc_id": "SOC-002",
@@ -15,6 +16,27 @@
   "location": "Mumbai, IN",
   "timezone": "Asia/Kolkata",
   "status": "ACTIVE",
-  "created_at": "2025-08-01T00:00:00Z"
+  "created_at": "2025-08-01T00:00:00Z",
+  "maturity_profile": "escalation_lagging"
+ },
+ {
+  "soc_id": "SOC-003",
+  "name": "SOC C",
+  "environment": "PRODUCTION",
+  "location": "Delhi, IN",
+  "timezone": "Asia/Kolkata",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z",
+  "maturity_profile": "closure_gaming"
+ },
+ {
+  "soc_id": "SOC-004",
+  "name": "SOC D",
+  "environment": "PRODUCTION",
+  "location": "Mumbai, IN",
+  "timezone": "Asia/Kolkata",
+  "status": "ACTIVE",
+  "created_at": "2025-08-01T00:00:00Z",
+  "maturity_profile": "backlog_heavy"
  }
 ]

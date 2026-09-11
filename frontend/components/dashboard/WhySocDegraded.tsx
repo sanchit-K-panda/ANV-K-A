@@ -66,7 +66,7 @@ export const WhySocDegraded: React.FC = () => {
               </span>
             </div>
 
-            <div className="text-[13px] font-semibold text-soc-text">{d.title}</div>
+            <div className="text-sm font-semibold text-soc-text">{d.title}</div>
             <div className="text-2xs text-soc-textMuted">{d.detail}</div>
             <p className="text-2xs text-soc-textSecondary pt-2 leading-relaxed border-t border-soc-border/70">
               {d.sub}

@@ -38,6 +38,15 @@ SOC tools → Data Ingestion → Normalization → SOC Knowledge Model
   → Correlation Engine → Risk Engine → Explainability Engine
   → Findings → SOC Command Centre → Supervisor → Audit Trail
 ```
+
+## Engine naming (canonical — Rules.md §9)
+Codename → component → repo module (single source of truth is PRD §7.2.1):
+**MĀYĀ** `soc-simulator/src/simulator/` · **VIVEKA** `ml/anomaly/execution_gap.py` ·
+**ABHĀVA** `ml/anomaly/negative_space.py` · **VIKĀRA** `ml/vikara/` ·
+**PUNARĀVṚTTI** `ml/behaviour/recurrence.py` · **MEDHĀ** `backend/app/analytics/` ·
+**PRATYAYA** `ml/models/explainability_engine.py` + `inference/gateway/` ·
+**KAVACA** `backend/app/auth/` · **SAKṢĪ** `backend/app/audit/` · **MĀN** `frontend/app/risk/`.
+Use exactly these spellings everywhere; code identifiers use ASCII (VIKARA, ABHAVA, PUNARAVRTTI).
 Hybrid AI: deterministic **rules** for workflow violations + **ML** (Isolation Forest / LOF / DBSCAN / statistical baselines / time-series) for behavioural anomalies. Optional local LLM (Ollama/llama.cpp) only for natural-language explanation/report text — never the sole source of a security decision.
 
 ## Tech stack (target)

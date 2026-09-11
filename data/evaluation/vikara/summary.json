@@ -1,0 +1,36 @@
+{
+  "model_version": "vikara-v1",
+  "evaluated_at": "2026-09-10T23:16:01.679806+00:00",
+  "canonical": true,
+  "note": "Canonical window-level VIK\u0100RA evaluation. data/evaluation/vikara/ is the single source of truth for model metrics.",
+  "total_windows": 5224,
+  "class_balance": {
+    "normal_windows": 4918,
+    "anomalous_windows": 306,
+    "anomaly_ratio": 0.0586
+  },
+  "metrics": {
+    "precision": 0.5728,
+    "recall": 0.5915,
+    "f1_score": 0.582,
+    "false_positive_rate": 0.0275,
+    "false_negative_rate": 0.4085,
+    "roc_auc": 0.7935,
+    "pr_auc": 0.1853
+  },
+  "decision_threshold": -3.415236843329339e-17,
+  "threshold_calibration": {
+    "method": "benign_percentile",
+    "quantile": 0.99,
+    "calibrated_threshold_raw": -0.0,
+    "baseline_windows": 842,
+    "expected_healthy_fpr": 0.01
+  },
+  "excluded_scenarios": [
+    "identity_anomaly"
+  ],
+  "latency_profile": {
+    "total_eval_time_ms": 149.76,
+    "avg_per_window_latency_ms": 0.0287
+  }
+}

@@ -10,7 +10,7 @@ import {
   evaluateScenario,
 } from '@/lib/api';
 import { Finding, SocHealthOverview, QuadrantScore } from '@/types';
-import { SCENARIOS } from '@/lib/mockData';
+import { SCENARIOS } from '@/lib/scenarios';
 import {
   RefreshCw,
   ArrowRight,
@@ -24,6 +24,7 @@ import { TotalRiskMeter } from '@/components/dashboard/TotalRiskMeter';
 import { SocHealthScore } from '@/components/dashboard/SocHealthScore';
 import { PerformanceBars } from '@/components/dashboard/PerformanceBars';
 import { SupervisoryEnginesGrid, EngineItem } from '@/components/dashboard/SupervisoryEnginesGrid';
+import { SupervisoryConstellation, SupervisoryNode } from '@/components/dashboard/SupervisoryConstellation';
 import { InfographicIntelligenceWindow } from '@/components/dashboard/InfographicIntelligenceWindow';
 import { TopFindingSpotlight } from '@/components/dashboard/TopFindingSpotlight';
 import { LiveActivityStream } from '@/components/dashboard/LiveActivityStream';
@@ -40,6 +41,7 @@ export default function CommandCentrePage() {
   const [evaluating, setEvaluating] = useState(false);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
   const [activeInfographicViewId, setActiveInfographicViewId] = useState<string>('execution-gap');
+  const [activeEngineViewMode, setActiveEngineViewMode] = useState<'RADAR' | 'GRID'>('GRID');
 
   const loadData = async (scen = currentScenario) => {
     setLoading(true);
@@ -86,25 +88,30 @@ export default function CommandCentrePage() {
     }
   };
 
+  const handleSelectConstellationNode = (node: SupervisoryNode) => {
+    setActiveInfographicViewId(node.targetInfographicId);
+  };
+
   const topFinding = findings[0] || null;
 
   return (
-    <div className="space-y-4 pb-10">
-      {/* 1. Page Header */}
-      <div className="animate-fade-up flex flex-col lg:flex-row lg:items-end justify-between gap-4 pb-1">
+    <div className="space-y-5 pb-12">
+      {/* 1. Page Header with Sovereign Telemetry */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-soc-border">
         <div>
-          <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
-            <span>ANVĪKṢA</span>
-            <span className="text-soc-textDim">/</span>
-            <span>COMMAND CENTRE</span>
-            <span className="text-soc-textDim">/</span>
-            <span className="text-soc-accent">SOC-04</span>
+          <div className="flex items-center gap-2 text-3xs font-mono text-soc-textMuted mb-1">
+            <span className="font-semibold text-soc-text">ANVĪKṢA</span>
+            <span>/</span>
+            <span>SUPERVISORY_INTEL</span>
+            <span>/</span>
+            <span className="text-soc-accent font-semibold">ENCLAVE_SOC-04</span>
           </div>
-          <h1 className="font-display text-[26px] leading-tight font-bold tracking-tight text-soc-text">
-            SOC Effectiveness, measured — not assumed
+          <h1 className="text-2xl font-bold tracking-tight text-soc-text font-display flex items-center gap-2.5">
+            <span>Supervisory SOC Command Centre</span>
+            <span className="h-2 w-2 rounded-full bg-soc-accent" />
           </h1>
-          <p className="text-sm text-soc-textMuted mt-1 max-w-xl">
-            Is the Security Operations Centre actually effective, or does its activity only appear healthy?
+          <p className="text-2xs font-mono text-soc-textSecondary mt-0.5">
+            Real-time supervisory telemetry · SOP omission verification · Cryptographic SAKṢĪ hash-chain audit
           </p>
         </div>
 
@@ -114,7 +121,7 @@ export default function CommandCentrePage() {
             <select
               value={currentScenario}
               onChange={(e) => setCurrentScenario(e.target.value)}
-              className="appearance-none soc-input !w-auto !pr-9 !py-2.5 font-medium cursor-pointer"
+              className="appearance-none soc-input !w-auto !pr-8 !py-1.5 font-mono font-semibold cursor-pointer text-xs bg-soc-panel border-soc-border focus:border-soc-accent shadow-sm"
               aria-label="Evaluation scenario"
             >
               {SCENARIOS.map((scen) => (
@@ -123,29 +130,29 @@ export default function CommandCentrePage() {
                 </option>
               ))}
             </select>
-            <ChevronDown className="w-3.5 h-3.5 text-soc-textMuted absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3.5 h-3.5 text-soc-accent absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
 
           <button
             type="button"
             onClick={handleRecalculate}
             disabled={evaluating || loading}
-            className="btn-primary"
+            className="btn-primary font-mono text-xs !px-3.5"
           >
-            <RefreshCw className={`w-4 h-4 ${evaluating ? 'animate-spin' : ''}`} />
-            <span>{evaluating ? 'Re-evaluating...' : 'Re-evaluate'}</span>
+            <RefreshCw className={`w-3.5 h-3.5 ${evaluating ? 'animate-spin' : ''}`} />
+            <span>{evaluating ? 'EVALUATING...' : 'RE-EVALUATE'}</span>
           </button>
         </div>
       </div>
 
       {/* Action Notification */}
       {actionNotice && (
-        <div className="animate-fade-up px-4 py-3 bg-soc-okDim border border-soc-ok/30 rounded-xl text-xs font-medium text-soc-ok flex items-center justify-between">
+        <div className="animate-fade-up px-4 py-3 bg-soc-ok/10 border border-soc-ok/40 rounded-lg text-xs font-mono font-semibold text-soc-ok flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4" />
+            <CheckCircle2 className="w-4 h-4 text-soc-ok" />
             <span>{actionNotice}</span>
           </div>
-          <span className="text-2xs font-mono">SAKṢĪ #9905</span>
+          <span className="text-3xs font-bold text-soc-ok/80">SAKṢĪ #9905</span>
         </div>
       )}
 
@@ -178,11 +185,52 @@ export default function CommandCentrePage() {
         </div>
       </div>
 
-      {/* 3. Supervisory Intelligence Engines */}
-      <div className="animate-fade-up" style={{ animationDelay: '230ms' }}>
-        <SupervisoryEnginesGrid
-          onSelectEngine={handleSelectEngine}
-        />
+      {/* 3. Supervisory Intelligence Engines (Tactical Grid or Topology Map) */}
+      <div className="space-y-2 animate-fade-up" style={{ animationDelay: '230ms' }}>
+        <div className="flex items-center justify-between px-1">
+          <div className="flex items-center gap-2">
+            <span className="panel-label text-soc-text">COGNITIVE ENGINE TELEMETRY</span>
+            <span className="text-3xs font-mono text-soc-accent font-semibold px-1.5 py-0.5 rounded bg-soc-accentDim border border-soc-accent/30">
+              8 ACTIVE ENGINES
+            </span>
+          </div>
+
+          {/* View Mode Toggle: GRID vs TOPOLOGY */}
+          <div className="flex items-center rounded-md border border-soc-border p-0.5 bg-soc-panel text-3xs font-mono">
+            <button
+              type="button"
+              onClick={() => setActiveEngineViewMode('GRID')}
+              className={`px-2.5 py-1 rounded transition-colors ${
+                activeEngineViewMode === 'GRID'
+                  ? 'bg-soc-accent text-white font-bold'
+                  : 'text-soc-textMuted hover:text-soc-text'
+              }`}
+            >
+              GRID
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveEngineViewMode('RADAR')}
+              className={`px-2.5 py-1 rounded transition-colors ${
+                activeEngineViewMode === 'RADAR'
+                  ? 'bg-soc-accent text-white font-bold'
+                  : 'text-soc-textMuted hover:text-soc-text'
+              }`}
+            >
+              TOPOLOGY
+            </button>
+          </div>
+        </div>
+
+        {activeEngineViewMode === 'RADAR' ? (
+          <SupervisoryConstellation
+            onSelectNode={handleSelectConstellationNode}
+          />
+        ) : (
+          <SupervisoryEnginesGrid
+            onSelectEngine={handleSelectEngine}
+          />
+        )}
       </div>
 
       {/* 4. Intelligence Window (all data visualizer) */}
@@ -209,19 +257,19 @@ export default function CommandCentrePage() {
       {/* 6. Findings Queue + Ledger — asymmetric 8/4 split */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         <div className="lg:col-span-8 animate-fade-up" style={{ animationDelay: '470ms' }}>
-          <div className="soc-panel overflow-hidden">
+          <div className="soc-panel overflow-hidden bg-soc-panel">
             <div className="soc-panel-header">
               <div className="flex items-center gap-2.5">
-                <span className="w-7 h-7 rounded-lg bg-soc-critDim flex items-center justify-center">
-                  <ShieldAlert className="w-3.5 h-3.5 text-soc-crit" />
+                <span className="w-7 h-7 rounded-md bg-soc-crit/10 border border-soc-crit/30 flex items-center justify-center">
+                  <ShieldAlert className="w-4 h-4 text-soc-crit" />
                 </span>
                 <div>
-                  <span className="panel-label">Prioritized Findings Queue</span>
-                  <p className="text-2xs text-soc-textMuted mt-0.5">Ranked by composite risk score</p>
+                  <span className="panel-label">PRIORITIZED FINDINGS QUEUE</span>
+                  <p className="text-2xs font-mono text-soc-textMuted mt-0.5">Ranked by Bayesian composite risk score</p>
                 </div>
               </div>
-              <Link href="/findings" className="text-xs text-soc-accent hover:text-soc-accentBright font-medium flex items-center gap-1 transition-colors">
-                <span>All findings</span>
+              <Link href="/findings" className="text-xs font-mono text-soc-accent hover:text-soc-accentBright font-bold flex items-center gap-1 transition-colors">
+                <span>ALL FINDINGS</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -233,7 +281,7 @@ export default function CommandCentrePage() {
                     <th>Severity</th>
                     <th>Finding</th>
                     <th>Confidence</th>
-                    <th>Affected scope</th>
+                    <th>Affected Scope</th>
                     <th className="text-right">Status</th>
                   </tr>
                 </thead>
@@ -242,21 +290,21 @@ export default function CommandCentrePage() {
                     <tr
                       key={f.id}
                       onClick={() => router.push(`/findings/${f.id}`)}
-                      className="cursor-pointer"
+                      className="cursor-pointer group"
                     >
                       <td className="whitespace-nowrap">
                         <SeverityBadge severity={f.severity} />
                       </td>
                       <td className="max-w-[300px]">
-                        <div className="font-semibold text-soc-text text-xs leading-snug line-clamp-2">
+                        <div className="font-semibold text-soc-text text-xs leading-snug line-clamp-2 group-hover:text-soc-accent transition-colors font-display">
                           {f.title}
                         </div>
-                        <div className="col-mono mt-0.5">{f.id}</div>
+                        <div className="col-mono text-soc-accent font-bold mt-0.5">{f.id}</div>
                       </td>
-                      <td className="text-xs font-semibold text-soc-text tabular-nums whitespace-nowrap">
+                      <td className="text-xs font-bold font-mono text-soc-text tabular-nums whitespace-nowrap">
                         {Math.round(f.confidence * 100)}%
                       </td>
-                      <td className="text-xs text-soc-textSecondary whitespace-nowrap">{f.affected_scope}</td>
+                      <td className="text-xs font-mono text-soc-textSecondary whitespace-nowrap">{f.affected_scope}</td>
                       <td className="text-right whitespace-nowrap">
                         <StatusBadge status={f.status} />
                       </td>
@@ -264,8 +312,8 @@ export default function CommandCentrePage() {
                   ))}
                   {findings.length === 0 && !loading && (
                     <tr>
-                      <td colSpan={5} className="text-center py-10 text-sm text-soc-textMuted">
-                        No findings in the current scenario
+                      <td colSpan={5} className="text-center py-10 text-xs font-mono text-soc-textMuted">
+                        NO FINDINGS DETECTED IN THE CURRENT SCENARIO
                       </td>
                     </tr>
                   )}

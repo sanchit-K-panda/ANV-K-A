@@ -60,6 +60,7 @@ class SocIngest(_IngestBase):
     timezone: str = "Asia/Kolkata"
     status: str = "ACTIVE"
     created_at: datetime
+    maturity_profile: str | None = None
 
     @field_validator("created_at", mode="before")
     @classmethod

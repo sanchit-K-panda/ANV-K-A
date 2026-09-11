@@ -1,322 +1,522 @@
 [
  {
   "threat_id": "THR-00001",
-  "name": "Phishing.758",
-  "category": "Credential Theft",
-  "severity": "HIGH",
+  "name": "Credential Theft.108",
+  "category": "Phishing",
+  "severity": "LOW",
   "mitre_techniques": [
-   "T1078",
-   "T1059.001"
+   "T1059.001",
+   "T1003.001",
+   "T1110.001"
   ],
-  "first_seen": "2026-08-07T06:13:14.362492Z",
-  "last_seen": "2026-08-08T02:12:11.067204Z",
+  "first_seen": "2026-08-08T12:01:26.095686Z",
+  "last_seen": "2026-08-10T17:11:25.969042Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00002",
-  "name": "Insider Threat.707",
-  "category": "C2",
-  "severity": "LOW",
+  "name": "Credential Theft.868",
+  "category": "Ransomware",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1078"
+   "T1566.001",
+   "T1021.002",
+   "T1190"
   ],
-  "first_seen": "2026-08-03T08:52:11.710064Z",
-  "last_seen": "2026-08-06T18:06:20.660242Z",
+  "first_seen": "2026-08-08T12:30:37.923529Z",
+  "last_seen": "2026-08-10T00:51:54.524381Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00003",
-  "name": "C2.160",
-  "category": "Insider Threat",
-  "severity": "HIGH",
+  "name": "Insider Threat.552",
+  "category": "Brute Force",
+  "severity": "LOW",
   "mitre_techniques": [
-   "T1190",
-   "T1041"
+   "T1486",
+   "T1110.001"
   ],
-  "first_seen": "2026-08-12T17:35:29.951167Z",
+  "first_seen": "2026-08-13T23:49:51.837881Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00004",
-  "name": "Web Attack.992",
-  "category": "Malware",
-  "severity": "CRITICAL",
+  "name": "Web Attack.388",
+  "category": "Web Attack",
+  "severity": "LOW",
   "mitre_techniques": [
-   "T1486",
-   "T1003.001"
+   "T1041",
+   "T1059.001",
+   "T1190"
   ],
-  "first_seen": "2026-08-12T16:19:57.611545Z",
+  "first_seen": "2026-08-11T20:42:55.067198Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00005",
-  "name": "C2.429",
-  "category": "Insider Threat",
-  "severity": "HIGH",
+  "name": "Phishing.725",
+  "category": "Ransomware",
+  "severity": "MEDIUM",
   "mitre_techniques": [
-   "T1053.005",
-   "T1003.001",
-   "T1059.001"
+   "T1190",
+   "T1078",
+   "T1003.001"
   ],
-  "first_seen": "2026-08-08T15:19:04.134448Z",
-  "last_seen": "2026-08-15T00:00:00Z",
+  "first_seen": "2026-08-04T01:09:03.861102Z",
+  "last_seen": "2026-08-04T17:05:48.163604Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00006",
-  "name": "Ransomware.875",
-  "category": "Malware",
-  "severity": "CRITICAL",
+  "name": "Phishing.146",
+  "category": "Credential Theft",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1003.001"
+   "T1021.002"
   ],
-  "first_seen": "2026-08-06T23:02:09.170330Z",
-  "last_seen": "2026-08-13T04:55:02.943853Z",
+  "first_seen": "2026-08-03T13:29:43.086788Z",
+  "last_seen": "2026-08-05T16:49:46.182491Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00007",
-  "name": "Phishing.139",
-  "category": "Web Attack",
-  "severity": "HIGH",
+  "name": "Credential Theft.850",
+  "category": "Insider Threat",
+  "severity": "LOW",
   "mitre_techniques": [
-   "T1078",
+   "T1021.002",
+   "T1059.001",
    "T1003.001"
   ],
-  "first_seen": "2026-08-03T07:50:31.859269Z",
-  "last_seen": "2026-08-07T09:47:37.194457Z",
+  "first_seen": "2026-08-04T00:53:52.594748Z",
+  "last_seen": "2026-08-07T23:38:19.577953Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00008",
-  "name": "Web Attack.109",
+  "name": "Web Attack.702",
   "category": "Credential Theft",
-  "severity": "HIGH",
+  "severity": "CRITICAL",
   "mitre_techniques": [
-   "T1190"
+   "T1003.001",
+   "T1059.001",
+   "T1078"
   ],
-  "first_seen": "2026-08-11T11:39:42.456647Z",
-  "last_seen": "2026-08-15T00:00:00Z",
+  "first_seen": "2026-08-09T14:38:20.780172Z",
+  "last_seen": "2026-08-13T21:51:46.337285Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00009",
-  "name": "Credential Theft.635",
-  "category": "Data Exfiltration",
-  "severity": "LOW",
+  "name": "Malware.158",
+  "category": "C2",
+  "severity": "MEDIUM",
   "mitre_techniques": [
-   "T1110.001",
-   "T1078",
-   "T1003.001"
+   "T1190",
+   "T1021.002"
   ],
-  "first_seen": "2026-08-11T01:54:03.045342Z",
-  "last_seen": "2026-08-13T12:39:00.018741Z",
+  "first_seen": "2026-08-03T18:55:06.940697Z",
+  "last_seen": "2026-08-04T00:05:06.042920Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00010",
-  "name": "Data Exfiltration.631",
-  "category": "Credential Theft",
-  "severity": "MEDIUM",
+  "name": "Malware.163",
+  "category": "Malware",
+  "severity": "CRITICAL",
   "mitre_techniques": [
-   "T1053.005",
-   "T1486"
+   "T1486",
+   "T1078"
   ],
-  "first_seen": "2026-08-10T14:10:04.879887Z",
+  "first_seen": "2026-08-10T15:13:53.285800Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00011",
-  "name": "Ransomware.268",
-  "category": "Brute Force",
-  "severity": "MEDIUM",
+  "name": "Phishing.103",
+  "category": "Data Exfiltration",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1053.005",
    "T1566.001",
-   "T1110.001"
+   "T1110.001",
+   "T1078"
   ],
-  "first_seen": "2026-08-13T23:29:55.476586Z",
-  "last_seen": "2026-08-15T00:00:00Z",
+  "first_seen": "2026-08-03T16:58:46.708069Z",
+  "last_seen": "2026-08-05T23:44:24.169801Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00012",
-  "name": "Malware.419",
-  "category": "C2",
-  "severity": "CRITICAL",
+  "name": "Brute Force.826",
+  "category": "Malware",
+  "severity": "LOW",
   "mitre_techniques": [
-   "T1059.001"
+   "T1003.001",
+   "T1078"
   ],
-  "first_seen": "2026-08-03T02:31:02.243076Z",
-  "last_seen": "2026-08-07T14:31:33.085697Z",
+  "first_seen": "2026-08-13T09:47:43.543132Z",
+  "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00013",
-  "name": "Insider Threat.708",
-  "category": "Ransomware",
-  "severity": "CRITICAL",
+  "name": "Malware.161",
+  "category": "Insider Threat",
+  "severity": "MEDIUM",
   "mitre_techniques": [
-   "T1110.001"
+   "T1003.001",
+   "T1190"
   ],
-  "first_seen": "2026-08-05T15:13:40.093770Z",
-  "last_seen": "2026-08-10T22:51:36.597248Z",
+  "first_seen": "2026-08-12T19:03:49.068811Z",
+  "last_seen": "2026-08-14T04:42:08.769841Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00014",
-  "name": "Malware.297",
-  "category": "Credential Theft",
+  "name": "C2.978",
+  "category": "C2",
   "severity": "HIGH",
   "mitre_techniques": [
-   "T1190",
-   "T1041"
+   "T1003.001"
   ],
-  "first_seen": "2026-08-13T08:48:11.915594Z",
+  "first_seen": "2026-08-07T09:40:57.296082Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00015",
-  "name": "Brute Force.654",
+  "name": "Web Attack.789",
   "category": "C2",
   "severity": "LOW",
   "mitre_techniques": [
-   "T1021.002"
+   "T1053.005"
   ],
-  "first_seen": "2026-08-11T17:42:29.699937Z",
-  "last_seen": "2026-08-13T01:02:24.679642Z",
+  "first_seen": "2026-08-03T21:29:16.317554Z",
+  "last_seen": "2026-08-07T07:34:55.796008Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00016",
-  "name": "Credential Theft.677",
-  "category": "Phishing",
-  "severity": "CRITICAL",
+  "name": "Phishing.746",
+  "category": "Brute Force",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1003.001"
+   "T1078",
+   "T1190"
   ],
-  "first_seen": "2026-08-11T05:30:04.011531Z",
+  "first_seen": "2026-08-11T10:59:11.636874Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00017",
-  "name": "Credential Theft.926",
-  "category": "Insider Threat",
+  "name": "Phishing.100",
+  "category": "Phishing",
   "severity": "HIGH",
   "mitre_techniques": [
    "T1078"
   ],
-  "first_seen": "2026-08-11T17:23:39.332761Z",
-  "last_seen": "2026-08-11T18:55:32.683608Z",
+  "first_seen": "2026-08-04T11:16:17.780678Z",
+  "last_seen": "2026-08-10T00:22:21.301932Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00018",
-  "name": "Ransomware.246",
+  "name": "C2.834",
   "category": "Ransomware",
   "severity": "CRITICAL",
   "mitre_techniques": [
-   "T1566.001",
-   "T1110.001"
+   "T1003.001"
   ],
-  "first_seen": "2026-08-04T05:53:42.821662Z",
-  "last_seen": "2026-08-04T22:22:29.735310Z",
+  "first_seen": "2026-08-12T01:48:36.908009Z",
+  "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00019",
-  "name": "Insider Threat.535",
-  "category": "Insider Threat",
+  "name": "Ransomware.572",
+  "category": "Phishing",
   "severity": "CRITICAL",
   "mitre_techniques": [
-   "T1041",
-   "T1003.001"
+   "T1053.005",
+   "T1110.001",
+   "T1566.001"
   ],
-  "first_seen": "2026-08-14T13:52:00.966953Z",
-  "last_seen": "2026-08-15T00:00:00Z",
+  "first_seen": "2026-08-11T05:38:46.240563Z",
+  "last_seen": "2026-08-14T15:27:08.069297Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00020",
-  "name": "Web Attack.823",
-  "category": "Insider Threat",
+  "name": "Phishing.766",
+  "category": "Malware",
   "severity": "HIGH",
   "mitre_techniques": [
-   "T1041",
-   "T1003.001"
+   "T1110.001",
+   "T1078"
   ],
-  "first_seen": "2026-08-04T08:53:58.890451Z",
-  "last_seen": "2026-08-07T00:58:37.577080Z",
+  "first_seen": "2026-08-13T12:56:21.929596Z",
+  "last_seen": "2026-08-13T15:11:16.583748Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00021",
-  "name": "C2.270",
+  "name": "Phishing.976",
   "category": "Credential Theft",
-  "severity": "MEDIUM",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1078",
-   "T1190",
-   "T1053.005"
+   "T1059.001"
   ],
-  "first_seen": "2026-08-02T02:16:30.310428Z",
-  "last_seen": "2026-08-06T04:48:13.297124Z",
-  "status": "ACTIVE"
- },
- {
-  "threat_id": "THR-00022",
-  "name": "Brute Force.545",
-  "category": "Data Exfiltration",
-  "severity": "MEDIUM",
-  "mitre_techniques": [
-   "T1566.001"
-  ],
-  "first_seen": "2026-08-12T01:05:32.131403Z",
+  "first_seen": "2026-08-13T14:00:53.746585Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
-  "threat_id": "THR-00023",
-  "name": "Data Exfiltration.845",
-  "category": "Web Attack",
-  "severity": "MEDIUM",
+  "threat_id": "THR-00022",
+  "name": "Web Attack.219",
+  "category": "Insider Threat",
+  "severity": "HIGH",
   "mitre_techniques": [
-   "T1021.002"
+   "T1059.001",
+   "T1110.001",
+   "T1190"
   ],
-  "first_seen": "2026-08-12T23:24:18.349995Z",
+  "first_seen": "2026-08-07T12:56:30.712484Z",
+  "last_seen": "2026-08-12T09:16:24.200057Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00023",
+  "name": "Credential Theft.458",
+  "category": "Insider Threat",
+  "severity": "CRITICAL",
+  "mitre_techniques": [
+   "T1566.001"
+  ],
+  "first_seen": "2026-08-08T11:10:08.323935Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00024",
-  "name": "Web Attack.483",
-  "category": "Ransomware",
-  "severity": "LOW",
+  "name": "Web Attack.485",
+  "category": "Data Exfiltration",
+  "severity": "CRITICAL",
   "mitre_techniques": [
-   "T1566.001",
-   "T1486",
-   "T1053.005"
+   "T1190",
+   "T1003.001",
+   "T1021.002"
   ],
-  "first_seen": "2026-08-14T23:17:39.976530Z",
+  "first_seen": "2026-08-12T12:09:40.694977Z",
   "last_seen": "2026-08-15T00:00:00Z",
   "status": "ACTIVE"
  },
  {
   "threat_id": "THR-00025",
-  "name": "Data Exfiltration.196",
+  "name": "Phishing.241",
   "category": "Data Exfiltration",
   "severity": "HIGH",
   "mitre_techniques": [
+   "T1486",
+   "T1041"
+  ],
+  "first_seen": "2026-08-09T13:30:34.370156Z",
+  "last_seen": "2026-08-14T17:14:28.811360Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00026",
+  "name": "Ransomware.451",
+  "category": "Data Exfiltration",
+  "severity": "LOW",
+  "mitre_techniques": [
+   "T1021.002"
+  ],
+  "first_seen": "2026-08-09T07:18:26.433481Z",
+  "last_seen": "2026-08-11T14:36:00.927099Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00027",
+  "name": "Insider Threat.855",
+  "category": "Credential Theft",
+  "severity": "MEDIUM",
+  "mitre_techniques": [
+   "T1021.002"
+  ],
+  "first_seen": "2026-08-07T02:12:43.868320Z",
+  "last_seen": "2026-08-14T06:40:52.203612Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00028",
+  "name": "Insider Threat.246",
+  "category": "Web Attack",
+  "severity": "CRITICAL",
+  "mitre_techniques": [
+   "T1021.002",
+   "T1041"
+  ],
+  "first_seen": "2026-08-01T07:33:05.534769Z",
+  "last_seen": "2026-08-01T21:04:27.968363Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00029",
+  "name": "Insider Threat.122",
+  "category": "Brute Force",
+  "severity": "MEDIUM",
+  "mitre_techniques": [
+   "T1003.001"
+  ],
+  "first_seen": "2026-08-07T03:07:30.886655Z",
+  "last_seen": "2026-08-13T15:42:45.984643Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00030",
+  "name": "Insider Threat.361",
+  "category": "Brute Force",
+  "severity": "MEDIUM",
+  "mitre_techniques": [
+   "T1021.002",
+   "T1041"
+  ],
+  "first_seen": "2026-08-07T09:38:51.120921Z",
+  "last_seen": "2026-08-10T19:22:03.093260Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00031",
+  "name": "Brute Force.967",
+  "category": "Credential Theft",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1190"
+  ],
+  "first_seen": "2026-08-02T01:17:24.136774Z",
+  "last_seen": "2026-08-05T22:14:11.979733Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00032",
+  "name": "Data Exfiltration.311",
+  "category": "Web Attack",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1021.002",
    "T1003.001",
+   "T1059.001"
+  ],
+  "first_seen": "2026-08-05T01:05:44.474437Z",
+  "last_seen": "2026-08-13T08:32:48.284949Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00033",
+  "name": "Malware.371",
+  "category": "Credential Theft",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1566.001",
+   "T1078"
+  ],
+  "first_seen": "2026-08-05T02:26:13.240602Z",
+  "last_seen": "2026-08-10T15:21:01.433921Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00034",
+  "name": "Malware.434",
+  "category": "Ransomware",
+  "severity": "HIGH",
+  "mitre_techniques": [
    "T1566.001"
   ],
-  "first_seen": "2026-08-03T17:28:57.258676Z",
-  "last_seen": "2026-08-08T19:13:50.448959Z",
+  "first_seen": "2026-08-08T04:57:45.386122Z",
+  "last_seen": "2026-08-09T14:36:13.897259Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00035",
+  "name": "Web Attack.509",
+  "category": "Credential Theft",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1021.002",
+   "T1566.001",
+   "T1003.001"
+  ],
+  "first_seen": "2026-08-02T22:53:08.784392Z",
+  "last_seen": "2026-08-09T23:01:09.705926Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00036",
+  "name": "Credential Theft.467",
+  "category": "Brute Force",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1486"
+  ],
+  "first_seen": "2026-08-03T12:11:29.550740Z",
+  "last_seen": "2026-08-03T13:17:59.822712Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00037",
+  "name": "C2.995",
+  "category": "Malware",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1053.005",
+   "T1041"
+  ],
+  "first_seen": "2026-08-13T06:45:33.483982Z",
+  "last_seen": "2026-08-15T00:00:00Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00038",
+  "name": "Insider Threat.368",
+  "category": "Phishing",
+  "severity": "CRITICAL",
+  "mitre_techniques": [
+   "T1110.001",
+   "T1190",
+   "T1486"
+  ],
+  "first_seen": "2026-08-08T13:43:40.751913Z",
+  "last_seen": "2026-08-08T17:37:37.903823Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00039",
+  "name": "Data Exfiltration.113",
+  "category": "Malware",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1486"
+  ],
+  "first_seen": "2026-08-13T22:57:09.570363Z",
+  "last_seen": "2026-08-14T09:05:29.714723Z",
+  "status": "ACTIVE"
+ },
+ {
+  "threat_id": "THR-00040",
+  "name": "Web Attack.204",
+  "category": "Data Exfiltration",
+  "severity": "HIGH",
+  "mitre_techniques": [
+   "T1486",
+   "T1566.001",
+   "T1110.001"
+  ],
+  "first_seen": "2026-08-05T19:53:27.274013Z",
+  "last_seen": "2026-08-09T01:59:02.472631Z",
   "status": "ACTIVE"
  }
 ]

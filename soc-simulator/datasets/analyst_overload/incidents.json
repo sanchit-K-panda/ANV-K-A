@@ -3,392 +3,1426 @@
   "incident_id": "INC-00001",
   "soc_id": "SOC-001",
   "alert_ids": [
-   "AL-00114"
+   "AL-00338",
+   "AL-00235",
+   "AL-00264",
+   "AL-00320"
   ],
   "threat_ids": [],
   "asset_ids": [
-   "ASSET-00003"
+   "ASSET-00039",
+   "ASSET-01729",
+   "ASSET-02923",
+   "ASSET-03030"
   ],
-  "severity": "HIGH",
+  "severity": "CRITICAL",
   "status": "CLOSED",
-  "created_at": "2026-08-09T20:27:29.242896Z",
-  "closed_at": "2026-08-09T22:19:16.325946Z",
-  "assigned_analyst_id": "AN-00007"
+  "created_at": "2026-08-09T01:50:56.584354Z",
+  "closed_at": "2026-08-09T03:30:57.322903Z",
+  "assigned_analyst_id": "AN-00009"
  },
  {
   "incident_id": "INC-00002",
   "soc_id": "SOC-002",
   "alert_ids": [
-   "AL-00076",
-   "AL-00079",
-   "AL-00012",
-   "AL-00025"
-  ],
-  "threat_ids": [
-   "THR-00018"
-  ],
-  "asset_ids": [
-   "ASSET-00194",
-   "ASSET-01739",
-   "ASSET-01761",
-   "ASSET-02583"
-  ],
-  "severity": "CRITICAL",
-  "status": "CLOSED",
-  "created_at": "2026-08-07T07:20:51.576085Z",
-  "closed_at": "2026-08-07T10:41:19.839597Z",
-  "assigned_analyst_id": "AN-00024"
- },
- {
-  "incident_id": "INC-00003",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00071",
-   "AL-00049"
-  ],
-  "threat_ids": [
-   "THR-00005"
-  ],
-  "asset_ids": [
-   "ASSET-01584",
-   "ASSET-02550"
-  ],
-  "severity": "CRITICAL",
-  "status": "CLOSED",
-  "created_at": "2026-08-06T12:04:52.073550Z",
-  "closed_at": "2026-08-06T14:25:53.373287Z",
-  "assigned_analyst_id": "AN-00019"
- },
- {
-  "incident_id": "INC-00004",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00103"
-  ],
-  "threat_ids": [
-   "THR-00008"
-  ],
-  "asset_ids": [
-   "ASSET-00053"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-09T01:34:47.261120Z",
-  "closed_at": "2026-08-09T02:18:16.216305Z",
-  "assigned_analyst_id": "AN-00007"
- },
- {
-  "incident_id": "INC-00005",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00109",
-   "AL-00065",
-   "AL-00066"
-  ],
-  "threat_ids": [],
-  "asset_ids": [
-   "ASSET-00570",
-   "ASSET-00630",
-   "ASSET-02101"
-  ],
-  "severity": "CRITICAL",
-  "status": "CLOSED",
-  "created_at": "2026-08-09T09:48:27.966814Z",
-  "closed_at": "2026-08-09T12:05:53.143322Z",
-  "assigned_analyst_id": "AN-00024"
- },
- {
-  "incident_id": "INC-00006",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00110",
-   "AL-00146"
-  ],
-  "threat_ids": [],
-  "asset_ids": [
-   "ASSET-00012",
-   "ASSET-02337"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-09T12:23:40.364792Z",
-  "closed_at": "2026-08-09T13:54:19.046083Z",
-  "assigned_analyst_id": "AN-00013"
- },
- {
-  "incident_id": "INC-00007",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00004"
-  ],
-  "threat_ids": [],
-  "asset_ids": [
-   "ASSET-01036"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-01T08:05:07.798410Z",
-  "closed_at": "2026-08-01T09:45:46.418734Z",
-  "assigned_analyst_id": "AN-00024"
- },
- {
-  "incident_id": "INC-00008",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00042",
-   "AL-00173",
-   "AL-00162"
-  ],
-  "threat_ids": [],
-  "asset_ids": [
-   "ASSET-00005",
-   "ASSET-00334",
-   "ASSET-01014"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-04T01:06:31.562669Z",
-  "closed_at": "2026-08-04T02:51:54.253790Z",
-  "assigned_analyst_id": "AN-00002"
- },
- {
-  "incident_id": "INC-00009",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00167"
-  ],
-  "threat_ids": [
-   "THR-00007"
-  ],
-  "asset_ids": [
-   "ASSET-02527"
-  ],
-  "severity": "CRITICAL",
-  "status": "CLOSED",
-  "created_at": "2026-08-13T21:36:28.951792Z",
-  "closed_at": "2026-08-14T01:15:20.153058Z",
-  "assigned_analyst_id": "AN-00024"
- },
- {
-  "incident_id": "INC-00010",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00171",
-   "AL-00108",
-   "AL-00072",
-   "AL-00091"
+   "AL-00417",
+   "AL-00513",
+   "AL-00481"
   ],
   "threat_ids": [
    "THR-00017"
   ],
   "asset_ids": [
-   "ASSET-00709",
-   "ASSET-01267",
-   "ASSET-02054",
-   "ASSET-02505"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-14T06:44:24.900566Z",
-  "closed_at": "2026-08-14T08:58:26.199468Z",
-  "assigned_analyst_id": "AN-00021"
- },
- {
-  "incident_id": "INC-00011",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00175",
-   "AL-00033",
-   "AL-00148",
-   "AL-00145"
-  ],
-  "threat_ids": [
-   "THR-00010"
-  ],
-  "asset_ids": [
-   "ASSET-00616",
-   "ASSET-01595",
-   "ASSET-02683",
-   "ASSET-02836"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-14T14:31:27.528196Z",
-  "closed_at": "2026-08-14T16:05:55.176005Z",
-  "assigned_analyst_id": "AN-00021"
- },
- {
-  "incident_id": "INC-00012",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00118",
-   "AL-00020"
-  ],
-  "threat_ids": [
-   "THR-00005"
-  ],
-  "asset_ids": [
-   "ASSET-00324",
-   "ASSET-00502"
+   "ASSET-01896",
+   "ASSET-01985",
+   "ASSET-03570"
   ],
   "severity": "CRITICAL",
   "status": "CLOSED",
-  "created_at": "2026-08-10T00:00:27.381176Z",
-  "closed_at": "2026-08-10T01:46:31.839695Z",
-  "assigned_analyst_id": "AN-00006"
+  "created_at": "2026-08-10T17:46:00.452465Z",
+  "closed_at": "2026-08-10T19:06:15.683409Z",
+  "assigned_analyst_id": "AN-00034"
  },
  {
-  "incident_id": "INC-00013",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00130"
-  ],
-  "threat_ids": [
-   "THR-00003"
-  ],
-  "asset_ids": [
-   "ASSET-00907"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-10T19:52:32.543349Z",
-  "closed_at": "2026-08-10T21:35:35.752982Z",
-  "assigned_analyst_id": "AN-00008"
- },
- {
-  "incident_id": "INC-00014",
-  "soc_id": "SOC-001",
-  "alert_ids": [
-   "AL-00147",
-   "AL-00059"
-  ],
-  "threat_ids": [
-   "THR-00018"
-  ],
-  "asset_ids": [
-   "ASSET-00621",
-   "ASSET-02450"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-12T07:04:51.573286Z",
-  "closed_at": "2026-08-12T09:07:28.569632Z",
-  "assigned_analyst_id": "AN-00005"
- },
- {
-  "incident_id": "INC-00015",
+  "incident_id": "INC-00003",
   "soc_id": "SOC-002",
   "alert_ids": [
-   "AL-00064",
-   "AL-00032",
-   "AL-00067"
+   "AL-00163"
+  ],
+  "threat_ids": [
+   "THR-00031"
+  ],
+  "asset_ids": [
+   "ASSET-02683"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T19:29:31.020328Z",
+  "closed_at": "2026-08-04T20:53:32.124518Z",
+  "assigned_analyst_id": "AN-00033"
+ },
+ {
+  "incident_id": "INC-00004",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00463"
   ],
   "threat_ids": [],
   "asset_ids": [
-   "ASSET-00170",
-   "ASSET-00498",
-   "ASSET-02705"
+   "ASSET-00521"
   ],
   "severity": "HIGH",
   "status": "CLOSED",
-  "created_at": "2026-08-05T21:45:05.539337Z",
-  "closed_at": "2026-08-05T23:25:52.899883Z",
-  "assigned_analyst_id": "AN-00023"
+  "created_at": "2026-08-11T22:39:08.825973Z",
+  "closed_at": "2026-08-12T01:11:45.555930Z",
+  "assigned_analyst_id": "AN-00012"
+ },
+ {
+  "incident_id": "INC-00005",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00102",
+   "AL-00484"
+  ],
+  "threat_ids": [
+   "THR-00013"
+  ],
+  "asset_ids": [
+   "ASSET-00720",
+   "ASSET-02406"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T06:44:24.916125Z",
+  "closed_at": "2026-08-03T08:42:26.600176Z",
+  "assigned_analyst_id": "AN-00015"
+ },
+ {
+  "incident_id": "INC-00006",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00027",
+   "AL-00462",
+   "AL-00052"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00213",
+   "ASSET-00800",
+   "ASSET-03108"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-01T16:54:01.227989Z",
+  "closed_at": "2026-08-01T20:37:34.780398Z",
+  "assigned_analyst_id": "AN-00001"
+ },
+ {
+  "incident_id": "INC-00007",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00035"
+  ],
+  "threat_ids": [
+   "THR-00001"
+  ],
+  "asset_ids": [
+   "ASSET-03789"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-01T22:50:07.033818Z",
+  "closed_at": "2026-08-02T01:54:03.789682Z",
+  "assigned_analyst_id": "AN-00088"
+ },
+ {
+  "incident_id": "INC-00008",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00004",
+   "AL-00219",
+   "AL-00262"
+  ],
+  "threat_ids": [
+   "THR-00032"
+  ],
+  "asset_ids": [
+   "ASSET-02895",
+   "ASSET-03507",
+   "ASSET-03794"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-01T02:34:11.972025Z",
+  "closed_at": "2026-08-01T06:06:23.189733Z",
+  "assigned_analyst_id": "AN-00069"
+ },
+ {
+  "incident_id": "INC-00009",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00136"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-03986"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T04:24:05.235927Z",
+  "closed_at": "2026-08-04T07:08:33.267039Z",
+  "assigned_analyst_id": "AN-00081"
+ },
+ {
+  "incident_id": "INC-00010",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00106",
+   "AL-00509",
+   "AL-00342"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00431",
+   "ASSET-04577",
+   "ASSET-04712"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T07:54:25.485329Z",
+  "closed_at": "2026-08-03T08:54:25.265174Z",
+  "assigned_analyst_id": "AN-00015"
+ },
+ {
+  "incident_id": "INC-00011",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00200"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-04166"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T13:45:19.922483Z",
+  "closed_at": "2026-08-05T16:18:42.938319Z",
+  "assigned_analyst_id": "AN-00084"
+ },
+ {
+  "incident_id": "INC-00012",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00247",
+   "AL-00409",
+   "AL-00085"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01114",
+   "ASSET-01159",
+   "ASSET-01511"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T19:07:18.680950Z",
+  "closed_at": "2026-08-06T19:43:01.433718Z",
+  "assigned_analyst_id": "AN-00034"
+ },
+ {
+  "incident_id": "INC-00013",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00281",
+   "AL-00560"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02912",
+   "ASSET-03654"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T14:53:06.655703Z",
+  "closed_at": "2026-08-07T18:35:03.328221Z",
+  "assigned_analyst_id": "AN-00079"
+ },
+ {
+  "incident_id": "INC-00014",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00363",
+   "AL-00218",
+   "AL-00294"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01143",
+   "ASSET-03061",
+   "ASSET-03519"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-09T13:54:12.210341Z",
+  "closed_at": "2026-08-09T17:14:09.680838Z",
+  "assigned_analyst_id": "AN-00070"
+ },
+ {
+  "incident_id": "INC-00015",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00147"
+  ],
+  "threat_ids": [
+   "THR-00006"
+  ],
+  "asset_ids": [
+   "ASSET-03279"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T10:05:32.088436Z",
+  "closed_at": "2026-08-04T11:12:31.787324Z",
+  "assigned_analyst_id": "AN-00051"
  },
  {
   "incident_id": "INC-00016",
   "soc_id": "SOC-001",
   "alert_ids": [
-   "AL-00113",
-   "AL-00155"
+   "AL-00211",
+   "AL-00186",
+   "AL-00086"
   ],
   "threat_ids": [
    "THR-00003"
   ],
   "asset_ids": [
-   "ASSET-00174",
-   "ASSET-00884"
+   "ASSET-00132",
+   "ASSET-00327",
+   "ASSET-03862"
   ],
   "severity": "HIGH",
   "status": "CLOSED",
-  "created_at": "2026-08-09T18:20:12.592005Z",
-  "closed_at": "2026-08-09T20:43:49.291118Z",
-  "assigned_analyst_id": "AN-00002"
+  "created_at": "2026-08-05T20:29:48.699563Z",
+  "closed_at": "2026-08-05T22:24:09.565190Z",
+  "assigned_analyst_id": "AN-00009"
  },
  {
   "incident_id": "INC-00017",
-  "soc_id": "SOC-001",
+  "soc_id": "SOC-003",
   "alert_ids": [
-   "AL-00062"
+   "AL-00419",
+   "AL-00385"
   ],
   "threat_ids": [],
   "asset_ids": [
-   "ASSET-00198"
+   "ASSET-03075",
+   "ASSET-03084"
   ],
   "severity": "HIGH",
   "status": "CLOSED",
-  "created_at": "2026-08-05T21:16:43.225471Z",
-  "closed_at": "2026-08-05T22:42:57.297061Z",
-  "assigned_analyst_id": "AN-00004"
+  "created_at": "2026-08-10T19:08:01.432713Z",
+  "closed_at": "2026-08-10T21:14:37.879252Z",
+  "assigned_analyst_id": "AN-00045"
  },
  {
   "incident_id": "INC-00018",
-  "soc_id": "SOC-001",
+  "soc_id": "SOC-003",
   "alert_ids": [
-   "AL-00086"
-  ],
-  "threat_ids": [
-   "THR-00024"
-  ],
-  "asset_ids": [
-   "ASSET-00434"
-  ],
-  "severity": "HIGH",
-  "status": "CLOSED",
-  "created_at": "2026-08-07T17:30:52.305141Z",
-  "closed_at": "2026-08-07T20:06:32.848883Z",
-  "assigned_analyst_id": "AN-00012"
- },
- {
-  "incident_id": "INC-00019",
-  "soc_id": "SOC-002",
-  "alert_ids": [
-   "AL-00043",
-   "AL-00168",
-   "AL-00135"
+   "AL-00529",
+   "AL-00249",
+   "AL-00182",
+   "AL-00037"
   ],
   "threat_ids": [],
   "asset_ids": [
-   "ASSET-00703",
-   "ASSET-01165",
-   "ASSET-01542"
+   "ASSET-01918",
+   "ASSET-03266",
+   "ASSET-03753",
+   "ASSET-04851"
   ],
   "severity": "CRITICAL",
   "status": "CLOSED",
-  "created_at": "2026-08-04T05:55:43.613572Z",
-  "closed_at": "2026-08-04T07:36:10.251968Z",
-  "assigned_analyst_id": "AN-00020"
+  "created_at": "2026-08-13T09:15:19.454576Z",
+  "closed_at": "2026-08-13T09:28:26.412110Z",
+  "assigned_analyst_id": "AN-00038"
  },
  {
-  "incident_id": "INC-00020",
-  "soc_id": "SOC-002",
+  "incident_id": "INC-00019",
+  "soc_id": "SOC-003",
   "alert_ids": [
-   "AL-00136",
-   "AL-00156",
-   "AL-00123"
+   "AL-00016",
+   "AL-00459",
+   "AL-00387",
+   "AL-00376"
   ],
   "threat_ids": [
-   "THR-00002"
+   "THR-00008"
   ],
   "asset_ids": [
-   "ASSET-00818",
-   "ASSET-01803",
-   "ASSET-02847"
+   "ASSET-01331",
+   "ASSET-01665",
+   "ASSET-02861",
+   "ASSET-03055"
   ],
   "severity": "HIGH",
   "status": "CLOSED",
-  "created_at": "2026-08-11T06:24:03.150290Z",
-  "closed_at": "2026-08-11T07:44:58.702030Z",
+  "created_at": "2026-08-01T08:05:07.798410Z",
+  "closed_at": "2026-08-01T08:47:06.406457Z",
+  "assigned_analyst_id": "AN-00060"
+ },
+ {
+  "incident_id": "INC-00020",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00215",
+   "AL-00473",
+   "AL-00015"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00327",
+   "ASSET-00805",
+   "ASSET-03146"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T00:05:32.521990Z",
+  "closed_at": "2026-08-06T02:17:28.753005Z",
+  "assigned_analyst_id": "AN-00013"
+ },
+ {
+  "incident_id": "INC-00021",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00439",
+   "AL-00205",
+   "AL-00204",
+   "AL-00006"
+  ],
+  "threat_ids": [
+   "THR-00021"
+  ],
+  "asset_ids": [
+   "ASSET-00651",
+   "ASSET-01347",
+   "ASSET-03250",
+   "ASSET-04277"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-11T06:54:11.612545Z",
+  "closed_at": "2026-08-11T09:52:54.427891Z",
+  "assigned_analyst_id": "AN-00001"
+ },
+ {
+  "incident_id": "INC-00022",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00453",
+   "AL-00073",
+   "AL-00105"
+  ],
+  "threat_ids": [
+   "THR-00001"
+  ],
+  "asset_ids": [
+   "ASSET-02121",
+   "ASSET-03709",
+   "ASSET-04150"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-11T14:02:21.198967Z",
+  "closed_at": "2026-08-11T14:55:39.562520Z",
+  "assigned_analyst_id": "AN-00033"
+ },
+ {
+  "incident_id": "INC-00023",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00436"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-03681"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-11T02:42:26.728183Z",
+  "closed_at": "2026-08-11T04:49:04.633262Z",
+  "assigned_analyst_id": "AN-00075"
+ },
+ {
+  "incident_id": "INC-00024",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00203",
+   "AL-00482",
+   "AL-00274",
+   "AL-00189"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02981",
+   "ASSET-03361",
+   "ASSET-03598",
+   "ASSET-04098"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T15:04:58.838522Z",
+  "closed_at": "2026-08-05T15:57:21.628402Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00025",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00324"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01260"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-08T14:49:03.919674Z",
+  "closed_at": "2026-08-08T17:50:37.879666Z",
+  "assigned_analyst_id": "AN-00037"
+ },
+ {
+  "incident_id": "INC-00026",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00142",
+   "AL-00501",
+   "AL-00308",
+   "AL-00078"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00183",
+   "ASSET-01588",
+   "ASSET-02872",
+   "ASSET-03008"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T08:38:20.883585Z",
+  "closed_at": "2026-08-04T10:30:06.196984Z",
+  "assigned_analyst_id": "AN-00019"
+ },
+ {
+  "incident_id": "INC-00027",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00589",
+   "AL-00148",
+   "AL-00465",
+   "AL-00157"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00459",
+   "ASSET-02858",
+   "ASSET-03050",
+   "ASSET-04572"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-14T20:18:23.313812Z",
+  "closed_at": "2026-08-14T20:49:37.892528Z",
+  "assigned_analyst_id": "AN-00039"
+ },
+ {
+  "incident_id": "INC-00028",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00273",
+   "AL-00497"
+  ],
+  "threat_ids": [
+   "THR-00027"
+  ],
+  "asset_ids": [
+   "ASSET-03465",
+   "ASSET-04721"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T09:32:03.815585Z",
+  "closed_at": "2026-08-07T13:02:25.660363Z",
+  "assigned_analyst_id": "AN-00090"
+ },
+ {
+  "incident_id": "INC-00029",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00110"
+  ],
+  "threat_ids": [
+   "THR-00025"
+  ],
+  "asset_ids": [
+   "ASSET-03246"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T12:22:06.696726Z",
+  "closed_at": "2026-08-03T13:44:34.196202Z",
+  "assigned_analyst_id": "AN-00063"
+ },
+ {
+  "incident_id": "INC-00030",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00243",
+   "AL-00460",
+   "AL-00554",
+   "AL-00270"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00358",
+   "ASSET-02882",
+   "ASSET-03236",
+   "ASSET-03442"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T16:36:33.165879Z",
+  "closed_at": "2026-08-06T18:54:27.551685Z",
+  "assigned_analyst_id": "AN-00075"
+ },
+ {
+  "incident_id": "INC-00031",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00046",
+   "AL-00452"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02943",
+   "ASSET-04065"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T03:43:18.489149Z",
+  "closed_at": "2026-08-02T04:35:28.689074Z",
+  "assigned_analyst_id": "AN-00058"
+ },
+ {
+  "incident_id": "INC-00032",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00519",
+   "AL-00521",
+   "AL-00072",
+   "AL-00214"
+  ],
+  "threat_ids": [
+   "THR-00030"
+  ],
+  "asset_ids": [
+   "ASSET-00402",
+   "ASSET-01341",
+   "ASSET-01935",
+   "ASSET-03237"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-13T02:24:05.820612Z",
+  "closed_at": "2026-08-13T03:59:57.315126Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00033",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00196",
+   "AL-00132",
+   "AL-00483",
+   "AL-00181"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00030",
+   "ASSET-00690",
+   "ASSET-00942",
+   "ASSET-03149"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T12:37:40.027973Z",
+  "closed_at": "2026-08-05T13:54:35.718273Z",
+  "assigned_analyst_id": "AN-00038"
+ },
+ {
+  "incident_id": "INC-00034",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00083",
+   "AL-00221",
+   "AL-00510"
+  ],
+  "threat_ids": [
+   "THR-00016"
+  ],
+  "asset_ids": [
+   "ASSET-02726",
+   "ASSET-03027",
+   "ASSET-04026"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T19:22:07.108256Z",
+  "closed_at": "2026-08-02T20:27:22.085038Z",
+  "assigned_analyst_id": "AN-00036"
+ },
+ {
+  "incident_id": "INC-00035",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00070",
+   "AL-00127",
+   "AL-00088",
+   "AL-00524"
+  ],
+  "threat_ids": [
+   "THR-00031"
+  ],
+  "asset_ids": [
+   "ASSET-00292",
+   "ASSET-03021",
+   "ASSET-03762",
+   "ASSET-04586"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T12:09:26.888250Z",
+  "closed_at": "2026-08-02T13:44:51.056965Z",
+  "assigned_analyst_id": "AN-00074"
+ },
+ {
+  "incident_id": "INC-00036",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00272",
+   "AL-00431",
+   "AL-00458"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00167",
+   "ASSET-00990",
+   "ASSET-02896"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T09:28:07.231949Z",
+  "closed_at": "2026-08-07T10:51:00.637077Z",
+  "assigned_analyst_id": "AN-00018"
+ },
+ {
+  "incident_id": "INC-00037",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00175"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01612"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T23:22:03.603948Z",
+  "closed_at": "2026-08-05T01:02:26.956078Z",
   "assigned_analyst_id": "AN-00026"
+ },
+ {
+  "incident_id": "INC-00038",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00442"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02886"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-11T08:19:28.843735Z",
+  "closed_at": "2026-08-11T08:54:41.048624Z",
+  "assigned_analyst_id": "AN-00058"
+ },
+ {
+  "incident_id": "INC-00039",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00591",
+   "AL-00526",
+   "AL-00570",
+   "AL-00489"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00804",
+   "ASSET-02207",
+   "ASSET-02916",
+   "ASSET-03142"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-14T20:23:25.692116Z",
+  "closed_at": "2026-08-14T21:44:38.754975Z",
+  "assigned_analyst_id": "AN-00020"
+ },
+ {
+  "incident_id": "INC-00040",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00267",
+   "AL-00335"
+  ],
+  "threat_ids": [
+   "THR-00032"
+  ],
+  "asset_ids": [
+   "ASSET-02412",
+   "ASSET-03923"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T06:51:59.502448Z",
+  "closed_at": "2026-08-07T09:17:02.488263Z",
+  "assigned_analyst_id": "AN-00034"
+ },
+ {
+  "incident_id": "INC-00041",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00299"
+  ],
+  "threat_ids": [
+   "THR-00018"
+  ],
+  "asset_ids": [
+   "ASSET-00978"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T21:51:27.354588Z",
+  "closed_at": "2026-08-07T23:17:50.854030Z",
+  "assigned_analyst_id": "AN-00017"
+ },
+ {
+  "incident_id": "INC-00042",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00183",
+   "AL-00305",
+   "AL-00119",
+   "AL-00139"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00005",
+   "ASSET-02046",
+   "ASSET-02275",
+   "ASSET-03050"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T04:54:01.091804Z",
+  "closed_at": "2026-08-05T08:25:02.608422Z",
+  "assigned_analyst_id": "AN-00031"
+ },
+ {
+  "incident_id": "INC-00043",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00471"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01807"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-12T00:22:49.209237Z",
+  "closed_at": "2026-08-12T02:32:27.570805Z",
+  "assigned_analyst_id": "AN-00037"
+ },
+ {
+  "incident_id": "INC-00044",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00166",
+   "AL-00562",
+   "AL-00325"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00724",
+   "ASSET-00891",
+   "ASSET-01929"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T20:15:37.922823Z",
+  "closed_at": "2026-08-04T22:35:12.931313Z",
+  "assigned_analyst_id": "AN-00002"
+ },
+ {
+  "incident_id": "INC-00045",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00025",
+   "AL-00255"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00066",
+   "ASSET-03168"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-01T15:18:28.639004Z",
+  "closed_at": "2026-08-01T16:46:25.129929Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00046",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00430",
+   "AL-00350",
+   "AL-00457",
+   "AL-00401"
+  ],
+  "threat_ids": [
+   "THR-00027"
+  ],
+  "asset_ids": [
+   "ASSET-00453",
+   "ASSET-00915",
+   "ASSET-02005",
+   "ASSET-02039"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-10T23:36:27.484759Z",
+  "closed_at": "2026-08-11T02:34:58.587986Z",
+  "assigned_analyst_id": "AN-00032"
+ },
+ {
+  "incident_id": "INC-00047",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00582",
+   "AL-00143",
+   "AL-00487"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00033",
+   "ASSET-02944",
+   "ASSET-03512"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-14T17:09:40.235318Z",
+  "closed_at": "2026-08-14T19:32:13.924631Z",
+  "assigned_analyst_id": "AN-00076"
+ },
+ {
+  "incident_id": "INC-00048",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00206",
+   "AL-00063"
+  ],
+  "threat_ids": [
+   "THR-00030"
+  ],
+  "asset_ids": [
+   "ASSET-00541",
+   "ASSET-04674"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T16:47:19.059178Z",
+  "closed_at": "2026-08-05T17:58:21.791780Z",
+  "assigned_analyst_id": "AN-00005"
+ },
+ {
+  "incident_id": "INC-00049",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00223"
+  ],
+  "threat_ids": [
+   "THR-00015"
+  ],
+  "asset_ids": [
+   "ASSET-03259"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T05:07:22.926456Z",
+  "closed_at": "2026-08-06T06:26:13.858990Z",
+  "assigned_analyst_id": "AN-00061"
+ },
+ {
+  "incident_id": "INC-00050",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00490",
+   "AL-00055",
+   "AL-00171",
+   "AL-00426"
+  ],
+  "threat_ids": [
+   "THR-00001"
+  ],
+  "asset_ids": [
+   "ASSET-00810",
+   "ASSET-01682",
+   "ASSET-02897",
+   "ASSET-03904"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-12T12:18:49.237541Z",
+  "closed_at": "2026-08-12T14:38:44.064536Z",
+  "assigned_analyst_id": "AN-00067"
+ },
+ {
+  "incident_id": "INC-00051",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00158",
+   "AL-00208",
+   "AL-00290",
+   "AL-00429"
+  ],
+  "threat_ids": [
+   "THR-00014"
+  ],
+  "asset_ids": [
+   "ASSET-00624",
+   "ASSET-03335",
+   "ASSET-03377",
+   "ASSET-03793"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T17:49:05.850457Z",
+  "closed_at": "2026-08-04T21:01:29.946640Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00052",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00039",
+   "AL-00172"
+  ],
+  "threat_ids": [
+   "THR-00015"
+  ],
+  "asset_ids": [
+   "ASSET-00527",
+   "ASSET-03112"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T00:47:20.032320Z",
+  "closed_at": "2026-08-02T03:53:04.542781Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00053",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00412",
+   "AL-00241",
+   "AL-00347"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00392",
+   "ASSET-04012",
+   "ASSET-04339"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-10T14:55:10.725464Z",
+  "closed_at": "2026-08-10T18:43:11.538597Z",
+  "assigned_analyst_id": "AN-00080"
+ },
+ {
+  "incident_id": "INC-00054",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00191",
+   "AL-00239"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00528",
+   "ASSET-03265"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T09:39:57.826515Z",
+  "closed_at": "2026-08-05T10:29:37.820366Z",
+  "assigned_analyst_id": "AN-00015"
+ },
+ {
+  "incident_id": "INC-00055",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00437"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02497"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-11T04:28:40.909182Z",
+  "closed_at": "2026-08-11T06:38:41.937249Z",
+  "assigned_analyst_id": "AN-00035"
+ },
+ {
+  "incident_id": "INC-00056",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00476",
+   "AL-00076",
+   "AL-00416",
+   "AL-00434"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00291",
+   "ASSET-00417",
+   "ASSET-03137",
+   "ASSET-03455"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-12T02:40:35.733317Z",
+  "closed_at": "2026-08-12T04:01:51.389073Z",
+  "assigned_analyst_id": "AN-00085"
+ },
+ {
+  "incident_id": "INC-00057",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00236",
+   "AL-00090"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02706",
+   "ASSET-03341"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T11:52:06.954459Z",
+  "closed_at": "2026-08-06T15:03:27.263852Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00058",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00113",
+   "AL-00038"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-02941",
+   "ASSET-03409"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T14:16:42.081948Z",
+  "closed_at": "2026-08-03T18:48:07.883338Z",
+  "assigned_analyst_id": "AN-00083"
+ },
+ {
+  "incident_id": "INC-00059",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00296",
+   "AL-00551",
+   "AL-00285",
+   "AL-00176"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-01462",
+   "ASSET-02919",
+   "ASSET-02970",
+   "ASSET-04783"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T20:48:59.145932Z",
+  "closed_at": "2026-08-07T22:29:08.411263Z",
+  "assigned_analyst_id": "AN-00051"
+ },
+ {
+  "incident_id": "INC-00060",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00120"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-04068"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T17:29:30.442345Z",
+  "closed_at": "2026-08-03T18:39:05.327144Z",
+  "assigned_analyst_id": "AN-00072"
+ },
+ {
+  "incident_id": "INC-00061",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00100",
+   "AL-00518",
+   "AL-00065",
+   "AL-00351"
+  ],
+  "threat_ids": [
+   "THR-00029"
+  ],
+  "asset_ids": [
+   "ASSET-00074",
+   "ASSET-00134",
+   "ASSET-00280",
+   "ASSET-02660"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-03T06:03:53.432649Z",
+  "closed_at": "2026-08-03T08:21:12.509706Z",
+  "assigned_analyst_id": "AN-00007"
+ },
+ {
+  "incident_id": "INC-00062",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00202",
+   "AL-00424"
+  ],
+  "threat_ids": [
+   "THR-00013"
+  ],
+  "asset_ids": [
+   "ASSET-00609",
+   "ASSET-04468"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-05T14:32:30.815069Z",
+  "closed_at": "2026-08-05T17:13:53.275455Z",
+  "assigned_analyst_id": "AN-00005"
+ },
+ {
+  "incident_id": "INC-00063",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00504",
+   "AL-00382"
+  ],
+  "threat_ids": [
+   "THR-00010"
+  ],
+  "asset_ids": [
+   "ASSET-02980",
+   "ASSET-03076"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-12T18:02:37.823591Z",
+  "closed_at": "2026-08-12T18:21:06.240969Z",
+  "assigned_analyst_id": "AN-00057"
+ },
+ {
+  "incident_id": "INC-00064",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00284",
+   "AL-00396",
+   "AL-00393",
+   "AL-00301"
+  ],
+  "threat_ids": [
+   "THR-00038"
+  ],
+  "asset_ids": [
+   "ASSET-00743",
+   "ASSET-01184",
+   "ASSET-02921",
+   "ASSET-03107"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-07T16:53:36.219278Z",
+  "closed_at": "2026-08-07T17:20:59.185421Z",
+  "assigned_analyst_id": "AN-00040"
+ },
+ {
+  "incident_id": "INC-00065",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00322"
+  ],
+  "threat_ids": [
+   "THR-00019"
+  ],
+  "asset_ids": [
+   "ASSET-01089"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-08T13:43:37.395811Z",
+  "closed_at": "2026-08-08T14:55:23.589351Z",
+  "assigned_analyst_id": "AN-00030"
+ },
+ {
+  "incident_id": "INC-00066",
+  "soc_id": "SOC-002",
+  "alert_ids": [
+   "AL-00231",
+   "AL-00486"
+  ],
+  "threat_ids": [
+   "THR-00025"
+  ],
+  "asset_ids": [
+   "ASSET-00763",
+   "ASSET-01499"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T10:18:27.144045Z",
+  "closed_at": "2026-08-06T11:04:54.708016Z",
+  "assigned_analyst_id": "AN-00026"
+ },
+ {
+  "incident_id": "INC-00067",
+  "soc_id": "SOC-003",
+  "alert_ids": [
+   "AL-00253",
+   "AL-00533",
+   "AL-00331",
+   "AL-00140"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00305",
+   "ASSET-01030",
+   "ASSET-03329",
+   "ASSET-04123"
+  ],
+  "severity": "CRITICAL",
+  "status": "CLOSED",
+  "created_at": "2026-08-06T21:30:17.472348Z",
+  "closed_at": "2026-08-06T22:24:17.842725Z",
+  "assigned_analyst_id": "AN-00041"
+ },
+ {
+  "incident_id": "INC-00068",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00049"
+  ],
+  "threat_ids": [
+   "THR-00034"
+  ],
+  "asset_ids": [
+   "ASSET-00525"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T04:06:59.700680Z",
+  "closed_at": "2026-08-02T05:11:39.060247Z",
+  "assigned_analyst_id": "AN-00004"
+ },
+ {
+  "incident_id": "INC-00069",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00050"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-03557"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-02T04:30:03.155631Z",
+  "closed_at": "2026-08-02T07:35:14.754531Z",
+  "assigned_analyst_id": "AN-00090"
+ },
+ {
+  "incident_id": "INC-00070",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00130"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00512"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T03:18:40.073440Z",
+  "closed_at": "2026-08-04T05:48:35.378234Z",
+  "assigned_analyst_id": "AN-00013"
+ },
+ {
+  "incident_id": "INC-00071",
+  "soc_id": "SOC-004",
+  "alert_ids": [
+   "AL-00150"
+  ],
+  "threat_ids": [
+   "THR-00012"
+  ],
+  "asset_ids": [
+   "ASSET-04044"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-04T11:53:53.255016Z",
+  "closed_at": "2026-08-04T16:10:11.723919Z",
+  "assigned_analyst_id": "AN-00082"
+ },
+ {
+  "incident_id": "INC-00072",
+  "soc_id": "SOC-001",
+  "alert_ids": [
+   "AL-00315"
+  ],
+  "threat_ids": [],
+  "asset_ids": [
+   "ASSET-00199"
+  ],
+  "severity": "HIGH",
+  "status": "CLOSED",
+  "created_at": "2026-08-08T06:52:37.773068Z",
+  "closed_at": "2026-08-08T08:59:11.466403Z",
+  "assigned_analyst_id": "AN-00003"
  }
 ]

@@ -28,7 +28,7 @@ export const FindingCorrelationGraph: React.FC = () => {
           <Cpu className="h-3.5 w-3.5 text-soc-textMuted" aria-hidden="true" />
           <h3 className="panel-label">Finding Correlation Graph (Alert ➔ Finding Provenance)</h3>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">MĀN Correlation Engine</span>
+        <span className="text-2xs uppercase tracking-[0.14em] text-soc-textDim">MĀN Correlation Engine</span>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
@@ -37,7 +37,7 @@ export const FindingCorrelationGraph: React.FC = () => {
           return (
             <React.Fragment key={n.label}>
               <div
-                className={`min-w-[120px] flex-1 rounded-sm border p-3 text-center ${
+                className={`min-w-[120px] flex-1 rounded-md border p-3 text-center ${
                   n.emphasis
                     ? 'border-soc-crit/60 bg-soc-critDim'
                     : isCrit
@@ -45,9 +45,9 @@ export const FindingCorrelationGraph: React.FC = () => {
                     : 'border-soc-border bg-soc-overlay'
                 }`}
               >
-                <div className="text-[9px] uppercase tracking-[0.14em] text-soc-textMuted">{n.type}</div>
+                <div className="text-2xs uppercase tracking-[0.14em] text-soc-textMuted">{n.type}</div>
                 <div className={`mt-0.5 text-xs font-bold ${isCrit ? 'text-soc-crit' : 'text-soc-text'}`}>{n.label}</div>
-                <div className="mt-0.5 text-[10px] text-soc-textSecondary">{n.sub}</div>
+                <div className="mt-0.5 text-2xs text-soc-textSecondary">{n.sub}</div>
               </div>
               {idx < nodes.length - 1 && (
                 <ArrowRight className="hidden h-3.5 w-3.5 flex-shrink-0 text-soc-textDim md:block" aria-hidden="true" />

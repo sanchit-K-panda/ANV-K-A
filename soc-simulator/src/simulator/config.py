@@ -88,8 +88,13 @@ class SimConfig:
     def load(cls, path: Path | None = None) -> "SimConfig":
         """Load config from TOML file, falling back to built-in defaults."""
         raw = DEFAULTS_TOML
-        if path and Path(path).exists():
-            raw = Path(path).read_text(encoding="utf-8")
+        if path is not None:
+            p = Path(path)
+            if not p.exists():
+                # Fail loudly: a silently-ignored config path once produced default-size
+                # datasets that looked legitimate but broke ground-truth density.
+                raise FileNotFoundError(f"Simulator config not found: {p.resolve()}")
+            raw = p.read_text(encoding="utf-8")
         data = tomllib.loads(raw)
         scale, time_, dist = data.get("scale", {}), data.get("time", {}), data.get("distributions", {})
         return cls(

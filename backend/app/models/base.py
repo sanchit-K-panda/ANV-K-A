@@ -1,10 +1,10 @@
 """SQLAlchemy Declarative Base + async engine/session for ANVĪKṢA.
 
-Supports both PostgreSQL (asyncpg) and TiDB/MySQL (asyncmy) backends.
+Local PostgreSQL (asyncpg) via docker-compose; the GUID column degrades to
+CHAR(36) for any MySQL-family backend if ever needed. No cloud database (Rules.md §4).
 """
 from __future__ import annotations
 
-import ssl
 import uuid
 
 from sqlalchemy import String, TypeDecorator
@@ -17,9 +17,8 @@ from app.core.config import settings
 class GUID(TypeDecorator):
     """Database-agnostic UUID column.
 
-    Stores as CHAR(36) on MySQL/TiDB, native UUID on PostgreSQL.
-    Always returns Python uuid.UUID objects.
-    Uses CHAR(36) (fixed-width) for MySQL FK constraint compatibility.
+    Stores as native-friendly String(36); uses CHAR(36) with ascii collation on
+    MySQL-family dialects for FK compatibility. Always returns Python uuid.UUID.
     """
     impl = String(36)
     cache_ok = True
@@ -51,19 +50,11 @@ class Base(DeclarativeBase):
 
 
 def _build_engine():
-    """Build async engine with appropriate SSL config for TiDB Cloud."""
-    connect_args = {}
-
-    # TiDB Cloud requires SSL
-    if settings.DATABASE_SSL and "tidbcloud" in settings.DATABASE_URL:
-        ssl_ctx = ssl.create_default_context()
-        connect_args["ssl"] = ssl_ctx
-
+    """Build async engine for the local compose database (no TLS endpoints)."""
     return create_async_engine(
         settings.DATABASE_URL,
         echo=False,
         future=True,
-        connect_args=connect_args,
         pool_pre_ping=True,
         pool_recycle=300,
     )

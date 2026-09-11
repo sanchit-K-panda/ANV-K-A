@@ -20,7 +20,7 @@ export const ThreatRecurrenceTimeline: React.FC = () => {
           <AlertTriangle className="h-3.5 w-3.5 text-soc-med" aria-hidden="true" />
           <h3 className="panel-label">Threat Recurrence Timeline (PUNARĀVṚTTI)</h3>
         </div>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-soc-textDim">Repeat Incident Chronology</span>
+        <span className="text-2xs uppercase tracking-[0.14em] text-soc-textDim">Repeat Incident Chronology</span>
       </div>
 
       <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 lg:grid-cols-6">
@@ -29,16 +29,16 @@ export const ThreatRecurrenceTimeline: React.FC = () => {
           return (
             <div
               key={idx}
-              className={`space-y-1.5 rounded-sm border p-3 ${
+              className={`space-y-1.5 rounded-md border p-3 ${
                 flagged ? 'border-soc-crit/40 bg-soc-critDim/60' : 'border-soc-border bg-soc-overlay'
               }`}
             >
-              <div className="flex items-center justify-between text-[10px]">
+              <div className="flex items-center justify-between text-2xs">
                 <span className="font-bold text-soc-textDim">0{idx + 1}</span>
                 <span className="tabular-nums text-soc-textMuted">{s.time}</span>
               </div>
               <div className={`font-sans text-xs font-bold ${flagged ? 'text-soc-crit' : 'text-soc-text'}`}>{s.title}</div>
-              <p className="font-sans text-[11px] leading-snug text-soc-textSecondary">{s.desc}</p>
+              <p className="font-sans text-2xs leading-snug text-soc-textSecondary">{s.desc}</p>
             </div>
           );
         })}

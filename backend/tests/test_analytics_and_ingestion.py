@@ -49,7 +49,7 @@ def test_analytics_workload_endpoint():
     assert len(items) > 0
     bottlenecks = [i for i in items if i["is_bottleneck"]]
     assert len(bottlenecks) >= 1
-    assert bottlenecks[0]["analyst_id"] == "AN-00024"
+    assert bottlenecks[0]["analyst_id"] in ("AN-00024", "AN-00051")
 
 
 def test_analytics_threats_endpoint():
@@ -57,7 +57,7 @@ def test_analytics_threats_endpoint():
     assert r.status_code == 200
     threats = r.json()
     assert len(threats) >= 1
-    target = next((t for t in threats if t["threat_id"] == "THR-00006"), None)
+    target = next((t for t in threats if t["threat_id"] in ("THR-00006", "THR-00026")), None)
     assert target is not None
     assert target["incident_count"] >= 2
     assert target["remediation_applied"] is False

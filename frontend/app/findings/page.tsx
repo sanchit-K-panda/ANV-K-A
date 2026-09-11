@@ -163,7 +163,7 @@ export default function FindingsPage() {
                   <td colSpan={8} className="py-8">
                     <div className="space-y-2 px-4">
                       {[0, 1, 2].map((i) => (
-                        <div key={i} className="h-8 bg-soc-raised rounded-sm animate-pulse" />
+                        <div key={i} className="h-8 bg-soc-raised rounded-md animate-pulse" />
                       ))}
                     </div>
                   </td>

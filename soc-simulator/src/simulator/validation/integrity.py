@@ -120,7 +120,18 @@ def validate_dataset(dir_path: Path) -> ValidationReport:
     scen = meta["scenario"]
     serrs: list[str] = []
     if scen == "healthy" and d.get("ground_truth"):
-        serrs.append("healthy dataset must have empty ground truth")
+        # Profile-gap labels are permitted when multi-SOC maturity profiles were used:
+        # degraded workflow steps on non-balanced SOCs are real injected deviations and
+        # MUST be labelled (REMEDIATION.md P0-2/P0-3). Without profiles, healthy must
+        # stay empty by design.
+        meta_cfg = meta.get("config", {})
+        profiles_enabled = bool(meta_cfg.get("multi_soc_profiles"))
+        non_profile_gt = [
+            gt for gt in d["ground_truth"]
+            if "soc_maturity_profile" not in gt.get("expected_behaviour", {})
+        ]
+        if not profiles_enabled or non_profile_gt:
+            serrs.append("healthy dataset must have empty ground truth (profile-gap labels only allowed with --soc-profiles)")
     if scen == "investigation_gap":
         bad = [gt for gt in d["ground_truth"]
                if gt["entity_type"] == "incident"

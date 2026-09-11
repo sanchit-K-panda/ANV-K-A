@@ -5,6 +5,7 @@ import { StatusBadge } from './StatusBadge';
 import { ConfidenceIndicator } from './ConfidenceIndicator';
 import { RiskScore } from './RiskScore';
 import { RiskFactorBreakdown } from './RiskFactorBreakdown';
+import { SupervisoryExplanationSection } from './SupervisoryExplanationSection';
 import {
   HelpCircle,
   FileText,
@@ -44,35 +45,35 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
   const stageHeader = (num: string, title: string, icon: React.ReactNode, tone: 'accent' | 'warn' | 'muted' | 'ok' | 'crit' = 'muted') => {
     const tones = {
       accent: 'text-soc-accent',
-      warn: 'text-soc-med',
+      warn: 'text-soc-high',
       muted: 'text-soc-textSecondary',
       ok: 'text-soc-ok',
       crit: 'text-soc-crit',
     };
     return (
-      <div className={`flex items-center gap-2 mb-2.5 font-mono text-2xs font-medium uppercase tracking-[0.14em] ${tones[tone]}`}>
+      <div className={`flex items-center gap-2 mb-2.5 font-mono text-2xs font-bold uppercase tracking-[0.14em] ${tones[tone]}`}>
         {icon}
         <span>{num} · {title}</span>
       </div>
     );
   };
 
-  const bodyBox = 'px-3.5 py-3 bg-soc-overlay rounded-lg text-xs text-soc-text leading-relaxed';
+  const bodyBox = 'px-3.5 py-3 bg-soc-overlay rounded-lg text-xs text-soc-text leading-relaxed border border-soc-border/60';
 
   return (
     <div className="space-y-5">
       {/* Finding Header */}
-      <div className="soc-panel">
+      <div className="soc-panel shadow-card border-soc-border">
         <div className="p-5">
           <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-soc-border">
             <div className="flex items-center gap-3">
               <SeverityBadge severity={finding.severity} />
-              <span className="col-mono text-sm text-soc-text">
+              <span className="col-mono text-sm font-bold text-soc-accent">
                 {finding.id}
               </span>
               <button
                 onClick={handleCopyId}
-                className="p-1 rounded-sm text-soc-textMuted hover:text-soc-text hover:bg-soc-raised transition-colors"
+                className="p-1 rounded-md text-soc-textMuted hover:text-soc-text hover:bg-soc-raised transition-colors"
                 title="Copy Finding ID"
                 aria-label="Copy Finding ID"
               >
@@ -102,6 +103,9 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
           </p>
         </div>
       </div>
+
+      {/* SUPERVISORY REASONING & EVIDENCE (PRATYAYA · DeepSeek-R1 8B) */}
+      <SupervisoryExplanationSection finding={finding} />
 
       {/* 7-PART EXPLAINABILITY MATRIX — WHAT → WHY → WHEN → WHERE → EVIDENCE → CONFIDENCE → RECOMMENDATION */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -134,7 +138,7 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
                 {finding.affected_entities.map((entity, i) => (
                   <span
                     key={i}
-                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-soc-raised border border-soc-border text-2xs"
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-soc-raised border border-soc-border text-2xs"
                   >
                     <span className="text-soc-textMuted uppercase tracking-wider">{entity.type}</span>
                     <span className="text-soc-text font-medium">{entity.id}</span>
@@ -225,7 +229,7 @@ export const ExplainabilityCard: React.FC<ExplainabilityCardProps> = ({ finding,
             </div>
 
             {actionConfirmed && (
-              <div className="mt-3 px-2.5 py-2 bg-soc-okDim border border-soc-ok/30 rounded-sm text-2xs font-mono text-soc-ok flex items-center gap-1.5">
+              <div className="mt-3 px-2.5 py-2 bg-soc-okDim border border-soc-ok/30 rounded-md text-2xs font-mono text-soc-ok flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5" />
                 Action [{actionConfirmed}] dispatched and recorded to the SAKṢĪ audit hash chain.
               </div>

@@ -34,16 +34,21 @@ export const AirGapDrawer: React.FC<AirGapDrawerProps> = ({ isOpen, onClose }) =
         <div className="space-y-5 overflow-y-auto">
           <div className="flex items-center justify-between border-b border-soc-border pb-4">
             <div className="flex items-center gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-soc-ok" />
-              <h2 className="panel-label">Air-Gap Assurance Manifest</h2>
+              <ShieldCheck className="w-5 h-5 text-soc-ok" />
+              <h2 className="panel-label !text-soc-ok !text-xs tracking-wider">Air-Gap Assurance Manifest</h2>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 text-soc-textMuted hover:text-soc-text rounded-sm hover:bg-soc-raised transition-colors"
+              className="p-1.5 text-soc-textMuted hover:text-soc-accent rounded-md hover:bg-soc-raised transition-colors"
               aria-label="Close manifest"
             >
               <X className="w-4 h-4" />
             </button>
+          </div>
+
+          <div className="p-3 rounded border border-soc-ok/30 bg-soc-ok/10 text-xs text-soc-ok font-mono flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-soc-ok" />
+            <span>SOVEREIGN ENCLAVE LOCK: 100% AIR-GAPPED</span>
           </div>
 
           <p className="text-xs text-soc-textSecondary font-sans leading-relaxed">
@@ -52,11 +57,11 @@ export const AirGapDrawer: React.FC<AirGapDrawerProps> = ({ isOpen, onClose }) =
             without external network connectivity.
           </p>
 
-          <div className="soc-panel overflow-hidden">
+          <div className="soc-panel overflow-hidden border-soc-border">
             {manifestItems.map((item) => (
               <div key={item.label} className="kv-row">
                 <span className="kv-key">{item.label}</span>
-                <span className="kv-val font-mono text-soc-text">{item.value}</span>
+                <span className="kv-val font-mono text-soc-accent font-semibold">{item.value}</span>
               </div>
             ))}
           </div>

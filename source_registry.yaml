@@ -1,0 +1,124 @@
+# ANVĪKṢA Data Source Registry (SAT-SA SIH26157)
+# Defines provenance, licensing, commercial/redistribution rules, and parsing roles.
+
+version: "1.0"
+registry:
+  - name: maya_soc_simulator
+    type: synthetic_soc_telemetry
+    provider: ANVĪKṢA Core Team
+    license: MIT
+    terms_url: "https://github.com/anviksa/soc-simulator"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: local_generator
+    parser: ml.adapters.maya_adapter.MayaAdapter
+    status: active
+    notes: Primary controlled baseline and evaluation oracle with 7 behavioral scenarios and hidden ground truth.
+
+  - name: mitre_attack
+    type: security_knowledge
+    provider: MITRE Corporation
+    license: MIT / Terms of Use
+    terms_url: "https://attack.mitre.org/resources/terms-of-use/"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: static_bundle
+    parser: ml.external.parsers.mitre_attack.MitreAttackParser
+    status: active
+    notes: Provides attack semantics, tactics, techniques, and operational threat mappings.
+
+  - name: cisa_kev
+    type: security_knowledge
+    provider: Cybersecurity and Infrastructure Security Agency (CISA)
+    license: US Government Public Domain
+    terms_url: "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: static_catalog
+    parser: ml.external.parsers.cisa_kev.CisaKevParser
+    status: active
+    notes: Authoritative catalog of known exploited vulnerabilities used to weight asset and incident severity.
+
+  - name: nvd_cve
+    type: vulnerability_metadata
+    provider: National Institute of Standards and Technology (NIST)
+    license: US Government Public Domain
+    terms_url: "https://nvd.nist.gov/general/terms-of-use"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: rest_api_cache
+    parser: ml.external.parsers.nvd.NvdParser
+    status: planned
+    notes: Base CVE scoring (CVSS v3.1/v4.0) and vulnerability descriptions.
+
+  - name: urlhaus
+    type: threat_intelligence
+    provider: abuse.ch
+    license: CC0 1.0 Universal
+    terms_url: "https://urlhaus.abuse.ch/api/"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: curated_sample
+    parser: ml.external.parsers.threat_feeds.ThreatFeedParser
+    status: active
+    notes: Malicious URL intelligence and hosting infrastructure mapping.
+
+  - name: threatfox
+    type: threat_intelligence
+    provider: abuse.ch
+    license: CC0 1.0 Universal
+    terms_url: "https://threatfox.abuse.ch/api/"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: curated_sample
+    parser: ml.external.parsers.threat_feeds.ThreatFeedParser
+    status: active
+    notes: High-fidelity indicators of compromise (IOCs) associated with known malware families.
+
+  - name: phishtank
+    type: threat_intelligence
+    provider: Cisco Talos / OpenDNS
+    license: PhishTank Developer Terms
+    terms_url: "https://phishtank.org/developer_info.php"
+    redistribution_allowed: false
+    commercial_use_allowed: false
+    retrieval_method: api_download
+    parser: ml.external.parsers.threat_feeds.PhishTankParser
+    status: planned
+    notes: Verified phishing URLs. Redistribution restricted; ingest strictly at runtime or cache locally without committing raw dumps.
+
+  - name: openphish
+    type: threat_intelligence
+    provider: OpenPhish
+    license: OpenPhish Community License
+    terms_url: "https://openphish.com/terms.html"
+    redistribution_allowed: false
+    commercial_use_allowed: false
+    retrieval_method: community_feed
+    parser: ml.external.parsers.threat_feeds.OpenPhishParser
+    status: planned
+    notes: Zero-day phishing intelligence feed for active campaign tracking.
+
+  - name: vcdb
+    type: incident_patterns
+    provider: VERIS Community Database
+    license: CC BY-SA 4.0
+    terms_url: "https://github.com/vz-risk/VCDB"
+    redistribution_allowed: true
+    commercial_use_allowed: true
+    retrieval_method: json_corpus
+    parser: ml.external.parsers.vcdb.VcdbParser
+    status: planned
+    notes: Real-world breach metadata used to calibrate supervisory risk weights, not for raw event telemetry.
+
+  - name: cic_ids2017
+    type: telemetry_benchmarks
+    provider: Canadian Institute for Cybersecurity (UNB)
+    license: Research and Educational Use
+    terms_url: "https://www.unb.ca/cic/datasets/ids-2017.html"
+    redistribution_allowed: false
+    commercial_use_allowed: false
+    retrieval_method: reference_benchmark
+    parser: ml.external.parsers.benchmarks.CicIdsParser
+    status: planned
+    notes: Telemetry realism benchmark. Informs MĀYĀ event generation parameters; never mixed into VIKĀRA training table.
