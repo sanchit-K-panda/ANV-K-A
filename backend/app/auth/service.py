@@ -127,6 +127,18 @@ async def authenticate_biometric_user(
     dist = cosine_distance(stored_template, live_encoding)
     if dist <= TOLERANCE:
         return user, "OK"
+
+    # Fallback to multi-angle encodings (Left, Right)
+    bp = user.biometric_profile
+    for angle_token in (bp.encoding_left, bp.encoding_right):
+        if angle_token:
+            try:
+                angle_template = decrypt_encoding(angle_token)
+                angle_dist = cosine_distance(angle_template, live_encoding)
+                if angle_dist <= TOLERANCE:
+                    return user, "OK"
+            except Exception:
+                continue
     
     return None, f"Biometric mismatch (dist={dist:.3f})"
 

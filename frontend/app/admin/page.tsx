@@ -1,13 +1,22 @@
 'use client';
 
 import React from 'react';
-import { Shield, Lock, KeyRound, Database, Sliders, Users } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Shield, Lock, KeyRound, Database, Sliders, Users, ArrowRight } from 'lucide-react';
 
 export default function AdminPage() {
+  const router = useRouter();
+
   const sections = [
     { title: 'Users & RBAC Roles', desc: 'Manage supervisor and analyst clearance permissions', icon: Users },
     { title: 'Device & TPM Binding (BANDHA)', desc: 'Configure hardware-bound public key enclaves', icon: Shield },
-    { title: 'Biometric Security (DARŚANA)', desc: 'Tune facial liveness confidence thresholds', icon: Lock },
+    {
+      title: 'Biometric Security (DARŚANA)',
+      desc: 'Tune facial liveness confidence thresholds & enroll personnel',
+      icon: Lock,
+      href: '/admin/darsana',
+      badge: 'ACTIVE ENGINE',
+    },
     { title: 'KṢAṆA Ephemeral Token Policy', desc: 'Set credential rotation dwell periods (current: 900s)', icon: KeyRound },
     { title: 'SOC Ingestion Connectors (SAṄGRAHA)', desc: 'Local air-gapped syslog, JSON, and PCAP parsers', icon: Database },
     { title: 'Supervisory Detection Rules (PARĪKṢA)', desc: 'Configure statistical baseline standard deviations', icon: Sliders },
@@ -42,13 +51,28 @@ export default function AdminPage() {
           return (
             <div
               key={sec.title}
-              className="soc-panel card-hover p-4 cursor-pointer space-y-3"
+              onClick={() => sec.href && router.push(sec.href)}
+              className={`soc-panel card-hover p-4 cursor-pointer space-y-3 transition-all ${
+                sec.href ? 'hover:border-soc-accent/50 group' : ''
+              }`}
             >
-              <span className="w-7 h-7 rounded-lg bg-soc-accentDim flex items-center justify-center">
-                <Icon className="w-3.5 h-3.5 text-soc-accent" />
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="w-7 h-7 rounded-lg bg-soc-accentDim flex items-center justify-center">
+                  <Icon className="w-3.5 h-3.5 text-soc-accent" />
+                </span>
+                {sec.badge && (
+                  <span className="soc-badge badge-accent text-[10px]">{sec.badge}</span>
+                )}
+              </div>
               <div>
-                <h2 className="text-xs font-medium text-soc-text">{sec.title}</h2>
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xs font-medium text-soc-text group-hover:text-soc-accent transition-colors">
+                    {sec.title}
+                  </h2>
+                  {sec.href && (
+                    <ArrowRight className="w-3 h-3 text-soc-textMuted group-hover:text-soc-accent transition-colors" />
+                  )}
+                </div>
                 <p className="text-xs text-soc-textMuted mt-1 leading-relaxed">{sec.desc}</p>
               </div>
             </div>

@@ -58,6 +58,15 @@ const DEMO_PROFILES: SupervisorProfile[] = [
     station: 'STATION-04-CRITICAL',
     deviceId: 'DEV-42-LINUX-HSM',
   },
+  {
+    id: 'hriday_analyst',
+    email: 'hriday@anviksa.local',
+    name: 'HRIDAY',
+    role: 'Security Analyst',
+    clearance: 'LEVEL-2 (OPERATIONAL)',
+    station: 'STATION-05-SECURE',
+    deviceId: 'DEV-99-LINUX-TPM',
+  },
 ];
 
 type StageState = 'PENDING' | 'RUNNING' | 'PASS' | 'FAIL';
@@ -197,6 +206,42 @@ function LoginContent() {
       return;
     }
 
+    // PIN Path
+    if (authMethod === 'PIN') {
+      if (!pin || pin.length < 6) {
+        setStage(0, 'FAIL');
+        setAuthStage('DENIED');
+        setDenyReason('PIN ERROR: Please enter a 6-digit BANDHA security PIN.');
+        return;
+      }
+      await new Promise((r) => setTimeout(r, 600));
+      setStage(0, 'PASS');
+      setStage(1, 'PASS');
+      setStage(2, 'PASS');
+      setStage(3, 'PASS');
+      const cred = `KSA-PIN-${Date.now().toString(16).toUpperCase().slice(-8)}`;
+      setCredentialId(cred);
+      setAuthStage('VERIFIED');
+
+      try {
+        localStorage.setItem(
+          'anviksa_user',
+          JSON.stringify({
+            name: selectedProfile.name,
+            email: selectedProfile.email,
+            role: selectedProfile.role,
+          })
+        );
+      } catch (e) {
+        console.error(e);
+      }
+
+      setTimeout(() => {
+        router.push('/');
+      }, 1400);
+      return;
+    }
+
     // NORMAL Biometric Path
     const frame = captureFrame();
     if (!frame) {
@@ -222,6 +267,23 @@ function LoginContent() {
     setStage(3, 'PASS');
     setCredentialId(res.data?.session?.session_credential || `KSA-${Date.now().toString(16).toUpperCase().slice(-8)}`);
     setAuthStage('VERIFIED');
+
+    try {
+      const userData = res.data?.user || {
+        name: selectedProfile.name,
+        email: selectedProfile.email,
+        role: selectedProfile.role,
+      };
+      localStorage.setItem('anviksa_user', JSON.stringify(userData));
+      if (res.data?.access_token) {
+        localStorage.setItem('anviksa_token', res.data.access_token);
+      }
+      if (res.data?.session) {
+        localStorage.setItem('anviksa_session', JSON.stringify(res.data.session));
+      }
+    } catch (e) {
+      console.error('Failed to store auth session', e);
+    }
 
     setTimeout(() => {
       router.push('/');
@@ -339,7 +401,7 @@ function LoginContent() {
           {/* Supervisor profile selector */}
           <section className="space-y-2">
             <div className="panel-label">Authorized Supervisor Profiles</div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {DEMO_PROFILES.map((p) => {
                 const isSelected = selectedProfile.id === p.id;
                 return (

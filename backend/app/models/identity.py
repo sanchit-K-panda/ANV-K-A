@@ -81,8 +81,23 @@ class BiometricProfile(Base):
         unique=True,
         nullable=False,
     )
+    # Primary template used for matching (typically "Front")
     protected_template: Mapped[bytes] = mapped_column(nullable=False)
     encryption_key_reference: Mapped[str] = mapped_column(String(255), nullable=False)
+
+    # User metadata from registration
+    age: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    height: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    weight: Mapped[str | None] = mapped_column(String(10), nullable=True)
+    biometric_registered_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+
+    # Multi-angle encrypted encodings (Fernet tokens)
+    encoding_front: Mapped[str | None] = mapped_column(Text, nullable=True)
+    encoding_left: Mapped[str | None] = mapped_column(Text, nullable=True)
+    encoding_right: Mapped[str | None] = mapped_column(Text, nullable=True)
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC)
     )

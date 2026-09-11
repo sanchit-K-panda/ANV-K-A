@@ -10,9 +10,19 @@ export const Topbar: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [secondsToRenewal, setSecondsToRenewal] = useState(868);
   const [lastEvaluatedSec, setLastEvaluatedSec] = useState(18);
+  const [currentUser, setCurrentUser] = useState<{ name: string; email?: string; role?: string } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
+    try {
+      const stored = localStorage.getItem('anviksa_user');
+      if (stored) {
+        setCurrentUser(JSON.parse(stored));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
     const renewTimer = setInterval(() => {
       setSecondsToRenewal((prev) => (prev > 10 ? prev - 1 : 900));
       setLastEvaluatedSec((prev) => (prev < 60 ? prev + 1 : 12));
@@ -24,6 +34,15 @@ export const Topbar: React.FC = () => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const displayName = currentUser?.name || 'Tejasw';
+  const getInitials = (name: string) => {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
   };
 
   const handleLockSession = () => {
@@ -77,14 +96,14 @@ export const Topbar: React.FC = () => {
         <div className="flex items-center gap-2.5 text-xs">
           <div className="hidden xl:flex items-center gap-2.5 pr-1">
             <div className="text-right leading-tight">
-              <div className="text-xs font-semibold text-soc-text">Dr. A. Sharma</div>
+              <div className="text-xs font-semibold text-soc-text">{displayName}</div>
               <div className="text-[10px] font-mono text-soc-ok flex items-center justify-end gap-1">
                 <ShieldCheck className="w-2.5 h-2.5" />
-                DEV-21 TRUSTED
+                {currentUser?.role || 'SUPERVISOR'} · DEV-21
               </div>
             </div>
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-soc-accent to-soc-accentBright text-white flex items-center justify-center text-[11px] font-bold shadow-sm">
-              AS
+              {getInitials(displayName)}
             </div>
           </div>
 
