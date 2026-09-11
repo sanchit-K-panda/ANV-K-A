@@ -16,14 +16,9 @@ async function fetchLiveEvents() {
   const data = await res.json();
   const events = data.events || [];
   
-  // Filter only LOGIN and LOGOUT
-  const authEvents = events.filter((e: any) => 
-    e.metadata?.action === 'LOGIN' || e.metadata?.action === 'LOGOUT'
-  );
-  
   // Sort descending by timestamp
-  authEvents.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-  return authEvents;
+  events.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  return events;
 }
 
 export default async function LoginSessionsPage() {
@@ -50,11 +45,11 @@ export default async function LoginSessionsPage() {
           <div className="flex items-center gap-2 text-2xs font-mono text-soc-textMuted mb-1.5">
             <span>ANVĪKṢA</span>
             <span className="text-soc-textDim">/</span>
-            <span>SESSIONS</span>
+            <span>LEDGER</span>
             <span className="text-soc-textDim">/</span>
             <span className="text-soc-accent">SOC-04</span>
           </div>
-          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Login Sessions &amp; Pattern Analysis</h1>
+          <h1 className="font-display text-[22px] font-bold tracking-tight text-soc-text">Live Ledger &amp; Pattern Analysis</h1>
           <p className="text-xs text-soc-textMuted mt-1">
             Live telemetry of user authentication events. Analyzes cryptographic chain integrity for concurrency attacks.
           </p>
@@ -121,10 +116,10 @@ export default async function LoginSessionsPage() {
             <thead>
               <tr>
                 <th>Time</th>
-                <th>User</th>
+                <th>Actor / Target</th>
                 <th>Action</th>
-                <th>IP &amp; device</th>
-                <th>Session ID</th>
+                <th>IP &amp; Device / Amount</th>
+                <th>Session / Ref ID</th>
                 <th>Block hash</th>
               </tr>
             </thead>
@@ -144,20 +139,26 @@ export default async function LoginSessionsPage() {
                   <tr key={log.event_id}>
                     <td className="col-mono">{new Date(log.timestamp).toLocaleTimeString()}</td>
                     <td className="font-mono text-2xs text-soc-textSecondary">
-                      {(payload as any).email || (payload as any).userId}
+                      {(payload as any).email || (payload as any).userId || (payload as any).targetAccount || "SYSTEM"}
                     </td>
                     <td className="whitespace-nowrap">
-                      <span className={`soc-badge ${log.metadata?.action === 'LOGIN' ? 'badge-accent' : 'badge-neutral'}`}>
-                        {log.metadata?.action}
+                      <span className={`soc-badge ${log.metadata?.action === 'LOGIN' ? 'badge-accent' : log.metadata?.action === 'LOGOUT' ? 'badge-neutral' : log.metadata?.action?.includes('PAYMENT') || log.metadata?.action?.includes('CHARGE') ? 'bg-green-500/20 text-green-400 border border-green-500/20' : 'bg-purple-500/20 text-purple-400 border border-purple-500/20'}`}>
+                        {log.metadata?.action || "UNKNOWN"}
                       </span>
                     </td>
                     <td className="text-2xs">
-                      <div className="font-mono text-soc-text">{(payload as any).ip}</div>
-                      <div className="truncate max-w-[150px] text-soc-textMuted" title={(payload as any).device}>
-                        {(payload as any).device}
-                      </div>
+                      {(payload as any).ip ? (
+                        <>
+                          <div className="font-mono text-soc-text">{(payload as any).ip}</div>
+                          <div className="truncate max-w-[150px] text-soc-textMuted" title={(payload as any).device}>
+                            {(payload as any).device}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="font-mono text-soc-text">Amount: {(payload as any).totalDeducted || (payload as any).amount || "-"}</div>
+                      )}
                     </td>
-                    <td className="col-mono">{(payload as any).sessionId}</td>
+                    <td className="col-mono">{(payload as any).sessionId || (payload as any).referenceId || "-"}</td>
                     <td className="text-2xs">
                       <div className="col-mono truncate max-w-[120px]" title={log.event_id}>{log.event_id}</div>
                       {isForked && (

@@ -18,6 +18,12 @@ class LoginRequest(_BaseSchema):
     device_identifier: str = Field(default="DEFAULT_DESKTOP_CLIENT")
 
 
+class BiometricLoginRequest(_BaseSchema):
+    email: str
+    image_base64: str
+    device_identifier: str = Field(default="DEFAULT_DESKTOP_CLIENT")
+
+
 class UserResponse(_BaseSchema):
     id: uuid.UUID
     name: str

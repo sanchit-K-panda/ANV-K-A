@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "dev-secret-change-in-production"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    BIOMETRIC_FERNET_KEY: str = "sKhX3YG3p_LEP5VkpUVfRuYPnz5rfmpvDRpZK5UK4VM="
 
     # Environment
     ENVIRONMENT: str = "development"

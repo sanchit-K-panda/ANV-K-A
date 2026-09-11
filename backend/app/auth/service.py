@@ -78,6 +78,59 @@ async def authenticate_user(
     return user
 
 
+async def authenticate_biometric_user(
+    db: AsyncSession, email: str, image_base64: str
+) -> tuple[User | None, str]:
+    """Validate user credentials via biometric facial recognition."""
+    import base64
+    from sqlalchemy.orm import selectinload
+    from app.ml.biometrics import (
+        get_single_face_encoding,
+        decrypt_encoding,
+        cosine_distance,
+        TOLERANCE,
+    )
+
+    # 1. Fetch user and their biometric profile
+    res = await db.execute(
+        select(User)
+        .options(selectinload(User.biometric_profile))
+        .where(User.email == email.lower().strip())
+    )
+    user = res.scalar_one_or_none()
+    if not user:
+        return None, "User not found"
+    if user.status != "ACTIVE":
+        return None, "User account is inactive"
+    if not user.biometric_profile:
+        return None, "No biometric profile registered for this user"
+
+    # 2. Decode the incoming base64 image
+    try:
+        image_data = image_base64.split(",")[1] if "," in image_base64 else image_base64
+        image_bytes = base64.b64decode(image_data)
+    except Exception:
+        return None, "Invalid image format"
+
+    # 3. Extract encoding from live image
+    live_encoding, msg = get_single_face_encoding(image_bytes)
+    if live_encoding is None:
+        return None, msg
+
+    # 4. Decrypt stored template
+    try:
+        stored_template = decrypt_encoding(user.biometric_profile.protected_template.decode("utf-8"))
+    except Exception:
+        return None, "Biometric decryption failure"
+
+    # 5. Compute Cosine Distance
+    dist = cosine_distance(stored_template, live_encoding)
+    if dist <= TOLERANCE:
+        return user, "OK"
+    
+    return None, f"Biometric mismatch (dist={dist:.3f})"
+
+
 async def get_or_create_device(
     db: AsyncSession, user_id: uuid.UUID, device_identifier: str
 ) -> UserDevice:

@@ -13,6 +13,7 @@ from app.auth.dependencies import (
     require_role,
 )
 from app.auth.schemas import (
+    BiometricLoginRequest,
     LockSessionRequest,
     LoginRequest,
     LoginResponse,
@@ -23,6 +24,7 @@ from app.auth.schemas import (
     VerifySessionResponse,
 )
 from app.auth.service import (
+    authenticate_biometric_user,
     authenticate_user,
     create_session,
     invalidate_session,
@@ -66,6 +68,50 @@ async def login(
     await record_audit_action(
         db=db,
         action="LOGIN",
+        resource="AUTH",
+        resource_id=str(user.id),
+        user_id=user.id,
+        session_id=session.id,
+        device_id=session.device_id,
+        identity_status="VERIFIED",
+    )
+
+    return LoginResponse(
+        access_token=token,
+        token_type="bearer",
+        expires_in_minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES,
+        user=UserResponse.model_validate(user),
+        session=SessionResponse.model_validate(session),
+    )
+
+
+@router.post("/biometric-login", response_model=LoginResponse)
+async def biometric_login(
+    payload: BiometricLoginRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    """Authenticate user with facial biometrics, creating a rotating session."""
+    user, msg = await authenticate_biometric_user(db, payload.email, payload.image_base64)
+    if not user:
+        # Audit failed login attempt
+        await record_audit_action(
+            db=db,
+            action="BIOMETRIC_LOGIN_FAILED",
+            resource="AUTH",
+            resource_id=payload.email,
+            identity_status="UNVERIFIED",
+        )
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=msg,
+        )
+
+    session, token = await create_session(db, user, payload.device_identifier)
+
+    # Audit successful login
+    await record_audit_action(
+        db=db,
+        action="BIOMETRIC_LOGIN",
         resource="AUTH",
         resource_id=str(user.id),
         user_id=user.id,

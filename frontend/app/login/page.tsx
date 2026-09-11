@@ -32,31 +32,31 @@ interface SupervisorProfile {
 
 const DEMO_PROFILES: SupervisorProfile[] = [
   {
-    id: 'a_sharma_supervisor',
+    id: 'tejasw_supervisor',
     email: 'supervisor@anviksa.local',
-    name: 'Dr. A. Sharma',
+    name: 'Tejasw',
     role: 'Chief SOC Supervisor',
     clearance: 'LEVEL-4 (EXECUTIVE)',
     station: 'STATION-01-SECURE',
     deviceId: 'DEV-21-FEDORA-TPM',
   },
   {
-    id: 'v_raman_auditor',
+    id: 'rio_auditor',
     email: 'admin@anviksa.local',
-    name: 'V. Raman',
+    name: 'rio',
     role: 'Compliance & Integrity Auditor',
     clearance: 'LEVEL-3 (AUDIT)',
-    station: 'AUDIT-CONSOLE-04',
-    deviceId: 'DEV-14-AUDIT-STATION',
+    station: 'STATION-08-REMOTE',
+    deviceId: 'DEV-88-MAC-ENCLAVE',
   },
   {
-    id: 'k_menon_lead',
+    id: 'sanchit_ops',
     email: 'analyst@anviksa.local',
-    name: 'K. Menon',
+    name: 'sANCHIT',
     role: 'Incident Response Commander',
     clearance: 'LEVEL-3 (OPERATIONAL)',
-    station: 'IR-CONSOLE-09',
-    deviceId: 'DEV-09-IR-PRIMARY',
+    station: 'STATION-04-CRITICAL',
+    deviceId: 'DEV-42-LINUX-HSM',
   },
 ];
 
@@ -92,6 +92,10 @@ function LoginContent() {
   const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
   const [credentialId, setCredentialId] = useState<string>('');
 
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const streamRef = React.useRef<MediaStream | null>(null);
+
   // Probe the local backend once — the platform must work with or without it.
   useEffect(() => {
     let cancelled = false;
@@ -101,22 +105,68 @@ function LoginContent() {
     return () => { cancelled = true; };
   }, []);
 
+  // Handle Webcam Lifecycle
+  useEffect(() => {
+    const startWebcam = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        streamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error("Failed to start webcam:", err);
+      }
+    };
+
+    const stopWebcam = () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
+      }
+    };
+
+    if (authMethod === 'BIOMETRIC') {
+      startWebcam();
+    } else {
+      stopWebcam();
+    }
+
+    return () => stopWebcam();
+  }, [authMethod]);
+
+  const captureFrame = (): string | null => {
+    if (!videoRef.current || !canvasRef.current) return null;
+    const context = canvasRef.current.getContext('2d');
+    if (!context) return null;
+    // ensure dimensions
+    if (videoRef.current.videoWidth === 0) return null;
+    canvasRef.current.width = videoRef.current.videoWidth;
+    canvasRef.current.height = videoRef.current.videoHeight;
+    context.drawImage(videoRef.current, 0, 0);
+    return canvasRef.current.toDataURL('image/jpeg', 0.8);
+  };
+
   const setStage = (index: number, state: StageState) => {
     setStageStates((prev) => prev.map((s, i) => (i === index ? state : s)));
   };
 
-  const tryBackendLogin = async (): Promise<boolean> => {
-    if (backendOnline !== true) return false;
+  const tryBiometricLogin = async (imageBase64: string): Promise<{ ok: boolean, data?: any, error?: string }> => {
+    if (backendOnline !== true) return { ok: false, error: "Backend offline" };
     try {
-      const res = await fetch('http://localhost:8000/api/auth/login', {
+      const res = await fetch('http://localhost:8000/api/auth/biometric-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: selectedProfile.email, password: 'anviksa_supervisor' }),
-        signal: AbortSignal.timeout(3000),
+        body: JSON.stringify({ 
+          email: selectedProfile.email, 
+          image_base64: imageBase64 
+        }),
+        signal: AbortSignal.timeout(10000),
       });
-      return res.ok;
-    } catch {
-      return false;
+      const data = await res.json();
+      return { ok: res.ok, data, error: res.ok ? undefined : data.detail };
+    } catch (err) {
+      return { ok: false, error: "Network error" };
     }
   };
 
@@ -128,35 +178,49 @@ function LoginContent() {
     setCredentialId('');
     setStageStates(['RUNNING', 'PENDING', 'PENDING', 'PENDING']);
 
-    await new Promise((r) => setTimeout(r, 800));
+    // Mock scenario paths
     if (testScenario === 'SPOOF_MASK') {
+      await new Promise((r) => setTimeout(r, 800));
       setStage(0, 'FAIL');
       setAuthStage('DENIED');
       setDenyReason('ANTI-SPOOFING ALERT: 2D static reflection / photo-mask artifact detected. Liveness entropy below threshold.');
       return;
     }
-    setStage(0, 'PASS');
-    setStage(1, 'RUNNING');
-
-    await new Promise((r) => setTimeout(r, 550));
+    
     if (testScenario === 'UNTRUSTED_DEVICE') {
+      await new Promise((r) => setTimeout(r, 800));
+      setStage(0, 'PASS');
       setStage(1, 'PASS');
       setStage(2, 'FAIL');
       setAuthStage('DENIED');
       setDenyReason('HARDWARE BINDING FAILURE: BANDHA TPM fingerprint mismatch. Sensitive operations remain locked.');
       return;
     }
+
+    // NORMAL Biometric Path
+    const frame = captureFrame();
+    if (!frame) {
+      setStage(0, 'FAIL');
+      setAuthStage('DENIED');
+      setDenyReason('CAMERA ERROR: Could not capture frame from video feed.');
+      return;
+    }
+
+    const res = await tryBiometricLogin(frame);
+    
+    if (!res.ok) {
+      setStage(0, 'FAIL');
+      setAuthStage('DENIED');
+      setDenyReason(`BIOMETRIC DENIED: ${res.error}`);
+      return;
+    }
+
+    // Success
+    setStage(0, 'PASS');
     setStage(1, 'PASS');
-    setStage(2, 'RUNNING');
-
-    await new Promise((r) => setTimeout(r, 500));
-    await tryBackendLogin();
     setStage(2, 'PASS');
-    setStage(3, 'RUNNING');
-
-    await new Promise((r) => setTimeout(r, 500));
     setStage(3, 'PASS');
-    setCredentialId(`KSA-${Date.now().toString(16).toUpperCase().slice(-8)}`);
+    setCredentialId(res.data?.session?.session_credential || `KSA-${Date.now().toString(16).toUpperCase().slice(-8)}`);
     setAuthStage('VERIFIED');
 
     setTimeout(() => {
@@ -362,18 +426,48 @@ function LoginContent() {
                 </div>
               </div>
             ) : (
-              <div className="soc-panel">
-                {[
-                  { label: 'Supervisor ID', value: selectedProfile.id },
-                  { label: 'Device Binding', value: selectedProfile.deviceId },
-                  { label: 'Assigned Station', value: selectedProfile.station },
-                  { label: 'Session Lifespan', value: '15-MIN ROTATING' },
-                ].map((row) => (
-                  <div key={row.label} className="kv-row">
-                    <span className="kv-key">{row.label}</span>
-                    <span className={`kv-val font-mono ${row.label === 'Session Lifespan' ? 'text-soc-ok' : 'text-soc-text'}`}>{row.value}</span>
-                  </div>
-                ))}
+              <div className="soc-panel space-y-4">
+                {/* Biometric Camera View */}
+                <div className="relative w-full aspect-video bg-black rounded-lg overflow-hidden border border-soc-border border-dashed flex items-center justify-center">
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    muted
+                    className={`w-full h-full object-cover ${authStage === 'SCANNING' ? 'opacity-50' : ''} ${authStage === 'VERIFIED' ? 'border-2 border-soc-ok' : ''}`}
+                    style={{ transform: 'scaleX(-1)' }}
+                  />
+                  <canvas ref={canvasRef} className="hidden" />
+                  
+                  {/* Scanning overlay */}
+                  {authStage === 'SCANNING' && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <RefreshCw className="w-8 h-8 text-soc-accent animate-spin mb-2" />
+                      <div className="text-xs font-mono text-soc-accent bg-black/50 px-2 py-1 rounded">EXTRACTING VECTORS...</div>
+                    </div>
+                  )}
+                  
+                  {/* Fallback text if stream is slow */}
+                  {!streamRef.current && (
+                    <div className="absolute inset-0 flex items-center justify-center text-xs font-mono text-soc-textMuted">
+                      INITIALIZING OPTICAL SENSOR...
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-1">
+                  {[
+                    { label: 'Supervisor ID', value: selectedProfile.id },
+                    { label: 'Device Binding', value: selectedProfile.deviceId },
+                    { label: 'Assigned Station', value: selectedProfile.station },
+                    { label: 'Session Lifespan', value: '15-MIN ROTATING' },
+                  ].map((row) => (
+                    <div key={row.label} className="kv-row">
+                      <span className="kv-key">{row.label}</span>
+                      <span className={`kv-val font-mono ${row.label === 'Session Lifespan' ? 'text-soc-ok' : 'text-soc-text'}`}>{row.value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </section>
