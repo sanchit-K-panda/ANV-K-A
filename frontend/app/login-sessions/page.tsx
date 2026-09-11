@@ -132,12 +132,14 @@ export default async function LoginSessionsPage() {
 
   const activeSiphonHash =
     activeSiphon?.metadata?.block_hash || activeSiphon?.event_id || 'UNKNOWN';
-  const activeTargetAccount = activeSiphonPayload.targetAccount || '1000000002';
+  const activeTargetAccount = activeSiphonPayload.targetAccount || 'N/A';
   const activeTotalDeducted =
     activeSiphonPayload.totalDeducted !== undefined
       ? activeSiphonPayload.totalDeducted
-      : activeSiphonPayload.amount || '4580.50';
-  const activeAccountsAffected = activeSiphonPayload.totalAccountsAffected || '12';
+      : activeSiphonPayload.amount !== undefined
+      ? activeSiphonPayload.amount
+      : 0;
+  const activeAccountsAffected = activeSiphonPayload.totalAccountsAffected || 0;
 
   return (
     <div className="space-y-5 pb-16">
@@ -380,7 +382,7 @@ export default async function LoginSessionsPage() {
                             Admin
                           </span>
                           <span className="text-soc-crit/80 text-[10px]">
-                            Target: {payload.targetAccount || '1000000002'}
+                            Target: {payload.targetAccount || 'N/A'}
                           </span>
                         </div>
                       ) : (

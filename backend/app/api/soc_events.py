@@ -100,3 +100,11 @@ async def list_soc_events(limit: int = 100):
         "count": len(events),
         "events": events,
     }
+
+
+@router.delete("/events")
+async def clear_soc_events():
+    """Clear in-memory telemetry buffer."""
+    _RECENT_EVENTS.clear()
+    new_data_event.set()
+    return {"success": True, "message": "Buffer cleared"}
